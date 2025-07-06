@@ -1,1 +1,368 @@
-
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kinderbücher - Helmut Wegners Wortwelten</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #FFE5B4 0%, #FFB6C1 50%, #98FB98 100%);
+            min-height: 100vh;
+        }
+        
+        .rainbow-header {
+            height: 20px;
+            background: linear-gradient(90deg, 
+                #FF0000 0%, 
+                #FF7F00 14%, 
+                #FFFF00 28%, 
+                #00FF00 42%, 
+                #0000FF 56%, 
+                #4B0082 70%, 
+                #9400D3 84%, 
+                #FF1493 100%);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #FFE4E1 0%, #E6E6FA 100%);
+            color: #2F4F4F;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border: 3px solid #FFD700;
+        }
+        
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            color: #FF6347;
+            text-shadow: 2px 2px 4px rgba(255,105,180,0.3);
+        }
+        
+        .header p {
+            font-size: 1.3em;
+            color: #9370DB;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .book-card {
+            background: linear-gradient(135deg, #FFF8DC 0%, #F0F8FF 100%);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            border: 2px solid #DDA0DD;
+            transition: all 0.3s ease;
+        }
+        
+        .book-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            border-color: #FFD700;
+        }
+        
+        .book-cover {
+            width: 180px;
+            height: 260px;
+            margin: 0 auto 20px;
+            border-radius: 15px;
+            border: 3px solid #FFD700;
+            object-fit: cover;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+            transition: transform 0.3s ease;
+        }
+        
+        .book-cover:hover {
+            transform: scale(1.05);
+        }
+        
+        .book-title {
+            font-size: 1.8em;
+            color: #FF6347;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .book-description {
+            font-size: 1.1em;
+            color: #2F4F4F;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .book-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+            min-width: 120px;
+        }
+        
+        .btn-read {
+            background: linear-gradient(135deg, #FF6347, #FF4500);
+            color: white;
+        }
+        
+        .btn-read:hover {
+            background: linear-gradient(135deg, #FF4500, #FF2400);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255,99,71,0.4);
+        }
+        
+        .btn-amazon {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #8B4513;
+        }
+        
+        .btn-amazon:hover {
+            background: linear-gradient(135deg, #FFA500, #FF8C00);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255,215,0,0.4);
+        }
+        
+        .coming-soon {
+            background: linear-gradient(135deg, #F0F8FF 0%, #E6E6FA 100%);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            border: 2px solid #DDA0DD;
+        }
+        
+        .coming-soon h2 {
+            font-size: 2.2em;
+            color: #9370DB;
+            margin-bottom: 15px;
+        }
+        
+        .coming-soon p {
+            font-size: 1.3em;
+            color: #2F4F4F;
+            margin-bottom: 20px;
+        }
+        
+        .series-info {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .series-cover {
+            width: 120px;
+            height: 180px;
+            border-radius: 15px;
+            border: 3px solid #FFD700;
+            object-fit: cover;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+            transition: transform 0.3s ease;
+        }
+        
+        .series-cover:hover {
+            transform: scale(1.05);
+        }
+        
+        .navigation {
+            background: linear-gradient(135deg, #F0FFF0 0%, #FFFACD 100%);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            border: 2px solid #32CD32;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .nav-link {
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #9370DB, #8A2BE2);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 1.2em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(147,112,219,0.3);
+        }
+        
+        .nav-link:hover {
+            background: linear-gradient(135deg, #8A2BE2, #7B68EE);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(138,43,226,0.4);
+        }
+        
+        @media (max-width: 768px) {
+            .books-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2.5em;
+            }
+            
+            .book-cover {
+                width: 150px;
+                height: 220px;
+            }
+            
+            .series-cover {
+                width: 100px;
+                height: 150px;
+            }
+            
+            .book-title {
+                font-size: 1.5em;
+            }
+            
+            .book-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 200px;
+            }
+            
+            .series-info {
+                flex-direction: column;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="rainbow-header"></div>
+    
+    <div class="container">
+        <div class="header">
+            <h1>📚 Kinderbücher</h1>
+            <p>Spannende Abenteuer zum Vorlesen und Entdecken</p>
+            <p>Magische Geschichten, die Kinder begeistern!</p>
+        </div>
+        
+        <div class="books-grid">
+            <!-- Buch 1: Die Zauberakademie von Morgenstern -->
+            <div class="book-card">
+                <img src="die-zauberakademie.jpg" alt="Die Zauberakademie von Morgenstern Cover" class="book-cover">
+                <h2 class="book-title">Die Zauberakademie von Morgenstern</h2>
+                <p class="book-description">
+                    Leonas ist anders als andere Kinder. Tiere vertrauen ihm, und Pflanzen gedeihen unter seinen Händen. 
+                    Als ein geheimnisvoller Bote ihm eine magische Einladung bringt, beginnt das größte Abenteuer seines Lebens.
+                </p>
+                <div class="book-actions">
+                    <a href="lese-vorlese-zauberakademie.html" class="btn btn-read">🎵 Vorlesen</a>
+                    <a href="https://www.amazon.de/dp/B0F8V7TLVT" class="btn btn-amazon">🛒 Bei Amazon kaufen</a>
+                </div>
+            </div>
+            
+            <!-- Buch 2: Das Geheimnis des verborgenen Waldes -->
+            <div class="book-card">
+                <img src="verborgener-wald.jpg" alt="Das Geheimnis des verborgenen Waldes Cover" class="book-cover">
+                <h2 class="book-title">Das Geheimnis des verborgenen Waldes</h2>
+                <p class="book-description">
+                    Max und Lisa finden eine geheimnisvolle Karte, die sie zu einem magischen Ort führt. 
+                    Gemeinsam mit ihrem Hund Bruno begeben sie sich auf eine Reise voller Wunder und Geheimnisse.
+                </p>
+                <div class="book-actions">
+                    <a href="lese-vorlese-verborgenerwald.html" class="btn btn-read">🎵 Vorlesen</a>
+                    <a href="#" class="btn btn-amazon" style="opacity: 0.6; cursor: not-allowed;">🛒 Bald verfügbar</a>
+                </div>
+            </div>
+            
+            <!-- Buch 3: Der Rätseldetektivclub -->
+            <div class="book-card">
+                <img src="raetseldetektivclub.jpg" alt="Der Rätseldetektivclub Cover" class="book-cover">
+                <h2 class="book-title">Der Rätseldetektivclub</h2>
+                <p class="book-description">
+                    Max, Emma, Jonas und Lena sind die besten Rätseldetektive weit und breit! 
+                    Als sie eine geheimnisvolle Notiz finden, führt sie diese in ein aufregendes Abenteuer voller Mysterien.
+                </p>
+                <div class="book-actions">
+                    <a href="lese-vorlese-raetseldetektivclub.html" class="btn btn-read">🎵 Vorlesen</a>
+                    <a href="https://www.amazon.de/dp/B0F8Q3LQ6K" class="btn btn-amazon">🛒 Bei Amazon kaufen</a>
+                </div>
+            </div>
+            
+            <!-- Buch 4: Der Zeitnarr -->
+            <div class="book-card">
+                <img src="zeitnarr.jpg" alt="Der Zeitnarr Cover" class="book-cover">
+                <h2 class="book-title">Der Zeitnarr</h2>
+                <p class="book-description">
+                    Max findet auf einem Flohmarkt eine geheimnisvolle Taschenuhr. 
+                    Doch als er sie aufzieht, wird er in ein unglaubliches Abenteuer durch die Zeit geschleudert!
+                </p>
+                <div class="book-actions">
+                    <a href="lese-vorlese-zeitnarr.html" class="btn btn-read">🎵 Vorlesen</a>
+                    <a href="https://www.amazon.de/dp/B0F8HY1P5G" class="btn btn-amazon">🛒 Bei Amazon kaufen</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Kommende Serie -->
+        <div class="coming-soon">
+            <h2>🌙 Bald verfügbar</h2>
+            <p><strong>Die Mondstein-Serie</strong> - Eine aufregende neue Buchreihe mit 3 Bänden!</p>
+            <div class="series-info">
+                <img src="mondstein.jpg" alt="Mondstein Serie Cover" class="series-cover">
+                <div>
+                    <p style="font-size: 1.1em; color: #2F4F4F; margin: 0;">
+                        Eine magische Trilogie voller Abenteuer und Geheimnisse wartet auf euch! 
+                        Die Mondstein-Serie wird bald mit drei spannenden Bändern erscheinen.
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="navigation">
+            <div class="nav-buttons">
+                <a href="index.html" class="nav-link">🏠 Zur Startseite</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
