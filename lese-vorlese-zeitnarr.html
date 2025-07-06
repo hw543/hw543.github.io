@@ -1,1 +1,546 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Der Zeitnarr - Vorlesen</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.8;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #FFE5B4 0%, #FFB6C1 50%, #98FB98 100%);
+            min-height: 100vh;
+        }
+        
+        .rainbow-header {
+            height: 20px;
+            background: linear-gradient(90deg, 
+                #FF0000 0%, 
+                #FF7F00 14%, 
+                #FFFF00 28%, 
+                #00FF00 42%, 
+                #0000FF 56%, 
+                #4B0082 70%, 
+                #9400D3 84%, 
+                #FF1493 100%);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background: linear-gradient(135deg, #FFF8DC 0%, #F0F8FF 100%);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border: 3px solid #FFD700;
+        }
+        
+        .header-section {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .title-section {
+            text-align: center;
+        }
+        
+        h1 {
+            color: #FF6347;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(255,105,180,0.3);
+        }
+        
+        .author {
+            color: #9370DB;
+            font-style: italic;
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+        
+        .controls {
+            position: sticky;
+            top: 20px;
+            text-align: center;
+            margin: 30px 0 10px 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #FFE4E1 0%, #E6E6FA 100%);
+            border-radius: 15px;
+            border: 2px solid #FFB6C1;
+            z-index: 1000;
+            box-shadow: 0 5px 15px rgba(255,182,193,0.3);
+        }
+        
+        .language-navigation {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            margin: 5px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .btn-nav {
+            background: linear-gradient(135deg, #9370DB, #8A2BE2);
+            color: white;
+            text-decoration: none;
+            border: 2px solid transparent;
+        }
+        
+        .btn-nav:hover {
+            background: linear-gradient(135deg, #8A2BE2, #7B68EE);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(138,43,226,0.4);
+        }
+        
+        .btn-lang {
+            background: linear-gradient(135deg, #FF69B4, #FF1493);
+            color: white;
+            border: 2px solid transparent;
+        }
+        
+        .btn-lang.active {
+            border-color: #FFD700;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+        }
+        
+        .btn-lang:hover {
+            background: linear-gradient(135deg, #FF1493, #C71585);
+            transform: translateY(-2px);
+        }
+        
+        .btn-read {
+            background: linear-gradient(135deg, #FF6347, #FF4500);
+            color: white;
+        }
+        
+        .btn-read:hover {
+            background: linear-gradient(135deg, #FF4500, #FF2400);
+            transform: translateY(-2px);
+        }
+        
+        .btn-continue {
+            background: linear-gradient(135deg, #32CD32, #228B22);
+            color: white;
+        }
+        
+        .btn-continue:hover {
+            background: linear-gradient(135deg, #228B22, #006400);
+            transform: translateY(-2px);
+        }
+        
+        .btn-stop {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #8B4513;
+        }
+        
+        .btn-stop:hover {
+            background: linear-gradient(135deg, #FFA500, #FF8C00);
+            transform: translateY(-2px);
+        }
+        
+        .story-text {
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: #2F4F4F;
+            text-align: justify;
+            background: linear-gradient(135deg, #FFFAF0 0%, #FFF8DC 100%);
+            padding: 25px;
+            border-radius: 15px;
+            border: 2px solid #DDA0DD;
+            box-shadow: 0 5px 15px rgba(221,160,221,0.2);
+        }
+        
+        .story-text p {
+            margin-bottom: 20px;
+        }
+        
+        .word {
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .word:hover {
+            background-color: #FFE4E1;
+            border-radius: 3px;
+        }
+        
+        .current {
+            background-color: #FF69B4 !important;
+            color: white !important;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+            
+            .header-section {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            .controls {
+                padding: 15px;
+            }
+            
+            .btn {
+                display: block;
+                margin: 10px auto;
+                width: 200px;
+            }
+            
+            .language-navigation {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="rainbow-header"></div>
+    
+    <div class="container">
+        <div class="header-section">
+            <div class="title-section">
+                <h1 id="main-title">Der Zeitnarr</h1>
+                <p class="author" id="author">von Helmut Wegner</p>
+            </div>
+        </div>
+        
+        <div class="controls">
+            <div class="language-navigation">
+                <a href="index.html" class="btn btn-nav">🏠 Startseite</a>
+                <button class="btn btn-lang active" onclick="switchLanguage('de')">🇩🇪 Deutsch</button>
+                <button class="btn btn-lang" onclick="switchLanguage('en')">🇬🇧 English</button>
+                <a href="kinderbuecher.html" class="btn btn-nav">📚 Kinderbücher</a>
+            </div>
+            
+            <button class="btn btn-read" onclick="startReading()">🔴 <span id="btn-read-text">Vorlesen</span></button>
+            <button class="btn btn-continue" onclick="continueReading()">▶️ <span id="btn-continue-text">Weiterlesen</span></button>
+            <button class="btn btn-stop" onclick="stopReading()">⏹️ <span id="btn-stop-text">Stop</span></button>
+        </div>
+        
+        <!-- Deutsche Version -->
+        <div id="de-content" class="language-content">
+            <div class="story-text" id="storyText">
+                <p>Der Flohmarkt war eine Welt für sich. Reihen von Ständen zogen sich über den kleinen Marktplatz, jeder beladen mit einer kunterbunten Mischung aus Altem, Kuriosem und Wertvollem. Max schob sich durch die Menschenmenge, die Hände tief in den Taschen seiner abgetragenen Jeans vergraben. Seine Mutter hatte ihn mitgeschleppt, obwohl er eigentlich lieber zu Hause geblieben wäre.</p>
 
+                <p>„Hier, Max! Schau mal, alte Bücher!" rief seine Mutter und verschwand zwischen den Ständen. Max seufzte. Bücher waren nicht sein Ding. Er streifte ziellos durch die Gassen, bis sein Blick an einem kleinen Stand hängen blieb. Er war unscheinbar -- ein alter Mann mit einem zerknitterten Gesicht saß auf einem wackeligen Stuhl hinter einem Tisch, auf dem eine Ansammlung von scheinbar wertlosem Kram lag.</p>
+
+                <p>Doch etwas auf diesem Tisch zog Max magisch an. Eine Taschenuhr. Die Uhr war aus Messing, verziert mit filigranen Gravuren, die sich wie ein Labyrinth über die Oberfläche zogen. Ihr Glas war leicht zerkratzt, und der Deckel lag halb offen. Max griff danach, zögerte kurz, doch dann nahm er sie in die Hand. Sie fühlte sich überraschend schwer an, und als er sie öffnete, schlug die Zeiger wie von selbst einen wilden Tanz.</p>
+
+                <p>„Interessierst du dich für alte Dinge?" fragte der Mann mit heiserer Stimme. Seine Augen funkelten auf eine Art, die Max nicht einordnen konnte -- irgendwo zwischen Neugier und Geheimnis. „Vielleicht. Was kostet sie?" Max drehte die Uhr in seiner Hand, während das Zifferblatt im Licht der Nachmittagssonne aufblitzte. Der Mann schien kurz nachzudenken. „Für dich? Zehn Euro. Aber sei vorsichtig mit ihr. Diese Uhr hat mehr Geschichte, als du dir vorstellen kannst."</p>
+
+                <p>Max zog sein Taschengeld hervor und legte es auf den Tisch. Der Mann nickte knapp, nahm das Geld und lächelte, als Max sich mit der Uhr in der Hand entfernte. Zuhause setzte sich Max an seinen Schreibtisch. Er klappte die Uhr auf und betrachtete das Zifferblatt genauer. Es schien fast zu leben -- die Gravuren bewegten sich leicht, als ob sie atmeten. Ohne lange nachzudenken, zog er die kleine Krone an der Seite auf.</p>
+
+                <p>Plötzlich schien die Luft im Raum zu vibrieren. Ein tiefes Summen erfüllte seine Ohren, und die Wände um ihn herum verschwammen. Max riss die Augen auf, wollte die Uhr fallen lassen, doch sie klebte wie festgewachsen an seiner Hand. Ein grelles Licht flammte auf, und für einen Moment schien die Welt stillzustehen. Dann war es vorbei.</p>
+
+                <p>Als Max blinzelte, fand er sich nicht mehr in seinem Zimmer wieder. Er stand in einer engen, kopfsteingepflasterten Gasse. Die Gebäude zu beiden Seiten waren alt und schief, aus grobem Holz und Stein gebaut. Menschen in seltsamen Kleidern eilten an ihm vorbei, manche warfen ihm irritierte Blicke zu. Max schnappte nach Luft. „Wo bin ich?" murmelte er, doch seine Stimme klang fremd, fast erstickt.</p>
+
+                <p>Er spürte die Uhr in seiner Hand pulsieren, wie ein Herzschlag. Und dann hörte er eine Stimme hinter sich, leise und bedrohlich: „Na, Zeitnarr? Du hast keine Ahnung, was du da angerichtet hast." Max drehte sich ruckartig um, doch die Gasse war leer. Sein Herz raste. Wer hatte gesprochen? Und vor allem -- wie würde er hier wieder herauskommen?</p>
+
+                <p>Max blieb wie angewurzelt stehen, während die kühle Luft der Gasse seine Haut prickeln ließ. Die Worte hallten in seinem Kopf wider: „Zeitnarr... keine Ahnung, was du da angerichtet hast." Sein Blick huschte über die unebenen Pflastersteine und die schiefen Holztüren der umliegenden Häuser. Kein Mensch war zu sehen, der die Worte hätte gesprochen haben können. Doch das Gefühl, beobachtet zu werden, ließ ihn nicht los.</p>
+
+                <p>„Okay, cool bleiben", murmelte er und zwang seine Beine, sich zu bewegen. Die pulsierende Taschenuhr in seiner Hand fühlte sich fast heiß an, und er schloss sie mit einem entschlossenen Klacken. Sofort ließ das seltsame Vibrieren in seiner Hand nach, aber das flaue Gefühl in seinem Magen blieb. Er ging langsam die Gasse entlang, sein Kopf drehte sich von rechts nach links, während er die Umgebung absuchte.</p>
+
+                <p>Eine Markise, ausgeblichen und von Rissen durchzogen, hing über einem Laden, dessen schiefes Schild „Bäcker" verkündete. Aus einer Seitengasse drang das Lachen von Kindern, und der Duft von frisch gebackenem Brot ließ Max kurz innehalten. Doch bevor er den Mut fand, jemanden anzusprechen, ertönte ein erneutes Flüstern. Es klang jetzt näher, fast so, als stünde der Sprecher direkt hinter ihm.</p>
+
+                <p>„Du gehörst nicht hierher." Max wirbelte herum, doch erneut war niemand zu sehen. Das Flüstern war verschwunden, aber diesmal bemerkte er etwas anderes: Ein Schatten huschte am Rand seines Blickfelds vorbei. „Hallo?" Seine Stimme klang unsicher, fast wie ein Wimmern, und er verfluchte sich dafür. „Wer ist da? Zeig dich!"</p>
+
+                <p>Eine Tür knarrte hinter ihm, und Max drehte sich so schnell um, dass ihm schwindelig wurde. Ein Junge, nicht viel älter als er selbst, trat aus einem der Häuser. Sein zerfledderter Umhang und die abgetragenen Stiefel passten perfekt in diese seltsam mittelalterliche Umgebung. Der Junge warf ihm einen misstrauischen Blick zu und hielt einen Korb voller Holzstücke in den Händen.</p>
+
+                <p>„Wer bist du?" fragte Max, bevor er sich selbst davon abhalten konnte. Der Junge kniff die Augen zusammen, als würde er etwas an Max prüfen. „Du kommst nicht von hier", sagte er schließlich, mehr eine Feststellung als eine Frage. „Pass besser auf. Fremde haben hier keinen guten Stand." Bevor Max etwas erwidern konnte, zog der Junge die Tür wieder hinter sich zu und ließ ihn allein.</p>
+
+                <p>„Was zum...?" Max strich sich mit der freien Hand durch die Haare und versuchte, einen klaren Gedanken zu fassen. Doch alles an diesem Ort war fremd. Die Geräusche, die Gerüche, selbst die Luft fühlten sich anders an. Er musste einen Weg finden, hier wegzukommen. Seine Finger schlossen sich um die Taschenuhr. Sie war die einzige Verbindung zu seiner Welt. Vielleicht konnte sie ihn zurückbringen, wenn er sie erneut aufzog.</p>
+
+                <p>Doch die Worte des alten Mannes kamen ihm in den Sinn: „Sei vorsichtig mit ihr." „Wieso hast du das nicht gleich gesagt, du Depp", murmelte Max und hob die Uhr. Der Gedanke, sie einfach aufzuziehen, erschien ihm gleichzeitig verlockend und furchteinflößend. Doch bevor er eine Entscheidung treffen konnte, verdunkelte sich der Himmel über ihm. Ein tiefes, grollendes Geräusch ließ den Boden unter seinen Füßen vibrieren, und Max sah, wie die Menschen aus den umliegenden Häusern stürmten.</p>
+
+                <p>Sie zeigten zum Horizont, wo sich eine dunkle Wolke rasend schnell näherte. „Der Sturm! Schließt die Tore!" rief eine Frau, während sie panisch Kinder ins Haus zog. Max stand wie erstarrt da, seine Beine wollten sich nicht bewegen. Was für ein Sturm konnte so etwas auslösen? Und warum hatte er das Gefühl, dass es irgendwie mit ihm zusammenhing?</p>
+
+                <p>Das Flüstern kehrte zurück, diesmal mit einem harten, eindringlichen Ton: „Renn, Zeitnarr, bevor es dich erwischt!" Max spürte, wie sein Herz raste. Ohne weiter nachzudenken, sprintete er los -- direkt auf den drohenden Sturm zu. Max rannte, obwohl er keine Ahnung hatte, wohin er eigentlich lief. Die dunkle Wolke am Horizont wuchs mit erschreckender Geschwindigkeit, und das dröhnende Grollen verstärkte sich, wie eine wütende Stimme, die ihn verfolgte.</p>
+
+                <p>Die Pflastersteine unter seinen Füßen waren uneben, und mehrmals stolperte er, fing sich aber im letzten Moment. Sein Atem ging stoßweise, und sein Herz pochte wie ein Vorschlaghammer in seiner Brust. Die Taschenuhr in seiner Hand fühlte sich jetzt fast lebendig an, pulsierend wie ein zweites Herz. „Was soll das hier alles?" schrie Max in die Leere. Seine Stimme schien von den schiefen Wänden der Gasse verschluckt zu werden.</p>
+
+                <p>Keine Antwort. Nur das Echo seiner eigenen Worte, die sich mit dem drohenden Lärm des Sturms vermischten. Plötzlich wurde Max am Arm gepackt und grob in einen Hauseingang gezogen. Eine raue Stimme zischte: „Bist du verrückt? Willst du, dass der Sturm dich erwischt?" Max taumelte gegen die Wand des schmalen Flurs, in den er gestoßen worden war. Vor ihm stand eine Frau, ihr Gesicht war von einer Kapuze halb verborgen.</p>
+
+                <p>Ihre Augen, scharf und funkelnd wie Klingen, fixierten ihn. „Wer...?" brachte Max hervor, aber die Frau schnitt ihm das Wort ab. „Keine Zeit für Fragen, Zeitnarr. Du bist das Ziel des Sturms, nicht der Schutz." Max blinzelte sie an. „Was soll das heißen? Wieso bin ich das Ziel? Und warum nennt ihr mich alle so?" Die Frau ignorierte seine Fragen. Sie zog die schwere Holztür mit einem Seufzen zu und ließ die Dunkelheit des Flurs über sie hereinbrechen.</p>
+
+                <p>Nur das schwache Leuchten einer Laterne, die sie in der Hand hielt, spendete spärliches Licht. „Die Uhr", sagte sie schließlich und deutete auf Max' Hand. „Hast du sie benutzt?" „Ja, aber ich weiß nicht, wie das alles funktioniert! Ich wollte nur---" „Natürlich hast du es nicht verstanden", unterbrach sie ihn. „Niemand, der dieses Artefakt findet, versteht es sofort. Aber jede Nutzung hat ihren Preis. Der Sturm ist nur der Anfang."</p>
+
+                <p>Max fühlte, wie ihm die Kehle zuschnürte. „Was meinst du mit ‚Preis'? Und wie kann ich das rückgängig machen?" Die Frau musterte ihn kurz, dann lachte sie trocken. „Rückgängig machen? Junge, das hier ist keine Spieluhr. Die Zeit lässt sich nicht einfach zurückdrehen, ohne Spuren zu hinterlassen." Bevor Max eine Erwiderung finden konnte, wurde die Tür von einem mächtigen Schlag erschüttert. Holz splitterte, und ein kalter Wind fegte durch den Raum.</p>
+
+                <p>Die Laterne flackerte, und die Frau drehte sich hastig um. „Sie sind hier", flüsterte sie, ihre Stimme jetzt angespannt. „Wer?" fragte Max, doch sie packte ihn erneut am Arm und zog ihn weiter ins Dunkel. „Die Jäger. Sie kommen, um zu holen, was ihnen gehört. Wenn du nicht schnell lernst, die Uhr zu kontrollieren, wirst du nicht überleben." Max stolperte hinter ihr her, während sein Verstand vor Fragen und Angst überquoll.</p>
+
+                <p>Die Wände des engen Flurs schienen näher zu rücken, und das Heulen des Sturms draußen mischte sich mit einem unheilvollen Kreischen. „Bleib bei mir", sagte die Frau und warf einen schnellen Blick über die Schulter. „Ich kann dich nicht ewig schützen, aber vielleicht gibt es noch einen Weg, dich zu retten." Max presste die Lippen zusammen, seine Hände umklammerten die Uhr fester. Was habe ich nur getan? dachte er, während die Dunkelheit ihn immer weiter verschluckte.</p>
+            </div>
+        </div>
+        
+        <!-- Englische Version -->
+        <div id="en-content" class="language-content hidden">
+            <div class="story-text" id="storyTextEn">
+                <p>The flea market was a world unto itself. Rows of stalls stretched across the small marketplace, each loaded with a colorful mix of old, curious, and valuable items. Max pushed through the crowd, his hands buried deep in the pockets of his worn jeans. His mother had dragged him along, although he would have preferred to stay home.</p>
+
+                <p>"Here, Max! Look, old books!" his mother called out and disappeared between the stalls. Max sighed. Books weren't his thing. He wandered aimlessly through the lanes until his gaze caught on a small stall. It was inconspicuous -- an old man with a wrinkled face sat on a rickety chair behind a table covered with what appeared to be worthless junk.</p>
+
+                <p>But something on this table magically drew Max in. A pocket watch. The watch was made of brass, decorated with intricate engravings that spread like a labyrinth across its surface. Its glass was slightly scratched, and the lid was half open. Max reached for it, hesitated briefly, but then took it in his hand. It felt surprisingly heavy, and when he opened it, the hands began to dance wildly as if by themselves.</p>
+
+                <p>"Are you interested in old things?" asked the man in a hoarse voice. His eyes sparkled in a way that Max couldn't categorize -- somewhere between curiosity and mystery. "Maybe. What does it cost?" Max turned the watch in his hand while the dial flashed in the afternoon sunlight. The man seemed to think briefly. "For you? Ten euros. But be careful with it. This watch has more history than you can imagine."</p>
+
+                <p>Max pulled out his pocket money and placed it on the table. The man nodded curtly, took the money and smiled as Max walked away with the watch in his hand. At home, Max sat down at his desk. He opened the watch and examined the dial more closely. It seemed almost alive -- the engravings moved slightly as if they were breathing. Without thinking long, he pulled the small crown on the side.</p>
+
+                <p>Suddenly the air in the room seemed to vibrate. A deep humming filled his ears, and the walls around him blurred. Max tore his eyes open, wanted to drop the watch, but it stuck to his hand as if it had grown there. A bright light flared up, and for a moment the world seemed to stand still. Then it was over.</p>
+
+                <p>When Max blinked, he found himself no longer in his room. He stood in a narrow, cobblestone lane. The buildings on both sides were old and crooked, built of rough wood and stone. People in strange clothes hurried past him, some giving him irritated looks. Max gasped for air. "Where am I?" he murmured, but his voice sounded strange, almost suffocated.</p>
+
+                <p>He felt the watch in his hand pulsing like a heartbeat. And then he heard a voice behind him, quiet and threatening: "Well, Time Fool? You have no idea what you've done." Max spun around abruptly, but the lane was empty. His heart raced. Who had spoken? And above all -- how would he get out of here?</p>
+
+                <p>Max stood rooted to the spot while the cool air of the lane made his skin tingle. The words echoed in his head: "Time Fool... no idea what you've done." His gaze flitted over the uneven cobblestones and the crooked wooden doors of the surrounding houses. No person was visible who could have spoken the words. But the feeling of being watched wouldn't leave him alone.</p>
+
+                <p>"Okay, stay cool," he murmured and forced his legs to move. The pulsing pocket watch in his hand felt almost hot, and he closed it with a determined click. Immediately the strange vibration in his hand subsided, but the queasy feeling in his stomach remained. He walked slowly down the lane, his head turning from right to left as he searched the surroundings.</p>
+
+                <p>An awning, faded and cracked, hung over a shop whose crooked sign proclaimed "Baker." From a side street came the laughter of children, and the scent of freshly baked bread made Max pause briefly. But before he found the courage to address someone, another whisper sounded. It now sounded closer, almost as if the speaker was standing right behind him.</p>
+
+                <p>"You don't belong here." Max whirled around, but again no one was visible. The whisper had disappeared, but this time he noticed something else: A shadow flitted past at the edge of his field of vision. "Hello?" His voice sounded uncertain, almost like a whimper, and he cursed himself for it. "Who's there? Show yourself!"</p>
+
+                <p>A door creaked behind him, and Max turned around so quickly that he became dizzy. A boy, not much older than himself, stepped out of one of the houses. His tattered cloak and worn boots fit perfectly into this strangely medieval environment. The boy gave him a suspicious look and held a basket full of wooden pieces in his hands.</p>
+
+                <p>"Who are you?" asked Max before he could stop himself. The boy squinted as if examining something about Max. "You're not from here," he finally said, more a statement than a question. "You'd better watch out. Strangers don't have a good standing here." Before Max could reply, the boy pulled the door shut behind him again and left him alone.</p>
+
+                <p>"What the...?" Max ran his free hand through his hair and tried to collect his thoughts. But everything about this place was foreign. The sounds, the smells, even the air felt different. He had to find a way to get out of here. His fingers closed around the pocket watch. It was the only connection to his world. Maybe it could bring him back if he wound it up again.</p>
+
+                <p>But the old man's words came to mind: "Be careful with it." "Why didn't you say that right away, you fool," Max muttered and lifted the watch. The thought of simply winding it up seemed both tempting and terrifying. But before he could make a decision, the sky above him darkened. A deep, rumbling sound made the ground beneath his feet vibrate, and Max saw people rushing out of the surrounding houses.</p>
+
+                <p>They pointed to the horizon where a dark cloud was approaching at breakneck speed. "The storm! Close the gates!" a woman shouted while frantically pulling children into the house. Max stood paralyzed, his legs wouldn't move. What kind of storm could cause such a thing? And why did he have the feeling that it somehow had to do with him?</p>
+
+                <p>The whisper returned, this time with a hard, urgent tone: "Run, Time Fool, before it catches you!" Max felt his heart racing. Without thinking further, he sprinted off -- directly toward the threatening storm. Max ran, although he had no idea where he was actually going. The dark cloud on the horizon grew at an alarming rate, and the thunderous rumble intensified, like an angry voice pursuing him.</p>
+
+                <p>The cobblestones under his feet were uneven, and he stumbled several times, but caught himself at the last moment. His breath came in gasps, and his heart pounded like a sledgehammer in his chest. The pocket watch in his hand now felt almost alive, pulsing like a second heart. "What's all this about?" Max screamed into the void. His voice seemed to be swallowed by the crooked walls of the lane.</p>
+
+                <p>No answer. Only the echo of his own words, which mixed with the threatening noise of the storm. Suddenly Max was grabbed by the arm and roughly pulled into a doorway. A rough voice hissed: "Are you crazy? Do you want the storm to catch you?" Max stumbled against the wall of the narrow hallway he had been pushed into. In front of him stood a woman, her face half hidden by a hood.</p>
+
+                <p>Her eyes, sharp and sparkling like blades, fixed on him. "Who...?" Max managed to say, but the woman cut him off. "No time for questions, Time Fool. You are the target of the storm, not the shelter." Max blinked at her. "What's that supposed to mean? Why am I the target? And why do you all call me that?" The woman ignored his questions. She pulled the heavy wooden door shut with a sigh and let the darkness of the hallway descend upon them.</p>
+
+                <p>Only the faint glow of a lantern she held in her hand provided sparse light. "The watch," she finally said, pointing to Max's hand. "Have you used it?" "Yes, but I don't know how all this works! I just wanted to---" "Of course you didn't understand it," she interrupted him. "Nobody who finds this artifact understands it immediately. But every use has its price. The storm is only the beginning."</p>
+
+                <p>Max felt his throat constricting. "What do you mean by 'price'? And how can I undo this?" The woman looked at him briefly, then laughed dryly. "Undo it? Boy, this isn't a toy watch. Time cannot simply be turned back without leaving traces." Before Max could find a reply, the door was shaken by a mighty blow. Wood splintered, and a cold wind swept through the room.</p>
+
+                <p>The lantern flickered, and the woman turned around hastily. "They're here," she whispered, her voice now tense. "Who?" asked Max, but she grabbed his arm again and pulled him further into the darkness. "The hunters. They come to take what belongs to them. If you don't quickly learn to control the watch, you won't survive." Max stumbled after her while his mind overflowed with questions and fear.</p>
+
+                <p>The walls of the narrow hallway seemed to close in, and the howling of the storm outside mixed with an ominous screeching. "Stay with me," the woman said, casting a quick glance over her shoulder. "I can't protect you forever, but maybe there's still a way to save you." Max pressed his lips together, his hands gripping the watch tighter. What have I done? he thought, as the darkness swallowed him deeper and deeper.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSpeech = null;
+        let currentWordIndex = 0;
+        let allWords = [];
+        let isReading = false;
+        let lastHighlightedWord = null;
+        let currentLanguage = 'de';
+        let stoppedAtIndex = 0;
+
+        // Spracheinstellungen
+        const languageTexts = {
+            de: {
+                title: "Der Zeitnarr",
+                author: "von Helmut Wegner",
+                btnRead: "Vorlesen",
+                btnContinue: "Weiterlesen",
+                btnStop: "Stop",
+                lang: "de-DE"
+            },
+            en: {
+                title: "The Time Fool",
+                author: "by Helmut Wegner",
+                btnRead: "Read Aloud",
+                btnContinue: "Continue",
+                btnStop: "Stop",
+                lang: "en-US"
+            }
+        };
+
+        function switchLanguage(lang) {
+            // Stoppe aktuelles Vorlesen
+            if (currentSpeech) {
+                speechSynthesis.cancel();
+                isReading = false;
+            }
+            
+            // Verstecke alle Sprachen
+            document.querySelectorAll('.language-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            
+            // Zeige ausgewählte Sprache
+            document.getElementById(lang + '-content').classList.remove('hidden');
+            
+            // Update Sprachbuttons
+            document.querySelectorAll('.btn-lang').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Update Texte
+            currentLanguage = lang;
+            const texts = languageTexts[lang];
+            document.getElementById('main-title').textContent = texts.title;
+            document.getElementById('author').textContent = texts.author;
+            document.getElementById('btn-read-text').textContent = texts.btnRead;
+            document.getElementById('btn-continue-text').textContent = texts.btnContinue;
+            document.getElementById('btn-stop-text').textContent = texts.btnStop;
+            
+            // Initialisiere Wörter für neue Sprache
+            currentWordIndex = 0;
+            stoppedAtIndex = 0;
+            clearHighlights();
+            initializeWords();
+        }
+
+        function initializeWords() {
+            const storyText = document.querySelector('#' + currentLanguage + '-content .story-text');
+            if (!storyText) return;
+            
+            const paragraphs = storyText.querySelectorAll('p');
+            allWords = [];
+            
+            paragraphs.forEach((paragraph) => {
+                const paragraphText = paragraph.textContent;
+                const paragraphWords = paragraphText.split(/\s+/).filter(word => word.length > 0);
+                
+                let paragraphHTML = '';
+                paragraphWords.forEach((word) => {
+                    paragraphHTML += `<span class="word" data-word-index="${allWords.length}" onclick="startFromWord(${allWords.length})">${word}</span> `;
+                    allWords.push(word);
+                });
+                
+                paragraph.innerHTML = paragraphHTML;
+            });
+        }
+
+        function startReading() {
+            currentWordIndex = 0;
+            stoppedAtIndex = 0;
+            clearHighlights();
+            continueReading();
+        }
+
+        function continueReading() {
+            if (currentSpeech) {
+                speechSynthesis.cancel();
+            }
+            
+            if (stoppedAtIndex > 0) {
+                currentWordIndex = stoppedAtIndex;
+            }
+            
+            if (allWords && allWords.length > 0) {
+                const remainingText = allWords.slice(currentWordIndex).join(' ');
+                
+                currentSpeech = new SpeechSynthesisUtterance(remainingText);
+                currentSpeech.rate = 1.0;
+                currentSpeech.lang = languageTexts[currentLanguage].lang;
+                
+                let wordCount = currentWordIndex;
+                
+                currentSpeech.onboundary = function(event) {
+                    if (event.name === 'word') {
+                        highlightCurrentWord(wordCount);
+                        wordCount++;
+                        stoppedAtIndex = wordCount;
+                    }
+                };
+                
+                currentSpeech.onend = function() {
+                    isReading = false;
+                };
+                
+                isReading = true;
+                speechSynthesis.speak(currentSpeech);
+            }
+        }
+
+        function startFromWord(wordIndex) {
+            currentWordIndex = wordIndex;
+            stoppedAtIndex = wordIndex;
+            clearHighlights();
+            continueReading();
+        }
+
+        function highlightCurrentWord(wordIndex) {
+            if (lastHighlightedWord) {
+                lastHighlightedWord.classList.remove('current');
+            }
+            
+            const wordSpan = document.querySelector(`#${currentLanguage}-content [data-word-index="${wordIndex}"]`);
+            if (wordSpan) {
+                wordSpan.classList.add('current');
+                lastHighlightedWord = wordSpan;
+                
+                // Sanftes Scrolling ohne die Controls aus dem Blickfeld zu nehmen
+                const rect = wordSpan.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
+                const controlsHeight = 150;
+                
+                if (rect.bottom > windowHeight - 100 || rect.top < controlsHeight + 50) {
+                    wordSpan.scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'nearest',
+                        inline: 'nearest'
+                    });
+                }
+            }
+        }
+
+        function clearHighlights() {
+            document.querySelectorAll('.current').forEach(el => {
+                el.classList.remove('current');
+            });
+            lastHighlightedWord = null;
+        }
+
+        function stopReading() {
+            if (currentSpeech) {
+                speechSynthesis.cancel();
+                currentSpeech = null;
+                isReading = false;
+            }
+            stoppedAtIndex = currentWordIndex;
+        }
+
+        // Initialisierung beim Seitenstart
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeWords();
+        });
+    </script>
+</body>
+</html>
