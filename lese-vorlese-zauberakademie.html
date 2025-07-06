@@ -1,1 +1,588 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Die Zauberakademie von Morgenstern - Vorlesen</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.8;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #FFE5B4 0%, #FFB6C1 50%, #98FB98 100%);
+            min-height: 100vh;
+        }
+        
+        .rainbow-header {
+            height: 20px;
+            background: linear-gradient(90deg, 
+                #FF0000 0%, 
+                #FF7F00 14%, 
+                #FFFF00 28%, 
+                #00FF00 42%, 
+                #0000FF 56%, 
+                #4B0082 70%, 
+                #9400D3 84%, 
+                #FF1493 100%);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background: linear-gradient(135deg, #FFF8DC 0%, #F0F8FF 100%);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border: 3px solid #FFD700;
+        }
+        
+        h1 {
+            color: #FF6347;
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(255,105,180,0.3);
+        }
+        
+        .author {
+            text-align: center;
+            color: #9370DB;
+            font-style: italic;
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+        
+        .controls {
+            position: sticky;
+            top: 20px;
+            text-align: center;
+            margin: 30px 0 10px 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #FFE4E1 0%, #E6E6FA 100%);
+            border-radius: 15px;
+            border: 2px solid #FFB6C1;
+            z-index: 1000;
+            box-shadow: 0 5px 15px rgba(255,182,193,0.3);
+        }
+        
+        .navigation-box {
+            text-align: center;
+            margin: 0 auto 30px auto;
+            padding: 15px 25px;
+            background: linear-gradient(135deg, #F0FFF0 0%, #FFFACD 100%);
+            border-radius: 15px;
+            border: 2px solid #32CD32;
+            width: fit-content;
+            max-width: 400px;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .language-navigation {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            margin: 5px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .btn-lang {
+            background: linear-gradient(135deg, #FF69B4, #FF1493);
+            color: white;
+            border: 2px solid transparent;
+        }
+        
+        .btn-lang.active {
+            border-color: #FFD700;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+        }
+        
+        .btn-lang:hover {
+            background: linear-gradient(135deg, #FF1493, #C71585);
+            transform: translateY(-2px);
+        }
+        
+        .btn-read {
+            background: linear-gradient(135deg, #FF6347, #FF4500);
+            color: white;
+        }
+        
+        .btn-read:hover {
+            background: linear-gradient(135deg, #FF4500, #FF2400);
+            transform: translateY(-2px);
+        }
+        
+        .btn-continue {
+            background: linear-gradient(135deg, #32CD32, #228B22);
+            color: white;
+        }
+        
+        .btn-continue:hover {
+            background: linear-gradient(135deg, #228B22, #006400);
+            transform: translateY(-2px);
+        }
+        
+        .btn-stop {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #8B4513;
+        }
+        
+        .btn-stop:hover {
+            background: linear-gradient(135deg, #FFA500, #FF8C00);
+            transform: translateY(-2px);
+        }
+        
+        .story-text {
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: #2F4F4F;
+            text-align: justify;
+            background: linear-gradient(135deg, #FFFAF0 0%, #FFF8DC 100%);
+            padding: 25px;
+            border-radius: 15px;
+            border: 2px solid #DDA0DD;
+            box-shadow: 0 5px 15px rgba(221,160,221,0.2);
+        }
+        
+        .story-text p {
+            margin-bottom: 20px;
+        }
+        
+        .word {
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .word:hover {
+            background-color: #FFE4E1;
+            border-radius: 3px;
+        }
+        
+        .current {
+            background-color: #FF69B4 !important;
+            color: white !important;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        
+        .nav-link {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 0 5px;
+            background: linear-gradient(135deg, #9370DB, #8A2BE2);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(147,112,219,0.3);
+            font-size: 14px;
+        }
+        
+        .nav-link:hover {
+            background: linear-gradient(135deg, #8A2BE2, #7B68EE);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(138,43,226,0.4);
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            .controls {
+                padding: 15px;
+            }
+            
+            .btn {
+                display: block;
+                margin: 10px auto;
+                width: 200px;
+            }
+            
+            .language-navigation {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .nav-link {
+                font-size: 13px;
+                padding: 8px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="rainbow-header"></div>
+    
+    <div class="container">
+        <h1 id="main-title">Die Zauberakademie von Morgenstern</h1>
+        <p class="author" id="author">von Helmut Wegner</p>
+        
+        <div class="controls">
+            <div class="language-navigation">
+                <button class="btn btn-lang active" onclick="switchLanguage('de')">🇩🇪 Deutsch</button>
+                <button class="btn btn-lang" onclick="switchLanguage('en')">🇬🇧 English</button>
+            </div>
+            
+            <button class="btn btn-read" onclick="startReading()">🔴 <span id="btn-read-text">Vorlesen</span></button>
+            <button class="btn btn-continue" onclick="continueReading()">▶️ <span id="btn-continue-text">Weiterlesen</span></button>
+            <button class="btn btn-stop" onclick="stopReading()">⏹️ <span id="btn-stop-text">Stop</span></button>
+        </div>
+        
+        <div class="navigation-box">
+            <div class="nav-buttons">
+                <a href="kinderbuecher.html" class="nav-link" id="back-link">📚 Zurück zu Kinderbücher</a>
+                <a href="index.html" class="nav-link" id="home-link">🏠 Zur Startseite</a>
+            </div>
+        </div>
+        
+        <!-- Deutsche Version -->
+        <div id="de-content" class="language-content">
+            <div class="story-text" id="storyText">
+                <p>Die Morgenluft war kühl und klar, als Leonas Grünfeld seinen Schulranzen über die Schulter schwang und den staubigen Weg zur Schule einschlug. Der Pfad schlängelte sich zwischen alten Eichen hindurch, deren Äste sich wie schützende Arme über ihm verwoben und Schatten auf den ausgetretenen Weg warfen. Sein Dorf, eingebettet in weite Felder und dichte Wälder, erwachte langsam zum Leben. Die Morgensonne malte goldene Streifen über die Wiesen, auf denen der Tau wie tausend kleine Diamanten funkelte.</p>
 
+                <p>Kühe muhten leise in der Ferne, ihre Stimmen mischten sich mit dem Gezwitscher der Vögel, die ihre Morgenliedchen sangen. Die ersten warmen Sonnenstrahlen brachen durch die Baumwipfel und ließen die Blätter in allen Grüntönen leuchten. Für andere mochte es ein gewöhnlicher Tag sein, aber Leonas spürte eine ungewöhnliche Anspannung in der Luft, ein seltsames Kribbeln, das über seine Haut wanderte und ihn innerlich unruhig machte.</p>
+
+                <p>Leonas war ein schüchterner Junge von zwölf Jahren mit strohblonden Haaren, die ihm ständig in die Stirn fielen, und grünen Augen, die oft nachdenklich und ein wenig melancholisch in die Ferne blickten. Seine Haut war blass, da er die meiste Zeit im Schatten der Bäume verbrachte, und seine Hände waren immer ein wenig schmutzig von der Erde, in der er gerne grub, um Käfer und Würmer zu beobachten.</p>
+
+                <p>Er mied die lauten Kinder in seiner Klasse und zog es vor, Zeit mit den Tieren des Waldes zu verbringen, die ihn nie verspotteten oder ausschlossen. Seine Schritte waren leise und bedacht, als würde er versuchen, so unsichtbar wie möglich zu bleiben, während er durch die Welt wandelte. Er bewegte sich oft wie ein Schatten, geschmeidig und unbemerkt, eine Eigenschaft, die er sich über Jahre des Vermeidens und Versteckens angeeignet hatte.</p>
+
+                <p>Die anderen Kinder in der Schule verstanden ihn nicht, und er verstand sie genauso wenig. Während sie sich für Ballspiele und laute Scherze begeisterten, für die neuesten Spielzeuge und Trends, fand Leonas Trost in der stillen Beobachtung von Käfern, die über die raue Baumrinde krochen, oder Vögeln, die geschickt ihre Nester aus Zweigen und Moos bauten.</p>
+
+                <p>Oft wurde er deshalb verspottet, besonders von Jasper und seiner Clique, einer Gruppe von fünf Jungen, die sich für die Könige des Schulhofs hielten. Sie nannten sich selbst "die Falken" und trugen diesen Namen mit einem Stolz, der völlig unangebracht war. Jasper war ihr Anführer, ein großer, kräftiger Junge mit schütterem braunen Haar und kleinen, stechenden Augen, die immer nach Schwäche suchten.</p>
+
+                <p>Heute war keine Ausnahme. Als Leonas die Schule erreichte, das alte Backsteingebäude mit seinen hohen, schmalen Fenstern und dem verwitterten Schieferdach, war es nur eine Frage von Minuten, bevor sie ihn umringten. "Hey, Grünfeld! Hast du wieder mit deinen Eichhörnchen geplaudert?", fragte Jasper mit einem breiten Grinsen und stieß Leonas an die Schulter.</p>
+
+                <p>Die anderen Kinder lachten, während Leonas stumm blieb und den Boden betrachtete. Seine Hände umklammerten den Riemen seines Ranzens, und er wünschte sich nichts sehnlicher, als unsichtbar zu werden. Die Worte schmerzten mehr, als er zeigen wollte, denn sie trafen genau das, was ihn von den anderen unterschied - seine tiefe Liebe zur Natur und seine merkwürdige Fähigkeit, sich in der Gegenwart von Tieren wohler zu fühlen als bei Menschen.</p>
+
+                <p>Der Unterricht zog sich endlos hin wie ein träger Fluss an einem heißen Sommertag. Leonas saß in der letzten Reihe, seinem gewohnten Platz, von wo aus er sowohl die Tafel sehen als auch unbemerkt aus dem Fenster blicken konnte. Seine Gedanken wanderten unwillkürlich zu den Eichhörnchen, die er gestern beim Sammeln von Nüssen beobachtet hatte.</p>
+
+                <p>"Leonas!", rief Frau Müller scharf. "Kannst du mir die Antwort auf die Frage geben?" Leonas schreckte auf und blickte verwirrt zur Tafel. Er hatte keine Ahnung, worum es ging. Die anderen Kinder kicherten, und er spürte wieder dieses vertraute Brennen in den Wangen. "Ich... ich weiß es nicht", murmelte er. "Dann solltest du besser aufpassen, anstatt zu träumen", ermahnte ihn die Lehrerin mit einem missbilligenden Blick.</p>
+
+                <p>Nach einem langen Tag voller peinlicher Momente und schiefer Blicke eilte Leonas nach Hause. Der kleine Hof seiner Familie, umgeben von dichten Hecken aus Weißdorn und Holunder und blühenden Wildblumen, die seine Mutter liebevoll pflegte, bot ihm zumindest etwas Geborgenheit. Seine Mutter bemerkte seine niedergeschlagene Stimmung. "War es wieder schlimm heute?", fragte sie sanft und strich ihm über das Haar. Leonas nickte nur.</p>
+
+                <p>Er verbrachte den Nachmittag wie gewohnt in seinem Lieblingsversteck, einer kleinen Lichtung im Wald, wo ein alter Baum mit knorrigen Wurzeln stand. Es war sein Zufluchtsort, sein Heiligtum, der einzige Ort auf der Welt, wo er sich vollkommen zu Hause fühlte. Der alte Baum war gewaltig und ehrfurchtgebietend, sein Stamm so dick, dass drei Erwachsene ihn nicht hätten umfassen können.</p>
+
+                <p>Ein Rotkehlchen landete auf einem Ast in seiner Nähe und betrachtete ihn neugierig mit seinen kleinen, glänzenden schwarzen Augen. Leonas bewegte sich nicht, atmete kaum, und nach einer Weile kam der Vogel näher und noch näher. Es war ein magischer Moment, einer von vielen, die er in diesem Wald erlebt hatte, Momente, die ihm das Gefühl gaben, mit etwas Größerem verbunden zu sein.</p>
+
+                <p>Doch heute war etwas anders, etwas, das die gewohnte Ruhe des Waldes durchbrach. Die Luft schien gespannter, elektrischer, als läge ein Gewitter in der Luft, obwohl der Himmel klar und blau war. Als er die Augen öffnete, bemerkte er eine seltsame Gestalt, die neben dem Stamm des alten Baumes stand, als wäre sie aus dem Nichts erschienen.</p>
+
+                <p>Es war ein Mann, hochgewachsen und von edler, königlicher Haltung, in einen schimmernden, dunkelblauen Mantel gehüllt, der im gedämpften Licht des Waldes zu funkeln schien wie der Nachthimmel voller Sterne. Das Haar des Mannes war silbern wie frisch gefallener Schnee im Mondschein und fiel ihm in weichen, geschmeidigen Wellen über die Schultern. Seine Augen funkelten wie Sterne in einer klaren Winternacht.</p>
+
+                <p>"Leonas Grünfeld, nehme ich an?", fragte der Mann mit einer warmen und ruhigen Stimme, die trotzdem die Stille des Waldes mit einer besonderen Macht durchdrang. "Ja, das bin ich", stammelte Leonas und fragte sich, woher dieser fremde Mann seinen Namen kannte. "Wer sind Sie? Und woher wissen Sie, wer ich bin?"</p>
+
+                <p>Der Mann lächelte, und sein Gesicht wurde von einer inneren Güte erleuchtet, die Leonas sofort vertraute. "Mein Name ist Elias Nachtflug. Ich bin ein Bote der Zauberakademie von Morgenstern. Und ich habe eine besondere Einladung für dich, junger Leonas." Mit diesen Worten zog er eine Pergamentrolle aus seinem Mantel. Das Pergament schimmerte in einem sanften goldenen Licht, als wäre es von Magie durchdrungen.</p>
+
+                <p>Leonas starrte den Mann ungläubig an. "Eine Zauberakademie?", flüsterte er. "Aber... aber das gibt es doch gar nicht. Das sind nur Märchen." Elias' Lächeln wurde breiter. "Märchen, sagst du? Schau dich um, Leonas. Siehst du nicht die Magie, die dich jeden Tag umgibt? Die Art, wie die Tiere zu dir kommen, wie die Pflanzen unter deinen Händen zu gedeihen scheinen? Du hast schon immer gewusst, dass du anders bist."</p>
+
+                <p>Leonas nahm die Rolle mit zitternden Händen entgegen. Als er sie entrollte, schien es in einem sanften Licht zu schimmern, und die Buchstaben auf dem Papier bewegten sich sanft, als wären sie lebendig. Die Schrift war elegant und kunstvoll, mit goldenen Akzenten verziert: "An Leonas Grünfeld, das Schicksal hat dich auserwählt, ein Schüler der Zauberakademie von Morgenstern zu werden."</p>
+
+                <p>Leonas' Kopf schwirrte. Eine Zauberakademie? Er hatte immer von Magie geträumt, aber das war doch unmöglich! Oder etwa nicht? "Das muss ein Irrtum sein", flüsterte er und blickte zu Elias auf. "Ich bin nur ein ganz normaler Junge. Ich kann nichts Besonderes." Elias schüttelte den Kopf. "Du bist alles andere als normal, Leonas. Du hast eine Gabe, die selten und wertvoll ist."</p>
+
+                <p>"Es liegt an dir, diese Gabe zu entdecken und zu entfalten", fuhr Elias fort. "In der Akademie von Morgenstern wirst du andere treffen, die ebenfalls besondere Fähigkeiten haben. Du wirst lernen, dass das, was dich anders macht, in Wahrheit deine größte Stärke ist." Die Worte des Boten schienen direkt in Leonas' Herz zu dringen.</p>
+
+                <p>"Aber was ist, wenn ich nicht gut genug bin?", fragte Leonas leise. "Was ist, wenn ich alle enttäusche?" Elias legte eine warme Hand auf seine Schulter. "Mut ist nicht die Abwesenheit von Angst, Leonas. Mut ist, trotz der Angst das Richtige zu tun. Du hast bereits mehr Mut gezeigt, als du weißt."</p>
+
+                <p>Als Elias zu verschwinden begann, sein Körper wurde durchsichtig wie Nebel, fügte er hinzu: "Die Entscheidung liegt bei dir, Leonas. Aber denk daran: Manchmal führen uns die Wege, die uns am meisten Angst machen, zu den schönsten Zielen." Als Elias verschwunden war, kehrte Leonas nach Hause zurück. Der Wald um ihn schien anders zu sein, erfüllt von neuen Möglichkeiten.</p>
+
+                <p>Die Nacht zog sich endlos hin. Leonas lag wach in seinem Bett und starrte an die Decke, während seine Gedanken zwischen Aufregung und Furcht hin und her sprangen. Mit zitternden, aber entschlossenen Händen packte Leonas eine kleine Tasche: ein Notizbuch, seinen Lieblingsstift aus Holz, den sein Großvater geschnitzt hatte, und ein altes Amulett, das seiner verstorbenen Mutter gehört hatte.</p>
+
+                <p>Als die ersten Sonnenstrahlen durch sein Fenster fielen, hörte er ein sanftes Klopfen an der Haustür. Sein Herz setzte einen Schlag aus. Es war Zeit. Er sprang aus dem Bett, griff seine gepackte Tasche und eilte nach draußen. Vor dem Haus stand eine prachtvolle Kutsche, prächtiger als alles, was er je gesehen hatte. Sie war aus dunklem Holz geschnitzt und mit goldenen Verzierungen versehen, die in der Morgensonne funkelten wie Edelsteine.</p>
+
+                <p>Gezogen wurde sie von zwei schneeweißen, geflügelten Pferden, deren Flügel im Morgenlicht schimmerten wie Perlmutt. Ein Kutscher in einem sternenbesetzten Umhang öffnete die Tür der Kutsche und lächelte ihm freundlich zu. "Bereit für dein Abenteuer, junger Herr Grünfeld? Die Akademie wartet auf dich." Leonas nickte, obwohl seine Knie zitterten.</p>
+
+                <p>Er warf einen letzten Blick auf sein Zuhause, auf das kleine Dorf mit seinen vertrauten Häusern und Gärten, das sein ganzes Leben lang seine Welt gewesen war. Er sah seine Mutter am Fenster stehen, Tränen in den Augen, aber auch Stolz in ihrem Lächeln. Sie winkte ihm zu und formte mit den Lippen die Worte: "Ich liebe dich."</p>
+
+                <p>Dann stieg er in die Kutsche und spürte, wie sich unter seinen Füßen etwas Wunderbares veränderte. Das Innere der Kutsche war noch prächtiger als das Äußere. Die Sitze waren mit samtweichem, tiefblauem Stoff bezogen, und die Wände waren mit schimmernden Symbolen verziert, die im Licht zu tanzen schienen.</p>
+
+                <p>Als die Kutsche sich in die Lüfte erhob und die geflügelten Pferde ihre majestätischen Schwingen ausbreiteten, blickte Leonas durch das Fenster auf die Welt hinab, die kleiner und kleiner wurde. Er fühlte keine Angst beim Fliegen, nur Staunen und eine tiefe Dankbarkeit für dieses unglaubliche Erlebnis. Das Abenteuer, von dem er immer geträumt hatte, hatte endlich begonnen, und obwohl er nicht wusste, was ihn erwartete, spürte er zum ersten Mal in seinem Leben, dass er bereit war, mutig zu sein.</p>
+            </div>
+        </div>
+        
+        <!-- Englische Version -->
+        <div id="en-content" class="language-content hidden">
+            <div class="story-text" id="storyTextEn">
+                <p>The morning air was cool and clear as Leonas Grünfeld slung his school bag over his shoulder and set off on the dusty path to school. The trail wound between old oak trees, whose branches wove together like protective arms above him, casting shadows on the worn path. His village, nestled in wide fields and dense forests, was slowly awakening to life. The morning sun painted golden stripes across the meadows, where dew sparkled like thousands of tiny diamonds.</p>
+
+                <p>Cows lowed softly in the distance, their voices mixing with the chirping of birds singing their morning songs. The first warm rays of sunlight broke through the treetops, making the leaves glow in every shade of green. For others, it might have been an ordinary day, but Leonas sensed an unusual tension in the air, a strange tingling that wandered over his skin and made him feel restless inside.</p>
+
+                <p>Leonas was a shy boy of twelve with straw-blonde hair that constantly fell into his forehead, and green eyes that often gazed thoughtfully and somewhat melancholically into the distance. His skin was pale, as he spent most of his time in the shade of trees, and his hands were always a little dirty from the earth he liked to dig in to observe beetles and worms.</p>
+
+                <p>He avoided the loud children in his class and preferred to spend time with the animals of the forest, who never mocked or excluded him. His steps were quiet and careful, as if he were trying to remain as invisible as possible while wandering through the world. He often moved like a shadow, smooth and unnoticed, a trait he had acquired over years of avoiding and hiding.</p>
+
+                <p>The other children at school didn't understand him, and he understood them just as little. While they were enthusiastic about ball games and loud jokes, about the latest toys and trends, Leonas found comfort in the quiet observation of beetles crawling over rough tree bark, or birds skillfully building their nests from twigs and moss.</p>
+
+                <p>He was often mocked for this, especially by Jasper and his clique, a group of five boys who considered themselves the kings of the schoolyard. They called themselves "the Falcons" and wore this name with a pride that was completely inappropriate. Jasper was their leader, a tall, strong boy with thin brown hair and small, piercing eyes that always searched for weakness.</p>
+
+                <p>Today was no exception. When Leonas reached the school, the old brick building with its high, narrow windows and weathered slate roof, it was only a matter of minutes before they surrounded him. "Hey, Grünfeld! Have you been chatting with your squirrels again?" asked Jasper with a broad grin, pushing Leonas on the shoulder.</p>
+
+                <p>The other children laughed while Leonas remained silent and stared at the ground. His hands gripped the strap of his bag, and he wished for nothing more than to become invisible. The words hurt more than he wanted to show, because they hit exactly what set him apart from the others - his deep love for nature and his strange ability to feel more comfortable in the presence of animals than with humans.</p>
+
+                <p>The lesson dragged on endlessly like a sluggish river on a hot summer day. Leonas sat in the back row, his usual place, from where he could both see the blackboard and look out the window unnoticed. His thoughts wandered involuntarily to the squirrels he had watched collecting nuts yesterday.</p>
+
+                <p>"Leonas!" called Mrs. Müller sharply. "Can you give me the answer to the question?" Leonas startled and looked confused at the blackboard. He had no idea what it was about. The other children giggled, and he felt that familiar burning in his cheeks again. "I... I don't know," he mumbled. "Then you should pay better attention instead of daydreaming," the teacher scolded him with a disapproving look.</p>
+
+                <p>After a long day full of embarrassing moments and sideways glances, Leonas hurried home. His family's small yard, surrounded by dense hedges of hawthorn and elderberry and blooming wildflowers that his mother lovingly tended, offered him at least some comfort. His mother noticed his dejected mood. "Was it bad again today?" she asked gently, stroking his hair. Leonas just nodded.</p>
+
+                <p>He spent the afternoon as usual in his favorite hiding place, a small clearing in the forest where an old tree with gnarled roots stood. It was his refuge, his sanctuary, the only place in the world where he felt completely at home. The old tree was massive and awe-inspiring, its trunk so thick that three adults couldn't have embraced it.</p>
+
+                <p>A robin landed on a branch near him and looked at him curiously with its small, shining black eyes. Leonas didn't move, barely breathed, and after a while the bird came closer and closer. It was a magical moment, one of many he had experienced in this forest, moments that made him feel connected to something greater.</p>
+
+                <p>But today something was different, something that broke the familiar peace of the forest. The air seemed more tense, more electric, as if a thunderstorm was in the air, although the sky was clear and blue. When he opened his eyes, he noticed a strange figure standing next to the trunk of the old tree, as if it had appeared from nowhere.</p>
+
+                <p>It was a man, tall and of noble, royal bearing, wrapped in a shimmering, dark blue cloak that seemed to sparkle in the dim light of the forest like the night sky full of stars. The man's hair was silver like freshly fallen snow in moonlight and fell in soft, smooth waves over his shoulders. His eyes twinkled like stars in a clear winter night.</p>
+
+                <p>"Leonas Grünfeld, I presume?" asked the man with a warm and calm voice that still penetrated the silence of the forest with a special power. "Yes, that's me," stammered Leonas, wondering how this strange man knew his name. "Who are you? And how do you know who I am?"</p>
+
+                <p>The man smiled, and his face was illuminated by an inner kindness that Leonas immediately trusted. "My name is Elias Nightflight. I am a messenger from the Magic Academy of Morgenstern. And I have a special invitation for you, young Leonas." With these words, he pulled a parchment scroll from his cloak. The parchment shimmered in a gentle golden light, as if it were infused with magic.</p>
+
+                <p>Leonas stared at the man incredulously. "A magic academy?" he whispered. "But... but that doesn't exist. Those are just fairy tales." Elias' smile grew wider. "Fairy tales, you say? Look around you, Leonas. Don't you see the magic that surrounds you every day? The way animals come to you, how plants seem to thrive under your hands? You've always known that you're different."</p>
+
+                <p>Leonas took the scroll with trembling hands. As he unrolled it, it seemed to shimmer in a gentle light, and the letters on the paper moved gently, as if they were alive. The writing was elegant and artistic, decorated with golden accents: "To Leonas Grünfeld, fate has chosen you to become a student of the Magic Academy of Morgenstern."</p>
+
+                <p>Leonas' head was spinning. A magic academy? He had always dreamed of magic, but this was impossible! Or wasn't it? "This must be a mistake," he whispered, looking up at Elias. "I'm just a completely normal boy. I can't do anything special." Elias shook his head. "You are anything but normal, Leonas. You have a gift that is rare and valuable."</p>
+
+                <p>"It's up to you to discover and develop this gift," continued Elias. "At the Academy of Morgenstern you will meet others who also have special abilities. You will learn that what makes you different is actually your greatest strength." The messenger's words seemed to penetrate directly into Leonas' heart.</p>
+
+                <p>"But what if I'm not good enough?" asked Leonas quietly. "What if I disappoint everyone?" Elias placed a warm hand on his shoulder. "Courage is not the absence of fear, Leonas. Courage is doing the right thing despite fear. You have already shown more courage than you know."</p>
+
+                <p>As Elias began to disappear, his body becoming transparent like mist, he added: "The decision is yours, Leonas. But remember: sometimes the paths that frighten us the most lead to the most beautiful destinations." When Elias had disappeared, Leonas returned home. The forest around him seemed different, filled with new possibilities.</p>
+
+                <p>The night dragged on endlessly. Leonas lay awake in his bed staring at the ceiling, his thoughts jumping back and forth between excitement and fear. With trembling but determined hands, Leonas packed a small bag: a notebook, his favorite wooden pen that his grandfather had carved, and an old amulet that had belonged to his deceased mother.</p>
+
+                <p>When the first rays of sunlight fell through his window, he heard a gentle knock at the front door. His heart skipped a beat. It was time. He jumped out of bed, grabbed his packed bag and hurried outside. In front of the house stood a magnificent carriage, more magnificent than anything he had ever seen. It was carved from dark wood and adorned with golden decorations that sparkled in the morning sun like precious stones.</p>
+
+                <p>It was pulled by two snow-white, winged horses whose wings shimmered like mother-of-pearl in the morning light. A coachman in a star-studded cloak opened the carriage door and smiled at him kindly. "Ready for your adventure, young Mr. Grünfeld? The academy awaits you." Leonas nodded, although his knees were shaking.</p>
+
+                <p>He took one last look at his home, at the small village with its familiar houses and gardens that had been his world all his life. He saw his mother standing at the window, tears in her eyes, but also pride in her smile. She waved to him and mouthed the words: "I love you."</p>
+
+                <p>Then he got into the carriage and felt something wonderful change beneath his feet. The interior of the carriage was even more magnificent than the exterior. The seats were covered with velvet-soft, deep blue fabric, and the walls were decorated with shimmering symbols that seemed to dance in the light.</p>
+
+                <p>As the carriage rose into the air and the winged horses spread their majestic wings, Leonas looked through the window at the world below, which became smaller and smaller. He felt no fear while flying, only wonder and deep gratitude for this incredible experience. The adventure he had always dreamed of had finally begun, and although he didn't know what awaited him, he felt for the first time in his life that he was ready to be brave.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSpeech = null;
+        let currentWordIndex = 0;
+        let allWords = [];
+        let isReading = false;
+        let lastHighlightedWord = null;
+        let currentLanguage = 'de';
+        let stoppedAtIndex = 0; // Neue Variable für Stop-Position
+
+        // Spracheinstellungen
+        const languageTexts = {
+            de: {
+                title: "Die Zauberakademie von Morgenstern",
+                author: "von Helmut Wegner",
+                btnRead: "Vorlesen",
+                btnContinue: "Weiterlesen",
+                btnStop: "Stop",
+                backLink: "📚 Zurück zu Kinderbücher",
+                homeLink: "🏠 Zur Startseite",
+                lang: "de-DE"
+            },
+            en: {
+                title: "The Magic Academy of Morgenstern",
+                author: "by Helmut Wegner",
+                btnRead: "Read Aloud",
+                btnContinue: "Continue",
+                btnStop: "Stop",
+                backLink: "📚 Back to Children's Books",
+                homeLink: "🏠 To Homepage",
+                lang: "en-US"
+            }
+        };
+
+        function switchLanguage(lang) {
+            // Stoppe aktuelles Vorlesen
+            if (currentSpeech) {
+                speechSynthesis.cancel();
+                isReading = false;
+            }
+            
+            // Verstecke alle Sprachen
+            document.querySelectorAll('.language-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            
+            // Zeige ausgewählte Sprache
+            document.getElementById(lang + '-content').classList.remove('hidden');
+            
+            // Update Sprachbuttons
+            document.querySelectorAll('.btn-lang').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Update Texte
+            currentLanguage = lang;
+            const texts = languageTexts[lang];
+            document.getElementById('main-title').textContent = texts.title;
+            document.getElementById('author').textContent = texts.author;
+            document.getElementById('btn-read-text').textContent = texts.btnRead;
+            document.getElementById('btn-continue-text').textContent = texts.btnContinue;
+            document.getElementById('btn-stop-text').textContent = texts.btnStop;
+            document.getElementById('back-link').textContent = texts.backLink;
+            document.getElementById('home-link').textContent = texts.homeLink;
+            
+            // Initialisiere Wörter für neue Sprache
+            currentWordIndex = 0;
+            stoppedAtIndex = 0; // Reset bei Sprachwechsel
+            clearHighlights();
+            initializeWords();
+        }
+
+        function initializeWords() {
+            const storyText = document.querySelector('#' + currentLanguage + '-content .story-text');
+            if (!storyText) return;
+            
+            const paragraphs = storyText.querySelectorAll('p');
+            allWords = [];
+            
+            paragraphs.forEach((paragraph) => {
+                const paragraphText = paragraph.textContent;
+                const paragraphWords = paragraphText.split(/\s+/).filter(word => word.length > 0);
+                
+                let paragraphHTML = '';
+                paragraphWords.forEach((word) => {
+                    paragraphHTML += `<span class="word" data-word-index="${allWords.length}" onclick="startFromWord(${allWords.length})">${word}</span> `;
+                    allWords.push(word);
+                });
+                
+                paragraph.innerHTML = paragraphHTML;
+            });
+        }
+
+        function startReading() {
+            currentWordIndex = 0;
+            stoppedAtIndex = 0; // Reset bei Neustart
+            clearHighlights();
+            continueReading();
+        }
+
+        function continueReading() {
+            if (currentSpeech) {
+                speechSynthesis.cancel();
+            }
+            
+            if (allWords && allWords.length > 0) {
+                const remainingText = allWords.slice(currentWordIndex).join(' ');
+                
+                currentSpeech = new SpeechSynthesisUtterance(remainingText);
+                currentSpeech.rate = 1.0;
+                currentSpeech.lang = languageTexts[currentLanguage].lang;
+                
+                let wordCount = currentWordIndex;
+                
+                currentSpeech.onboundary = function(event) {
+                    if (event.name === 'word') {
+                        highlightCurrentWord(wordCount);
+                        wordCount++;
+                        currentWordIndex = wordCount;
+                    }
+                };
+                
+                currentSpeech.onend = function() {
+                    isReading = false;
+                };
+                
+                isReading = true;
+                speechSynthesis.speak(currentSpeech);
+            }
+        }
+
+        function startFromWord(wordIndex) {
+            currentWordIndex = wordIndex;
+            stoppedAtIndex = wordIndex; // Position auch für Stop setzen
+            clearHighlights();
+            continueReading();
+        }
+
+        function highlightCurrentWord(wordIndex) {
+            if (lastHighlightedWord) {
+                lastHighlightedWord.classList.remove('current');
+            }
+            
+            const wordSpan = document.querySelector(`#${currentLanguage}-content [data-word-index="${wordIndex}"]`);
+            if (wordSpan) {
+                wordSpan.classList.add('current');
+                lastHighlightedWord = wordSpan;
+                
+                // Sanftes Scrolling OHNE die Controls aus dem Blickfeld zu nehmen
+                const rect = wordSpan.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
+                const controlsHeight = 150; // Platz für die Controls
+                
+                // Nur scrollen wenn das Wort zu weit unten oder oben ist
+                if (rect.bottom > windowHeight - 100 || rect.top < controlsHeight + 50) {
+                    wordSpan.scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'nearest',
+                        inline: 'nearest'
+                    });
+                }
+            }
+        }
+
+        function clearHighlights() {
+            document.querySelectorAll('.current').forEach(el => {
+                el.classList.remove('current');
+            });
+            lastHighlightedWord = null;
+        }
+
+        function stopReading() {
+            if (currentSpeech) {
+                speechSynthesis.cancel();
+                currentSpeech = null;
+                isReading = false;
+            }
+            // Aktuelle Position für Weiterlesen merken
+            stoppedAtIndex = currentWordIndex;
+            // WICHTIG: Markierung NICHT löschen!
+            // Die blaue Markierung bleibt stehen für "Weiterlesen"
+        }
+
+        // Initialisierung beim Seitenstart
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeWords();
+        });
+    </script>
+</body>
+</html>
