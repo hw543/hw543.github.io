@@ -1,1 +1,556 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Das Geheimnis des verborgenen Waldes - Vorlesen</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.8;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #FFE5B4 0%, #FFB6C1 50%, #98FB98 100%);
+            min-height: 100vh;
+        }
+        
+        .rainbow-header {
+            height: 20px;
+            background: linear-gradient(90deg, 
+                #FF0000 0%, 
+                #FF7F00 14%, 
+                #FFFF00 28%, 
+                #00FF00 42%, 
+                #0000FF 56%, 
+                #4B0082 70%, 
+                #9400D3 84%, 
+                #FF1493 100%);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background: linear-gradient(135deg, #FFF8DC 0%, #F0F8FF 100%);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border: 3px solid #FFD700;
+        }
+        
+        h1 {
+            color: #FF6347;
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(255,105,180,0.3);
+        }
+        
+        .author {
+            text-align: center;
+            color: #9370DB;
+            font-style: italic;
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+        
+        .controls {
+            position: sticky;
+            top: 20px;
+            text-align: center;
+            margin: 30px 0 10px 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #FFE4E1 0%, #E6E6FA 100%);
+            border-radius: 15px;
+            border: 2px solid #FFB6C1;
+            z-index: 1000;
+            box-shadow: 0 5px 15px rgba(255,182,193,0.3);
+        }
+        
+        .navigation-box {
+            text-align: center;
+            margin: 0 auto 30px auto;
+            padding: 15px 25px;
+            background: linear-gradient(135deg, #F0FFF0 0%, #FFFACD 100%);
+            border-radius: 15px;
+            border: 2px solid #32CD32;
+            width: fit-content;
+            max-width: 400px;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .language-navigation {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            margin: 5px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .btn-lang {
+            background: linear-gradient(135deg, #FF69B4, #FF1493);
+            color: white;
+            border: 2px solid transparent;
+        }
+        
+        .btn-lang.active {
+            border-color: #FFD700;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+        }
+        
+        .btn-lang:hover {
+            background: linear-gradient(135deg, #FF1493, #C71585);
+            transform: translateY(-2px);
+        }
+        
+        .btn-read {
+            background: linear-gradient(135deg, #FF6347, #FF4500);
+            color: white;
+        }
+        
+        .btn-read:hover {
+            background: linear-gradient(135deg, #FF4500, #FF2400);
+            transform: translateY(-2px);
+        }
+        
+        .btn-continue {
+            background: linear-gradient(135deg, #32CD32, #228B22);
+            color: white;
+        }
+        
+        .btn-continue:hover {
+            background: linear-gradient(135deg, #228B22, #006400);
+            transform: translateY(-2px);
+        }
+        
+        .btn-stop {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #8B4513;
+        }
+        
+        .btn-stop:hover {
+            background: linear-gradient(135deg, #FFA500, #FF8C00);
+            transform: translateY(-2px);
+        }
+        
+        .story-text {
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: #2F4F4F;
+            text-align: justify;
+            background: linear-gradient(135deg, #FFFAF0 0%, #FFF8DC 100%);
+            padding: 25px;
+            border-radius: 15px;
+            border: 2px solid #DDA0DD;
+            box-shadow: 0 5px 15px rgba(221,160,221,0.2);
+        }
+        
+        .story-text p {
+            margin-bottom: 20px;
+        }
+        
+        .word {
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .word:hover {
+            background-color: #FFE4E1;
+            border-radius: 3px;
+        }
+        
+        .current {
+            background-color: #FF69B4 !important;
+            color: white !important;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        
+        .nav-link {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 0 5px;
+            background: linear-gradient(135deg, #9370DB, #8A2BE2);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(147,112,219,0.3);
+            font-size: 14px;
+        }
+        
+        .nav-link:hover {
+            background: linear-gradient(135deg, #8A2BE2, #7B68EE);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(138,43,226,0.4);
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            .controls {
+                padding: 15px;
+            }
+            
+            .btn {
+                display: block;
+                margin: 10px auto;
+                width: 200px;
+            }
+            
+            .language-navigation {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .nav-link {
+                font-size: 13px;
+                padding: 8px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="rainbow-header"></div>
+    
+    <div class="container">
+        <h1 id="main-title">Das Geheimnis des verborgenen Waldes</h1>
+        <p class="author" id="author">von Helmut Wegner</p>
+        
+        <div class="controls">
+            <div class="language-navigation">
+                <button class="btn btn-lang active" onclick="switchLanguage('de')">🇩🇪 Deutsch</button>
+                <button class="btn btn-lang" onclick="switchLanguage('en')">🇬🇧 English</button>
+            </div>
+            
+            <button class="btn btn-read" onclick="startReading()">🔴 <span id="btn-read-text">Vorlesen</span></button>
+            <button class="btn btn-continue" onclick="continueReading()">▶️ <span id="btn-continue-text">Weiterlesen</span></button>
+            <button class="btn btn-stop" onclick="stopReading()">⏹️ <span id="btn-stop-text">Stop</span></button>
+        </div>
+        
+        <div class="navigation-box">
+            <div class="nav-buttons">
+                <a href="kinderbuecher.html" class="nav-link" id="back-link">📚 Zurück zu Kinderbücher</a>
+                <a href="index.html" class="nav-link" id="home-link">🏠 Zur Startseite</a>
+            </div>
+        </div>
+        
+        <!-- Deutsche Version -->
+        <div id="de-content" class="language-content">
+            <div class="story-text" id="storyText">
+                <p>Die Sonne neigte sich dem Horizont entgegen und tauchte den Himmel in ein sanftes Orange. Max und Lisa standen auf dem alten Marktplatz ihrer Stadt und schauten sich neugierig um. Der Platz war leer, die meisten Geschäfte hatten bereits geschlossen, und nur das entfernte Kichern der Kinder, die auf dem Heimweg waren, war zu hören. Aber Max und Lisa waren nicht in die Richtung nach Hause gegangen. Sie hatten etwas anderes im Kopf.</p>
 
+                <p>„Glaubst du, es ist wirklich der Verborgene Wald?", fragte Max aufgeregt. Er sprang von einem Bein auf das andere und klopfte sich mit der Hand auf die Tasche, in der er eine kleine Notiz versteckt hatte, die sie den ganzen Nachmittag über verfolgt hatte.</p>
+
+                <p>„Vielleicht..." antwortete Lisa nachdenklich. Sie drehte sich langsam um, um nach dem geheimen Hinweis zu suchen, den sie erhalten hatten. Max hatte die Nachricht in einem alten Buch gefunden, das sie im Antiquariat der Stadt entdeckt hatten. Sie hatte sie verwirrt, aber auch neugierig gemacht.</p>
+
+                <p>Die Nachricht sprach von einem alten Mann, der sie zur geheimen Karte führen würde -- eine Karte, die zu einem versteckten Ort voller Magie und Abenteuer führte. Max hatte sofort entschieden, dass sie sich auf den Weg machen sollten, aber Lisa hatte etwas mehr Zeit gebraucht, um sich zu überlegen, ob es wirklich sicher war.</p>
+
+                <p>„Schau mal da!", rief Max plötzlich und zeigte auf einen schmalen, fast verborgenen Weg zwischen den Häusern. Am Ende des Weges stand ein alter Mann in einem langen, grauen Umhang. Seine Augen leuchteten wie zwei funkelnde Sterne. Lisa spürte sofort eine seltsame Energie in seiner Nähe -- als ob der Wald, von dem sie gehört hatten, in ihm lebte.</p>
+
+                <p>Der Mann bemerkte sie sofort und winkte mit einer einladenden Geste. „Ah, du bist gekommen", sagte er mit einer Stimme, die sich wie das Flüstern des Windes anhörte. „Ich habe gewusst, dass ihr es seid."</p>
+
+                <p>„W-wir?", fragte Max überrascht. „Wie können Sie das wissen?" Der Mann lächelte geheimnisvoll. „Ich kenne viele Dinge, die andere nicht wissen. Die Karte, die ihr sucht, wird euch den Weg zeigen, aber nur, wenn ihr mutig genug seid, ihn zu gehen."</p>
+
+                <p>Er zog eine alte, zusammengerollte Karte aus seinem Mantel und überreichte sie Max. Die Karte war mit seltsamen Symbolen und bunten, geheimen Markierungen verziert. Der Rand war mit goldenen Schnörkeln geschmückt, die in der Dämmerung im Schein des Mondes schimmerten.</p>
+
+                <p>Max öffnete die Karte und hielt sie neugierig in der Hand. Es war, als ob die Karte lebendig wurde. Sie schien zu flimmern und zu pulsieren, als ob sie aufgeregt darauf wartete, dass er sie entdeckte.</p>
+
+                <p>„Was bedeutet das?", fragte Lisa und deutete auf einen merkwürdigen, leuchtenden Punkt in der Mitte der Karte. „Der Verborgene Wald", erklärte der Mann. „Er wartet auf euch. Wenn ihr ihm begegnet, werdet ihr ein Geheimnis erfahren, das schon viele Jahre verborgen ist. Doch nur die, die das Herz eines Abenteurers haben, können es finden."</p>
+
+                <p>Max' Augen glänzten vor Aufregung. „Das hört sich nach einem echten Abenteuer an!", rief er und drückte die Karte fest an sich. Lisa hingegen schaute sich die Karte und den alten Mann misstrauisch an. „Aber was passiert, wenn wir nicht zurückkommen?", fragte sie leise.</p>
+
+                <p>Der Mann schaute sie mit einem wissenden Blick an. „Ihr werdet zurückkommen", sagte er sanft. „Doch nicht so, wie ihr gegangen seid. Ihr werdet stärker, weiser und vielleicht auch ein wenig anders sein. Aber das ist das Abenteuer."</p>
+
+                <p>Max zog Lisa etwas ungeduldig am Ärmel. „Komm schon, Lisa! Wir können es doch wenigstens versuchen!" Lisa seufzte, doch in ihren Augen funkelte die Neugier. „Okay", sagte sie schließlich. „Aber nur, wenn du uns auch hilfst, den Weg zu finden."</p>
+
+                <p>Der alte Mann nickte und verschwand dann im Schatten der Gasse, als ob er nie da gewesen wäre. Max und Lisa standen einen Moment lang unschlüssig da, dann drehten sie sich gemeinsam in Richtung des Waldes.</p>
+
+                <p>Es war bereits Abend, und die ersten Sterne waren am Himmel zu sehen. Die Karte in Max' Händen leuchtete schwach, als ob sie ihnen den Weg wies. „Lass uns aufbrechen", sagte Max entschlossen. Lisa zögerte kurz, dann nickte sie. „Ja, aufbrechen, aber vorsichtig", murmelte sie, während sie Bruno, ihren Hund, der freudig neben ihnen herlief, ansah.</p>
+
+                <p>„Wir müssen uns gut vorbereiten. Vielleicht brauchen wir Proviant, ein paar Seile und auf jeden Fall etwas zum Leuchten", überlegte Lisa laut, während Max bereits in eine der Taschen seiner Jacke griff und nach seinen Abenteuergütern suchte.</p>
+
+                <p>„Das wird großartig", sagte Max und packte eine Taschenlampe ein. „Was ist, wenn wir Magie entdecken?" Lisa drehte sich um und blickte zur Karte, die in seinen Händen pulsierte. „Was, wenn wir uns verlaufen oder etwas anderes passiert?"</p>
+
+                <p>Doch gerade, als sie die Frage laut aussprach, schimmerte die Karte plötzlich heller. Ein warmes, goldenes Licht flimmerte auf der Karte auf und löste sich wie ein Nebel in der Luft auf. Ein leises Geräusch, wie das sanfte Rascheln von Blättern, war zu hören.</p>
+
+                <p>„Sie lebt...", flüsterte Lisa fasziniert. Max griff nach ihrer Hand, und gemeinsam folgten sie der magischen Spur, die die Karte ihnen zeigte. Doch gerade als sie die ersten Schritte auf den Waldweg setzten, erklang ein leises, unheimliches Knistern in der Luft -- ein Geräusch, das ihnen das Gefühl gab, dass sie nicht alleine waren.</p>
+
+                <p>„Bist du bereit?", fragte Max. „Ich weiß nicht", sagte Lisa mit einem Blick auf die Karte, „aber ich glaube, die Reise hat gerade erst begonnen."</p>
+
+                <p>Mit einem letzten Blick zurück auf die Stadt, die langsam in der Dunkelheit verschwand, traten Max, Lisa und Bruno in den geheimen Wald ein, und das Abenteuer begann. Ihre Herzen klopften schneller, als sie sich tiefer in die Dunkelheit wagten. Und so begann ihre Reise -- ein Abenteuer, das sie nie vergessen würden.</p>
+            </div>
+        </div>
+        
+        <!-- Englische Version -->
+        <div id="en-content" class="language-content hidden">
+            <div class="story-text" id="storyTextEn">
+                <p>The sun was inclining toward the horizon and bathed the sky in a gentle orange. Max and Lisa stood on the old market square of their town and looked around curiously. The square was empty, most shops had already closed, and only the distant giggling of children who were on their way home could be heard. But Max and Lisa had not gone in the direction of home. They had something else in mind.</p>
+
+                <p>"Do you think it's really the Hidden Forest?" asked Max excitedly. He jumped from one leg to the other and tapped his hand on the pocket where he had hidden a small note that had been following them all afternoon.</p>
+
+                <p>"Maybe..." Lisa answered thoughtfully. She turned around slowly to look for the secret clue they had received. Max had found the message in an old book they had discovered in the town's antique shop. It had confused them, but also made them curious.</p>
+
+                <p>The message spoke of an old man who would lead them to the secret map -- a map that led to a hidden place full of magic and adventure. Max had immediately decided that they should set off, but Lisa had needed a little more time to think about whether it was really safe.</p>
+
+                <p>"Look there!" Max suddenly called out, pointing to a narrow, almost hidden path between the houses. At the end of the path stood an old man in a long, gray cloak. His eyes shone like two twinkling stars. Lisa immediately felt a strange energy near him -- as if the forest they had heard about lived in him.</p>
+
+                <p>The man noticed them immediately and waved with an inviting gesture. "Ah, you have come," he said with a voice that sounded like the whisper of the wind. "I knew it was you."</p>
+
+                <p>"W-we?" asked Max surprised. "How can you know that?" The man smiled mysteriously. "I know many things that others do not know. The map you seek will show you the way, but only if you are brave enough to walk it."</p>
+
+                <p>He pulled an old, rolled-up map from his cloak and handed it to Max. The map was decorated with strange symbols and colorful, secret markings. The edge was adorned with golden flourishes that shimmered in the twilight in the glow of the moon.</p>
+
+                <p>Max opened the map and held it curiously in his hand. It was as if the map came alive. It seemed to flicker and pulse, as if it was excitedly waiting for him to discover it.</p>
+
+                <p>"What does this mean?" asked Lisa, pointing to a strange, glowing point in the center of the map. "The Hidden Forest," the man explained. "It waits for you. When you encounter it, you will learn a secret that has been hidden for many years. But only those who have the heart of an adventurer can find it."</p>
+
+                <p>Max's eyes gleamed with excitement. "That sounds like a real adventure!" he exclaimed, pressing the map firmly against himself. Lisa, however, looked at the map and the old man suspiciously. "But what happens if we don't come back?" she asked quietly.</p>
+
+                <p>The man looked at her with a knowing gaze. "You will return," he said gently. "But not as you left. You will be stronger, wiser, and perhaps a little different. But that is the adventure."</p>
+
+                <p>Max pulled Lisa somewhat impatiently by the sleeve. "Come on, Lisa! We can at least try!" Lisa sighed, but curiosity sparkled in her eyes. "Okay," she finally said. "But only if you also help us find the way."</p>
+
+                <p>The old man nodded and then disappeared into the shadow of the alley, as if he had never been there. Max and Lisa stood uncertainly for a moment, then turned together toward the forest.</p>
+
+                <p>It was already evening, and the first stars were visible in the sky. The map in Max's hands glowed faintly, as if it was showing them the way. "Let's set off," said Max determinedly. Lisa hesitated briefly, then nodded. "Yes, let's go, but carefully," she murmured, while looking at Bruno, their dog, who was running happily beside them.</p>
+
+                <p>"We need to prepare well. Maybe we need provisions, some ropes, and definitely something for light," Lisa thought aloud, while Max was already reaching into one of his jacket pockets, searching for his adventure gear.</p>
+
+                <p>"This will be great," said Max, packing a flashlight. "What if we discover magic?" Lisa turned around and looked at the map pulsing in his hands. "What if we get lost or something else happens?"</p>
+
+                <p>But just as she spoke the question aloud, the map suddenly shimmered brighter. A warm, golden light flickered on the map and dissolved like mist in the air. A soft sound, like the gentle rustling of leaves, could be heard.</p>
+
+                <p>"It lives..." whispered Lisa, fascinated. Max grabbed her hand, and together they followed the magical trail that the map showed them. But just as they took the first steps onto the forest path, a soft, eerie crackling sounded in the air -- a sound that gave them the feeling that they were not alone.</p>
+
+                <p>"Are you ready?" asked Max. "I don't know," said Lisa with a look at the map, "but I believe the journey has just begun."</p>
+
+                <p>With one last look back at the city, which was slowly disappearing into the darkness, Max, Lisa, and Bruno entered the secret forest, and the adventure began. Their hearts beat faster as they ventured deeper into the darkness. And so began their journey -- an adventure they would never forget.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSpeech = null;
+        let currentWordIndex = 0;
+        let allWords = [];
+        let isReading = false;
+        let lastHighlightedWord = null;
+        let currentLanguage = 'de';
+        let stoppedAtIndex = 0;
+
+        // Spracheinstellungen
+        const languageTexts = {
+            de: {
+                title: "Das Geheimnis des verborgenen Waldes",
+                author: "von Helmut Wegner",
+                btnRead: "Vorlesen",
+                btnContinue: "Weiterlesen",
+                btnStop: "Stop",
+                backLink: "📚 Zurück zu Kinderbücher",
+                homeLink: "🏠 Zur Startseite",
+                lang: "de-DE"
+            },
+            en: {
+                title: "The Secret of the Hidden Forest",
+                author: "by Helmut Wegner",
+                btnRead: "Read Aloud",
+                btnContinue: "Continue",
+                btnStop: "Stop",
+                backLink: "📚 Back to Children's Books",
+                homeLink: "🏠 To Homepage",
+                lang: "en-US"
+            }
+        };
+
+        function switchLanguage(lang) {
+            // Stoppe aktuelles Vorlesen
+            if (currentSpeech) {
+                speechSynthesis.cancel();
+                isReading = false;
+            }
+            
+            // Verstecke alle Sprachen
+            document.querySelectorAll('.language-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            
+            // Zeige ausgewählte Sprache
+            document.getElementById(lang + '-content').classList.remove('hidden');
+            
+            // Update Sprachbuttons
+            document.querySelectorAll('.btn-lang').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Update Texte
+            currentLanguage = lang;
+            const texts = languageTexts[lang];
+            document.getElementById('main-title').textContent = texts.title;
+            document.getElementById('author').textContent = texts.author;
+            document.getElementById('btn-read-text').textContent = texts.btnRead;
+            document.getElementById('btn-continue-text').textContent = texts.btnContinue;
+            document.getElementById('btn-stop-text').textContent = texts.btnStop;
+            document.getElementById('back-link').textContent = texts.backLink;
+            document.getElementById('home-link').textContent = texts.homeLink;
+            
+            // Initialisiere Wörter für neue Sprache
+            currentWordIndex = 0;
+            stoppedAtIndex = 0;
+            clearHighlights();
+            initializeWords();
+        }
+
+        function initializeWords() {
+            const storyText = document.querySelector('#' + currentLanguage + '-content .story-text');
+            if (!storyText) return;
+            
+            const paragraphs = storyText.querySelectorAll('p');
+            allWords = [];
+            
+            paragraphs.forEach((paragraph) => {
+                const paragraphText = paragraph.textContent;
+                const paragraphWords = paragraphText.split(/\s+/).filter(word => word.length > 0);
+                
+                let paragraphHTML = '';
+                paragraphWords.forEach((word) => {
+                    paragraphHTML += `<span class="word" data-word-index="${allWords.length}" onclick="startFromWord(${allWords.length})">${word}</span> `;
+                    allWords.push(word);
+                });
+                
+                paragraph.innerHTML = paragraphHTML;
+            });
+        }
+
+        function startReading() {
+            currentWordIndex = 0;
+            stoppedAtIndex = 0;
+            clearHighlights();
+            continueReading();
+        }
+
+        function continueReading() {
+            if (currentSpeech) {
+                speechSynthesis.cancel();
+            }
+            
+            if (stoppedAtIndex > 0) {
+                currentWordIndex = stoppedAtIndex;
+            }
+            
+            if (allWords && allWords.length > 0) {
+                const remainingText = allWords.slice(currentWordIndex).join(' ');
+                
+                currentSpeech = new SpeechSynthesisUtterance(remainingText);
+                currentSpeech.rate = 1.0;
+                currentSpeech.lang = languageTexts[currentLanguage].lang;
+                
+                let wordCount = currentWordIndex;
+                
+                currentSpeech.onboundary = function(event) {
+                    if (event.name === 'word') {
+                        highlightCurrentWord(wordCount);
+                        wordCount++;
+                        stoppedAtIndex = wordCount;
+                    }
+                };
+                
+                currentSpeech.onend = function() {
+                    isReading = false;
+                };
+                
+                isReading = true;
+                speechSynthesis.speak(currentSpeech);
+            }
+        }
+
+        function startFromWord(wordIndex) {
+            currentWordIndex = wordIndex;
+            stoppedAtIndex = wordIndex;
+            clearHighlights();
+            continueReading();
+        }
+
+        function highlightCurrentWord(wordIndex) {
+            if (lastHighlightedWord) {
+                lastHighlightedWord.classList.remove('current');
+            }
+            
+            const wordSpan = document.querySelector(`#${currentLanguage}-content [data-word-index="${wordIndex}"]`);
+            if (wordSpan) {
+                wordSpan.classList.add('current');
+                lastHighlightedWord = wordSpan;
+                
+                // Sanftes Scrolling ohne die Controls aus dem Blickfeld zu nehmen
+                const rect = wordSpan.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
+                const controlsHeight = 150;
+                
+                if (rect.bottom > windowHeight - 100 || rect.top < controlsHeight + 50) {
+                    wordSpan.scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'nearest',
+                        inline: 'nearest'
+                    });
+                }
+            }
+        }
+
+        function clearHighlights() {
+            document.querySelectorAll('.current').forEach(el => {
+                el.classList.remove('current');
+            });
+            lastHighlightedWord = null;
+        }
+
+        function stopReading() {
+            if (currentSpeech) {
+                speechSynthesis.cancel();
+                currentSpeech = null;
+                isReading = false;
+            }
+            stoppedAtIndex = currentWordIndex;
+        }
+
+        // Initialisierung beim Seitenstart
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeWords();
+        });
+    </script>
+</body>
+</html>
