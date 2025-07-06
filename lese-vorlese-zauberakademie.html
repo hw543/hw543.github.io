@@ -67,29 +67,13 @@
             box-shadow: 0 5px 15px rgba(255,182,193,0.3);
         }
         
-        .navigation-box {
-            text-align: center;
-            margin: 0 auto 30px auto;
-            padding: 15px 25px;
-            background: linear-gradient(135deg, #F0FFF0 0%, #FFFACD 100%);
-            border-radius: 15px;
-            border: 2px solid #32CD32;
-            width: fit-content;
-            max-width: 400px;
-        }
-        
-        .nav-buttons {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        
         .language-navigation {
             display: flex;
             gap: 10px;
             justify-content: center;
             margin-bottom: 20px;
+            align-items: center;
+            flex-wrap: wrap;
         }
         
         .btn {
@@ -119,6 +103,19 @@
         .btn-lang:hover {
             background: linear-gradient(135deg, #FF1493, #C71585);
             transform: translateY(-2px);
+        }
+        
+        .btn-nav {
+            background: linear-gradient(135deg, #9370DB, #8A2BE2);
+            color: white;
+            text-decoration: none;
+            border: 2px solid transparent;
+        }
+        
+        .btn-nav:hover {
+            background: linear-gradient(135deg, #8A2BE2, #7B68EE);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(138,43,226,0.4);
         }
         
         .btn-read {
@@ -184,25 +181,6 @@
             border-radius: 3px;
         }
         
-        .nav-link {
-            display: inline-block;
-            padding: 10px 20px;
-            margin: 0 5px;
-            background: linear-gradient(135deg, #9370DB, #8A2BE2);
-            color: white;
-            text-decoration: none;
-            border-radius: 20px;
-            transition: all 0.3s ease;
-            box-shadow: 0 3px 10px rgba(147,112,219,0.3);
-            font-size: 14px;
-        }
-        
-        .nav-link:hover {
-            background: linear-gradient(135deg, #8A2BE2, #7B68EE);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(138,43,226,0.4);
-        }
-        
         .hidden {
             display: none;
         }
@@ -230,16 +208,7 @@
             .language-navigation {
                 flex-direction: column;
                 align-items: center;
-            }
-            
-            .nav-buttons {
-                flex-direction: column;
-                gap: 10px;
-            }
-            
-            .nav-link {
-                font-size: 13px;
-                padding: 8px 15px;
+                gap: 15px;
             }
         }
     </style>
@@ -253,20 +222,15 @@
         
         <div class="controls">
             <div class="language-navigation">
+                <a href="index.html" class="btn btn-nav">🏠 Startseite</a>
                 <button class="btn btn-lang active" onclick="switchLanguage('de')">🇩🇪 Deutsch</button>
                 <button class="btn btn-lang" onclick="switchLanguage('en')">🇬🇧 English</button>
+                <a href="kinderbuecher.html" class="btn btn-nav">📚 Kinderbücher</a>
             </div>
             
             <button class="btn btn-read" onclick="startReading()">🔴 <span id="btn-read-text">Vorlesen</span></button>
             <button class="btn btn-continue" onclick="continueReading()">▶️ <span id="btn-continue-text">Weiterlesen</span></button>
             <button class="btn btn-stop" onclick="stopReading()">⏹️ <span id="btn-stop-text">Stop</span></button>
-        </div>
-        
-        <div class="navigation-box">
-            <div class="nav-buttons">
-                <a href="kinderbuecher.html" class="nav-link" id="back-link">📚 Zurück zu Kinderbücher</a>
-                <a href="index.html" class="nav-link" id="home-link">🏠 Zur Startseite</a>
-            </div>
         </div>
         
         <!-- Deutsche Version -->
@@ -413,8 +377,6 @@
                 btnRead: "Vorlesen",
                 btnContinue: "Weiterlesen",
                 btnStop: "Stop",
-                backLink: "📚 Zurück zu Kinderbücher",
-                homeLink: "🏠 Zur Startseite",
                 lang: "de-DE"
             },
             en: {
@@ -423,8 +385,6 @@
                 btnRead: "Read Aloud",
                 btnContinue: "Continue",
                 btnStop: "Stop",
-                backLink: "📚 Back to Children's Books",
-                homeLink: "🏠 To Homepage",
                 lang: "en-US"
             }
         };
@@ -458,8 +418,6 @@
             document.getElementById('btn-read-text').textContent = texts.btnRead;
             document.getElementById('btn-continue-text').textContent = texts.btnContinue;
             document.getElementById('btn-stop-text').textContent = texts.btnStop;
-            document.getElementById('back-link').textContent = texts.backLink;
-            document.getElementById('home-link').textContent = texts.homeLink;
             
             // Initialisiere Wörter für neue Sprache
             currentWordIndex = 0;
