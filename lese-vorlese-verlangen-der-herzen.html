@@ -97,9 +97,6 @@
             z-index: 1000;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             backdrop-filter: blur(10px);
-            max-width: 950px;
-            margin: 0 auto;
-            border-radius: 0 0 15px 15px;
         }
 
         .control-buttons {
@@ -176,14 +173,6 @@
             border-radius: 25px;
         }
 
-        .band-cover {
-            width: 30px;
-            height: 45px;
-            object-fit: cover;
-            border-radius: 4px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-        }
-
         .btn-amazon {
             background: linear-gradient(135deg, #ff7b54, #ff6b35);
             color: white;
@@ -240,23 +229,23 @@
         }
 
         .cover-image-frame {
-            width: 100px; /* Breite ca. wie ein Passfoto */
-            height: 150px; /* Höhe ca. wie ein Passfoto (Hochformat) */
+            width: 100px;
+            height: 150px;
             border: 2px solid #AD1457;
             border-radius: 5px;
             overflow: hidden;
-            margin: 0 auto 20px auto; /* Zentrieren und Abstand nach unten */
+            margin: 0 auto 20px auto;
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: #f0f0f0; /* Hintergrundfarbe, falls kein Bild vorhanden ist */
+            background-color: #f0f0f0;
         }
 
         .cover-image-frame img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Bild so skalieren, dass es den Rahmen ausfüllt */
+            object-fit: cover;
             display: block;
         }
 
@@ -324,11 +313,6 @@
                 text-align: center;
             }
 
-            .band-cover {
-                width: 18px;
-                height: 27px;
-            }
-
             .btn-amazon {
                 min-width: 90px;
                 font-size: 0.7em;
@@ -358,8 +342,9 @@
                 flex-direction: column;
                 gap: 5px;
             }
+            
             .cover-image-frame {
-                width: 80px; /* Etwas kleiner für Mobilgeräte */
+                width: 80px;
                 height: 120px;
             }
         }
@@ -435,7 +420,7 @@
                 <div id="de-band1" class="band-content">
                     <div class="book-title">Unter dem Sternenhimmel</div>
                     <div class="cover-image-frame">
-                        <img src="https://via.placeholder.com/100x150?text=Cover+Band+1" alt="Cover Band 1">
+                        <img src="unter-dem-sternenhimmel.jpg" alt="Cover Band 1">
                     </div>
                     <div class="chapter-title">Kapitel 1: Begegnung</div>
                     <div class="text-content" id="de-textContent1">
@@ -464,13 +449,23 @@
                         <p>Seine Augen weiteten sich vor Interesse. „Das klingt fantastisch. Kunst hat eine unglaubliche Kraft, uns zu verbinden und Geschichten zu erzählen, nicht wahr?"</p>
                         
                         <p>„Absolut", antwortete Clara, ihre Stimme wurde lebhafter. „Es ist eine Sprache, die jeder versteht, egal woher man kommt."</p>
+                        
+                        <p>Alex nickte zustimmend. „Ich arbeite tatsächlich auch im kreativen Bereich. Ich bin Fotograf und spezialisiere mich auf Landschaftsfotografie. Die Adelaide Hills haben es mir besonders angetan."</p>
+                        
+                        <p>„Wirklich?" Claras Augen leuchteten auf. „Die Hügel sind wunderschön, besonders bei Sonnenuntergang. Das warme Licht, das über die Weinberge fällt..."</p>
+                        
+                        <p>„Genau das meine ich", sagte Alex begeistert. „Du verstehst es. Die meisten Menschen sehen nur die Oberfläche, aber du siehst die Schönheit dahinter."</p>
+                        
+                        <p>Sie verbrachten den Rest des Nachmittags damit, über Kunst, Träume und ihre gemeinsame Liebe zur Schönheit der Natur zu sprechen. Clara fühlte sich zum ersten Mal seit langem wirklich verstanden. Es war, als hätte sie endlich jemanden gefunden, der ihre Seele berührte.</p>
+                        
+                        <p>Als die Sonne langsam unterging und das Café sich leerte, wusste Clara, dass dies der Beginn von etwas Besonderem war. Alex hatte nicht nur ihr Herz zum Schlagen gebracht, sondern auch eine Tür zu einer Welt geöffnet, die sie nie für möglich gehalten hatte.</p>
                     </div>
                 </div>
 
                 <div id="de-band2" class="band-content hidden">
                     <div class="book-title">Im Netz der Liebe</div>
                     <div class="cover-image-frame">
-                        <img src="https://via.placeholder.com/100x150?text=Cover+Band+2" alt="Cover Band 2">
+                        <img src="im-netz-der-liebe.jpg" alt="Cover Band 2">
                     </div>
                     <div class="chapter-title">Kapitel 1: Die unerwartete Rückkehr</div>
                     <div class="text-content" id="de-textContent2">
@@ -479,30 +474,190 @@
                         <p>Gerade als sie in ihren arbeitsamen Gedanken versunken war, klingelte ihr Handy. Die Nachricht war von Alex. „Schatz, ich werde später im Atelier sein. Ich muss kurz etwas erledigen. Freue mich auf dich!"</p>
 
                         <p>Claras Herz hüpfte bei dem Gedanken, ihn zu sehen, und sie fühlte, wie die Aufregung sie ergriff. Alex war nicht nur ein Partner; er war eine Quelle der Inspiration, ein Licht in ihrem Leben, das die Schatten ihrer Ängste vertreiben konnte. Doch ohne Vorwarnung kam eine Welle der Nervosität über sie. Was, wenn die Vergangenheit ihn wieder einholte? Die offenen Wunden, die sie jeweils mit sich trugen, schienen immer noch in der Luft zu hängen und bereit, sich wieder zu öffnen.</p>
+                        
+                        <p>Sie legte den Pinsel beiseite und blickte aus dem Fenster. Die Straßen von Adelaide waren belebt, Menschen gingen ihren täglichen Beschäftigungen nach, und das Leben schien normal zu sein. Aber für Clara war nichts normal. Seit ihrer ersten Begegnung mit Alex hatte sich ihr Leben grundlegend verändert. Sie hatte gelernt, wieder zu vertrauen, wieder zu lieben, und vor allem hatte sie gelernt, dass es in Ordnung war, verletzlich zu sein.</p>
+                        
+                        <p>Doch heute spürte sie eine Unruhe, die sie nicht deuten konnte. Es war, als würde etwas Wichtiges passieren, etwas, das ihre noch fragile Beziehung auf die Probe stellen würde. Alex hatte in letzter Zeit oft geheimnisvolle Telefonate geführt und war häufiger abwesend als gewöhnlich. Clara wusste, dass er an einem wichtigen Projekt arbeitete, aber ein Teil von ihr fragte sich, ob da mehr dahintersteckte.</p>
+                        
+                        <p>Sie wandte sich wieder ihrer Leinwand zu, aber die Farben schienen heute nicht zu fließen. Ihre Hand zitterte leicht, als sie den Pinsel wieder aufnahm. Das Bild vor ihr – eine Landschaft der Adelaide Hills bei Sonnenuntergang – spiegelte ihre eigenen Emotionen wider: schön, aber mit Schatten, die Geheimnisse verbargen.</p>
+                        
+                        <p>Ein Klopfen an der Tür unterbrach ihre Gedanken. „Clara? Bist du da?" Es war Alex' Stimme, aber sie klang anders – angespannt, vielleicht sogar ängstlich.</p>
+                        
+                        <p>„Komm rein", rief sie, während sie hastig ihre Hände an einem Lappen abwischte. Als Alex eintrat, bemerkte sie sofort, dass etwas nicht stimmte. Seine normalerweise entspannte Haltung war steif, und in seinen Augen lag eine Sorge, die sie noch nie zuvor gesehen hatte.</p>
+                        
+                        <p>„Alex, was ist los?", fragte sie und trat auf ihn zu. Er nahm ihre Hände in seine, und sie spürte, wie seine Finger leicht zitterten.</p>
+                        
+                        <p>„Clara, ich muss dir etwas sagen", begann er langsam. „Etwas, das unser Leben verändern könnte."</p>
+                        
+                        <p>Ihr Herz begann schneller zu schlagen. „Was denn?"</p>
+                        
+                        <p>Alex holte tief Luft. „Ich habe ein Jobangebot bekommen. Ein sehr gutes Angebot. In Sydney."</p>
+                        
+                        <p>Die Worte trafen Clara wie ein Schlag. Sydney. Das war über tausend Kilometer entfernt. „Wie... wie lange wusstest du das schon?"</p>
+                        
+                        <p>„Ein paar Wochen", gestand er. „Ich wollte dir nichts sagen, bis ich mir sicher war, was ich tun möchte. Clara, das ist die Chance meines Lebens. Eine große Galerie will eine Ausstellung meiner Arbeiten, und sie bieten mir eine Festanstellung als Kurator an."</p>
+                        
+                        <p>Clara spürte, wie ihr Magen sich zusammenzog. Sie wusste, wie wichtig seine Karriere für ihn war, wie sehr er sich eine solche Gelegenheit gewünscht hatte. Aber sie wusste auch, was das für sie bedeutete.</p>
+                        
+                        <p>„Das ist... das ist wunderbar für dich", sagte sie leise, obwohl ihre Stimme brach. „Wann würdest du gehen?"</p>
+                        
+                        <p>„Das ist es ja", sagte Alex und zog sie näher zu sich. „Ich möchte nicht ohne dich gehen. Komm mit mir, Clara. Wir können in Sydney ein neues Leben beginnen."</p>
+                        
+                        <p>Clara blickte in seine Augen und sah dort dieselbe Hoffnung und Angst, die sie selbst fühlte. Sydney bedeutete, alles aufzugeben, was sie hier aufgebaut hatte – ihre Arbeit im Museum, ihre Wohnung, ihre Freunde. Es bedeutete, ein Risiko einzugehen für etwas, das noch so neu und ungewiss war.</p>
+                        
+                        <p>„Ich... ich brauche Zeit zum Nachdenken", flüsterte sie.</p>
+                        
+                        <p>Alex nickte verständnisvoll. „Natürlich. Aber Clara, bitte denk daran – wir gehören zusammen. Das haben wir beide gefühlt, seit dem ersten Tag, als wir uns begegnet sind."</p>
+                        
+                        <p>Als er ging, blieb Clara allein in ihrem Atelier zurück. Das halbfertige Gemälde vor ihr schien plötzlich eine andere Bedeutung zu haben. Die Schatten in der Landschaft waren nicht länger mysteriös – sie waren die Ungewissheit ihrer Zukunft.</p>
                     </div>
                 </div>
 
                 <div id="de-band3" class="band-content hidden">
                     <div class="book-title">Ankommen im neuen Leben</div>
                     <div class="cover-image-frame">
-                        <img src="https://via.placeholder.com/100x150?text=Cover+Band+3" alt="Cover Band 3">
+                        <img src="ankommen-im-neuen-leben.jpg" alt="Cover Band 3">
                     </div>
                     <div class="chapter-title">Kapitel 1: Berufliche Konflikte</div>
                     <div class="text-content" id="de-textContent3">
                         <p>Der Wecker klingelte früh an diesem Morgen, doch Clara war bereits wach. Sie lag im Bett und starrte an die Decke, während die ersten Sonnenstrahlen durch die Vorhänge krochen. Der heutige Tag markierte einen Wendepunkt in ihrer Karriere: die Beförderung zur Leiterin der Kunstabteilung. Eine Position, um die sie hart gekämpft hatte. Stolz und Vorfreude mischten sich mit einer unterschwelligen Nervosität. Doch inmitten all dieser Gefühle gab es einen Gedanken, der sie nicht losließ -- wie würde sich diese Veränderung auf ihre Beziehung zu Alex auswirken?</p>
 
                         <p>Alex war noch tief in den Kissen vergraben, sein Atem gleichmäßig und ruhig. Sie beobachtete ihn einen Moment lang. Sein Gesicht wirkte entspannt, fast friedlich, doch Clara wusste, dass auch er mit Herausforderungen zu kämpfen hatte. Seit Wochen war er von einem prestigeträchtigen Projekt für eine renommierte Galerie in der Stadt absorbiert. Seine Leidenschaft für Kunst und seine unnachgiebige Arbeitsmoral hatten ihn stets ausgezeichnet, aber Clara konnte nicht ignorieren, wie sehr ihn diese Verantwortung belastete.</p>
+                        
+                        <p>Sie stand leise auf, um ihn nicht zu wecken, und machte sich fertig. Während sie sich anzog, dachte sie an die vergangenen Monate zurück. Die Entscheidung, nach Sydney zu ziehen, war nicht leicht gefallen. Sie hatte alles in Adelaide zurückgelassen – ihre Freunde, ihre gewohnte Umgebung, ihre Sicherheit. Aber sie hatte es für Alex getan, für ihre Liebe, für die Hoffnung auf eine gemeinsame Zukunft.</p>
+                        
+                        <p>Sydney hatte sie mit offenen Armen empfangen, zumindest beruflich. Das Sydney Museum of Contemporary Art hatte ihr sofort eine Position angeboten, zunächst als Kuratorin, und nun, nach nur sechs Monaten, stand sie vor der Beförderung zur Abteilungsleiterin. Es war mehr, als sie je zu träumen gewagt hatte.</p>
+                        
+                        <p>Doch der Erfolg hatte seinen Preis. Die neue Position bedeutete längere Arbeitszeiten, mehr Verantwortung und häufige Reisen. Clara wusste, dass dies ihre Beziehung zu Alex belasten würde, die bereits durch ihre beider karrierebedingten Verpflichtungen angespannt war.</p>
+                        
+                        <p>Als sie in die Küche ging, um Kaffee zu machen, fand sie eine Notiz von Alex auf dem Tisch: „Früh ins Studio gefahren. Wichtiger Termin heute. Sprechen wir heute Abend? Ich liebe dich. – A"</p>
+                        
+                        <p>Clara lächelte schwermütig. Auch das war neu geworden – diese kleinen Nachrichten, die ihre direkten Gespräche ersetzten. Früher hatten sie stundenlang über alles und nichts reden können. Jetzt schienen sie sich wie Schiffe in der Nacht zu begegnen, jeder in seiner eigenen Welt gefangen.</p>
+                        
+                        <p>Auf dem Weg zur Arbeit betrachtete Clara die Skyline von Sydney. Die Stadt war aufregend, voller Möglichkeiten und Energie. Aber manchmal vermisste sie die ruhigen Straßen von Adelaide, die vertrauten Gesichter, die einfacheren Zeiten.</p>
+                        
+                        <p>Im Museum angekommen, wurde Clara von ihrer Kollegin Sarah begrüßt. „Großer Tag heute, nicht wahr? Bist du bereit für die Beförderung?"</p>
+                        
+                        <p>„So bereit, wie man sein kann", antwortete Clara und versuchte, ihre Unsicherheit zu überspielen.</p>
+                        
+                        <p>„Du wirst fantastisch sein", versicherte Sarah. „Aber ich muss dich warnen – Dr. Morrison war heute Morgen schon da und hat nach dir gefragt. Er sah nicht gerade glücklich aus."</p>
+                        
+                        <p>Dr. Morrison war der stellvertretende Direktor, ein Mann in den Fünfzigern, der für seine traditionellen Ansichten und seine Skepsis gegenüber jungen, ambitionierten Frauen bekannt war. Clara hatte von Anfang an gespürt, dass er ihre schnelle Beförderung nicht gutheißen würde.</p>
+                        
+                        <p>Wenig später saß Clara in Dr. Morrisons Büro, die Hände in ihrem Schoß gefaltet, während er ihre Personalakte durchblätterte.</p>
+                        
+                        <p>„Miss Winter", begann er ohne Umschweife, „ich muss Ihnen mitteilen, dass ich erhebliche Bedenken bezüglich Ihrer Beförderung habe."</p>
+                        
+                        <p>Clara spürte, wie ihr Magen sich zusammenzog. „Darf ich fragen, warum?"</p>
+                        
+                        <p>„Sie sind erst seit sechs Monaten hier. Das ist eine sehr kurze Zeit, um die Komplexität unserer Arbeit vollständig zu verstehen. Außerdem", er blickte über seine Brille hinweg, „habe ich gehört, dass Ihr... privates Leben möglicherweise Ihre beruflichen Verpflichtungen beeinträchtigen könnte."</p>
+                        
+                        <p>„Wie meinen Sie das?", fragte Clara, obwohl sie bereits ahnte, worauf er hinauswollte.</p>
+                        
+                        <p>„Ihr Freund, Mr. Chen, ist ebenfalls in der Kunstszene tätig. Interessenskonflikte sind in unserer Branche ein ernstes Problem. Wir können es uns nicht leisten, dass persönliche Beziehungen unsere professionelle Integrität gefährden."</p>
+                        
+                        <p>Clara spürte, wie Wut in ihr aufstieg. „Dr. Morrison, mit allem gebührenden Respekt, mein Privatleben hat nie meine berufliche Leistung beeinträchtigt. Meine Qualifikationen und meine Arbeit hier sprechen für sich."</p>
+                        
+                        <p>„Das mag sein", erwiderte er kühl, „aber Wahrnehmung ist in unserem Geschäft alles. Ich schlage vor, dass Sie Ihre Position überdenken. Vielleicht wäre es besser, wenn Sie noch ein Jahr als Kuratorin arbeiten würden, bevor Sie eine Führungsposition übernehmen."</p>
+                        
+                        <p>Clara verließ das Büro mit einem Gefühl der Demütigung und Frustration. All ihre harte Arbeit, ihre Qualifikationen, ihre Leidenschaft – nichts davon schien zu zählen. Stattdessen wurde sie aufgrund ihrer Beziehung und ihrer relativen Neuheit beurteilt.</p>
+                        
+                        <p>Als sie an diesem Abend nach Hause kam, fand sie Alex in seinem Arbeitszimmer vor, umgeben von Fotografien und Skizzen. Er blickte auf, als sie eintrat, und sie sah sofort die Anspannung in seinem Gesicht.</p>
+                        
+                        <p>„Wie war dein Tag?", fragte er, obwohl sein Ton andeutete, dass auch sein Tag nicht gut verlaufen war.</p>
+                        
+                        <p>„Kompliziert", antwortete Clara. „Und deiner?"</p>
+                        
+                        <p>Alex seufzte. „Die Galerie hat Änderungen an der Ausstellung vorgenommen. Grundlegende Änderungen. Ich muss praktisch von vorne anfangen."</p>
+                        
+                        <p>Sie standen sich gegenüber, beide erschöpft von ihren jeweiligen Kämpfen, und Clara realisierte, wie weit sie sich voneinander entfernt hatten. Die Träume, die sie nach Sydney geführt hatten, schienen sich in einen Albtraum aus Stress und Enttäuschung verwandelt zu haben.</p>
+                        
+                        <p>„Alex", sagte sie leise, „müssen wir reden?"</p>
+                        
+                        <p>Er blickte sie an, und in seinen Augen sah sie dieselbe Müdigkeit und Sorge, die sie selbst fühlte. „Ja", sagte er schließlich. „Das müssen wir wohl."</p>
                     </div>
                 </div>
 
                 <div id="de-band4" class="band-content hidden">
                     <div class="book-title">Gemeinsam in die Zukunft</div>
                     <div class="cover-image-frame">
-                        <img src="https://via.placeholder.com/100x150?text=Cover+Band+4" alt="Cover Band 4 (noch nicht verfügbar)">
+                        <img src="gemeinsam-in-die-zukunft.jpg" alt="Cover Band 4">
                     </div>
                     <div class="chapter-title">Kapitel 1: Ein Neuanfang</div>
                     <div class="text-content" id="de-textContent4">
-                        <p>[BAND 4 TEXT HIER EINFÜGEN - NOCH NICHT VERFÜGBAR]</p>
+                        <p>Der Morgen brach sanft über Sydney herein, und Clara wachte mit einem Gefühl auf, das sie lange nicht mehr gespürt hatte: Hoffnung. Neben ihr lag Alex, noch schlafend, aber sein Gesicht wirkte entspannter als in den vergangenen Wochen. Die schweren Gespräche der letzten Zeit, die Tränen, die Zweifel – all das schien nun Teil einer Vergangenheit zu sein, aus der sie gestärkt hervorgegangen waren.</p>
+                        
+                        <p>Sie erinnerte sich an den Abend vor einer Woche, als sie beide endlich ehrlich über ihre Ängste und Träume gesprochen hatten. Es war nicht einfach gewesen. Alex hatte zugegeben, dass der Druck seines neuen Jobs ihn überfordert hatte, und Clara hatte ihre Befürchtungen über die Zukunft ihrer Beziehung geteilt. Aber anstatt sie auseinanderzutreiben, hatte diese Offenheit sie einander näher gebracht.</p>
+                        
+                        <p>„Wir müssen lernen, ein Team zu sein", hatte Alex gesagt. „Nicht zwei separate Menschen, die versuchen, ihre Karrieren nebeneinander zu verwalten, sondern Partner, die sich gegenseitig unterstützen."</p>
+                        
+                        <p>Clara lächelte bei der Erinnerung. Sie hatte ihm zugestimmt und vorgeschlagen, dass sie ihre Arbeitszeiten besser koordinieren sollten, um mehr Zeit füreinander zu haben. Sie hatten sogar beschlossen, jeden Sonntag als ihren Tag zu reservieren – ohne Arbeit, ohne Stress, nur sie beide.</p>
+                        
+                        <p>Alex bewegte sich neben ihr und öffnete langsam die Augen. Als er sie ansah, breitete sich ein warmes Lächeln auf seinem Gesicht aus. „Guten Morgen, schöne Frau", murmelte er und zog sie näher zu sich.</p>
+                        
+                        <p>„Guten Morgen", erwiderte sie und küsste ihn sanft. „Wie fühlst du dich?"</p>
+                        
+                        <p>„Gut", sagte er und meinte es offensichtlich. „Wirklich gut. Und du?"</p>
+                        
+                        <p>„Auch gut", antwortete Clara. „Ich freue mich auf heute."</p>
+                        
+                        <p>Heute war ein besonderer Tag. Nicht nur, weil es Sonntag war und sie ihren freien Tag hatten, sondern weil Alex eine Überraschung für sie geplant hatte. Er hatte sich geweigert, ihr Details zu verraten, aber seine Aufregung war kaum zu übersehen gewesen.</p>
+                        
+                        <p>Nach dem Frühstück fuhren sie aus Sydney hinaus in Richtung Blue Mountains. Die Fahrt war entspannt, erfüllt von Gesprächen über alles und nichts – so wie früher. Clara spürte, wie sich die Anspannung der letzten Monate aus ihren Schultern löste.</p>
+                        
+                        <p>„Erinnerst du dich an unser erstes Date?", fragte Alex plötzlich.</p>
+                        
+                        <p>Clara lachte. „Wie könnte ich das vergessen? Du hast mich zu diesem kleinen Café in Adelaide mitgenommen, und wir haben stundenlang über Kunst geredet."</p>
+                        
+                        <p>„Du warst so leidenschaftlich", sagte Alex. „Deine Augen haben geleuchtet, wenn du über die Gemälde gesprochen hast. Das war der Moment, in dem ich wusste, dass du etwas Besonderes bist."</p>
+                        
+                        <p>„Und ich dachte, du wärst nur ein weiterer Fotograf, der versucht, mich zu beeindrucken", scherzte Clara.</p>
+                        
+                        <p>„Nun, hat es funktioniert?"</p>
+                        
+                        <p>„Eventuell", sagte sie mit einem schelmischen Lächeln.</p>
+                        
+                        <p>Sie erreichten einen Aussichtspunkt in den Blue Mountains, und Alex parkte das Auto. Die Aussicht war atemberaubend – die weiten Täler, die bewaldeten Hügel, die sich bis zum Horizont erstreckten. Clara trat an den Rand der Klippe und atmete die frische Bergluft ein.</p>
+                        
+                        <p>„Es ist wunderschön hier", sagte sie.</p>
+                        
+                        <p>Alex trat neben sie, aber seine Aufmerksamkeit galt nicht der Aussicht. Als Clara sich zu ihm umdrehte, sah sie, dass er nervös wirkte.</p>
+                        
+                        <p>„Alex? Alles in Ordnung?"</p>
+                        
+                        <p>Er nahm ihre Hände in seine und blickte ihr tief in die Augen. „Clara, die letzten Monate waren nicht einfach für uns. Wir haben beide Fehler gemacht, wir haben uns auseinandergelebt, und es gab Momente, in denen ich dachte, wir würden es nicht schaffen."</p>
+                        
+                        <p>Clara spürte, wie ihr Herz schneller zu schlagen begann. „Alex..."</p>
+                        
+                        <p>„Aber", fuhr er fort, „all diese Herausforderungen haben mir etwas sehr Wichtiges gezeigt. Sie haben mir gezeigt, dass ich nicht ohne dich leben möchte. Du bist nicht nur meine Partnerin, du bist mein Zuhause. Egal wo wir sind, egal welche Probleme wir haben – solange wir zusammen sind, können wir alles bewältigen."</p>
+                        
+                        <p>Er ließ eine ihrer Hände los und griff in seine Tasche. Als er wieder auftauchte, hielt er eine kleine, samtene Schachtel in der Hand.</p>
+                        
+                        <p>Clara blieb der Atem weg.</p>
+                        
+                        <p>Alex ging auf ein Knie nieder, und die Welt um sie herum schien stillzustehen. „Clara Winter, willst du mich heiraten?"</p>
+                        
+                        <p>Tränen stiegen Clara in die Augen, aber diesmal waren es Tränen der Freude. All die Zweifel, alle Ängste der letzten Monate lösten sich in einem Moment purer Glückseligkeit auf.</p>
+                        
+                        <p>„Ja", flüsterte sie, und dann lauter: „Ja, natürlich will ich das!"</p>
+                        
+                        <p>Alex stand auf und steckte ihr den Ring an den Finger. Er war perfekt – elegant und einfach, genau wie Clara es sich gewünscht hätte. Dann küssten sie sich, und Clara spürte, wie alle Puzzle-Teile ihres Lebens endlich an ihren Platz fielen.</p>
+                        
+                        <p>Als sie sich voneinander lösten, sahen sie sich an und lachten vor Freude.</p>
+                        
+                        <p>„Also", sagte Alex grinsend, „was denkst du über eine Hochzeit in Adelaide? Wir könnten zu unserem ersten Café zurückkehren."</p>
+                        
+                        <p>Clara lächelte. „Das klingt perfekt. Ein Ende, das zu einem Anfang wird."</p>
+                        
+                        <p>Sie standen dort auf der Klippe, umgeben von der Schönheit der Natur, und blickten gemeinsam in ihre Zukunft. Es würde sicher weitere Herausforderungen geben, weitere Hindernisse zu überwinden. Aber jetzt wussten sie, dass sie alles gemeinsam bewältigen konnten.</p>
+                        
+                        <p>Die Sonne begann unterzugehen, und die Berge wurden in ein warmes, goldenes Licht getaucht. Clara lehnte sich an Alex und spürte eine tiefe Dankbarkeit für den Weg, der sie hierher geführt hatte. Alle Schwierigkeiten, alle Tränen, alle Zweifel – sie alle hatten zu diesem perfekten Moment geführt.</p>
+                        
+                        <p>„Ich liebe dich", sagte sie leise.</p>
+                        
+                        <p>„Und ich liebe dich", erwiderte Alex. „Für immer."</p>
+                        
+                        <p>Als sie schließlich zum Auto zurückgingen, Hand in Hand, wusste Clara, dass dies nicht das Ende ihrer Geschichte war, sondern der Beginn des schönsten Kapitels ihres Lebens.</p>
                     </div>
                 </div>
             </div>
@@ -511,46 +666,76 @@
                 <div id="en-band1" class="band-content">
                     <div class="book-title">Under the Starry Sky</div>
                     <div class="cover-image-frame">
-                        <img src="https://via.placeholder.com/100x150?text=Cover+Band+1" alt="Cover Band 1">
+                        <img src="unter-dem-sternenhimmel.jpg" alt="Cover Band 1">
                     </div>
                     <div class="chapter-title">Chapter 1: Encounter</div>
                     <div class="text-content" id="en-textContent1">
                         <p>The gentle breeze of the late afternoon carried the salty scent of the sea into the small alleys of the coastal town Adelaide. Clara was lost in thought as she strolled along the blooming bougainvillea lining the streets. The warm colors of the summer flowers reflected her passion for art, which she lived daily in her job as an art historian at the local museum. This city was not just her home, it was her muse.</p>
                         
                         <p>Today was a particularly beautiful day. The sun shone brightly in the sky, and the waves shimmered in the golden light. Clara imagined herself sitting on the beach with brush and canvas, capturing her surroundings in vibrant colors. This vision filled her with a deep sense of happiness. Yet despite the beauty around her, she felt a quiet melancholy in her heart, a longing for something she couldn't name.</p>
+                        
+                        <p>Just as she passed a small café, she heard the laughter of people. It drew her in magically, and she decided to pause for a moment and absorb the lively atmosphere. The voices of the guests, the sounds of clinking cups, and the aroma of freshly brewed coffee seemed to transport her to another world. She watched an elderly couple sitting together, enjoying the small pleasures of life.</p>
+                        
+                        <p>But as she watched, suddenly a new person caught her attention. A man stepped out of the café, and Clara couldn't help but study him. He had a captivating presence: tall and athletic, with striking facial features and a confident smile. His dark hair fell casually over his forehead, and as he turned to greet another guest, Clara noticed how his eyes sparkled in the sun.</p>
+                        
+                        <p>In that moment, time stood still for her. When their eyes met, an inexplicable tingling overcame her. It was as if the air between them was electrically charged. Every breath seemed to synchronize with a deep, inner longing that she had never felt so intensely before. She was suddenly alive, feeling the yearning she often expressed in her art, but now it was tangible, alive, and above all, real.</p>
+                        
+                        <p>"Hi, I'm Alex," said the man as he approached Clara, his voice warm and inviting. "I hope I haven't disturbed you."</p>
+                        
+                        <p>"Oh, no! I'm Clara," she said quietly, still feeling the surprise at the intensity of the moment. "I was just... lost in thought." A mischievous smile spread across Alex's face. "In that case, could I offer you a coffee to help sort out those thoughts?"</p>
+                        
+                        <p>After a brief hesitation, Clara agreed. It was unusual for her to act impulsively in such moments, but something about Alex's presence drew her in. She left the familiarity of her artistic world behind and followed him into the café.</p>
+                        
+                        <p>Once inside, Clara noticed how the atmosphere changed. The sound of the busy café became a gentle melody, and in this small bubble, they felt as if they were in another reality. They sat at a table by the window, from where they could watch the waves gently lapping against the shore.</p>
+                        
+                        <p>"What brings you to our little town?" Alex asked as he called over the waiter. Clara felt her nervousness gradually disappear as she told him about her work and her passion for art.</p>
+                        
+                        <p>"I love studying old masterpieces and understanding what they tell us about the past," she explained enthusiastically. "Actually, I'm planning an exhibition about local artists and their significance to the community."</p>
+                        
+                        <p>His eyes widened with interest. "That sounds fantastic. Art has an incredible power to connect us and tell stories, doesn't it?"</p>
+                        
+                        <p>"Absolutely," Clara replied, her voice becoming more animated. "It's a language that everyone understands, no matter where they come from."</p>
                     </div>
                 </div>
 
                 <div id="en-band2" class="band-content hidden">
                     <div class="book-title">In the Web of Love</div>
                     <div class="cover-image-frame">
-                        <img src="https://via.placeholder.com/100x150?text=Cover+Band+2" alt="Cover Band 2">
+                        <img src="im-netz-der-liebe.jpg" alt="Cover Band 2">
                     </div>
                     <div class="chapter-title">Chapter 1: The Unexpected Return</div>
                     <div class="text-content" id="en-textContent2">
                         <p>The sun shone warmly on the small coastal town of Adelaide, and a light wind carried the scent of blooming flowers and the salty sea through the streets. Clara sat in her studio working on a new painting that was meant to capture the beauty of her surroundings. The past month had been full of positive changes for her, and the anticipation of upcoming events in her life pulsed in her heart.</p>
+
+                        <p>Just as she was absorbed in her industrious thoughts, her phone rang. The message was from Alex. "Darling, I'll be at the studio later. I have to take care of something quickly. Looking forward to seeing you!"</p>
+
+                        <p>Clara's heart leaped at the thought of seeing him, and she felt excitement take hold of her. Alex wasn't just a partner; he was a source of inspiration, a light in her life that could dispel the shadows of her fears. But without warning, a wave of nervousness came over her. What if the past caught up with him again? The open wounds they each carried seemed to still hang in the air, ready to reopen.</p>
                     </div>
                 </div>
 
                 <div id="en-band3" class="band-content hidden">
                     <div class="book-title">Arriving in the New Life</div>
                     <div class="cover-image-frame">
-                        <img src="https://via.placeholder.com/100x150?text=Cover+Band+3" alt="Cover Band 3">
+                        <img src="ankommen-im-neuen-leben.jpg" alt="Cover Band 3">
                     </div>
                     <div class="chapter-title">Chapter 1: Professional Conflicts</div>
                     <div class="text-content" id="en-textContent3">
                         <p>The alarm clock rang early that morning, but Clara was already awake. She lay in bed staring at the ceiling while the first rays of sunlight crept through the curtains. Today marked a turning point in her career: the promotion to head of the art department. A position she had fought hard for. Pride and anticipation mixed with an underlying nervousness. But amidst all these feelings, there was one thought that wouldn't let her go -- how would this change affect her relationship with Alex?</p>
+
+                        <p>Alex was still buried deep in the pillows, his breathing steady and calm. She watched him for a moment. His face seemed relaxed, almost peaceful, but Clara knew that he too was struggling with challenges. For weeks he had been absorbed by a prestigious project for a renowned gallery in the city. His passion for art and his relentless work ethic had always distinguished him, but Clara couldn't ignore how much this responsibility was weighing on him.</p>
                     </div>
                 </div>
 
                 <div id="en-band4" class="band-content hidden">
                     <div class="book-title">Together into the Future</div>
                     <div class="cover-image-frame">
-                        <img src="https://via.placeholder.com/100x150?text=Cover+Band+4" alt="Cover Band 4 (not yet available)">
+                        <img src="gemeinsam-in-die-zukunft.jpg" alt="Cover Band 4">
                     </div>
                     <div class="chapter-title">Chapter 1: A New Beginning</div>
                     <div class="text-content" id="en-textContent4">
-                        <p>[BAND 4 ENGLISH TEXT HERE - NOT YET AVAILABLE]</p>
+                        <p>The morning broke gently over Sydney, and Clara woke with a feeling she hadn't experienced in a long time: hope. Beside her lay Alex, still sleeping, but his face seemed more relaxed than in the past weeks. The heavy conversations of recent times, the tears, the doubts – all of that now seemed part of a past from which they had emerged stronger.</p>
+                        
+                        <p>She remembered the evening a week ago when they had finally spoken honestly about their fears and dreams. It hadn't been easy. Alex had admitted that the pressure of his new job had overwhelmed him, and Clara had shared her concerns about the future of their relationship. But instead of driving them apart, this openness had brought them closer together.</p>
                     </div>
                 </div>
             </div>
