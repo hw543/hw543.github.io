@@ -1,1 +1,625 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Die Verborgenen Kammern - Lesen & Vorlesen-System - Helmut Wegners Wortwelten</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.8;
+            color: #2c1810;
+            background: linear-gradient(135deg, #8B4513 0%, #D2691E 25%, #A0522D 50%, #8B4513 75%, #D2691E 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #FFF8F0;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #8B4513, #A0522D);
+            color: #FFF8F0;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .back-button-header {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .back-button {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 8px 16px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            font-size: 0.9em;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .versuchsreihe-badge {
+            background: #FFD700;
+            color: #8B4513;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.9em;
+            font-weight: bold;
+            margin-top: 10px;
+            display: inline-block;
+        }
+
+        .controls {
+            background: #fff8f8;
+            padding: 20px;
+            border-bottom: 3px solid #A0522D;
+            position: -webkit-sticky;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .control-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 120px;
+        }
+
+        .btn-play {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+        }
+
+        .btn-stop {
+            background: linear-gradient(135deg, #dc3545, #e83e8c);
+            color: white;
+        }
+
+        .btn-continue {
+            background: linear-gradient(135deg, #17a2b8, #6f42c1);
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .band-navigation, .language-navigation {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+
+        .btn-band, .btn-lang {
+            background: linear-gradient(135deg, #8B4513, #A0522D);
+            color: #FFF8F0;
+            padding: 10px 20px;
+            border: 2px solid transparent;
+        }
+
+        .btn-band.active, .btn-lang.active {
+            border-color: #FFD700;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+
+        .content {
+            padding: 30px;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .book-title {
+            color: #8B4513;
+            font-size: 2em;
+            margin-bottom: 10px;
+            text-align: center;
+            border-bottom: 2px solid #A0522D;
+            padding-bottom: 15px;
+        }
+
+        .chapter-title {
+            color: #A0522D;
+            font-size: 1.5em;
+            margin: 30px 0 20px 0;
+            text-align: center;
+            font-style: italic;
+        }
+
+        .text-content {
+            text-align: justify;
+            margin-bottom: 30px;
+        }
+
+        .word {
+            cursor: pointer;
+            transition: all 0.2s ease;
+            padding: 1px 2px;
+            border-radius: 3px;
+        }
+
+        .word:hover {
+            background-color: #F5E6D3;
+        }
+
+        .word-highlight {
+            background-color: #8B4513;
+            color: white;
+            padding: 2px 4px;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(139, 69, 19, 0.3);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 600px) {
+            .control-buttons, .band-navigation, .language-navigation {
+                gap: 10px;
+            }
+
+            .btn {
+                min-width: 100px;
+                font-size: 0.9em;
+                padding: 10px 16px;
+            }
+
+            .content {
+                padding: 20px;
+                font-size: 1em;
+            }
+
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .back-button-header {
+                position: relative;
+                top: 0;
+                left: 0;
+                margin-bottom: 15px;
+                flex-direction: column;
+                gap: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="back-button-header">
+                <a href="index.html" class="back-button">← Zurück zur Startseite</a>
+                <a href="die-verborgenen-kammern.html" class="back-button">← Zurück zur Serie</a>
+            </div>
+            <h1>Die Verborgenen Kammern</h1>
+            <p>Lesen & Vorlesen-System - Geheimnisvolle Romanzen in historischen Gemäuern</p>
+            <div class="versuchsreihe-badge">LESE & VORLESE-SYSTEM</div>
+        </div>
+
+        <div class="controls">
+            <div class="control-buttons">
+                <button class="btn btn-play" onclick="startReading()">🔴 Vorlesen</button>
+                <button class="btn btn-continue" onclick="continueReading()">▶️ Weiterlesen</button>
+                <button class="btn btn-stop" onclick="stopReading()">⏹️ Stop</button>
+            </div>
+
+            <div class="language-navigation">
+                <button class="btn btn-lang active" onclick="switchLanguage('de')">🇩🇪 Deutsch</button>
+                <button class="btn btn-lang" onclick="switchLanguage('en')">🇬🇧 English</button>
+                <button class="btn btn-lang" onclick="switchLanguage('es')">🇪🇸 Español</button>
+            </div>
+
+            <div class="band-navigation">
+                <button class="btn btn-band active" onclick="showBand(1)">Band 1</button>
+                <button class="btn btn-band" onclick="showBand(2)">Band 2</button>
+                <button class="btn btn-band" onclick="showBand(3)">Band 3</button>
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- DEUTSCHE VERSIONEN -->
+            <div id="de-content" class="language-content">
+                <!-- Band 1: Hinter verschlossenen Türen (Deutsch) -->
+                <div id="de-band1" class="band-content">
+                    <div class="book-title">Band 1: Hinter verschlossenen Türen</div>
+                    <div class="chapter-title">Kapitel 1: Das Angebot</div>
+                    <div class="text-content" id="de-textContent1">
+                        <p>Das Pigment bröckelte unter Elenas behutsamen Bewegungen. Winzige Farbpartikel, einst leuchtend rot, nun zu einem matten Braun verblasst, rieselten auf das weiße Tuch, das sie unter dem Gemälde ausgebreitet hatte. Vor über zweihundert Jahren hatte ein Künstler diesen Farbton mit Quecksilbersulfid und organischen Bindemitteln angerührt, ohne zu ahnen, dass seine Schöpfung eines Tages unter Elenas Mikroskop und Skalpell liegen würde.</p>
+
+                        <p>„Jahrhunderte", murmelte sie, während sie mit geübten Fingern die nächste Schicht freilegte. „Und trotzdem verrätst du mir deine Geheimnisse."</p>
+
+                        <p>Elena Winters arbeitete im großzügigen Restaurierungsatelier des Friedrich-Museums in Berlin, umgeben von Spezialinstrumenten, Chemikalien und Referenzwerken. Die hohen Fenster ließen gleichmäßiges Nordlicht herein -- das ideale Licht für ihre präzise Arbeit. Das spätbarocke Gemälde, eine Darstellung der Göttin Diana bei der Jagd, war seit drei Wochen ihr Projekt. Es war eine Herausforderung, doch genau das machte die Arbeit für sie so befriedigend.</p>
+
+                        <p>Elenas Handy vibrierte auf dem Arbeitstisch. Sie ignorierte es. Der Bereich um Dianas rechtes Auge bedurfte ihrer vollen Konzentration -- zu viele übermalte Schichten, zu viel Firnis, aufgetragen von wohlmeinenden, aber unkundigen Restauratoren vergangener Jahrhunderte. Ihre Aufgabe war es, durch all diese Schichten zum Original vorzudringen, ohne es zu beschädigen.</p>
+
+                        <p>Das Telefon vibrierte erneut. Elena seufzte, legte ihr Skalpell beiseite und streifte die Latexhandschuhe ab. Es war Direktor Schumann, wie die Anzeige verriet. Der Museumsdirektor rief sie selten direkt an; normalerweise kommunizierte er über seine Assistentin oder E-Mail.</p>
+
+                        <p>„Winters", meldete sie sich knapp.</p>
+
+                        <p>„Elena, gut, dass ich Sie erreiche." Die Stimme des Direktors klang ungewöhnlich enthusiastisch. „Könnten Sie in einer halben Stunde in meinem Büro sein? Ich habe jemanden hier, der Sie kennenlernen möchte."</p>
+
+                        <p>Sie blickte auf das halb restaurierte Gemälde. „Ich bin mitten in der Arbeit an der Diana, Herr Direktor."</p>
+
+                        <p>„Das kann warten. Diese Gelegenheit nicht."</p>
+
+                        <p>Elena unterdrückte ein Seufzen. In ihrem Beruf hatte sie gelernt, dass Zeit relativ war. Für sie bedeuteten Minuten manchmal den Unterschied zwischen erhaltener und zerstörter Geschichte. Für Administratoren wie Schumann waren Termine und Netzwerkgespräche wichtiger.</p>
+
+                        <p>„In Ordnung. Dreißig Minuten."</p>
+                    </div>
+                </div>
+
+                <!-- Band 2: Die Kunst der Hingabe (Deutsch) -->
+                <div id="de-band2" class="band-content hidden">
+                    <div class="book-title">Band 2: Die Kunst der Hingabe</div>
+                    <div class="chapter-title">Kapitel 1: Toskanische Träume</div>
+                    <div class="text-content" id="de-textContent2">
+                        <p style="text-align: center; color: #666; font-style: italic; font-size: 1.3em; margin: 60px 20px;">
+                            📖 Kapitel wird eingefügt, sobald verfügbar...<br><br>
+                            Bitte hängen Sie das erste Kapitel von "Die Kunst der Hingabe" an!
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Band 3: Die Tiefe der Begierde (Deutsch) -->
+                <div id="de-band3" class="band-content hidden">
+                    <div class="book-title">Band 3: Die Tiefe der Begierde</div>
+                    <div class="chapter-title">Kapitel 1: Ein Angebot zu Begehren</div>
+                    <div class="text-content" id="de-textContent3">
+                        <p style="text-align: center; color: #666; font-style: italic; font-size: 1.3em; margin: 60px 20px;">
+                            📖 Kapitel wird eingefügt, sobald verfügbar...<br><br>
+                            Bitte hängen Sie das erste Kapitel von "Die Tiefe der Begierde" an!
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ENGLISCHE VERSIONEN -->
+            <div id="en-content" class="language-content hidden">
+                <!-- Band 1: Behind Closed Doors (English) -->
+                <div id="en-band1" class="band-content">
+                    <div class="book-title">Band 1: Behind Closed Doors</div>
+                    <div class="chapter-title">Chapter 1: The Offer</div>
+                    <div class="text-content" id="en-textContent1">
+                        <p>The pigment crumbled under Elena's careful movements. Tiny particles of color, once bright red, now faded to a dull brown, trickled onto the white cloth she had spread beneath the painting. Over two hundred years ago, an artist had mixed this hue with mercuric sulfide and organic binders, unaware that his creation would one day lie beneath Elena's microscope and scalpel. "Centuries," she murmured, as she uncovered the next layer with practiced fingers. "And yet you tell me your secrets."</p>
+
+                        <p>Elena Winters worked in the spacious restoration studio of the Friedrich Museum in Berlin, surrounded by specialized instruments, chemicals, and reference works. The high windows let in steady northern light—the ideal light for her precise work. The late Baroque painting, a depiction of the goddess Diana hunting, had been her project for three weeks. It was a challenge, but that was precisely what made the work so satisfying.</p>
+
+                        <p>Lena's cell phone vibrated on the worktable. She ignored it. The area around Diana's right eye needed her full concentration -- too many layers of overpainted material, too much varnish, applied by well-meaning but ignorant restorers of past centuries. Her task was to penetrate through all these layers to the original without damaging it.</p>
+
+                        <p>The phone vibrated again. Elena sighed, put down her scalpel, and removed her latex gloves. It was Director Schumann, as the ad revealed. The museum director rarely called her directly; he usually communicated through his assistant or email.</p>
+
+                        <p>"Winters," she answered tersely.</p>
+
+                        <p>"Elena, good to reach you." The director's voice sounded unusually enthusiastic. "Could you be in my office in half an hour? I have someone here who would like to meet you."</p>
+
+                        <p>She looked at the half-restored painting. "I'm in the middle of working on the Diana, Mr. Director."</p>
+
+                        <p>"That can wait. This opportunity cannot," Elena suppressed a sigh. In her profession, she had learned that time was relative. For her, minutes sometimes meant the difference between preserved and destroyed history. For administrators like Schumann, appointments and networking conversations were more important.</p>
+
+                        <p>"All right, thirty minutes."</p>
+                    </div>
+                </div>
+
+                <!-- Band 2: The Art of Devotion (English) -->
+                <div id="en-band2" class="band-content hidden">
+                    <div class="book-title">Band 2: The Art of Devotion</div>
+                    <div class="chapter-title">Chapter 1: Tuscan Dreams</div>
+                    <div class="text-content" id="en-textContent2">
+                        <p style="text-align: center; color: #666; font-style: italic; font-size: 1.3em; margin: 60px 20px;">
+                            📖 Chapter will be inserted when available...<br><br>
+                            Please attach the first chapter of "The Art of Devotion"!
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Band 3: The Depth of Desire (English) -->
+                <div id="en-band3" class="band-content hidden">
+                    <div class="book-title">Band 3: The Depth of Desire</div>
+                    <div class="chapter-title">Chapter 1: An Offer to Desire</div>
+                    <div class="text-content" id="en-textContent3">
+                        <p style="text-align: center; color: #666; font-style: italic; font-size: 1.3em; margin: 60px 20px;">
+                            📖 Chapter will be inserted when available...<br><br>
+                            Please attach the first chapter of "The Depth of Desire"!
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SPANISCHE VERSIONEN -->
+            <div id="es-content" class="language-content hidden">
+                <!-- Band 1: Tras Puertas Cerradas (Español) -->
+                <div id="es-band1" class="band-content">
+                    <div class="book-title">Band 1: Tras Puertas Cerradas</div>
+                    <div class="chapter-title">Capítulo 1: La Oferta</div>
+                    <div class="text-content" id="es-textContent1">
+                        <p>El pigmento se desmoronó bajo los cuidadosos movimientos de Elena. Diminutas partículas de color, antes rojo brillante, ahora desvanecidas en un marrón apagado, se deslizaron sobre la tela blanca que había extendido debajo de la pintura. Hacía más de doscientos años, un artista había mezclado este tono con sulfuro de mercurio y aglutinantes orgánicos, sin saber que su creación algún día yacería bajo el microscopio y el bisturí de Elena. «Siglos», murmuró, mientras descubría la siguiente capa con dedos expertos. «Y aun así me revelas tus secretos».</p>
+
+                        <p>Elena Winters trabajaba en el espacioso estudio de restauración del Museo Friedrich de Berlín, rodeada de instrumentos especializados, productos químicos y obras de referencia. Los altos ventanales dejaban entrar una luz constante del norte, la luz ideal para su preciso trabajo. La pintura del Barroco tardío, una representación de la diosa Diana cazando, había sido su proyecto durante tres semanas. Era un desafío, pero eso era precisamente lo que hacía que el trabajo fuera tan satisfactorio.</p>
+
+                        <p>El móvil de Lena vibró sobre la mesa de trabajo. Lo ignoró. La zona alrededor del ojo derecho de Diana requería toda su concentración: demasiadas capas de pintura, demasiado barniz, aplicado por restauradores bienintencionados pero ignorantes de siglos pasados. Su tarea consistía en penetrar a través de todas esas capas hasta llegar al original sin dañarlo.</p>
+
+                        <p>El teléfono volvió a vibrar. Elena suspiró, dejó el bisturí y se quitó los guantes de látex. Era el director Schumann, como revelaba el anuncio. El director del museo rara vez la llamaba directamente; solía comunicarse a través de su asistente o por correo electrónico.</p>
+
+                        <p>"Winters", respondió secamente.</p>
+
+                        <p>"Elena, me alegro de contactarla". La voz del director sonaba inusualmente entusiasta. "¿Podría estar en mi oficina en media hora? Tengo a alguien aquí que quiere conocerla".</p>
+
+                        <p>Miró la pintura a medio restaurar. "Estoy trabajando en la Diana, señor director".</p>
+
+                        <p>"Eso puede esperar. Esta oportunidad no", reprimió Elena con un suspiro. En su profesión, había aprendido que el tiempo era relativo. Para ella, los minutos a veces marcaban la diferencia entre la historia preservada y la destruida. Para administradores como Schumann, las citas y las conversaciones para establecer contactos eran más importantes.</p>
+
+                        <p>"Muy bien, treinta minutos".</p>
+                    </div>
+                </div>
+
+                <!-- Band 2: El Arte de la Entrega (Español) -->
+                <div id="es-band2" class="band-content hidden">
+                    <div class="book-title">Band 2: El Arte de la Entrega</div>
+                    <div class="chapter-title">Capítulo 1: Sueños Toscanos</div>
+                    <div class="text-content" id="es-textContent2">
+                        <p style="text-align: center; color: #666; font-style: italic; font-size: 1.3em; margin: 60px 20px;">
+                            📖 Capítulo será insertado cuando esté disponible...<br><br>
+                            ¡Por favor adjunte el primer capítulo de "El Arte de la Entrega"!
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Band 3: La Profundidad del Deseo (Español) -->
+                <div id="es-band3" class="band-content hidden">
+                    <div class="book-title">Band 3: La Profundidad del Deseo</div>
+                    <div class="chapter-title">Capítulo 1: Una Oferta que Desear</div>
+                    <div class="text-content" id="es-textContent3">
+                        <p style="text-align: center; color: #666; font-style: italic; font-size: 1.3em; margin: 60px 20px;">
+                            📖 Capítulo será insertado cuando esté disponible...<br><br>
+                            ¡Por favor adjunte el primer capítulo de "La Profundidad del Deseo"!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSpeech = null;
+        let currentBand = 1;
+        let currentLanguage = 'de';
+        let currentWordIndex = 0;
+        let allBandWords = {}; // Speichert Wörter für alle Bände und Sprachen
+        let isReading = false;
+        let lastHighlightedWord = null;
+
+        // Initialisiere alle Bände beim Seitenstart
+        function initializeAllBands() {
+            ['de', 'en', 'es'].forEach(lang => {
+                allBandWords[lang] = {};
+                for (let bandNumber = 1; bandNumber <= 3; bandNumber++) {
+                    const bandContent = document.querySelector(`#${lang}-band${bandNumber} .text-content`);
+                    if (bandContent && !bandContent.querySelector('.word')) {
+                        const paragraphs = bandContent.querySelectorAll('p');
+                        let wordCounter = 0;
+                        let bandWords = [];
+
+                        paragraphs.forEach((paragraph) => {
+                            // Skip placeholder paragraphs
+                            if (paragraph.style.textAlign === 'center') return;
+
+                            const paragraphText = paragraph.textContent;
+                            const paragraphWords = paragraphText.split(/\s+/).filter(word => word.length > 0);
+
+                            let paragraphHTML = '';
+                            paragraphWords.forEach((word) => {
+                                paragraphHTML += `<span class="word" data-word-index="${wordCounter}" onclick="startFromWord(${wordCounter})">${word}</span> `;
+                                bandWords.push(word);
+                                wordCounter++;
+                            });
+
+                            paragraph.innerHTML = paragraphHTML;
+                        });
+
+                        // Speichere Wörter für diesen Band und Sprache
+                        allBandWords[lang][bandNumber] = bandWords;
+                    }
+                }
+            });
+        }
+
+        function switchLanguage(lang) {
+            // Stoppe aktuelles Vorlesen
+            stopReading();
+
+            // Verstecke alle Sprachen
+            document.querySelectorAll('.language-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+
+            // Zeige ausgewählte Sprache
+            document.getElementById(lang + '-content').classList.remove('hidden');
+
+            // Update Sprachbuttons
+            document.querySelectorAll('.btn-lang').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            currentLanguage = lang;
+            currentWordIndex = 0;
+            clearHighlight();
+            showBand(currentBand); // Zeige aktuellen Band in neuer Sprache
+        }
+
+        function showBand(bandNumber) {
+            // Stoppe aktuelles Vorlesen
+            stopReading();
+
+            // Verstecke alle Bände in aktueller Sprache
+            for (let i = 1; i <= 3; i++) {
+                const bandElement = document.getElementById(`${currentLanguage}-band${i}`);
+                if (bandElement) {
+                    bandElement.classList.add('hidden');
+                }
+            }
+
+            // Update Band-Buttons
+            document.querySelectorAll('.btn-band').forEach((btn, index) => {
+                btn.classList.remove('active');
+                if (index === bandNumber - 1) {
+                    btn.classList.add('active');
+                }
+            });
+
+            // Zeige ausgewählten Band
+            const targetBand = document.getElementById(`${currentLanguage}-band${bandNumber}`);
+            if (targetBand) {
+                targetBand.classList.remove('hidden');
+            }
+
+            currentBand = bandNumber;
+            currentWordIndex = 0;
+            clearHighlight();
+        }
+
+        function startReading() {
+            currentWordIndex = 0;
+            clearHighlight();
+            continueReading();
+        }
+
+        function continueReading() {
+            if (currentSpeech) {
+                currentSpeech.cancel();
+            }
+
+            const currentWords = allBandWords[currentLanguage] && allBandWords[currentLanguage][currentBand];
+            if (currentWords && currentWords.length > 0) {
+                // Text ab der aktuellen Position
+                const remainingText = currentWords.slice(currentWordIndex).join(' ');
+                currentSpeech = new SpeechSynthesisUtterance(remainingText);
+                
+                currentSpeech.rate = 1.0;
+                currentSpeech.lang = currentLanguage === 'de' ? 'de-DE' : 
+                                   currentLanguage === 'en' ? 'en-US' : 'es-ES';
+
+                let wordCount = currentWordIndex;
+                currentSpeech.onboundary = function(event) {
+                    if (event.name === 'word') {
+                        highlightCurrentWord(wordCount);
+                        wordCount++;
+                        currentWordIndex = wordCount;
+                    }
+                };
+
+                currentSpeech.onend = function() {
+                    isReading = false;
+                };
+
+                isReading = true;
+                speechSynthesis.speak(currentSpeech);
+            }
+        }
+
+        function startFromWord(wordIndex) {
+            currentWordIndex = wordIndex;
+            clearHighlight();
+            continueReading();
+        }
+
+        function highlightCurrentWord(wordIndex) {
+            // Entferne vorherige Highlights
+            if (lastHighlightedWord) {
+                lastHighlightedWord.classList.remove('word-highlight');
+            }
+
+            // Highlights das entsprechende Wort im aktuellen Band und Sprache
+            const wordSpan = document.querySelector(`#${currentLanguage}-band${currentBand} [data-word-index="${wordIndex}"]`);
+            if (wordSpan) {
+                wordSpan.classList.add('word-highlight');
+                lastHighlightedWord = wordSpan;
+
+                // Scroll to current word
+                wordSpan.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+
+        function clearHighlight() {
+            document.querySelectorAll('.word-highlight').forEach(el => {
+                el.classList.remove('word-highlight');
+            });
+            lastHighlightedWord = null;
+        }
+
+        function stopReading() {
+            if (currentSpeech) {
+                speechSynthesis.cancel();
+                currentSpeech = null;
+                isReading = false;
+            }
+
+            // Zurück zum Anfang + alle Markierungen löschen
+            currentWordIndex = 0;
+            clearHighlight();
+        }
+
+        // Initialisierung beim Seitenstart
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeAllBands(); // Initialisiere ALLE Bände und Sprachen
+            showBand(1); // Zeige Band 1
+        });
+    </script>
+</body>
+</html>
