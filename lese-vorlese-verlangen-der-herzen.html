@@ -15,7 +15,7 @@
             font-family: 'Georgia', serif;
             line-height: 1.8;
             color: #2c1810;
-            background: linear-gradient(135deg, #FF8A80 0%, #FFB74D 25%, #FF8A80 50%, #FFB74D 75%, #FF8A80 100%);
+            background: linear-gradient(135deg, #FF8A80 0%, #FFB740 25%, #FF8A80 50%, #FFB74D 75%, #FF8A80 100%);
             min-height: 100vh;
             padding: 20px;
         }
@@ -239,6 +239,27 @@
             padding-bottom: 15px;
         }
 
+        .cover-image-frame {
+            width: 100px; /* Breite ca. wie ein Passfoto */
+            height: 150px; /* Höhe ca. wie ein Passfoto (Hochformat) */
+            border: 2px solid #AD1457;
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 0 auto 20px auto; /* Zentrieren und Abstand nach unten */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f0f0f0; /* Hintergrundfarbe, falls kein Bild vorhanden ist */
+        }
+
+        .cover-image-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Bild so skalieren, dass es den Rahmen ausfüllt */
+            display: block;
+        }
+
         .chapter-title {
             color: #AD1457;
             font-size: 1.5em;
@@ -337,6 +358,10 @@
                 flex-direction: column;
                 gap: 5px;
             }
+            .cover-image-frame {
+                width: 80px; /* Etwas kleiner für Mobilgeräte */
+                height: 120px;
+            }
         }
     </style>
 </head>
@@ -406,11 +431,12 @@
         </div>
 
         <div class="content">
-            <!-- DEUTSCHE VERSIONEN -->
             <div id="de-content" class="language-content">
-                <!-- Band 1: Unter dem Sternenhimmel (Deutsch) -->
                 <div id="de-band1" class="band-content">
                     <div class="book-title">Unter dem Sternenhimmel</div>
+                    <div class="cover-image-frame">
+                        <img src="https://via.placeholder.com/100x150?text=Cover+Band+1" alt="Cover Band 1">
+                    </div>
                     <div class="chapter-title">Kapitel 1: Begegnung</div>
                     <div class="text-content" id="de-textContent1">
                         <p>Die sanfte Brise des späten Nachmittags trug den salzigen Duft des Meeres in die kleinen Gassen der Küstenstadt Adelaide. Clara versank in Gedanken, während sie über die blühende Bougainvillea entlang der Straßen schlenderte. Die warmen Farben der Sommerblumen spiegelten ihre Leidenschaft für die Kunst wider, die sie täglich in ihrem Job als Kunsthistorikerin im örtlichen Museum lebte. Diese Stadt war nicht nur ihr Zuhause, sie war ihre Muse.</p>
@@ -441,9 +467,11 @@
                     </div>
                 </div>
 
-                <!-- Band 2: Im Netz der Liebe (Deutsch) -->
                 <div id="de-band2" class="band-content hidden">
                     <div class="book-title">Im Netz der Liebe</div>
+                    <div class="cover-image-frame">
+                        <img src="https://via.placeholder.com/100x150?text=Cover+Band+2" alt="Cover Band 2">
+                    </div>
                     <div class="chapter-title">Kapitel 1: Die unerwartete Rückkehr</div>
                     <div class="text-content" id="de-textContent2">
                         <p>Die Sonne schien warm auf das kleine Küstenstädtchen Adelaide, und ein leichter Wind trug den Duft von blühenden Blumen und dem salzigen Meer durch die Straßen. Clara saß in ihrem Atelier und arbeitete an einem neuen Gemälde, das die Schönheit ihrer Umgebung einfangen sollte. Der letzte Monat war voller positiver Veränderungen für sie gewesen, und die Vorfreude auf die bevorstehenden Ereignisse in ihrem Leben pulsierte in ihrem Herzen.</p>
@@ -454,9 +482,11 @@
                     </div>
                 </div>
 
-                <!-- Band 3: Ankommen im neuen Leben (Deutsch) -->
                 <div id="de-band3" class="band-content hidden">
                     <div class="book-title">Ankommen im neuen Leben</div>
+                    <div class="cover-image-frame">
+                        <img src="https://via.placeholder.com/100x150?text=Cover+Band+3" alt="Cover Band 3">
+                    </div>
                     <div class="chapter-title">Kapitel 1: Berufliche Konflikte</div>
                     <div class="text-content" id="de-textContent3">
                         <p>Der Wecker klingelte früh an diesem Morgen, doch Clara war bereits wach. Sie lag im Bett und starrte an die Decke, während die ersten Sonnenstrahlen durch die Vorhänge krochen. Der heutige Tag markierte einen Wendepunkt in ihrer Karriere: die Beförderung zur Leiterin der Kunstabteilung. Eine Position, um die sie hart gekämpft hatte. Stolz und Vorfreude mischten sich mit einer unterschwelligen Nervosität. Doch inmitten all dieser Gefühle gab es einen Gedanken, der sie nicht losließ -- wie würde sich diese Veränderung auf ihre Beziehung zu Alex auswirken?</p>
@@ -465,9 +495,11 @@
                     </div>
                 </div>
 
-                <!-- Band 4: Gemeinsam in die Zukunft (Deutsch) -->
                 <div id="de-band4" class="band-content hidden">
                     <div class="book-title">Gemeinsam in die Zukunft</div>
+                    <div class="cover-image-frame">
+                        <img src="https://via.placeholder.com/100x150?text=Cover+Band+4" alt="Cover Band 4 (noch nicht verfügbar)">
+                    </div>
                     <div class="chapter-title">Kapitel 1: Ein Neuanfang</div>
                     <div class="text-content" id="de-textContent4">
                         <p>[BAND 4 TEXT HIER EINFÜGEN - NOCH NICHT VERFÜGBAR]</p>
@@ -475,11 +507,12 @@
                 </div>
             </div>
             
-            <!-- ENGLISCHE VERSIONEN -->
             <div id="en-content" class="language-content hidden">
-                <!-- Band 1: Under the Starry Sky (English) -->
                 <div id="en-band1" class="band-content">
                     <div class="book-title">Under the Starry Sky</div>
+                    <div class="cover-image-frame">
+                        <img src="https://via.placeholder.com/100x150?text=Cover+Band+1" alt="Cover Band 1">
+                    </div>
                     <div class="chapter-title">Chapter 1: Encounter</div>
                     <div class="text-content" id="en-textContent1">
                         <p>The gentle breeze of the late afternoon carried the salty scent of the sea into the small alleys of the coastal town Adelaide. Clara was lost in thought as she strolled along the blooming bougainvillea lining the streets. The warm colors of the summer flowers reflected her passion for art, which she lived daily in her job as an art historian at the local museum. This city was not just her home, it was her muse.</p>
@@ -488,27 +521,33 @@
                     </div>
                 </div>
 
-                <!-- Band 2: In the Web of Love (English) -->
                 <div id="en-band2" class="band-content hidden">
                     <div class="book-title">In the Web of Love</div>
+                    <div class="cover-image-frame">
+                        <img src="https://via.placeholder.com/100x150?text=Cover+Band+2" alt="Cover Band 2">
+                    </div>
                     <div class="chapter-title">Chapter 1: The Unexpected Return</div>
                     <div class="text-content" id="en-textContent2">
                         <p>The sun shone warmly on the small coastal town of Adelaide, and a light wind carried the scent of blooming flowers and the salty sea through the streets. Clara sat in her studio working on a new painting that was meant to capture the beauty of her surroundings. The past month had been full of positive changes for her, and the anticipation of upcoming events in her life pulsed in her heart.</p>
                     </div>
                 </div>
 
-                <!-- Band 3: Arriving in the New Life (English) -->
                 <div id="en-band3" class="band-content hidden">
                     <div class="book-title">Arriving in the New Life</div>
+                    <div class="cover-image-frame">
+                        <img src="https://via.placeholder.com/100x150?text=Cover+Band+3" alt="Cover Band 3">
+                    </div>
                     <div class="chapter-title">Chapter 1: Professional Conflicts</div>
                     <div class="text-content" id="en-textContent3">
                         <p>The alarm clock rang early that morning, but Clara was already awake. She lay in bed staring at the ceiling while the first rays of sunlight crept through the curtains. Today marked a turning point in her career: the promotion to head of the art department. A position she had fought hard for. Pride and anticipation mixed with an underlying nervousness. But amidst all these feelings, there was one thought that wouldn't let her go -- how would this change affect her relationship with Alex?</p>
                     </div>
                 </div>
 
-                <!-- Band 4: Together into the Future (English) -->
                 <div id="en-band4" class="band-content hidden">
                     <div class="book-title">Together into the Future</div>
+                    <div class="cover-image-frame">
+                        <img src="https://via.placeholder.com/100x150?text=Cover+Band+4" alt="Cover Band 4 (not yet available)">
+                    </div>
                     <div class="chapter-title">Chapter 1: A New Beginning</div>
                     <div class="text-content" id="en-textContent4">
                         <p>[BAND 4 ENGLISH TEXT HERE - NOT YET AVAILABLE]</p>
