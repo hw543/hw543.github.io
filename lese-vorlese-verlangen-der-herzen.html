@@ -1,1 +1,714 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verlangen der Herzen - Lesen & Vorlesen-System - Helmut Wegners Wortwelten</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.8;
+            color: #2c1810;
+            background: linear-gradient(135deg, #FF8A80 0%, #FFB74D 25%, #FF8A80 50%, #FFB74D 75%, #FF8A80 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #FFF8F0;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #FF8A80, #E91E63);
+            color: #FFF8F0;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .back-button-header {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .back-button {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 8px 16px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            font-size: 0.9em;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .versuchsreihe-badge {
+            background: #FFD700;
+            color: #E91E63;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.9em;
+            font-weight: bold;
+            margin-top: 10px;
+            display: inline-block;
+        }
+
+        .controls {
+            background: #fff8f8;
+            padding: 25px;
+            border-bottom: 3px solid #FFB74D;
+            position: -webkit-sticky;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            max-width: 950px;
+            margin: 0 auto;
+            border-radius: 0 0 15px 15px;
+        }
+
+        .control-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 120px;
+        }
+
+        .btn-play {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+        }
+
+        .btn-stop {
+            background: linear-gradient(135deg, #dc3545, #e83e8c);
+            color: white;
+        }
+
+        .btn-continue {
+            background: linear-gradient(135deg, #17a2b8, #6f42c1);
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .band-navigation, .language-navigation {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+
+        .band-block {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .amazon-buttons {
+            display: flex;
+            gap: 5px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-band, .btn-lang {
+            background: linear-gradient(135deg, #E91E63, #AD1457);
+            color: #FFF8F0;
+            padding: 8px 16px;
+            border: 2px solid transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 120px;
+            gap: 8px;
+            border-radius: 25px;
+        }
+
+        .band-cover {
+            width: 30px;
+            height: 45px;
+            object-fit: cover;
+            border-radius: 4px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        }
+
+        .btn-amazon {
+            background: linear-gradient(135deg, #ff7b54, #ff6b35);
+            color: white;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 15px;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.75em;
+            min-width: 80px;
+            text-align: center;
+            line-height: 1.2;
+        }
+
+        .btn-amazon:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 123, 84, 0.3);
+        }
+
+        .btn-amazon-disabled {
+            background: #6c757d;
+            color: white;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 15px;
+            font-weight: bold;
+            cursor: not-allowed;
+            font-size: 0.75em;
+            min-width: 80px;
+            text-align: center;
+            line-height: 1.2;
+        }
+
+        .btn-band.active, .btn-lang.active {
+            border-color: #FFD700;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+
+        .content {
+            padding: 30px;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .book-title {
+            color: #E91E63;
+            font-size: 2em;
+            margin-bottom: 10px;
+            text-align: center;
+            border-bottom: 2px solid #FFB74D;
+            padding-bottom: 15px;
+        }
+
+        .chapter-title {
+            color: #AD1457;
+            font-size: 1.5em;
+            margin: 30px 0 20px 0;
+            text-align: center;
+            font-style: italic;
+        }
+
+        .text-content {
+            text-align: justify;
+            margin-bottom: 30px;
+        }
+
+        .word {
+            cursor: pointer;
+            transition: all 0.2s ease;
+            padding: 1px 2px;
+            border-radius: 3px;
+        }
+
+        .word:hover {
+            background-color: #FFE5E5;
+        }
+
+        .word-highlight {
+            background-color: #E91E63;
+            color: white;
+            padding: 2px 4px;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(233, 30, 99, 0.3);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 600px) {
+            .control-buttons, .band-navigation, .language-navigation {
+                gap: 8px;
+            }
+
+            .band-block {
+                gap: 5px;
+            }
+
+            .amazon-buttons {
+                gap: 3px;
+                flex-direction: column;
+            }
+
+            .btn {
+                min-width: 90px;
+                font-size: 0.8em;
+                padding: 8px 12px;
+            }
+
+            .btn-band {
+                min-width: 90px;
+                padding: 6px 8px;
+                flex-direction: row;
+                gap: 4px;
+                text-align: center;
+            }
+
+            .band-cover {
+                width: 18px;
+                height: 27px;
+            }
+
+            .btn-amazon {
+                min-width: 90px;
+                font-size: 0.7em;
+                padding: 6px 8px;
+            }
+
+            .btn-amazon-disabled {
+                min-width: 90px;
+                font-size: 0.7em;
+                padding: 6px 8px;
+            }
+
+            .content {
+                padding: 20px;
+                font-size: 1em;
+            }
+
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .back-button-header {
+                position: relative;
+                top: 0;
+                left: 0;
+                margin-bottom: 15px;
+                flex-direction: column;
+                gap: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="back-button-header">
+                <a href="index.html" class="back-button">← Zurück zur Startseite</a>
+                <a href="romantik.html" class="back-button">← Zurück zur Romantik</a>
+            </div>
+            <h1>Verlangen der Herzen</h1>
+            <p>Lesen & Vorlesen-System - Emotionale Romanzen aus den Adelaide Hills</p>
+            <div class="versuchsreihe-badge">LESE & VORLESE-SYSTEM</div>
+        </div>
+
+        <div class="controls">
+            <div class="control-buttons">
+                <button class="btn btn-play" onclick="startReading()">🔴 Vorlesen</button>
+                <button class="btn btn-continue" onclick="continueReading()">▶️ Weiterlesen</button>
+                <button class="btn btn-stop" onclick="stopReading()">⏹️ Stop</button>
+            </div>
+
+            <div class="language-navigation">
+                <button class="btn btn-lang active" onclick="switchLanguage('de')">🇩🇪 Deutsch</button>
+                <button class="btn btn-lang" onclick="switchLanguage('en')">🇬🇧 English</button>
+            </div>
+
+            <div class="band-navigation">
+                <div class="band-block">
+                    <button class="btn btn-band active" onclick="showBand(1)">
+                        <span>Band 1</span>
+                    </button>
+                    <div class="amazon-buttons">
+                        <a href="https://amazon.de/dp/B0F9Y4L5LK" class="btn btn-amazon" target="_blank">📖 Taschenbuch</a>
+                        <a href="https://amazon.de/dp/B0F9XFG5BR" class="btn btn-amazon" target="_blank">📱 eBook</a>
+                    </div>
+                </div>
+                
+                <div class="band-block">
+                    <button class="btn btn-band" onclick="showBand(2)">
+                        <span>Band 2</span>
+                    </button>
+                    <div class="amazon-buttons">
+                        <a href="https://amazon.de/dp/B0FBL167H5" class="btn btn-amazon" target="_blank">📖 Taschenbuch</a>
+                        <a href="https://amazon.de/dp/B0FBKGJNY7" class="btn btn-amazon" target="_blank">📱 eBook</a>
+                    </div>
+                </div>
+                
+                <div class="band-block">
+                    <button class="btn btn-band" onclick="showBand(3)">
+                        <span>Band 3</span>
+                    </button>
+                    <div class="amazon-buttons">
+                        <a href="https://amazon.de/dp/B0FBKKW3HF" class="btn btn-amazon" target="_blank">📱 eBook</a>
+                    </div>
+                </div>
+                
+                <div class="band-block">
+                    <button class="btn btn-band" onclick="showBand(4)">
+                        <span>Band 4</span>
+                    </button>
+                    <div class="amazon-buttons">
+                        <button class="btn btn-amazon-disabled">Bald verfügbar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- DEUTSCHE VERSIONEN -->
+            <div id="de-content" class="language-content">
+                <!-- Band 1: Unter dem Sternenhimmel (Deutsch) -->
+                <div id="de-band1" class="band-content">
+                    <div class="book-title">Unter dem Sternenhimmel</div>
+                    <div class="chapter-title">Kapitel 1: Begegnung</div>
+                    <div class="text-content" id="de-textContent1">
+                        <p>Die sanfte Brise des späten Nachmittags trug den salzigen Duft des Meeres in die kleinen Gassen der Küstenstadt Adelaide. Clara versank in Gedanken, während sie über die blühende Bougainvillea entlang der Straßen schlenderte. Die warmen Farben der Sommerblumen spiegelten ihre Leidenschaft für die Kunst wider, die sie täglich in ihrem Job als Kunsthistorikerin im örtlichen Museum lebte. Diese Stadt war nicht nur ihr Zuhause, sie war ihre Muse.</p>
+                        
+                        <p>Heute war ein besonders schöner Tag. Die Sonne strahlte hell am Himmel, und die Wellen schimmerten im goldenen Licht. Clara stellte sich vor, wie sie mit Pinsel und Leinwand am Strand saß, ihre Umgebung in lebendigen Farben festhaltend. Diese Vorstellung erfüllte sie mit einem tiefen Glücksgefühl. Doch trotz der Schönheit um sie herum spürte sie eine leise Melancholie in ihrem Herzen, ein Verlangen nach etwas, das sie nicht benennen konnte.</p>
+                        
+                        <p>Gerade als sie an einem kleinen Café vorbeikam, hörte sie das Lachen von Menschen. Es zog sie magisch an, und sie beschloss, einen Moment innezuhalten und die lebhafte Atmosphäre aufzusaugen. Die Stimmen der Gäste, die Klänge von klirrenden Tassen und das Aroma von frisch gebrühtem Kaffee schienen sie in eine andere Welt zu entführen. Sie beobachtete, wie ein älteres Paar zusammensaß und die kleinen Freuden des Lebens genoss.</p>
+                        
+                        <p>Doch während sie schaute, lenkte plötzlich eine neue Person ihre Aufmerksamkeit ab. Ein Mann trat aus dem Café, und Clara konnte nicht anders, als ihn zu mustern. Er hatte eine ergreifende Ausstrahlung: groß und athletisch, mit markanten Gesichtszügen und einem selbstbewussten Lächeln. Seine dunklen Haare fielen leger über seine Stirn, und während er sich mit einem freundlichen Gruß zu einem anderen Gast drehte, bemerkte Clara, wie seine Augen in der Sonne funkelten.</p>
+                        
+                        <p>In diesem Augenblick hielt die Zeit für sie an. Als ihre Blicke sich trafen, überkam sie ein unerklärliches Prickeln. Es war, als ob die Luft zwischen ihnen elektrisch geladen war. Jeder Atemzug schien synchron zu einem tiefen, inneren Verlangen zu werden, das sie nie zuvor so intensiv gefühlt hatte. Sie war plötzlich lebendig, spürte die Sehnsucht, die sie oft in ihrer Kunst ausdrückte, doch jetzt war sie greifbar, lebendig und vor allem real.</p>
+                        
+                        <p>„Hi, ich bin Alex", sagte der Mann, als er sich Clara näherte, seine Stimme warm und einladend. „Ich hoffe, ich habe dich nicht belästigt."</p>
+                        
+                        <p>„Oh, nein! Ich bin Clara", sagte sie leise und spürte noch immer die Überraschung über die Intensität des Augenblicks. „Ich war nur... in Gedanken versunken." Ein verschmitztes Lächeln breitete sich auf Alex' Gesicht aus. „In diesem Fall könnte ich dir einen Kaffee anbieten, um die Gedanken zu sortieren?"</p>
+                        
+                        <p>Nach einem kurzen Zögern stimmte Clara zu. Es war untypisch für sie, in solchen Momenten impulsiv zu handeln, doch etwas an Alex's Ausstrahlung zog sie an. Sie ließ die Vertrautheit ihrer künstlerischen Welt hinter sich und folgte ihm ins Café.</p>
+                        
+                        <p>Sobald sie drinnen waren, bemerkte Clara, wie sich die Atmosphäre veränderte. Der Klang des Betriebs wurde zu einer sanften Melodie, und in dieser kleinen Blase fühlten sie sich wie in einer anderen Realität. Sie setzten sich an einen Tisch am Fenster, von wo aus sie die Wellen beobachten konnten, die sanft gegen die Küste brandeten.</p>
+                        
+                        <p>„Was führt dich in unsere kleine Stadt?", fragte Alex, während er den Kellner herbeirief. Clara spürte, wie ihre Nervosität allmählich verschwand, als sie ihm von ihrer Arbeit und ihrer Leidenschaft für die Kunst erzählte.</p>
+                        
+                        <p>„Ich liebe es, alte Meisterwerke zu studieren und zu verstehen, was sie über die Vergangenheit erzählen", erklärte sie begeistert. „Tatsächlich plane ich eine Ausstellung über lokale Künstler und deren Bedeutung für die Gemeinschaft."</p>
+                        
+                        <p>Seine Augen weiteten sich vor Interesse. „Das klingt fantastisch. Kunst hat eine unglaubliche Kraft, uns zu verbinden und Geschichten zu erzählen, nicht wahr?"</p>
+                        
+                        <p>„Absolut", antwortete Clara, ihre Stimme wurde lebhafter. „Es ist eine Sprache, die jeder versteht, egal woher man kommt."</p>
+                    </div>
+                </div>
+
+                <!-- Band 2: Im Netz der Liebe (Deutsch) -->
+                <div id="de-band2" class="band-content hidden">
+                    <div class="book-title">Im Netz der Liebe</div>
+                    <div class="chapter-title">Kapitel 1: Die unerwartete Rückkehr</div>
+                    <div class="text-content" id="de-textContent2">
+                        <p>Die Sonne schien warm auf das kleine Küstenstädtchen Adelaide, und ein leichter Wind trug den Duft von blühenden Blumen und dem salzigen Meer durch die Straßen. Clara saß in ihrem Atelier und arbeitete an einem neuen Gemälde, das die Schönheit ihrer Umgebung einfangen sollte. Der letzte Monat war voller positiver Veränderungen für sie gewesen, und die Vorfreude auf die bevorstehenden Ereignisse in ihrem Leben pulsierte in ihrem Herzen.</p>
+
+                        <p>Gerade als sie in ihren arbeitsamen Gedanken versunken war, klingelte ihr Handy. Die Nachricht war von Alex. „Schatz, ich werde später im Atelier sein. Ich muss kurz etwas erledigen. Freue mich auf dich!"</p>
+
+                        <p>Claras Herz hüpfte bei dem Gedanken, ihn zu sehen, und sie fühlte, wie die Aufregung sie ergriff. Alex war nicht nur ein Partner; er war eine Quelle der Inspiration, ein Licht in ihrem Leben, das die Schatten ihrer Ängste vertreiben konnte. Doch ohne Vorwarnung kam eine Welle der Nervosität über sie. Was, wenn die Vergangenheit ihn wieder einholte? Die offenen Wunden, die sie jeweils mit sich trugen, schienen immer noch in der Luft zu hängen und bereit, sich wieder zu öffnen.</p>
+                    </div>
+                </div>
+
+                <!-- Band 3: Ankommen im neuen Leben (Deutsch) -->
+                <div id="de-band3" class="band-content hidden">
+                    <div class="book-title">Ankommen im neuen Leben</div>
+                    <div class="chapter-title">Kapitel 1: Berufliche Konflikte</div>
+                    <div class="text-content" id="de-textContent3">
+                        <p>Der Wecker klingelte früh an diesem Morgen, doch Clara war bereits wach. Sie lag im Bett und starrte an die Decke, während die ersten Sonnenstrahlen durch die Vorhänge krochen. Der heutige Tag markierte einen Wendepunkt in ihrer Karriere: die Beförderung zur Leiterin der Kunstabteilung. Eine Position, um die sie hart gekämpft hatte. Stolz und Vorfreude mischten sich mit einer unterschwelligen Nervosität. Doch inmitten all dieser Gefühle gab es einen Gedanken, der sie nicht losließ -- wie würde sich diese Veränderung auf ihre Beziehung zu Alex auswirken?</p>
+
+                        <p>Alex war noch tief in den Kissen vergraben, sein Atem gleichmäßig und ruhig. Sie beobachtete ihn einen Moment lang. Sein Gesicht wirkte entspannt, fast friedlich, doch Clara wusste, dass auch er mit Herausforderungen zu kämpfen hatte. Seit Wochen war er von einem prestigeträchtigen Projekt für eine renommierte Galerie in der Stadt absorbiert. Seine Leidenschaft für Kunst und seine unnachgiebige Arbeitsmoral hatten ihn stets ausgezeichnet, aber Clara konnte nicht ignorieren, wie sehr ihn diese Verantwortung belastete.</p>
+                    </div>
+                </div>
+
+                <!-- Band 4: Gemeinsam in die Zukunft (Deutsch) -->
+                <div id="de-band4" class="band-content hidden">
+                    <div class="book-title">Gemeinsam in die Zukunft</div>
+                    <div class="chapter-title">Kapitel 1: Ein Neuanfang</div>
+                    <div class="text-content" id="de-textContent4">
+                        <p>[BAND 4 TEXT HIER EINFÜGEN - NOCH NICHT VERFÜGBAR]</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ENGLISCHE VERSIONEN -->
+            <div id="en-content" class="language-content hidden">
+                <!-- Band 1: Under the Starry Sky (English) -->
+                <div id="en-band1" class="band-content">
+                    <div class="book-title">Under the Starry Sky</div>
+                    <div class="chapter-title">Chapter 1: Encounter</div>
+                    <div class="text-content" id="en-textContent1">
+                        <p>The gentle breeze of the late afternoon carried the salty scent of the sea into the small alleys of the coastal town Adelaide. Clara was lost in thought as she strolled along the blooming bougainvillea lining the streets. The warm colors of the summer flowers reflected her passion for art, which she lived daily in her job as an art historian at the local museum. This city was not just her home, it was her muse.</p>
+                        
+                        <p>Today was a particularly beautiful day. The sun shone brightly in the sky, and the waves shimmered in the golden light. Clara imagined herself sitting on the beach with brush and canvas, capturing her surroundings in vibrant colors. This vision filled her with a deep sense of happiness. Yet despite the beauty around her, she felt a quiet melancholy in her heart, a longing for something she couldn't name.</p>
+                    </div>
+                </div>
+
+                <!-- Band 2: In the Web of Love (English) -->
+                <div id="en-band2" class="band-content hidden">
+                    <div class="book-title">In the Web of Love</div>
+                    <div class="chapter-title">Chapter 1: The Unexpected Return</div>
+                    <div class="text-content" id="en-textContent2">
+                        <p>The sun shone warmly on the small coastal town of Adelaide, and a light wind carried the scent of blooming flowers and the salty sea through the streets. Clara sat in her studio working on a new painting that was meant to capture the beauty of her surroundings. The past month had been full of positive changes for her, and the anticipation of upcoming events in her life pulsed in her heart.</p>
+                    </div>
+                </div>
+
+                <!-- Band 3: Arriving in the New Life (English) -->
+                <div id="en-band3" class="band-content hidden">
+                    <div class="book-title">Arriving in the New Life</div>
+                    <div class="chapter-title">Chapter 1: Professional Conflicts</div>
+                    <div class="text-content" id="en-textContent3">
+                        <p>The alarm clock rang early that morning, but Clara was already awake. She lay in bed staring at the ceiling while the first rays of sunlight crept through the curtains. Today marked a turning point in her career: the promotion to head of the art department. A position she had fought hard for. Pride and anticipation mixed with an underlying nervousness. But amidst all these feelings, there was one thought that wouldn't let her go -- how would this change affect her relationship with Alex?</p>
+                    </div>
+                </div>
+
+                <!-- Band 4: Together into the Future (English) -->
+                <div id="en-band4" class="band-content hidden">
+                    <div class="book-title">Together into the Future</div>
+                    <div class="chapter-title">Chapter 1: A New Beginning</div>
+                    <div class="text-content" id="en-textContent4">
+                        <p>[BAND 4 ENGLISH TEXT HERE - NOT YET AVAILABLE]</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSpeech = null;
+        let currentWordIndex = 0;
+        let allWords = [];
+        let isReading = false;
+        let lastHighlightedWord = null;
+        let currentLanguage = 'de';
+        let currentBand = 1;
+        let stoppedAtIndex = 0;
+
+        // Spracheinstellungen
+        const languageTexts = {
+            de: {
+                btnRead: "Vorlesen",
+                btnContinue: "Weiterlesen", 
+                btnStop: "Stop",
+                lang: "de-DE"
+            },
+            en: {
+                btnRead: "Read Aloud",
+                btnContinue: "Continue",
+                btnStop: "Stop", 
+                lang: "en-US"
+            }
+        };
+
+        function switchLanguage(lang) {
+            // Stoppe aktuelles Vorlesen
+            if (currentSpeech) {
+                speechSynthesis.cancel();
+                isReading = false;
+            }
+            
+            // Verstecke alle Sprachen
+            document.querySelectorAll('.language-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            
+            // Zeige ausgewählte Sprache
+            document.getElementById(lang + '-content').classList.remove('hidden');
+            
+            // Update Sprachbuttons
+            document.querySelectorAll('.btn-lang').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            currentLanguage = lang;
+            currentWordIndex = 0;
+            stoppedAtIndex = 0;
+            clearHighlights();
+            initializeWords();
+            showBand(currentBand);
+        }
+
+        function showBand(bandNumber) {
+            // Stoppe aktuelles Vorlesen
+            if (currentSpeech) {
+                speechSynthesis.cancel();
+                isReading = false;
+            }
+
+            // Verstecke alle Bände
+            for (let i = 1; i <= 4; i++) {
+                const bandElement = document.getElementById(`${currentLanguage}-band${i}`);
+                if (bandElement) bandElement.classList.add('hidden');
+            }
+
+            // Zeige ausgewählten Band
+            const targetBand = document.getElementById(`${currentLanguage}-band${bandNumber}`);
+            if (targetBand) targetBand.classList.remove('hidden');
+
+            // Update Band-Buttons
+            document.querySelectorAll('.btn-band').forEach((btn, index) => {
+                btn.classList.remove('active');
+                if (index === bandNumber - 1) {
+                    btn.classList.add('active');
+                }
+            });
+
+            currentBand = bandNumber;
+            currentWordIndex = 0;
+            stoppedAtIndex = 0;
+            clearHighlights();
+            initializeWords();
+        }
+
+        function initializeWords() {
+            const storyText = document.querySelector(`#${currentLanguage}-band${currentBand} .text-content`);
+            if (!storyText) return;
+            
+            const paragraphs = storyText.querySelectorAll('p');
+            allWords = [];
+            
+            paragraphs.forEach((paragraph) => {
+                const paragraphText = paragraph.textContent;
+                const paragraphWords = paragraphText.split(/\s+/).filter(word => word.length > 0);
+                
+                let paragraphHTML = '';
+                paragraphWords.forEach((word) => {
+                    paragraphHTML += `<span class="word" data-word-index="${allWords.length}" onclick="startFromWord(${allWords.length})">${word}</span> `;
+                    allWords.push(word);
+                });
+                
+                paragraph.innerHTML = paragraphHTML;
+            });
+        }
+
+        function startReading() {
+            currentWordIndex = 0;
+            stoppedAtIndex = 0;
+            clearHighlights();
+            continueReading();
+        }
+
+        function continueReading() {
+            if (currentSpeech) {
+                speechSynthesis.cancel();
+            }
+            
+            if (stoppedAtIndex > 0) {
+                currentWordIndex = stoppedAtIndex;
+            }
+            
+            if (allWords && allWords.length > 0) {
+                const remainingText = allWords.slice(currentWordIndex).join(' ');
+                
+                currentSpeech = new SpeechSynthesisUtterance(remainingText);
+                currentSpeech.rate = 1.0;
+                currentSpeech.lang = languageTexts[currentLanguage].lang;
+                
+                let wordCount = currentWordIndex;
+                
+                currentSpeech.onboundary = function(event) {
+                    if (event.name === 'word') {
+                        highlightCurrentWord(wordCount);
+                        wordCount++;
+                        stoppedAtIndex = wordCount;
+                    }
+                };
+                
+                currentSpeech.onend = function() {
+                    isReading = false;
+                };
+                
+                isReading = true;
+                speechSynthesis.speak(currentSpeech);
+            }
+        }
+
+        function startFromWord(wordIndex) {
+            currentWordIndex = wordIndex;
+            stoppedAtIndex = wordIndex;
+            clearHighlights();
+            continueReading();
+        }
+
+        function highlightCurrentWord(wordIndex) {
+            if (lastHighlightedWord) {
+                lastHighlightedWord.classList.remove('word-highlight');
+            }
+            
+            const wordSpan = document.querySelector(`#${currentLanguage}-band${currentBand} [data-word-index="${wordIndex}"]`);
+            if (wordSpan) {
+                wordSpan.classList.add('word-highlight');
+                lastHighlightedWord = wordSpan;
+                // KEIN SCROLLING
+            }
+        }
+
+        function clearHighlights() {
+            document.querySelectorAll('.word-highlight').forEach(el => {
+                el.classList.remove('word-highlight');
+            });
+            lastHighlightedWord = null;
+        }
+
+        function stopReading() {
+            if (currentSpeech) {
+                speechSynthesis.cancel();
+                currentSpeech = null;
+                isReading = false;
+            }
+            stoppedAtIndex = currentWordIndex;
+        }
+
+        // Initialisierung beim Seitenstart
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeWords();
+            showBand(1);
+        });
+    </script>
+</body>
+</html>
