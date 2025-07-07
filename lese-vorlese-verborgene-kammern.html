@@ -39,7 +39,7 @@
 
         .back-button-header {
             position: absolute;
-            top: 15px;
+            top: 5px;
             left: 15px;
             display: flex;
             gap: 10px;
@@ -160,11 +160,37 @@
             font-weight: bold;
         }
 
-        .btn-band, .btn-lang {
+        .btn-band {
             background: linear-gradient(135deg, #8B4513, #A0522D);
             color: #FFF8F0;
             padding: 10px 20px;
             border: 2px solid transparent;
+        }
+
+        .btn-lang {
+            background: linear-gradient(135deg, #8B4513, #A0522D);
+            color: #FFF8F0;
+            padding: 10px 20px;
+            border: 2px solid transparent;
+        }
+
+        .book-cover-container {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .book-cover {
+            width: 200px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border: 3px solid #FFD700;
+            background-color: #8B4513;
+            background-image: linear-gradient(45deg, #A0522D 25%, transparent 25%), 
+                             linear-gradient(-45deg, #A0522D 25%, transparent 25%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px;
         }
 
         .btn-amazon {
@@ -273,6 +299,19 @@
                 padding: 10px 16px;
             }
 
+            .btn-band {
+                min-width: 110px;
+                padding: 6px 12px;
+                flex-direction: column;
+                gap: 4px;
+                text-align: center;
+            }
+
+            .band-cover {
+                width: 25px;
+                height: 38px;
+            }
+
             .btn-amazon {
                 min-width: 130px;
                 font-size: 0.75em;
@@ -357,6 +396,9 @@
                 <!-- Band 1: Hinter verschlossenen Türen (Deutsch) -->
                 <div id="de-band1" class="band-content">
                     <div class="book-title">Band 1: Hinter verschlossenen Türen</div>
+                    <div class="book-cover-container">
+                        <img src="hinter-verschlossenen-tueren.jpg" alt="Cover Band 1" class="book-cover">
+                    </div>
                     <div class="chapter-title">Kapitel 1: Das Angebot</div>
                     <div class="text-content" id="de-textContent1">
                         <p>Das Pigment bröckelte unter Elenas behutsamen Bewegungen. Winzige Farbpartikel, einst leuchtend rot, nun zu einem matten Braun verblasst, rieselten auf das weiße Tuch, das sie unter dem Gemälde ausgebreitet hatte. Vor über zweihundert Jahren hatte ein Künstler diesen Farbton mit Quecksilbersulfid und organischen Bindemitteln angerührt, ohne zu ahnen, dass seine Schöpfung eines Tages unter Elenas Mikroskop und Skalpell liegen würde.</p>
@@ -544,173 +586,3 @@
                             let paragraphHTML = '';
                             paragraphWords.forEach((word) => {
                                 paragraphHTML += `<span class="word" data-word-index="${wordCounter}" onclick="startFromWord(${wordCounter})">${word}</span> `;
-                                bandWords.push(word);
-                                wordCounter++;
-                            });
-
-                            paragraph.innerHTML = paragraphHTML;
-                        });
-
-                        // Speichere Wörter für diesen Band und Sprache
-                        allBandWords[lang][bandNumber] = bandWords;
-                    }
-                }
-            });
-        }
-
-        function switchLanguage(lang) {
-            // Stoppe aktuelles Vorlesen
-            stopReading();
-
-            // Verstecke alle Sprachen
-            document.querySelectorAll('.language-content').forEach(content => {
-                content.classList.add('hidden');
-            });
-
-            // Zeige ausgewählte Sprache
-            document.getElementById(lang + '-content').classList.remove('hidden');
-
-            // Update Sprachbuttons
-            document.querySelectorAll('.btn-lang').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            event.target.classList.add('active');
-
-            currentLanguage = lang;
-            currentWordIndex = 0;
-            clearHighlight();
-            showBand(currentBand); // Zeige aktuellen Band in neuer Sprache
-        }
-
-        function showBand(bandNumber) {
-            // Stoppe aktuelles Vorlesen
-            stopReading();
-
-            // Verstecke alle Bände in aktueller Sprache
-            for (let i = 1; i <= 3; i++) {
-                const bandElement = document.getElementById(`${currentLanguage}-band${i}`);
-                if (bandElement) {
-                    bandElement.classList.add('hidden');
-                }
-                
-                // Verstecke alle Amazon-Button-Gruppen
-                const amazonElement = document.getElementById(`amazon-band${i}`);
-                if (amazonElement) {
-                    amazonElement.classList.add('hidden');
-                }
-            }
-
-            // Update Band-Buttons
-            document.querySelectorAll('.btn-band').forEach((btn, index) => {
-                btn.classList.remove('active');
-                if (index === bandNumber - 1) {
-                    btn.classList.add('active');
-                }
-            });
-
-            // Zeige ausgewählten Band
-            const targetBand = document.getElementById(`${currentLanguage}-band${bandNumber}`);
-            if (targetBand) {
-                targetBand.classList.remove('hidden');
-            }
-
-            // Zeige entsprechende Amazon-Buttons
-            const targetAmazon = document.getElementById(`amazon-band${bandNumber}`);
-            if (targetAmazon) {
-                targetAmazon.classList.remove('hidden');
-            }
-
-            currentBand = bandNumber;
-            currentWordIndex = 0;
-            clearHighlight();
-        }
-
-        function startReading() {
-            currentWordIndex = 0;
-            clearHighlight();
-            continueReading();
-        }
-
-        function continueReading() {
-            if (currentSpeech) {
-                currentSpeech.cancel();
-            }
-
-            const currentWords = allBandWords[currentLanguage] && allBandWords[currentLanguage][currentBand];
-            if (currentWords && currentWords.length > 0) {
-                // Text ab der aktuellen Position
-                const remainingText = currentWords.slice(currentWordIndex).join(' ');
-                currentSpeech = new SpeechSynthesisUtterance(remainingText);
-                
-                currentSpeech.rate = 1.0;
-                currentSpeech.lang = currentLanguage === 'de' ? 'de-DE' : 
-                                   currentLanguage === 'en' ? 'en-US' : 'es-ES';
-
-                let wordCount = currentWordIndex;
-                currentSpeech.onboundary = function(event) {
-                    if (event.name === 'word') {
-                        highlightCurrentWord(wordCount);
-                        wordCount++;
-                        currentWordIndex = wordCount;
-                    }
-                };
-
-                currentSpeech.onend = function() {
-                    isReading = false;
-                };
-
-                isReading = true;
-                speechSynthesis.speak(currentSpeech);
-            }
-        }
-
-        function startFromWord(wordIndex) {
-            currentWordIndex = wordIndex;
-            clearHighlight();
-            continueReading();
-        }
-
-        function highlightCurrentWord(wordIndex) {
-            // Entferne vorherige Highlights
-            if (lastHighlightedWord) {
-                lastHighlightedWord.classList.remove('word-highlight');
-            }
-
-            // Highlights das entsprechende Wort im aktuellen Band und Sprache
-            const wordSpan = document.querySelector(`#${currentLanguage}-band${currentBand} [data-word-index="${wordIndex}"]`);
-            if (wordSpan) {
-                wordSpan.classList.add('word-highlight');
-                lastHighlightedWord = wordSpan;
-
-                // Scroll to current word
-                wordSpan.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }
-        }
-
-        function clearHighlight() {
-            document.querySelectorAll('.word-highlight').forEach(el => {
-                el.classList.remove('word-highlight');
-            });
-            lastHighlightedWord = null;
-        }
-
-        function stopReading() {
-            if (currentSpeech) {
-                speechSynthesis.cancel();
-                currentSpeech = null;
-                isReading = false;
-            }
-
-            // Zurück zum Anfang + alle Markierungen löschen
-            currentWordIndex = 0;
-            clearHighlight();
-        }
-
-        // Initialisierung beim Seitenstart
-        document.addEventListener('DOMContentLoaded', function() {
-            initializeAllBands(); // Initialisiere ALLE Bände und Sprachen
-            showBand(1); // Zeige Band 1 (inkl. Amazon-Buttons)
-        });
-    </script>
-</body>
-</html>
