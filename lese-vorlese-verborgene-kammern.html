@@ -89,7 +89,7 @@
 
         .controls {
             background: #fff8f8;
-            padding: 20px;
+            padding: 25px;
             border-bottom: 3px solid #A0522D;
             position: -webkit-sticky;
             position: sticky;
@@ -138,7 +138,7 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
 
-        .band-navigation, .language-navigation {
+        .band-navigation, .language-navigation, .amazon-navigation {
             display: flex;
             gap: 10px;
             justify-content: center;
@@ -146,11 +146,60 @@
             margin-bottom: 10px;
         }
 
+        .amazon-buttons {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .amazon-text {
+            color: #FFD700;
+            font-size: 1.2em;
+            margin-right: 3px;
+            font-weight: bold;
+        }
+
         .btn-band, .btn-lang {
             background: linear-gradient(135deg, #8B4513, #A0522D);
             color: #FFF8F0;
             padding: 10px 20px;
             border: 2px solid transparent;
+        }
+
+        .btn-amazon {
+            background: linear-gradient(135deg, #ff7b54, #ff6b35);
+            color: white;
+            padding: 10px 16px;
+            border: none;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.8em;
+            min-width: 150px;
+            text-align: center;
+            line-height: 1.3;
+        }
+
+        .btn-amazon:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 123, 84, 0.3);
+        }
+
+        .btn-amazon-disabled {
+            background: #6c757d;
+            color: white;
+            padding: 10px 16px;
+            border: none;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: not-allowed;
+            font-size: 0.8em;
+            min-width: 150px;
+            text-align: center;
+            line-height: 1.3;
         }
 
         .btn-band.active, .btn-lang.active {
@@ -210,14 +259,30 @@
         }
 
         @media (max-width: 600px) {
-            .control-buttons, .band-navigation, .language-navigation {
-                gap: 10px;
+            .control-buttons, .band-navigation, .language-navigation, .amazon-navigation {
+                gap: 8px;
+            }
+
+            .amazon-buttons {
+                gap: 5px;
             }
 
             .btn {
                 min-width: 100px;
                 font-size: 0.9em;
                 padding: 10px 16px;
+            }
+
+            .btn-amazon {
+                min-width: 130px;
+                font-size: 0.75em;
+                padding: 8px 12px;
+            }
+
+            .btn-amazon-disabled {
+                min-width: 130px;
+                font-size: 0.75em;
+                padding: 8px 12px;
             }
 
             .content {
@@ -269,6 +334,20 @@
                 <button class="btn btn-band active" onclick="showBand(1)">Band 1</button>
                 <button class="btn btn-band" onclick="showBand(2)">Band 2</button>
                 <button class="btn btn-band" onclick="showBand(3)">Band 3</button>
+            </div>
+
+            <div class="amazon-navigation">
+                <div id="amazon-band1" class="amazon-buttons">
+                    <a href="https://amazon.de/dp/B0F1YC3J79" class="btn btn-amazon" target="_blank"><span class="amazon-text">Amazon</span> DE<br>Taschenbuch + eBook</a>
+                    <a href="https://amazon.de/dp/B0F311L2ZQ" class="btn btn-amazon" target="_blank"><span class="amazon-text">Amazon</span> EN<br>Taschenbuch + eBook</a>
+                    <a href="https://amazon.de/dp/B0F37NJD39" class="btn btn-amazon" target="_blank"><span class="amazon-text">Amazon</span> ES<br>Taschenbuch</a>
+                </div>
+                <div id="amazon-band2" class="amazon-buttons hidden">
+                    <button class="btn btn-amazon-disabled"><span class="amazon-text">Amazon</span> Bald verfügbar</button>
+                </div>
+                <div id="amazon-band3" class="amazon-buttons hidden">
+                    <button class="btn btn-amazon-disabled"><span class="amazon-text">Amazon</span> Bald verfügbar</button>
+                </div>
             </div>
         </div>
 
@@ -513,6 +592,12 @@
                 if (bandElement) {
                     bandElement.classList.add('hidden');
                 }
+                
+                // Verstecke alle Amazon-Button-Gruppen
+                const amazonElement = document.getElementById(`amazon-band${i}`);
+                if (amazonElement) {
+                    amazonElement.classList.add('hidden');
+                }
             }
 
             // Update Band-Buttons
@@ -527,6 +612,12 @@
             const targetBand = document.getElementById(`${currentLanguage}-band${bandNumber}`);
             if (targetBand) {
                 targetBand.classList.remove('hidden');
+            }
+
+            // Zeige entsprechende Amazon-Buttons
+            const targetAmazon = document.getElementById(`amazon-band${bandNumber}`);
+            if (targetAmazon) {
+                targetAmazon.classList.remove('hidden');
             }
 
             currentBand = bandNumber;
@@ -618,7 +709,7 @@
         // Initialisierung beim Seitenstart
         document.addEventListener('DOMContentLoaded', function() {
             initializeAllBands(); // Initialisiere ALLE Bände und Sprachen
-            showBand(1); // Zeige Band 1
+            showBand(1); // Zeige Band 1 (inkl. Amazon-Buttons)
         });
     </script>
 </body>
