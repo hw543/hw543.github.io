@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>High Fantasy - Lesen & Vorlesen-System - Helmut Wegners Wortwelten</title>
+    <title>High Fantasy - Lesen & Vorlesen-System - Eldorias Vermächtnis - Helmut Wegners Wortwelten</title>
     <style>
         * {
             margin: 0;
@@ -160,6 +160,45 @@
             box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
         }
 
+        .amazon-navigation {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .btn-amazon {
+            background: linear-gradient(135deg, #ff6b35, #ff8c42);
+            color: white;
+            padding: 6px 12px;
+            border: none;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 100px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-amazon:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 3px 10px rgba(255, 107, 53, 0.3);
+        }
+
+        .btn-amazon-disabled {
+            background: #666666;
+            color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        .btn-amazon-disabled:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
         .content {
             padding: 30px;
             font-size: 1.1em;
@@ -188,43 +227,6 @@
             margin-bottom: 30px;
         }
 
-        .book-cover-container {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .book-cover {
-            width: 200px;
-            height: 300px;
-            object-fit: cover;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            border: 3px solid #ffd700;
-            background: linear-gradient(135deg, #4d0099, #7733ff);
-        }
-
-        .amazon-buttons {
-            display: flex;
-            gap: 8px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-bottom: 20px;
-        }
-
-        .btn-amazon-disabled {
-            background: #666666;
-            color: #cccccc;
-            padding: 10px 16px;
-            border: none;
-            border-radius: 20px;
-            font-weight: bold;
-            cursor: not-allowed;
-            font-size: 0.8em;
-            min-width: 150px;
-            text-align: center;
-            line-height: 1.3;
-        }
-
         .word {
             cursor: pointer;
             transition: all 0.2s ease;
@@ -249,7 +251,7 @@
         }
 
         @media (max-width: 600px) {
-            .control-buttons, .band-navigation, .language-navigation {
+            .control-buttons, .band-navigation, .language-navigation, .amazon-navigation {
                 gap: 8px;
             }
 
@@ -260,8 +262,13 @@
             }
 
             .btn-band {
-                min-width: 110px;
+                min-width: 80px;
                 padding: 6px 12px;
+            }
+
+            .btn-amazon {
+                min-width: 80px;
+                padding: 4px 8px;
             }
 
             .content {
@@ -289,7 +296,7 @@
         <div class="header">
             <div class="back-button-header">
                 <a href="index.html" class="back-button">← Zurück zur Startseite</a>
-                <a href="high_fantasy_genre.html" class="back-button">← Zurück zu High Fantasy</a>
+                <a href="high-fantasy.html" class="back-button">← Zurück zu High Fantasy</a>
             </div>
             <h1>High Fantasy</h1>
             <p>Lesen & Vorlesen-System - Eldorias Vermächtnis</p>
@@ -314,6 +321,13 @@
                 <button class="btn btn-band" onclick="showBand(3)">Band 3</button>
                 <button class="btn btn-band" onclick="showBand(4)">Band 4</button>
             </div>
+
+            <div class="amazon-navigation">
+                <button class="btn-amazon btn-amazon-disabled">Amazon Band 1 - In Vorbereitung</button>
+                <button class="btn-amazon btn-amazon-disabled">Amazon Band 2 - In Vorbereitung</button>
+                <button class="btn-amazon btn-amazon-disabled">Amazon Band 3 - In Vorbereitung</button>
+                <button class="btn-amazon btn-amazon-disabled">Amazon Band 4 - In Vorbereitung</button>
+            </div>
         </div>
 
         <div class="content">
@@ -322,448 +336,106 @@
                 <!-- Band 1: Die Prophezeiung von Eldoria -->
                 <div id="de-band1" class="band-content">
                     <div class="book-title">Band 1: Die Prophezeiung von Eldoria</div>
-                    <div class="book-cover-container">
-                        <img src="prophezeiung-eldoria.jpg" alt="Cover Die Prophezeiung von Eldoria" class="book-cover">
-                    </div>
-                    <div class="amazon-buttons">
-                        <button class="btn btn-amazon-disabled">Amazon - Bald verfügbar</button>
-                    </div>
                     <div class="chapter-title">Kapitel 1: Das Erwachen der uralten Macht</div>
                     <div class="text-content" id="de-textContent1">
-                        <p>Die ersten Strahlen der Morgendämmerung durchbrachen den dichten Nebel, der über den Wäldern von Eldoria lag. Tief in den geheimnisvollen Tiefen des Kristallwaldes, wo uralte Bäume ihre Äste wie schützende Hände über längst vergessene Geheimnisse breiteten, geschah etwas, das das Schicksal des Königreichs für immer verändern sollte.</p>
+                        <p>Das Königreich Eldoria erstreckte sich über weite Ebenen, dichte Wälder und schroffe Bergketten, eingerahmt von einem schimmernden Ozean im Westen. Im Herzen des Landes thronte das Königshaus: ein gewaltiges Bauwerk aus weißem Stein, dass die Jahrhunderte überdauert hatte. Die Mauern trugen Narben von Belagerungen und Kriegen, ein stiller Zeuge der turbulenten Geschichte Eldorias. Große Türme ragten gen Himmel, gekrönt von Flaggen, die das Wappen des Königreichs trugen -- ein goldener Phönix, umgeben von einer Flamme, Symbol für Wiedergeburt und Unsterblichkeit.</p>
 
-                        <p>Lyra Sternenklinge erwachte mit einem seltsamen Gefühl der Unruhe. Etwas war anders an diesem Morgen. Die Vögel sangen nicht ihre gewohnten Melodien, und selbst der Wind schien seinen Atem anzuhalten. Sie erhob sich von ihrem einfachen Strohbett in der kleinen Hütte am Rande des Dorfes Mondschein und trat vor die Tür.</p>
+                        <p>König Aldemar saß auf seinem steinernen Thron in der großen Halle, die von hohen Fenstern durchflutet wurde. Doch das Licht der Sonne konnte die Schatten auf seinem Gesicht nicht vertreiben. Seine Augen waren von Sorgen umwölkt, und seine Schultern trugen die Last nicht nur des Königreichs, sondern auch der Prophezeiung, die über seine Familie hing.</p>
 
-                        <p>Was sie sah, ließ ihr das Blut in den Adern gefrieren. Am Horizont, dort wo die Berge von Drachenzahn den Himmel berührten, pulsierte ein schwaches, violettes Licht. Es war kein natürliches Licht – es war Magie, und zwar eine Art von Magie, die seit tausend Jahren nicht mehr gesehen worden war.</p>
+                        <p>Sein treuer Berater Orin stand neben ihm, ein Mann mit grauem Haar und wachem Blick, der stets die Ruhe bewahrte, auch wenn die Welt, um ihn zu zerbrechen drohte. „Mein König", begann Orin, als er bemerkte, wie Aldemar gedankenverloren auf das Wandgemälde starrte, das die Entstehung Eldorias darstellte. „Ihr dürft Euch von diesen Zeichen nicht überwältigen lassen. Das Volk benötigt Eure Stärke."</p>
 
-                        <p>"Die Prophezeiung", flüsterte eine Stimme hinter ihr. Lyra wirbelte herum und sah ihren Großvater, den alten Weisen Aldric, der sein Leben lang die Geschichten und Legenden von Eldoria gehütet hatte. Seine normalerweise klaren blauen Augen waren von Sorge getrübt.</p>
+                        <p>„Und was, wenn meine Stärke nicht ausreicht?" Aldemar erhob sich langsam. Seine Stimme war tief und schwer, wie ein donnerndes Echo in der Halle. „Die Vorzeichen sind eindeutig, Orin. Der Nebel, die Berichte über die Kreaturen in den Wäldern, die Unruhen im Volk -- all das deutet darauf hin, dass die Prophezeiung wahr wird."</p>
 
-                        <p>"Großvater, was meinst du mit Prophezeiung?" fragte Lyra, obwohl sie tief in ihrem Herzen bereits die Antwort zu ahnen begann. Seit ihrer Kindheit hatte Aldric ihr Geschichten von der Zeit erzählt, als mächtige Wächter das Land beschützten und die Kräfte des Lichts und der Dunkelheit in einem ewigen Gleichgewicht standen.</p>
+                        <p>Orin legte eine Hand auf den Arm des Königs. „Es gab schon immer Zeiten der Dunkelheit, und jedes Mal hat die Blutlinie des Phönix überlebt. Wir müssen die Prophezeiung entschlüsseln, das ist wahr, aber nicht in Verzweiflung handeln."</p>
 
-                        <p>Aldric setzte sich schwer auf die hölzerne Bank vor der Hütte und bedeutete Lyra, sich zu ihm zu setzen. "Vor langer Zeit, mein Kind, als die Welt noch jung war und Magie so natürlich war wie das Atmen, gab es eine große Prophezeiung. Sie sprach von einer Zeit, in der die alten Kräfte erwachen würden, wenn das Gleichgewicht zwischen Licht und Schatten gestört wäre."</p>
+                        <p>In den Straßen der Hauptstadt Eldorias, den gepflasterten Gassen, die vom Königshaus hinabführten, herrschte ein geschäftiges Treiben. Händler priesen lautstark ihre Waren an, während Kinder lachend zwischen den Marktständen umherliefen. Doch hinter der Fassade des Alltags schlummerte eine wachsende Unruhe. Die alten Weisen flüsterten von den Geschichten der Prophezeiung, einer Weissagung, die das Ende oder die Rettung Eldorias voraussagte.</p>
 
-                        <p>Er deutete auf das pulsierende Licht in der Ferne. "Das dort ist das Erwachen der Kristalle der Macht. Sie waren seit dem Großen Krieg versiegelt, als die letzten Wächter ihr Leben opferten, um das Land vor der Dunkelheit zu bewahren. Aber die Prophezeiung besagt, dass sie zurückkehren würden, wenn ein neuer Wächter geboren würde – jemand mit dem Blut der alten Linie."</p>
+                        <p>Tief unter dem Königshaus, verborgen hinter schweren Eisentüren, lag die königliche Bibliothek, ein Labyrinth aus Regalen, die sich ins Dunkel erstreckten. In ihrem Zentrum stand eine goldene Truhe, geschützt von uralten Runen und Zaubern. Darin lag das Buch der Weissagung. Aldemar, Orin und der Weise Eldrin standen vor der Truhe, während die flackernden Fackeln die uralten Runen erhellten.</p>
 
-                        <p>Lyra spürte, wie sich ihre Handflächen erwärmten. Seit Jahren hatte sie seltsame Träume gehabt, Visionen von leuchtenden Kristallen und mächtigen Kriegerinnen mit Schwertern aus reinem Licht. Sie hatte gedacht, es seien nur die Geschichten ihres Großvaters, die ihre Fantasie beflügelten, aber jetzt...</p>
+                        <p>„Mein König, sobald wir das Buch öffnen, gibt es kein Zurück", warnte Eldrin, ohne den Blick von der Truhe zu lösen. „Das weiß ich", antwortete Aldemar entschlossen. „Aber die Zeit drängt. Wir müssen wissen, was die Prophezeiung verlangt." Mit einem letzten Wort öffnete sich die Truhe, und Eldrin zog vorsichtig ein in Leder gebundenes Buch heraus. Die Seiten wirkten brüchig, doch die Schrift darauf pulsierte, als wäre sie lebendig.</p>
 
-                        <p>"Du spürst es, nicht wahr?" Aldrics Stimme war sanft, aber ernst. "Die Wärme in deinen Händen, die Träume, die dich heimsuchen? Das ist das Erwachen deiner wahren Natur, Lyra. Du bist die letzte der Linie von Sternenklinge, und das Blut der alten Wächter fließt in deinen Adern."</p>
+                        <p>Bevor Eldrin weitersprechen konnte, ertönte ein ohrenbetäubendes Krachen aus der Ferne. Die Erde erbebte, und ein unnatürlicher Wind fegte durch die Katakomben. Aldemar zog sein Schwert, während Orin sich schützend vor den König stellte. An der Oberfläche strömten die Menschen aus ihren Häusern. Der Himmel über Eldoria hatte sich verdunkelt, und ein riesiger Riss zog sich wie eine offene Wunde durch die Wolken.</p>
 
-                        <p>Als ob seine Worte ein Signal gewesen wären, begann Lyras Amulett – ein simpler Kristallanhänger, den sie seit ihrer Geburt trug – zu glühen. Das schwache Licht wurde stärker und stärker, bis es schließlich in einem blendenden Strahl aufflammte, der den Morgennebel durchschnitt.</p>
-
-                        <p>In diesem Moment hörten sie es: das Geräusch von Hufen, die sich schnell näherten. Ein Reiter in schwarzer Rüstung erschien am Rand des Dorfes, sein Pferd war schweißnass von einem langen, harten Ritt. Er sprang ab und eilte direkt auf Lyra und Aldric zu.</p>
-
-                        <p>"Ist sie das?" fragte er atemlos und deutete auf Lyra. "Ist sie diejenige, von der die Prophezeiung spricht?"</p>
-
-                        <p>Aldric erhob sich langsam. "Sir Gareth von Silberbach, was führt dich in unser bescheidenes Dorf?"</p>
-
-                        <p>"Die Zeit der Ruhe ist vorbei, alter Freund," antwortete der Ritter. "Dunkle Kräfte bewegen sich bereits. Lord Malachar ist aus seinem jahrtausendelangen Schlaf erwacht. Seine Schattenlegionen sammeln sich in den Nordlanden, und seine Macht wächst mit jedem Tag."</p>
-
-                        <p>Lyra fühlte, wie sich eine eisige Kälte in ihrem Magen ausbreitete. Lord Malachar – der Name war ihr aus den düstersten Geschichten ihres Großvaters bekannt. Der gefallene Wächter, der sich der Dunkelheit zugewandt und versucht hatte, die Welt in ewige Finsternis zu tauchen.</p>
-
-                        <p>"Aber ich bin nur ein einfaches Dorfmädchen," protestierte Lyra. "Ich weiß nichts über Magie oder Kämpfe oder..."</p>
-
-                        <p>"Du weißt mehr, als du denkst," unterbrach sie Sir Gareth sanft. "Erzähl mir von deinen Träumen."</p>
-
-                        <p>Lyra zögerte, dann begann sie zu sprechen. Sie erzählte von den Visionen leuchtender Kristalle, von Schlachten zwischen Kriegern des Lichts und Kreaturen der Dunkelheit, von einem großen Turm aus Kristall, der wie ein Leuchtfeuer in der Finsternis strahlte.</p>
-
-                        <p>"Das ist der Turm der Ewigkeit," erklärte Sir Gareth mit ehrfürchtiger Stimme. "Der Sitz der alten Wächter und die Quelle aller Magie in Eldoria. Er ist seit dem Großen Krieg verloren, aber wenn die Prophezeiung wahr ist, wirst du der Schlüssel sein, ihn wiederzufinden."</p>
-
-                        <p>Plötzlich erschütterte ein donnerndes Gebrüll die Luft. In der Ferne, über den Wipfeln des Kristallwaldes, erhob sich eine Gestalt in den Himmel – ein Drache, aber nicht wie die edlen Geschöpfe aus den Legenden. Dieser war schwarz wie die Nacht, seine Augen glühten rot wie Kohlen, und von seinem Körper ging eine Aura der Verderbnis aus.</p>
-
-                        <p>"Ein Schattendrache," murmelte Sir Gareth und griff instinktiv zu seinem Schwert. "Malachars Boten. Sie suchen nach dir, Lyra."</p>
-
-                        <p>Das Amulett an Lyras Brust pulsierte nun heftig, als ob es auf die Anwesenheit des dunklen Wesens reagierte. Sie spürte, wie eine seltsame Kraft durch ihren Körper strömte, etwas, das sie nie zuvor gefühlt hatte – wild und mächtig und gleichzeitig erschreckend.</p>
-
-                        <p>"Was soll ich tun?" fragte sie, ihre Stimme kaum mehr als ein Flüstern.</p>
-
-                        <p>Aldric legte eine zitternde Hand auf ihre Schulter. "Du musst zu den anderen Wächtern. Es gibt noch drei weitere, die irgendwo in Eldoria verstreut sind. Nur zusammen könnt ihr Lord Malachar aufhalten und das Gleichgewicht wiederherstellen."</p>
-
-                        <p>"Die anderen Wächter?" Lyra blickte zwischen ihrem Großvater und Sir Gareth hin und her. "Ihr meint, es gibt noch mehr wie mich?"</p>
-
-                        <p>"Theron Drachenheart in der Festung Himmelsburg," zählte Sir Gareth auf, "Elara Mondschimmer im Elfenreich von Silberlicht, und Kael Sturmrufer auf den Inseln der Winde. Jeder von ihnen trägt einen Teil der alten Macht in sich, aber getrennt sind sie verwundbar. Malachar weiß das, und er wird versuchen, euch einzeln zu vernichten, bevor ihr euch vereinen könnt."</p>
-
-                        <p>Der Schattendrache kreiste nun niedriger, seine brennenden Augen schienen direkt auf ihre kleine Gruppe gerichtet zu sein. Andere Dorfbewohner begannen aus ihren Häusern zu kommen, schauten ängstlich zum Himmel und flüsterten aufgeregt miteinander.</p>
-
-                        <p>"Wir müssen gehen," drängte Sir Gareth. "Sofort. Jede Minute, die wir hier verweilen, bringt uns in größere Gefahr."</p>
-
-                        <p>Lyra blickte zu der kleinen Hütte, die ihr ganzes bisheriges Leben bedeutet hatte. Es war ein bescheidenes Zuhause, aber es war alles, was sie kannte. Die Vorstellung, es zu verlassen und sich in ein Abenteuer zu stürzen, das das Schicksal der ganzen Welt bestimmen könnte, war überwältigend.</p>
-
-                        <p>"Großvater, kommst du mit mir?" fragte sie hoffnungsvoll.</p>
-
-                        <p>Aldric schüttelte den Kopf, aber seine Augen glänzten vor Stolz. "Mein Platz ist hier, bei den Menschen unseres Dorfes. Sie werden Schutz brauchen, wenn die dunklen Zeiten kommen. Aber du, mein liebes Kind, du hast eine größere Bestimmung. Nimm das hier." Er reichte ihr ein altes Buch mit ledernem Einband. "Es enthält alles, was ich über die alte Magie und die Wächter gesammelt habe. Es wird dir auf deiner Reise helfen."</p>
-
-                        <p>Mit zitternden Händen nahm Lyra das Buch entgegen. Es war schwerer, als sie erwartet hatte, und sie konnte die Macht spüren, die von seinen Seiten ausging. Uraltes Wissen, jahrhundertelang gehütet und bewahrt, lag nun in ihren Händen.</p>
-
-                        <p>Sir Gareth führte ein zweites Pferd heran, ein edles Tier mit silbergrauem Fell und intelligenten Augen. "Das ist Sternentänzer," erklärte er. "Ein Pferd von königlichem Geblüt, das dich sicher tragen wird. Es versteht die Sprache der Magie und wird dich warnen, wenn Gefahr naht."</p>
-
-                        <p>Lyra streichelte sanft die Nüstern des Pferdes, und zu ihrer Überraschung stupste es sie sanft an, als ob es sie bereits erkannt hätte. In diesem Moment fühlte sie zum ersten Mal, dass vielleicht, nur vielleicht, das alles richtig war – dass sie wirklich dazu bestimmt war, mehr zu sein als nur ein einfaches Dorfmädchen.</p>
-
-                        <p>Der Schattendrache kreischte erneut, diesmal näher und bedrohlicher. Seine Schatten fielen auf das Dorf, und die Temperaturen schienen zu fallen. Die Zeit war gekommen.</p>
-
-                        <p>"Ich bin bereit," sagte Lyra mit einer Stimme, die fester klang, als sie sich fühlte. Sie umarmte ihren Großvater ein letztes Mal, schwang sich auf Sternentänzers Rücken und folgte Sir Gareth, als er sein Pferd in Richtung des Kristallwaldes lenkte.</p>
-
-                        <p>Hinter ihnen erhob sich das Dorf Mondschein in den frühen Morgenstunden, friedlich und unwissend über die große Veränderung, die gerade begonnen hatte. Vor ihnen lag der ungewisse Pfad eines Abenteuers, das das Schicksal von Eldoria und allen, die darin lebten, bestimmen würde.</p>
-
-                        <p>Und in der Ferne wachte Lord Malachar auf, seine roten Augen öffneten sich in der Dunkelheit seines Turms, und ein grausames Lächeln spielte um seine Lippen. Die Spiele konnten beginnen.</p>
+                        <p>Ein Krieger, der an der Grenze des Königreichs stationiert war, ritt in die Stadt. Sein Gesicht war aschfahl, und seine Stimme bebte, als er ausrief: „Die Kreaturen aus den Geschichten sind wahr! Sie kommen!" Das Königreich Eldoria stand vor seiner dunkelsten Stunde, und die Prophezeiung hatte begonnen, ihre Schatten auf das Land zu werfen.</p>
                     </div>
                 </div>
 
                 <!-- Band 2: Der Beginn des Friedens -->
                 <div id="de-band2" class="band-content hidden">
                     <div class="book-title">Band 2: Der Beginn des Friedens</div>
-                    <div class="book-cover-container">
-                        <img src="beginn-des-friedens.jpg" alt="Cover Der Beginn des Friedens" class="book-cover">
-                    </div>
-                    <div class="amazon-buttons">
-                        <button class="btn btn-amazon-disabled">Amazon - Bald verfügbar</button>
-                    </div>
                     <div class="chapter-title">Kapitel 1: Die Rückkehr nach Eldoria</div>
                     <div class="text-content" id="de-textContent2">
-                        <p>Ein Jahr war vergangen seit dem großen Sieg über Lord Malachar, und die Wunden, die der Krieg dem Land Eldoria zugefügt hatte, heilten langsam. Die vier Wächter hatten ihre Mission erfüllt – das Gleichgewicht zwischen Licht und Dunkelheit war wiederhergestellt, und der Turm der Ewigkeit strahlte wieder in seinem ursprünglichen Glanz über das Königreich.</p>
+                        <p>Die Dämmerung tauchte die Türme von Eldoria in warmes Gold, als Eryon und Aris auf den gepflasterten Straßen der Stadt einritten. Die Menschen drängten sich dicht an den Straßenrändern, jubelnd und lachend. Fahnen flatterten im Wind, und der süße Duft von Blumen, die in Hülle und Fülle auf die Helden herabregneten, vermischte sich mit dem erdigen Aroma des Pflasters, das die Hitze des Tages gespeichert hatte.</p>
 
-                        <p>Lyra Sternenklinge stand auf dem höchsten Balkon des Turms und blickte über die weiten Ländereien, die sich bis zum Horizont erstreckten. Die Landschaft hatte sich verändert – wo einst verwüstete Gebiete und verdorrte Wälder gelegen hatten, grünten nun wieder Wiesen und Bäume. Die Magie des Lichts hatte das Land erneuert und ihm seine natürliche Schönheit zurückgegeben.</p>
+                        <p>Eryon saß auf einem majestätischen Rappen, seine goldene Rüstung funkelte im Licht. Ein Lächeln spielte auf seinen Lippen, doch in seinen Augen lag ein Schatten, den die Menge nicht wahrnahm. Neben ihm ritt Aris, ihre Hand fest um den Griff ihres Schwertes geschlossen. Ihre prüfenden Blicke glitten durch die Menge, immer auf der Hut.</p>
 
-                        <p>Doch trotz des äußeren Friedens spürte Lyra eine Unruhe in ihrem Herzen. Die Macht, die während des Kampfes gegen Malachar in ihr erwacht war, war nicht verschwunden. Sie war stärker geworden, hatte sich entwickelt und verändert. Manchmal, in stillen Momenten wie diesem, konnte sie die Stimmen der alten Wächter hören, die vor Jahrhunderten gelebt hatten und deren Geister nun in den Kristallen des Turms ruhten.</p>
+                        <p>Im Großen Saal, wo die Ratsführer der Völker Eldorias versammelt waren, empfing eine kühle, fast greifbare Spannung die Ankömmlinge. Der Elfenfürst, hochgewachsen und mit funkelnden Augen, begrüßte Eryon mit knapper Höflichkeit. Die Zwerge hingegen, gedrungen und schwer gerüstet, grummelten leise vor sich hin, als die Elfen ihre Meinungen äußerten.</p>
 
-                        <p>"Du grübelst wieder," sagte eine vertraute Stimme hinter ihr. Theron Drachenheart trat aus dem Schatten der Säulen hervor, sein imposanter Rahmen war noch immer beeindruckend, auch wenn die Spuren des Krieges deutlich in seinem Gesicht zu sehen waren. Eine neue Narbe zog sich von seiner linken Schläfe bis zu seinem Kinn – ein Andenken an den finalen Kampf gegen Malachars Schattendrachen.</p>
+                        <p>„Unsere Schmiede haben das Beste gegeben, um diese Schlacht zu gewinnen", erklärte ein Zwergenältester, doch seine Stimme klang trotzig. „Und doch habt ihr euch erst zu spät dem Kampf angeschlossen", erwiderte eine Elfe mit scharfer Zunge. Eryon hob die Hand, um Einhalt zu gebieten. „Heute feiern wir den Frieden. Lasst uns nicht den Keim von Zwietracht säen, wo Einheit nötig ist."</p>
 
-                        <p>"Ich denke an die Zukunft," antwortete Lyra, ohne sich umzudrehen. "An das, was jetzt kommt. Wir haben den Krieg gewonnen, aber was bedeutet das für uns? Für die Menschen von Eldoria?"</p>
+                        <p>Während der Feierlichkeiten im Palast wandelten Aris' Gedanken in dunkleren Gefilden. Ihr scharfer Blick glitt über die Menge, bis sie an einer verhüllten Gestalt hängen blieb, die abseits stand. Der Fremde schien sich kaum zu bewegen, doch als Aris näher trat, löste er sich in der Menge auf.</p>
 
-                        <p>Theron trat neben sie und legte seine schwere Hand auf die Balkonbrüstung. "Es bedeutet, dass wir leben können. Dass unsere Kinder in einer Welt aufwachsen werden, in der sie nicht ständig Angst vor den Schatten haben müssen."</p>
+                        <p>Später, als die Feierlichkeiten verstummten und nur noch das leise Flackern der Fackeln die Hallen erleuchtete, zog sich Eryon in den Thronsaal zurück. Seine Hände ruhten schwer auf den Armlehnen seines Thrones, während seine Gedanken rastlos durch die Erinnerungen an die Schlacht wanderten. „Es fühlt sich nicht wie ein Sieg an", murmelte er.</p>
 
-                        <p>"Aber werden sie uns verstehen?" fragte Lyra. "Werden sie verstehen, was es bedeutet, diese Macht zu tragen? Manchmal fühle ich mich, als wäre ich nicht mehr ganz menschlich."</p>
+                        <p>Aris, die stumm neben ihm stand, legte ihm eine Hand auf die Schulter. „Der Frieden ist nur ein Anfang, Eryon. Die wahre Prüfung liegt noch vor uns."</p>
 
-                        <p>Es war eine Sorge, die alle vier Wächter teilten. Die Transformation, die sie während des Krieges durchlaufen hatten, hatte sie verändert. Ihre Sinne waren geschärft, ihre Reflexe übermenschlich schnell, und die Magie floss jetzt so natürlich durch sie wie ihr eigenes Blut. Sie waren zu etwas geworden, das zwischen den gewöhnlichen Menschen und den alten Göttern stand.</p>
-
-                        <p>"Elara und Kael sind schon aufgebrochen," berichtete Theron. "Elara ist zu ihrem Volk ins Elfenreich zurückgekehrt, und Kael segelt wieder zu seinen Inseln. Sie haben beide gesagt, dass sie Zeit brauchen, um zu verstehen, was aus ihnen geworden ist."</p>
-
-                        <p>Lyra nickte verständnisvoll. Nach dem Ende des Krieges hatten sich die vier Wächter zum ersten Mal seit Monaten die Gelegenheit genommen, durchzuatmen und über ihre Zukunft nachzudenken. Die intensive Kameradschaft, die sie während der dunklen Zeiten zusammengeschweißt hatte, war unerschütterlich, aber jeder von ihnen hatte auch sein eigenes Leben, zu dem er zurückkehren musste.</p>
-
-                        <p>"Und du?" fragte sie Theron. "Wirst du auch gehen?"</p>
-
-                        <p>"Ich denke darüber nach," gestand er. "Die Festung Himmelsburg braucht ihren Kommandanten. Meine Soldaten haben lange genug ohne mich gekämpft. Aber..." Er zögerte und blickte zu den Kristallen des Turms, die sanft in allen Farben des Regenbogens schimmerten. "Ich fühle mich mit diesem Ort verbunden. Als wäre ein Teil von mir für immer hier verwurzelt."</p>
-
-                        <p>Das konnte Lyra gut verstehen. Der Turm der Ewigkeit war mehr als nur ein Gebäude – er war das Herz der Magie in Eldoria, der Ort, an dem alle Ley-Linien des Kontinents zusammenliefen. Für die Wächter war er wie ein Zuhause geworden, ein Ort, an dem sie ihre wahre Natur ohne Verstecken oder Erklärungen leben konnten.</p>
-
-                        <p>In diesem Moment erscholl ein heller Klang durch die Luft – der Ton der großen Kristallglocke, die nur in Zeiten höchster Wichtigkeit geläutet wurde. Lyra und Theron tauschten einen besorgten Blick aus und eilten gemeinsam in die große Halle des Turms.</p>
-
-                        <p>Dort erwartete sie ein ungewöhnlicher Anblick. Eine Gruppe von Gesandten aus allen Ecken von Eldoria hatte sich versammelt – Vertreter des Königshauses, Botschafter der verschiedenen Völker, und sogar einige der Dorfältesten, die normalerweise ihre bescheidenen Gemeinden nie verließen.</p>
-
-                        <p>An der Spitze der Delegation stand König Aldwin von Eldoria, ein Mann mittleren Alters mit weisem Gesicht und freundlichen Augen. Er hatte während des Krieges tapfer an der Seite der Wächter gekämpft und war einer der wenigen Herrscher, die die wahre Bedeutung ihrer Mission verstanden hatten.</p>
-
-                        <p>"Lyra, Theron," begrüßte er sie mit einer tiefen Verbeugung, die für einen König ungewöhnlich war. "Ich hoffe, wir stören nicht."</p>
-
-                        <p>"Niemals, Majestät," antwortete Lyra respektvoll. "Was führt Euch zu uns?"</p>
-
-                        <p>König Aldwin richtete sich auf und blickte zwischen den beiden Wächtern hin und her. "Wir sind gekommen, um über die Zukunft zu sprechen. Über Eure Zukunft und die Zukunft von Eldoria."</p>
-
-                        <p>Er machte eine Geste, und einer seiner Begleiter trat vor – ein alter Mann in den Roben eines Gelehrten, dessen Arme voller Schriftrollen und alter Bücher waren.</p>
-
-                        <p>"Das ist Meister Lysander," erklärte der König. "Unser oberster Historiker und Experte für die Legenden der alten Zeit. Er hat einige interessante Entdeckungen gemacht."</p>
-
-                        <p>Meister Lysander verneigte sich vor den Wächtern und rollte eine besonders große Pergamentrolle auf einem steinernen Tisch aus. Es war eine Karte von Eldoria, aber nicht so, wie Lyra sie kannte. Diese Karte zeigte das Königreich, wie es vor tausend Jahren ausgesehen hatte, zur Zeit der ersten Wächter.</p>
-
-                        <p>"Während der letzten Monate haben wir die Archive durchforstet," begann Lysander mit einer dünnen, aber klaren Stimme. "Wir wollten mehr über die ursprünglichen Wächter erfahren, über ihre Rolle in der Gesellschaft und darüber, wie sie das Land regierten."</p>
-
-                        <p>"Regierten?" fragte Theron überrascht. "Ich dachte, sie wären Beschützer gewesen, nicht Herrscher."</p>
-
-                        <p>"Das ist ein weit verbreiteter Irrtum," erklärte Lysander und deutete auf verschiedene Markierungen auf der Karte. "Die alten Wächter waren sowohl Beschützer als auch Führer. Jeder von ihnen herrschte über ein Viertel des Kontinents, und gemeinsam bildeten sie einen Rat, der über das gesamte Reich wachte. Es war eine Zeit des größten Friedens und Wohlstands, die Eldoria je erlebt hat."</p>
-
-                        <p>Lyra fühlte, wie sich ein kalter Schauer über ihren Rücken ausbreitete. Sie begann zu verstehen, worauf diese Unterhaltung hinauslief.</p>
-
-                        <p>"Ihr wollt, dass wir ihre Nachfolge antreten," sagte sie langsam. "Ihr wollt, dass wir Eldoria regieren."</p>
-
-                        <p>König Aldwin nickte ernst. "Nicht als Eroberer oder Tyrannen, sondern als weise Beschützer. Das Land hat gesehen, was ihr geleistet habt, wie ihr euer Leben riskiert habt, um uns alle zu retten. Die Menschen vertrauen euch, sie respektieren euch, und viele sehen euch bereits als ihre wahren Führer an."</p>
-
-                        <p>"Aber wir sind keine Politiker," protestierte Theron. "Wir sind Krieger, Magier. Wir verstehen nichts von Staatsführung oder Diplomatie."</p>
-
-                        <p>"Das lässt sich lernen," entgegnete ein anderer Gesandter, ein gut gekleideter Mann mit dem Aussehen eines erfahrenen Staatsmannes. "Und ihr würdet nicht allein sein. Der bestehende Verwaltungsapparat würde euch unterstützen, und jeder von euch hätte einen Rat aus erfahrenen Beratern."</p>
-
-                        <p>Lyra schüttelte den Kopf. "Das ist zu viel. Zu viel Verantwortung, zu viel Macht für so wenige Menschen. Was ist, wenn wir Fehler machen? Was ist, wenn die Macht uns korrumpiert, so wie sie Lord Malachar korrumpiert hat?"</p>
-
-                        <p>Bei der Erwähnung von Malachar wurde es still in der Halle. Der gefallene Wächter war ein warnendes Beispiel dafür, was geschehen konnte, wenn große Macht in die falschen Hände geriet oder wenn ein einst edler Geist von Dunkelheit verführt wurde.</p>
-
-                        <p>"Das ist genau der Grund, warum ihr die Richtigen für diese Aufgabe seid," sagte König Aldwin sanft. "Ihr habt bereits bewiesen, dass ihr die Macht nicht für euch selbst begehrt. Ihr habt sie eingesetzt, um andere zu beschützen, um das Gleichgewicht zu bewahren. Und ihr fragt euch noch immer, ob ihr würdig seid – das allein zeigt eure Weisheit."</p>
-
-                        <p>Theron verschränkte die Arme vor der Brust und blickte nachdenklich auf die Karte. "Welche Art von Regierung schwebt euch vor? Ein Königreich mit vier Herrschern würde in Chaos enden."</p>
-
-                        <p>"Nicht ein Königreich," korrigierte Meister Lysander. "Vier Fürstentümer, vereint unter einem gemeinsamen Rat. Jeder Wächter würde über sein Gebiet herrschen, aber wichtige Entscheidungen würden gemeinsam getroffen. Genau so, wie es vor tausend Jahren war."</p>
-
-                        <p>Er zeigte auf die vier farbig markierten Bereiche der Karte. "Das nördliche Bergland für Theron, mit Himmelsburg als Hauptstadt. Das östliche Elfenreich für Elara, die bereits eine natürliche Verbindung zu ihrem Volk hat. Die westlichen Inseln für Kael, der die Seefahrer und Händler regieren könnte. Und das zentrale Heartland für Lyra, mit dem Turm der Ewigkeit als Sitz des Rates."</p>
-
-                        <p>Die Vorstellung war verlockend und erschreckend zugleich. Lyra konnte sich vorstellen, wie es wäre – eine Welt, in der die Magie offen praktiziert werden könnte, in der die Wächter die Menschen vor den Gefahren beschützen könnten, die in den entlegensten Winkeln der Welt noch immer lauerten. Aber sie konnte auch die Schattenseiten sehen – die Versuchungen der Macht, die Isolation, die mit großer Verantwortung einherging, die Möglichkeit, dass sie von den einfachen Menschen entfremdet würden, die sie einst beschützt hatten.</p>
-
-                        <p>"Wir brauchen Zeit," sagte sie schließlich. "Zeit, um darüber nachzudenken, um mit Elara und Kael zu sprechen, um die Konsequenzen zu durchdenken."</p>
-
-                        <p>"Natürlich," stimmte König Aldwin zu. "Das ist eine Entscheidung, die nicht leichtfertig getroffen werden kann. Aber bedenkt auch: Das Land braucht Stabilität. Die Menschen haben Angst vor der Zukunft, vor dem, was kommen könnte. Sie haben gesehen, wie schnell Frieden in Krieg umschlagen kann. Eure Anwesenheit, eure Macht würde ihnen die Sicherheit geben, die sie brauchen."</p>
-
-                        <p>Nach der Abreise der Delegation saßen Lyra und Theron noch lange in der großen Halle und starrten auf die ausgebreitete Karte. Die Kristalle um sie herum pulstierten sanft, als ob sie die Unruhe ihrer Gedanken spürten.</p>
-
-                        <p>"Was denkst du?" fragte Lyra schließlich.</p>
-
-                        <p>Theron seufzte tief. "Ich denke an die Verantwortung. An all die Menschen, die auf uns blicken und erwarten, dass wir die richtigen Entscheidungen treffen. Aber ich denke auch daran, was passieren könnte, wenn wir nein sagen. Wenn wir uns zurückziehen und das Land sich selbst überlassen."</p>
-
-                        <p>"Malachar ist besiegt, aber er war nicht die einzige Bedrohung," gab Lyra zu bedenken. "Da draußen gibt es noch andere dunkle Kräfte, andere Gefahren. Ohne Wächter wäre das Land verwundbar."</p>
-
-                        <p>"Andererseits," fügte Theron hinzu, "könnten wir auch Beschützer sein, ohne Herrscher zu werden. Wir könnten uns zurückziehen, aber bereit sein, wenn wir gebraucht werden."</p>
-
-                        <p>Es war ein Dilemma ohne einfache Antwort. In dieser Nacht sendeten sie Nachrichten an Elara und Kael, baten sie, so schnell wie möglich zum Turm zurückzukehren. Diese Entscheidung mussten sie gemeinsam treffen, so wie sie alles andere auch gemeinsam bewältigt hatten.</p>
-
-                        <p>Während sie warteten, verbrachte Lyra ihre Tage damit, durch die Ländereien um den Turm zu wandern, mit den Menschen zu sprechen, die in den kleinen Dörfern und Bauernhöfen lebten. Sie wollte verstehen, was sie wirklich brauchten, was sie sich wünschten.</p>
-
-                        <p>Was sie fand, überraschte sie. Die Menschen waren nicht nur dankbar für ihre Rettung – sie sahen in den Wächtern etwas, was sie in ihren traditionellen Herrschern vermisst hatten. Jemanden, der ihre Kämpfe verstand, der bereit war, persönliche Opfer für das Gemeinwohl zu bringen.</p>
-
-                        <p>Eine alte Bäuerin sagte zu ihr: "Ihr seid eine von uns, Kindchen. Ihr kennt das einfache Leben, aber ihr habt auch die Macht, etwas zu verändern. Das ist das, was wir brauchen – jemanden, der beide Welten kennt."</p>
-
-                        <p>Diese Worte hingen schwer in Lyras Gedanken, als Elara und Kael endlich ankamen. Die Wiedervereinigung der vier Wächter war emotional – sie hatten sich alle verändert, waren gereift durch ihre Erfahrungen während der Trennung.</p>
-
-                        <p>Elara war ruhiger geworden, ihre elfische Weisheit hatte sich vertieft. Kael strahlte eine neue Zuversicht aus, die Seeluft und die Freiheit der Inseln hatten ihm gutgetan. Aber alle vier spürten sie die unsichtbaren Bande, die sie miteinander verbanden – die geteilten Erfahrungen, die gemeinsam durchstandenen Prüfungen, die Macht, die in jedem von ihnen schlummerte.</p>
-
-                        <p>Sie sprachen drei Tage und drei Nächte lang. Sie diskutierten jeden Aspekt des Vorschlags, wogen die Vor- und Nachteile ab, teilten ihre Ängste und Hoffnungen miteinander. Am Ende kamen sie zu einer Entscheidung, die keiner von ihnen allein hätte treffen können.</p>
-
-                        <p>Sie würden es versuchen. Aber nicht als absolute Herrscher, sondern als Hüter – als Beschützer, die die Verantwortung für das Land und seine Menschen teilten. Sie würden ein neues System schaffen, eines, das die Weisheit der alten Wächter mit den Bedürfnissen der modernen Zeit verband.</p>
-
-                        <p>Und so begann eine neue Ära in Eldoria – eine Zeit des Friedens, die auf der Stärke und Weisheit von vier außergewöhnlichen Menschen ruhte, die gelernt hatten, dass wahre Macht nicht darin lag, über andere zu herrschen, sondern ihnen zu dienen.</p>
+                        <p>Tief in den Schatten von Eldorias Bergen versammelten sich währenddessen düstere Gestalten in einer Höhle, ihre Gesichter von Kapuzen verborgen. Der verhüllte Fremde sprach leise, aber eindringlich: „Die Dunkelheit mag geschlagen sein, doch sie ist nicht besiegt. Eldoria wird fallen -- nicht durch Krieg, sondern durch den Samen des Misstrauens."</p>
                     </div>
                 </div>
 
                 <!-- Band 3: Die Schatten des Vergessenen -->
                 <div id="de-band3" class="band-content hidden">
                     <div class="book-title">Band 3: Die Schatten des Vergessenen</div>
-                    <div class="book-cover-container">
-                        <img src="schatten-vergessenen.jpg" alt="Cover Die Schatten des Vergessenen" class="book-cover">
-                    </div>
-                    <div class="amazon-buttons">
-                        <button class="btn btn-amazon-disabled">Amazon - Bald verfügbar</button>
-                    </div>
                     <div class="chapter-title">Kapitel 1: Der Funke des Abenteuers</div>
                     <div class="text-content" id="de-textContent3">
-                        <p>Fünf Jahre des Friedens lagen hinter den vier Reichen von Eldoria. Die Herrschaft der Wächter hatte dem Land eine Stabilität und einen Wohlstand gebracht, die es seit Jahrhunderten nicht mehr erlebt hatte. Doch unter der ruhigen Oberfläche regte sich etwas Unerwartetes – eine Macht, die so alt war, dass selbst die Legenden der ersten Wächter sie nur in Flüsterton erwähnten.</p>
+                        <p>Die Morgensonne tauchte die weiten Ebenen von Eldoria in ein goldenes Licht, das von den sanften Hügeln zurückstrahlte. Kael saß am Rand der Klippe, die über das Tal von Arien ragte, und ließ den Blick über die friedliche Landschaft schweifen. Die Narben der vergangenen Kriege schienen endlich zu verblassen -- die Felder trugen wieder reiche Ernten, und die Städte erblühten in neuem Glanz. Doch in Kaels Herzen regte sich Unruhe, ein flüchtiges Verlangen nach etwas Größerem, das er selbst nicht benennen konnte.</p>
 
-                        <p>In den tiefsten Gewölben unter dem Turm der Ewigkeit, dort wo die Grundmauern auf den lebenden Fels trafen, entdeckte Lyra ein Geheimnis, das ihr ganzes Verständnis von der Geschichte Eldorias erschüttern sollte. Sie war dorthin gegangen, um die alten Kristallformationen zu studieren, die als Energiequelle für den Turm dienten, als sie auf eine Wand stieß, die anders war als alle anderen.</p>
+                        <p>„Du denkst wieder zu viel nach", rief Tessa hinter ihm, ihre Stimme wie ein fröhlicher Glockenklang. Sie balancierte einen Korb voller Karten und Schriftrollen in den Händen und ließ sich neben ihm nieder. „Du weißt, was das bedeutet." Kael lachte leise und schüttelte den Kopf. „Was bedeutet es denn, allwissende Tessa?"</p>
 
-                        <p>Diese Wand schimmerte nicht mit der bekannten bläulichen Aura der Turmkristalle. Stattdessen pulsierte sie in einem tiefen, schwärzlichen Violett, das ihre Augen seltsam anzog und gleichzeitig abstieß. Runen waren in den Stein geätzt, aber es waren nicht die vertrauten Schriftzeichen der alten Wächter. Diese Symbole waren älter, primitiver, und sie schienen von einer Macht zu sprechen, die vor der Zeit des Lichts existiert hatte.</p>
+                        <p>„Es bedeutet, dass du dich nach einem Abenteuer sehnst. Und rate mal -- ich habe genau das Richtige für uns!" Sie legte die Karten vor sich aus, die Ecken sorgfältig mit Steinen beschwert, damit der Wind sie nicht davontrug. Eine Karte stach sofort ins Auge: Ihre Linien waren grob gezeichnet, die Details verschwommen, doch eine rote Markierung in einer abgelegenen Ecke fiel auf.</p>
 
-                        <p>"Die Vergessenen," flüsterte eine Stimme hinter ihr, und Lyra wirbelte herum, ihr Herzschlag beschleunigte sich instinktiv. Doch es war nur Meister Lysander, der alte Historiker, der eine flackernde Laterne in der Hand hielt und ihre Entdeckung mit einem Ausdruck des Erkennens betrachtete.</p>
+                        <p>Die Vorbereitungen für die Reise begannen am nächsten Morgen. Kael und Tessa sammelten Proviant, überprüften ihre Waffen und befestigten die alten Karten sorgfältig in einer ledernen Tasche. Die Dorfbewohner beobachteten sie mit gemischten Gefühlen. Manche schüttelten den Kopf, andere flüsterten ängstlich über die düsteren Mythen der Randlande.</p>
 
-                        <p>"Ihr kennt diese Runen?" fragte Lyra überrascht.</p>
+                        <p>Am dritten Tag ihrer Reise hatten sie die vertrauten Wälder von Eldoria hinter sich gelassen und die Grenzen der Nebelberge erreicht. Hier war die Luft anders, schwer und voller unheimlicher Stille. Die Pfade wurden schmaler, und der Nebel verdichtete sich, bis sie kaum die Hand vor Augen sehen konnten.</p>
 
-                        <p>Lysander nickte langsam, seine normalerweise ruhigen Augen zeigten eine Mischung aus Faszination und Sorge. "Ich habe Jahre damit verbracht, Fragmente alter Texte zu übersetzen, Hinweise in zerstörten Manuskripten zu verfolgen. Diese Symbole stammen von denen, die vor den Wächtern kamen – ein Volk, das die ursprünglichen Bewohner von Eldoria waren, bevor die Magie des Lichts das Land überhaupt erreichte."</p>
+                        <p>Plötzlich zerriss ein dumpfes Dröhnen die Stille. Die Erde vibrierte unter ihren Füßen, und Kael zog instinktiv sein Schwert. Vor ihnen öffnete sich die dichte Nebelwand und gab den Blick auf ein leuchtendes, pulsierendes Licht frei. Es schien direkt aus dem Boden zu kommen und warf tanzende Schatten an die Felsen.</p>
 
-                        <p>Er trat näher an die Wand heran und fuhr mit seinem zitternden Finger über die uralten Zeichen. "Sie nannten sich die Schattenweber, und ihre Macht kam nicht aus den Kristallen oder den Sternen, sondern aus der Erde selbst, aus den dunklen Tiefen, wo die Wurzeln der Welt ihre Nahrung finden."</p>
+                        <p>Doch bevor sie einen weiteren Schritt wagen konnten, brach ein donnerndes Knurren aus der Dunkelheit, und zwei glühende Augen fixierten sie. „Kael", hauchte Tessa, „ich glaube, wir sind nicht allein."</p>
 
-                        <p>Lyra spürte eine seltsame Resonanz zwischen ihrem eigenen Amulett und der Wand. Das Kristall an ihrer Brust, das normalerweise in einem warmen, goldenen Licht strahlte, begann in einem dämmrigen Violett zu pulsieren, das dem Schimmer der Runen entsprach.</p>
+                        <p>Das Licht verschlang Kael und Tessa wie eine Welle, die sie in die Tiefe zog. Ihre Körper schienen sich aufzulösen, während sie durch eine wirbelnde Leere aus Farben und Formen stürzten. Kael versuchte, Tessas Hand festzuhalten, doch es fühlte sich an, als glitte sie ihm aus den Fingern.</p>
 
-                        <p>"Was ist mit ihnen geschehen?" fragte sie, obwohl sie befürchtete, die Antwort bereits zu kennen.</p>
+                        <p>Sie standen auf einer Ebene, die von einem unheimlichen, silbernen Licht durchflutet wurde. Der Boden unter ihnen war kalt, glatt wie Glas, aber so klar, dass sie in eine bodenlose Tiefe blicken konnten. Über ihnen schwebte ein Himmel ohne Sterne, nur ein diffuses, pulsierendes Leuchten.</p>
 
-                        <p>"Die offiziellen Geschichten sprechen von einem großen Krieg zwischen Licht und Dunkelheit," erklärte Lysander. "Aber die Wahrheit ist komplexer. Die Schattenweber wurden nicht vernichtet – sie wurden vergessen. Ihre Erinnerungen wurden aus den Köpfen der Menschen gelöscht, ihre Namen aus allen Aufzeichnungen getilgt, ihre Macht versiegelt und tief in der Erde vergraben."</p>
+                        <p>Kael stand wie versteinert, der Griff seines Schwertes schweißnass in seiner Hand. Eine flüsternde Stimme in seinem Kopf schien lauter zu werden: „Wähle." „Das tue ich nicht!", brüllte Kael in die Dunkelheit. „Ich werde sie nicht opfern. Findet eine andere Prüfung!"</p>
 
-                        <p>Eine Welle der Erkenntnis durchfuhr Lyra. "Deshalb ist der Turm hier gebaut worden. Nicht nur als Zentrum der Macht, sondern als Siegel."</p>
-
-                        <p>"Genau," bestätigte der alte Gelehrte. "Der Turm der Ewigkeit ist ein Gefängnis genauso wie ein Palast. Fünftausend Jahre lang hat er die vergessene Macht in den Tiefen gehalten."</p>
-
-                        <p>In diesem Moment erzitterte der Boden unter ihren Füßen, und die Runen an der Wand begannen heller zu leuchten. Lyra hörte etwas – einen Klang, der weniger gehört als gefühlt wurde, wie das ferne Schlagen eines riesigen Herzens.</p>
-
-                        <p>"Es erwacht," murmelte Lysander mit bleichem Gesicht. "Nach all den Jahrtausenden erwacht es wieder."</p>
-
-                        <p>Über ihnen, in den höheren Ebenen des Turms, spürten Theron, Elara und Kael die Störung gleichzeitig. Die Verbindung, die sie als Wächter teilten, übertrug Lyras Angst und Verwirrung direkt zu ihnen. Binnen Minuten waren sie alle in den tiefen Gewölben versammelt und starrten auf die pulsierende Wand.</p>
-
-                        <p>"Was bedeutet das?" fragte Theron und griff instinktiv zu seinem Schwert, obwohl er spürte, dass gegen diese Art von Bedrohung eine Klinge nutzlos war.</p>
-
-                        <p>"Es bedeutet, dass unsere Zeit des Friedens vorbei sein könnte," antwortete Elara mit ihrer charakteristischen elfischen Ruhe, aber ihre Augen verrieten ihre Besorgnis. "Ich kann die Magie spüren, die hier schlummert. Sie ist anders als alles, was wir kennen – älter, wilder, ungezähmt."</p>
-
-                        <p>Kael, dessen Verbindung zu den natürlichen Elementen immer am stärksten gewesen war, hob seine Hand und spürte die Luftströmungen im Gewölbe. "Die Ley-Linien sind gestört," berichtete er. "Die magischen Ströme, die normalerweise gleichmäßig durch den Turm fließen, werden zu diesem Punkt hier hinabgezogen."</p>
-
-                        <p>Meister Lysander rollte eine weitere seiner alten Schriftrollen aus, diese war so zerbrechlich, dass sie bei der geringsten Berührung zu zerfallen drohte. "Es gibt eine Prophezeiung," sagte er mit leiser Stimme. "Eine sehr alte, die ich erst vor kurzem entschlüsselt habe. Sie spricht von einer Zeit, in der das vergessene Volk erwachen würde, wenn das Gleichgewicht der Welt zu stark ins Licht geneigt wäre."</p>
-
-                        <p>"Zu stark ins Licht?" fragte Lyra verwirrt. "Aber wir haben das Gleichgewicht wiederhergestellt. Wir haben Malachar besiegt und die Dunkelheit zurückgedrängt."</p>
-
-                        <p>"Genau das ist das Problem," erklärte Lysander geduldig. "Ihr habt das Gleichgewicht zu vollständig wiederhergestellt. Fünf Jahre des Friedens, fünf Jahre ohne Krieg, ohne Konflikte, ohne die natürlichen Spannungen, die das Leben in Bewegung halten. Die Welt ist zu stark ins Licht geneigt, und das vergessene Volk erwacht, um das Gleichgewicht zu korrigieren."</p>
-
-                        <p>Die vier Wächter tauschten besorgte Blicke aus. War es möglich, dass ihr größter Sieg gleichzeitig ihr größter Fehler gewesen war? Hatten sie in ihrem Bestreben, Frieden und Harmonie zu schaffen, unwissentlich eine noch größere Bedrohung heraufbeschworen?</p>
-
-                        <p>Plötzlich verstummte das pulsierende Geräusch, und die Runen erloschen so abrupt, als wäre eine Kerze ausgeblasen worden. Die Stille, die folgte, war noch beunruhigender als der vorherige Lärm.</p>
-
-                        <p>"Was ist passiert?" flüsterte Theron.</p>
-
-                        <p>Seine Antwort kam in Form eines Boten, der keuchend die Treppen zu den Gewölben hinunterstürmte. Es war einer der königlichen Wächter, sein Gesicht war schweißnass von einem schnellen Ritt.</p>
-
-                        <p>"Wächter!" rief er außer Atem. "Ihr müsst sofort kommen! In allen vier Reichen geschehen seltsame Dinge. Menschen verschwinden ohne eine Spur, und an den Orten, wo sie zuletzt gesehen wurden, wachsen seltsame schwarze Blumen aus dem Boden."</p>
-
-                        <p>Elara wurde blass. "Schwarze Blumen? Beschreibt sie genauer."</p>
-
-                        <p>"Sie sind wie Rosen, aber völlig schwarz, und sie verströmen einen Duft, der... der die Menschen anzieht. Wer zu nahe kommt, scheint in eine Art Trance zu fallen. Und dann..." Er zögerte, als ob er seinen eigenen Worten nicht trauen würde.</p>
-
-                        <p>"Dann was?" drängte Kael.</p>
-
-                        <p>"Dann sinken sie in den Boden ein, als wäre die Erde flüssig geworden. Aber wenn wir nachgraben, finden wir nichts. Keine Körper, keine Knochen, nichts."</p>
-
-                        <p>Lysander blätterte hastig durch seine Pergamente. "Die Schatten-Rosen," murmelte er. "Sie sind die Boten der Schattenweber. Sie markieren die Stellen, wo die Barriere zwischen unserer Welt und ihrer am dünnsten ist."</p>
-
-                        <p>"Wir müssen handeln," sagte Lyra entschlossen. "Jeder von uns muss in sein Reich zurückkehren und versuchen, die Situation unter Kontrolle zu bringen."</p>
-
-                        <p>"Nein," widersprach Theron. "Wenn wir uns aufteilen, werden wir verwundbar. Das vergessene Volk könnte uns einzeln angreifen, bevor wir verstehen, womit wir es zu tun haben."</p>
-
-                        <p>"Aber die Menschen brauchen uns," protestierte Elara. "Wir können nicht hier bleiben, während unsere Untertanen verschwinden."</p>
-
-                        <p>Es war Kael, der eine Lösung vorschlug. "Wir reisen zusammen, aber effizient. Wir beginnen mit dem Reich, das am stärksten betroffen ist, finden ein Muster in den Angriffen, und dann kehren wir hierher zurück, um eine umfassende Strategie zu entwickeln."</p>
-
-                        <p>Der Bote berichtete, dass die meisten Verschwinden in Therons nördlichem Bergland stattgefunden hatten, also machten sich die vier Wächter noch in derselben Nacht auf den Weg zur Festung Himmelsburg. Die Reise, die normalerweise zwei Tage gedauert hätte, absolvierten sie in wenigen Stunden, indem sie ihre magischen Fähigkeiten nutzten, um sich über große Entfernungen zu teleportieren.</p>
-
-                        <p>Was sie in den Bergen fanden, übertraf ihre schlimmsten Befürchtungen. Ganze Dörfer waren wie ausgestorben, nicht durch Gewalt oder Krankheit, sondern durch das mysteriöse Verschwinden ihrer Bewohner. Überall, wo Menschen verschwunden waren, wuchsen die unheimlichen schwarzen Rosen in perfekten Kreisen, und die Luft um sie herum schimmerte mit einer dunklen Energie, die ihre Haut kribbeln ließ.</p>
-
-                        <p>In einem verlassenen Dorf namens Steinbrücke fanden sie den ersten Hinweis auf das, was wirklich geschah. Ein alter Mann, der einzige Überlebende, kauerte in seiner Hütte und weigerte sich, herauszukommen.</p>
-
-                        <p>"Sie sprachen zu uns," flüsterte er, als Lyra sanft mit ihm redete. "Die Blumen sprachen, mit Stimmen wie Honig und Nebel. Sie sagten, dass wir nach Hause kommen sollten, in die warme Erde, wo wir keine Sorgen mehr haben würden."</p>
-
-                        <p>"Warum seid Ihr nicht gegangen?" fragte sie vorsichtig.</p>
-
-                        <p>Der alte Mann hob seine Hand, und sie sah, dass er völlig taub war. "Ich konnte sie nicht hören," erklärte er. "Aber ich sah, was mit den anderen geschah. Sie gingen zu den Blumen, lächelten, als ob sie die schönste Musik der Welt hörten, und dann... dann sank die Erde auf und verschluckte sie."</p>
-
-                        <p>Die Erkenntnis traf die Wächter wie ein Blitz. Die Schattenweber griffen nicht mit Gewalt an – sie lockten ihre Opfer mit einer Form der mentalen Beeinflussung, die nur auf Menschen wirkte, die hören konnten.</p>
-
-                        <p>"Es ist ein emotionaler Angriff," realisierte Elara. "Sie nutzen die Sehnsüchte und Ängste der Menschen gegen sie. Das Versprechen von Frieden, von einem Ort ohne Schmerz oder Sorgen."</p>
-
-                        <p>"Aber warum jetzt?" fragte Theron. "Warum nach fünf Jahren des Friedens?"</p>
-
-                        <p>Die Antwort kam ihnen in der Nacht, als sie in der Festung Himmelsburg kampierten und Wache hielten. Kael, der aufgrund seiner Verbindung zu den natürlichen Zyklen immer am sensitivsten für Veränderungen war, spürte es zuerst.</p>
-
-                        <p>"Das Gleichgewicht," sagte er plötzlich, seine Augen weit aufgerissen vor Erkenntnis. "Es geht nicht nur um Licht und Dunkelheit. Es geht um alle Kräfte – Leben und Tod, Ordnung und Chaos, Erinnerung und Vergessen."</p>
-
-                        <p>"Wir haben eine perfekte Ordnung geschaffen," fügte Lyra hinzu, die Zusammenhänge erkennend. "Keine Kriege, keine großen Katastrophen, keine dramatischen Veränderungen. Aber das Leben braucht Veränderung, es braucht Herausforderungen und Wachstum."</p>
-
-                        <p>"Und weil wir diese natürlichen Schwankungen unterdrückt haben," schloss Theron, "muss das Universum das Gleichgewicht auf andere Weise wiederherstellen."</p>
-
-                        <p>Das vergessene Volk war nicht ihr Feind – es war eine Naturkraft, so notwendig wie der Winter nach dem Sommer oder die Ebbe nach der Flut. Aber das machte sie nicht weniger gefährlich für die Menschen von Eldoria.</p>
-
-                        <p>In dieser Nacht träumte Lyra von einer unterirdischen Stadt, deren Gebäude aus lebendigem Stein wuchsen und deren Straßen von einem sanften, violetten Licht erleuchtet wurden. Sie sah Wesen, die einst Menschen gewesen waren, aber nun mit der Erde selbst verschmolzen waren, ihre Körper halb Fleisch, halb Kristall. Und sie hörte eine Stimme, alt wie die Berge, die zu ihr sprach:</p>
-
-                        <p>"Wächter des Lichts, ihr habt die Welt aus dem Gleichgewicht gebracht. Jetzt müssen wir korrigieren, was ihr verschuldet habt. Schließt euch uns an, und wir werden euch einen Ort zeigen, wo es keine Konflikte gibt, keinen Schmerz, keine Zweifel."</p>
-
-                        <p>Als sie erwachte, wusste Lyra, dass die wahre Prüfung erst begonnen hatte. Es reichte nicht mehr aus, gegen einen einzelnen bösen Feinf zu kämpfen. Jetzt mussten sie einen Weg finden, das natürliche Gleichgewicht der Welt wiederherzustellen, ohne dabei alles zu zerstören, was sie aufgebaut hatten.</p>
-
-                        <p>Das Abenteuer, das vor ihnen lag, würde nicht nur ihre Macht als Wächter testen, sondern auch ihre Weisheit als Herrscher und ihre Menschlichkeit als Individuen. Denn um das vergessene Volk zu verstehen, würden sie tief in die Schatten ihrer eigenen Herzen blicken müssen – und herausfinden, was sie bereit wären zu opfern, um beide Welten zu retten.</p>
+                        <p>Mit einem letzten, entschlossenen Schritt hob er sein Schwert, das nun in reinem Licht leuchtete, und zielte auf das Herz des Wesens. „Dies ist keine Prüfung", rief Kael. „Es ist eine Täuschung. Und ich werde sie durchbrechen!"</p>
                     </div>
                 </div>
 
                 <!-- Band 4: Das Vermächtnis der Wächter -->
                 <div id="de-band4" class="band-content hidden">
                     <div class="book-title">Band 4: Das Vermächtnis der Wächter</div>
-                    <div class="book-cover-container">
-                        <img src="vermaechtnis-waechter.jpg" alt="Cover Das Vermächtnis der Wächter" class="book-cover">
-                    </div>
-                    <div class="amazon-buttons">
-                        <button class="btn btn-amazon-disabled">Amazon - Bald verfügbar</button>
-                    </div>
                     <div class="chapter-title">Kapitel 1: Zerfallende Einheit</div>
                     <div class="text-content" id="de-textContent4">
-                        <p>Der Winter war früh gekommen nach Eldoria, und mit ihm eine Kälte, die tiefer ging als die Haut – eine Kälte, die die Seelen der Menschen erreichte und dort verweilte. In den drei Monaten seit der ersten Begegnung mit dem vergessenen Volk hatten sich die vier Wächter in einem zermürbenden Kampf gegen einen Feind befunden, der sich ihrem Verständnis hartnäckig entzog.</p>
+                        <p>Der Morgen in Eldoria brach düster an. Eine schwere Wolkendecke lag über der Hauptstadt, als ob sie die politischen Spannungen der letzten Tage widerspiegeln wollte. Auf dem Platz vor der Ratskammer hatten sich Bürger und Soldaten versammelt, deren Rufe und Proteste die Luft vibrieren ließen. Es herrschte Unruhe, und die sonst strahlenden Banner Eldorias hingen schwer und verschmutzt im Wind.</p>
 
-                        <p>Lyra stand allein auf der obersten Plattform des Turms der Ewigkeit und blickte über ein Land, das sich dramatisch verändert hatte. Wo einst grüne Wiesen und blühende Felder gelegen hatten, erstreckten sich nun weite Bereiche von dunkler Erde, aus der die unheimlichen schwarzen Rosen in immer größeren Kreisen wuchsen. Es war, als ob die Welt selbst die Farbe verloren hätte.</p>
+                        <p>Kael spürte die Veränderung sofort, als er mit Tessa den Platz betrat. Die Menschen wirkten angespannt, viele schauten sich nervös um, als könnten aus den Schatten neue Gefahren auftauchen. „Die Einheit zerbricht", sagte Tessa leise und betrachtete das Durcheinander. „Wenn die Fraktionen sich weiter gegenseitig bekämpfen, gibt es bald nichts mehr, was wir retten können."</p>
 
-                        <p>Die Einheit der Wächter, die einst ihre größte Stärke gewesen war, begann unter dem Druck der anhaltenden Krise zu bröckeln. Jeder von ihnen hatte eine andere Vorstellung davon, wie mit der Bedrohung umzugehen war, und die Meinungsverschiedenheiten wurden mit jedem Tag heftiger.</p>
+                        <p>Die Gruppe war in einem Nebenraum der Ratskammer zusammengekommen. Der mysteriöse Auftraggeber hatte sich verspätet, und die Stille war unerträglich. Marek saß am Rand, den Blick ausdruckslos, während Aris mit dem Fuß ungeduldig auf den Boden klopfte. „Das hier ist eine Farce", platzte Eryon schließlich heraus. „Wir sollten dort draußen sein und etwas tun, statt hier zu warten."</p>
 
-                        <p>Theron befürwortete den direkten Angriff. "Wir haben Lord Malachar mit Schwert und Magie besiegt," argumentierte er in ihren nächtlichen Beratungen. "Warum sollten wir bei diesem Feind anders vorgehen? Wir müssen in die Tiefen hinabsteigen und die Quelle der Bedrohung zerstören."</p>
+                        <p>Ein hagerer Mann in einer dunklen Robe trat ein, gefolgt von zwei Wachen. Seine Augen leuchteten in einem merkwürdigen Grün, und seine Stimme war ruhig, fast hypnotisch. „Ich danke euch, dass ihr gekommen seid", begann er, ohne sich vorzustellen. „Es gibt eine Dimension jenseits unserer, eng verbunden mit den Wächtern und ihrer Magie. Diese Dimension steht kurz davor, von der Dunkelheit verschlungen zu werden."</p>
 
-                        <p>Elara hingegen war davon überzeugt, dass eine diplomatische Lösung möglich war. "Das vergessene Volk war einst Teil dieser Welt," erinnerte sie die anderen. "Vielleicht können wir einen Pakt schließen, einen Kompromiss finden, der beiden Seiten erlaubt zu existieren."</p>
+                        <p>Nach dem Treffen war die Gruppe in ihr Quartier zurückgekehrt. Die Stimmung war angespannt. Eryon warf seine Ausrüstung in eine Ecke und begann sofort zu packen, während Tessa versuchte, die Details der Mission zu analysieren. „Es ist Wahnsinn, sich in eine unbekannte Dimension zu wagen", meinte Aris. „Wir wissen nicht einmal, ob dieser Mann die Wahrheit sagt."</p>
 
-                        <p>Kael, dessen Verbindung zu den natürlichen Zyklen ihm eine einzigartige Perspektive gab, glaubte, dass sie akzeptieren mussten, was geschah. "Wenn das wirklich eine natürliche Korrektur des Gleichgewichts ist," sagte er, "dann sollten wir vielleicht nicht versuchen, sie zu stoppen. Vielleicht sollten wir stattdessen versuchen, sie zu lenken."</p>
+                        <p>Die Nacht brach herein, und Kael saß allein auf dem Balkon, den Blick auf die sterbende Stadt gerichtet. Die Proteste hatten sich aufgelöst, doch die Stille war beängstigender als der Lärm. Tessa trat zu ihm, ihren Mantel fest um sich gezogen. „Was ist mit Marek?" fragte sie schließlich.</p>
 
-                        <p>Und Lyra? Sie war sich nicht mehr sicher, woran sie glauben sollte. Die Last der Führung, die sie seit Jahren getragen hatte, fühlte sich schwerer an als je zuvor. Jede Entscheidung, die sie trafen, schien unvorhergesehene Konsequenzen zu haben, und die Stimmen der verschwundenen Menschen verfolgten ihre Träume.</p>
+                        <p>Kael ließ den Blick über die Stadt schweifen, die in der Dunkelheit lag. Flackernde Laternen warfen geisterhafte Schatten auf die Straßen. Die einst lebendige Hauptstadt Eldorias hatte sich in einen Ort der Anspannung verwandelt, wo jeder nur darauf wartete, dass der nächste Funke das Pulverfass entzündete.</p>
 
-                        <p>Der Wendepunkt kam an einem besonders dunklen Abend im Dezember, als eine Delegation von Überlebenden aus allen vier Reichen zum Turm kam. Es waren nicht die üblichen höflichen Gesandten oder respektvollen Bittsteeller. Diese Menschen waren verzweifelt, verängstigt und wütend.</p>
+                        <p>Die beiden folgten den Gestalten leise, die in einer Seitengasse verschwanden. Kael und Tessa hielten sich dicht an die Häuserwände, ihre Schritte lautlos auf dem unebenen Pflaster. Hinter einer Ecke blieben sie stehen. Kael spähte vorsichtig hervor und entdeckte zwei Gestalten, die sich über eine Rolle Pergament beugten.</p>
 
-                        <p>"Ihr habt versagt!" schrie eine Frau aus Therons Bergland, deren Gesicht von Tränen gezeichnet war. "Mein Mann, meine Kinder – sie sind alle verschwunden, und ihr könnt nichts tun, um sie zu retten!"</p>
+                        <p>„Das ist eine Karte", flüsterte Tessa. Er konnte Wortfetzen aufschnappen: „... die Wächter ... Dimension ... Portal." Sein Magen zog sich zusammen. Waren sie schon entdeckt worden? Wusste jemand von ihrer Mission?</p>
 
-                        <p>Ein alter Bauer aus Kaels westlichen Inseln schüttelte seine geballte Faust gen Himmel. "Ihr nennt euch Wächter, aber was bewacht ihr? Eure eigene Macht? Eure bequemen Throne?"</p>
-
-                        <p>"Die Menschen verlieren das Vertrauen in uns," stellte Elara später fest, als sich die vier Wächter in der großen Halle versammelt hatten. "Und ehrlich gesagt kann ich es ihnen nicht verübeln. Wir sind mächtiger als jeder normale Mensch, aber gegen diese Bedrohung scheinen wir hilflos zu sein."</p>
-
-                        <p>Theron schlug mit der Faust auf den Tisch. "Dann kämpfen wir härter! Wir nutzen unsere volle Macht, koste es, was es wolle!"</p>
-
-                        <p>"Und was ist, wenn unsere volle Macht das Problem nur verschlimmert?" konterte Kael. "Was ist, wenn jeder Einsatz von Magie die Verzerrung nur verstärkt?"</p>
-
-                        <p>Es war das erste Mal seit Jahren, dass sie sich offen stritten, und die Worte, die ausgesprochen wurden, hinterließen Wunden, die nicht leicht heilen würden.</p>
-
-                        <p>"Vielleicht," sagte Lyra schließlich in die angespannte Stille hinein, "ist das das eigentliche Problem. Wir versuchen immer noch, als Gruppe zu handeln, aber wir sind vier verschiedene Menschen mit vier verschiedenen Naturen geworden. Vielleicht ist es Zeit, dass jeder von uns seinen eigenen Weg geht."</p>
-
-                        <p>Die Worte hingen schwer in der Luft. Es war das Unaussprechliche ausgesprochen worden – die Möglichkeit, dass die legendäre Einheit der Wächter ein Ende haben könnte.</p>
-
-                        <p>Elara war die erste, die sich entschied. "Ich kehre zu meinem Volk zurück," kündigte sie am nächsten Morgen an. "Die Elfen haben andere Wege, mit solchen Problemen umzugehen. Alte Rituale, die vielleicht funktionieren könnten."</p>
-
-                        <p>Theron folgte ihrem Beispiel. "Ich sammle meine Soldaten. Wenn es einen Krieg geben muss, dann soll er geführt werden, wie Kriege geführt werden sollten – mit Mut und Entschlossenheit."</p>
-
-                        <p>Kael zögerte am längsten, aber schließlich nickte auch er. "Ich muss zu den Quellen zurückkehren, zu den ursprünglichen Ley-Linien. Wenn es eine natürliche Lösung gibt, finde ich sie dort."</p>
-
-                        <p>Und so zerstreuten sich die vier Wächter zum ersten Mal seit dem Ende des Krieges gegen Malachar. Jeder kehrte in sein Reich zurück, um die Krise auf seine eigene Weise anzugehen.</p>
-
-                        <p>Lyra blieb allein im Turm der Ewigkeit zurück, umgeben von den summenden Kristallen und dem Gewicht ihrer Verantwortung. Sie verbrachte ihre Tage damit, die alten Texte zu studieren, die Meister Lysander hinterlassen hatte, auf der Suche nach irgendeinem Hinweis, irgendeiner Erkenntnis, die ihr helfen könnte, das Puzzle zu lösen.</p>
-
-                        <p>In den Wochen, die folgten, erfuhr sie durch Boten von den Fortschritten – oder dem Mangel daran – ihrer ehemaligen Kameraden.</p>
-
-                        <p>Therons direkter Ansatz hatte zunächst vielversprechend ausgesehen. Seine Soldaten hatten Expeditionen in die Gebiete geführt, wo die schwarzen Rosen am dichtesten wuchsen, und hatten versucht, sie mit Feuer und Stahl zu vernichten. Aber für jede Blume, die sie zerstörten, wuchsen zwei neue nach, und die Angriffe des vergessenen Volks wurden nur aggressiver.</p>
-
-                        <p>Elaras diplomatische Bemühungen hatten zu einem ersten Kontakt geführt – einer schattenhaften Gestalt, die aus der Erde aufgestiegen war und in einer Sprache gesprochen hatte, die älter war als die elfischen Dialekte. Aber die Verhandlungen waren ins Stocken geraten, als klar wurde, dass das vergessene Volk nicht bereit war, Kompromisse einzugehen. Ihr Ziel war nichts weniger als die vollständige Rückkehr der Welt zu ihrem ursprünglichen Zustand.</p>
-
-                        <p>Kaels Forschungen hatten die beunruhigendste Entdeckung von allen gebracht. Die natürlichen Ley-Linien, die magischen Ströme, die durch die Erde flossen, wurden tatsächlich durch die Anwesenheit der Wächter gestört. Ihre Macht, so nobel ihre Absichten auch waren, war ein fremdes Element in dem natürlichen Gleichgewicht der Welt.</p>
-
-                        <p>Diese Nachricht erreichte Lyra an einem Abend, als der erste Schnee des Winters zu fallen begann. Sie saß in der höchsten Kammer des Turms und las Kaels Bericht bei Kerzenlicht, als die Worte auf der Seite verschwammen und sie die schreckliche Wahrheit erkannte.</p>
-
-                        <p>Sie waren nicht die Lösung für das Problem – sie waren das Problem.</p>
-
-                        <p>Ihre Macht, ihre guten Absichten, ihre Bemühungen, eine perfekte Welt zu schaffen, hatten das natürliche Gleichgewicht so stark gestört, dass das Universum selbst sich erheben musste, um es zu korrigieren. Das vergessene Volk war nicht böse – es war eine Immunreaktion, ein Versuch der Welt, sich selbst zu heilen.</p>
-
-                        <p>In dieser Nacht träumte Lyra wieder von der unterirdischen Stadt, aber diesmal war der Traum anders. Sie sah nicht die friedlichen, in Stein verwandelten Gestalten, die sie zuvor gesehen hatte. Stattdessen sah sie etwas viel Komplexeres – eine alternative Version der Realität, in der die Wächter nie existiert hatten.</p>
-
-                        <p>In dieser Welt gab es Kriege und Konflikte, ja, aber es gab auch Wachstum und Veränderung. Die Menschen kämpften mit ihren Problemen, lernten von ihren Fehlern, und entwickelten sich weiter. Es war eine unvollkommene Welt, aber es war eine lebendige Welt, eine Welt im Gleichgewicht.</p>
-
-                        <p>Als sie erwachte, wusste Lyra, was getan werden musste. Es war die schwerste Entscheidung ihres Lebens, aber es war auch die eindeutigste. Sie sandte Nachrichten an die anderen drei, bat sie, sich ein letztes Mal im Turm zu versammeln.</p>
-
-                        <p>Sie kamen, obwohl die Anspannung zwischen ihnen spürbar war. Die Monate der Trennung hatten ihre Unterschiede noch verstärkt, und für einen Moment fragte sich Lyra, ob sie überhaupt noch dieselben Menschen waren, die einst so harmonisch zusammengearbeitet hatten.</p>
-
-                        <p>"Ich habe eine Lösung gefunden," begann sie ohne Umschweife. "Aber es ist eine Lösung, die von uns ein Opfer verlangt, das größer ist als alles, was wir bisher gebracht haben."</p>
-
-                        <p>Sie erzählte ihnen von ihrer Erkenntnis, von der Rolle, die ihre Macht bei der Entstörung des Gleichgewichts gespielt hatte. Sie sprach von der Notwendigkeit, nicht nur ihre Throne aufzugeben, sondern ihre Macht selbst.</p>
-
-                        <p>"Ihr meint, wir sollen unsere Fähigkeiten aufgeben?" fragte Theron ungläubig. "Uns zu gewöhnlichen Menschen machen?"</p>
-
-                        <p>"Nicht gewöhnlich," korrigierte Lyra. "Menschlich. So, wie wir hätten bleiben sollen."</p>
-
-                        <p>Elara war die erste, die verstand. "Das Ritual der Großen Entsagung," flüsterte sie. "Ich habe davon in den ältesten elfischen Texten gelesen. Ein Weg, die magische Macht freiwillig aufzugeben und sie zurück an die Quelle zu senden."</p>
-
-                        <p>Kael nickte langsam. "Es würde funktionieren. Die Ley-Linien würden sich wieder stabilisieren, und das vergessene Volk würde keinen Grund mehr haben, zu erwachen."</p>
-
-                        <p>"Aber was ist mit den Menschen?" fragte Theron. "Was ist mit all den guten Dingen, die wir getan haben? Wer wird sie beschützen?"</p>
-
-                        <p>"Sie werden sich selbst beschützen," antwortete Lyra sanft. "So wie sie es vor uns getan haben, und so wie sie es nach uns tun werden. Wir haben ihnen fünf Jahre des Friedens gegeben, Zeit zu wachsen und zu lernen. Jetzt müssen wir ihnen vertrauen, dass sie dieses Wissen nutzen können."</p>
-
-                        <p>Die Entscheidung war nicht leicht, und sie wurde nicht schnell getroffen. Sie sprachen die ganze Nacht hindurch, diskutierten jede Implikation, jede mögliche Alternative. Aber am Ende kamen sie zu dem gleichen Schluss, zu dem Lyra bereits gelangt war.</p>
-
-                        <p>Das Ritual der Großen Entsagung würde bei Sonnenaufgang stattfinden, auf der höchsten Plattform des Turms, dort wo die magischen Energien am stärksten flossen. Es war ein komplexes und gefährliches Ritual, das nur funktionieren würde, wenn alle vier Wächter es freiwillig und gleichzeitig durchführten.</p>
-
-                        <p>Als die erste Morgendämmerung am Horizont erschien, standen sie in einem Kreis um den zentralen Kristall des Turms. Jeder von ihnen hielt ein Symbol seiner Macht – Lyras Amulett, Therons Schwert, Elaras Elfenkrone, Kaels Sturmstab.</p>
-
-                        <p>"Sind wir bereit?" fragte Lyra, ihre Stimme kaum mehr als ein Flüstern.</p>
-
-                        <p>Einer nach dem anderen nickten sie. Und dann, als die Sonne über den Rand der Welt kletterte und das Land in goldenes Licht tauchte, sprachen sie die uralten Worte der Entsagung.</p>
-
-                        <p>Die Macht verließ sie nicht schmerzhaft oder gewaltsam. Sie floss aus ihnen heraus wie Wasser aus einem zerbrochenen Gefäß, warm und beruhigend. Lyra spürte, wie Jahre der Spannung von ihren Schultern fielen, wie das Gewicht der Verantwortung für ein ganzes Königreich von ihrem Herzen genommen wurde.</p>
-
-                        <p>Als das Ritual abgeschlossen war, standen vier gewöhnliche Menschen auf der Plattform – müde, aber seltsam befreit. Unter ihnen begann sich der Turm zu verändern. Die Kristalle verloren ihren magischen Glanz und wurden zu schönem, aber gewöhnlichem Glas. Die komplexen magischen Mechanismen erstarrten und verwandelten sich in kunstvolle, aber funktionslose Dekoration.</p>
-
-                        <p>In der Ferne hörten sie es – ein leises Seufzen, das über das ganze Land zu gehen schien. Die schwarzen Rosen begannen zu verwelken, ihre dunklen Blütenblätter fielen ab und verwandelten sich zu fruchtbarer Erde. Die verschlungenen Menschen kehrten nicht zurück – das war ein Preis, der nicht rückgängig gemacht werden konnte – aber das vergessene Volk zog sich in seine tiefen Höhlen zurück, zufrieden, dass das Gleichgewicht wiederhergestellt war.</p>
-
-                        <p>In den Monaten, die folgten, lernten die ehemaligen Wächter, wie es war, wieder menschlich zu sein. Lyra wurde eine einfache Lehrerin, die ihr Wissen über Geschichte und alte Sprachen an die nächste Generation weitergab. Theron kehrte zu seinen Soldaten zurück, aber als Berater, nicht als übernatürlicher Kommandant. Elara wurde eine Botschafterin zwischen den Elfen und den Menschen, und Kael ein Seefahrer, der die Winde und Ströme auf natürliche Weise studierte.</p>
-
-                        <p>Eldoria durchlebte eine Zeit der Anpassung. Ohne die Wächter mussten die Menschen wieder lernen, sich auf sich selbst zu verlassen. Es gab Herausforderungen und Konflikte, aber es gab auch Innovation und Wachstum. Das Land fand zu einem neuen Gleichgewicht, einem, das nachhaltiger war als das, was die Wächter mit ihrer Macht erzwingen konnten.</p>
-
-                        <p>Jahre später, als Lyra alt und grau geworden war, saß sie oft an sommerlichen Abenden vor ihrer kleinen Hütte und blickte zum Horizont, wo der ehemalige Turm der Ewigkeit als gewöhnliches, aber schönes Gebäude in der Sonne glänzte. Manchmal besuchten sie ihre alten Kameraden, und sie sprachen über die Zeit, als sie die Welt regierten.</p>
-
-                        <p>Sie bereuten ihre Entscheidung nie. Sie hatten gelernt, dass wahre Größe nicht darin lag, Macht zu besitzen, sondern zu wissen, wann man sie loslassen musste. Ihr Vermächtnis war nicht ein Königreich, das sie regiert hatten, sondern eine Welt, die sie frei gelassen hatten.</p>
-
-                        <p>Und in den tiefen Höhlen unter Eldoria schlief das vergessene Volk wieder seinen langen Schlaf, bereit zu erwachen, falls das Gleichgewicht wieder gestört würde. Aber das war eine Geschichte für eine andere Zeit, für andere Helden, die noch geboren werden mussten.</p>
-
-                        <p>Das Vermächtnis der Wächter war vollständig – nicht in ihrer Macht, sondern in ihrer Weisheit, diese Macht aufzugeben, als die Zeit gekommen war.</p>
+                        <p>Die Stille in dem Raum war fast unerträglich, und die Luft fühlte sich schwer an, als Kael und Tessa sich noch immer vor dem sich öffnenden Portal hielten. Mit einem letzten Blick in die Dunkelheit wusste Tessa, dass sie auf dem richtigen Weg war. Das Abenteuer, das sie nun vor sich hatte, war größer und gefährlicher, als sie sich je vorgestellt hatte. Doch Eldoria brauchte sie.</p>
                     </div>
                 </div>
             </div>
@@ -772,4 +444,254 @@
             <div id="en-content" class="language-content hidden">
                 <!-- Band 1: The Prophecy of Eldoria -->
                 <div id="en-band1" class="band-content">
-                    <div class="book-
+                    <div class="book-title">Band 1: The Prophecy of Eldoria</div>
+                    <div class="chapter-title">Chapter 1: The Awakening of Ancient Power</div>
+                    <div class="text-content" id="en-textContent1">
+                        <p>The first rays of dawn pierced through the thick mist that lay over the forests of Eldoria. Deep in the mysterious depths of the Crystal Forest, where ancient trees spread their branches like protective hands over long-forgotten secrets, something was happening that would change the fate of the kingdom forever.</p>
+
+                        <p>Lyra Starblade awakened with a strange feeling of unease. Something was different about this morning. The birds were not singing their usual melodies, and even the wind seemed to hold its breath. She rose from her simple straw bed in the small hut at the edge of the village of Moonlight and stepped outside.</p>
+
+                        <p>What she saw made her blood freeze in her veins. On the horizon, where the mountains of Dragonfang touched the sky, a faint, violet light pulsed. It was not natural light – it was magic, and a kind of magic that had not been seen for a thousand years.</p>
+
+                        <p>"The prophecy," whispered a voice behind her. Lyra spun around and saw her grandfather, the old sage Aldric, who had guarded the stories and legends of Eldoria all his life. His normally clear blue eyes were clouded with worry.</p>
+
+                        <p>"Grandfather, what do you mean by prophecy?" asked Lyra, although deep in her heart she already began to sense the answer. Since her childhood, Aldric had told her stories of the time when mighty guardians protected the land and the forces of light and darkness stood in eternal balance.</p>
+                    </div>
+                </div>
+
+                <!-- Band 2: The Beginning of Peace -->
+                <div id="en-band2" class="band-content hidden">
+                    <div class="book-title">Band 2: The Beginning of Peace</div>
+                    <div class="chapter-title">Chapter 1: The Return to Eldoria</div>
+                    <div class="text-content" id="en-textContent2">
+                        <p>A year had passed since the great victory over Lord Malachar, and the wounds that the war had inflicted on the land of Eldoria were slowly healing. The four guardians had fulfilled their mission – the balance between light and darkness had been restored, and the Tower of Eternity shone again in its original splendor over the kingdom.</p>
+
+                        <p>Lyra Starblade stood on the highest balcony of the tower and looked over the vast lands that stretched to the horizon. The landscape had changed – where once devastated areas and withered forests had lain, meadows and trees were now green again. The magic of light had renewed the land and restored its natural beauty.</p>
+
+                        <p>But despite the outward peace, Lyra felt an unrest in her heart. The power that had awakened in her during the battle against Malachar had not disappeared. It had grown stronger, had developed and changed. Sometimes, in quiet moments like this, she could hear the voices of the old guardians who had lived centuries ago and whose spirits now rested in the crystals of the tower.</p>
+
+                        <p>"You're brooding again," said a familiar voice behind her. Theron Dragonheart stepped out of the shadow of the pillars, his imposing frame still impressive, even though the traces of war were clearly visible on his face. A new scar ran from his left temple to his chin – a memento of the final battle against Malachar's shadow dragons.</p>
+
+                        <p>"I'm thinking about the future," replied Lyra without turning around. "About what comes next. We won the war, but what does that mean for us? For the people of Eldoria?"</p>
+                    </div>
+                </div>
+
+                <!-- Band 3: The Shadows of the Forgotten -->
+                <div id="en-band3" class="band-content hidden">
+                    <div class="book-title">Band 3: The Shadows of the Forgotten</div>
+                    <div class="chapter-title">Chapter 1: The Spark of Adventure</div>
+                    <div class="text-content" id="en-textContent3">
+                        <p>Five years of peace lay behind the four realms of Eldoria. The rule of the guardians had brought the land a stability and prosperity that it had not experienced for centuries. But beneath the calm surface, something unexpected was stirring – a power so ancient that even the legends of the first guardians mentioned it only in whispers.</p>
+
+                        <p>In the deepest vaults beneath the Tower of Eternity, where the foundations met the living rock, Lyra discovered a secret that would shake her entire understanding of Eldoria's history. She had gone there to study the old crystal formations that served as an energy source for the tower, when she encountered a wall that was different from all others.</p>
+
+                        <p>This wall did not shimmer with the familiar bluish aura of the tower crystals. Instead, it pulsed in a deep, blackish violet that strangely attracted and repelled her eyes at the same time. Runes were etched into the stone, but they were not the familiar script of the old guardians. These symbols were older, more primitive, and they seemed to speak of a power that had existed before the time of light.</p>
+
+                        <p>"The Forgotten," whispered a voice behind her, and Lyra spun around, her heartbeat instinctively accelerating. But it was only Master Lysander, the old historian, who held a flickering lantern in his hand and regarded her discovery with an expression of recognition.</p>
+
+                        <p>"You know these runes?" asked Lyra in surprise.</p>
+                    </div>
+                </div>
+
+                <!-- Band 4: The Legacy of the Guardians -->
+                <div id="en-band4" class="band-content hidden">
+                    <div class="book-title">Band 4: The Legacy of the Guardians</div>
+                    <div class="chapter-title">Chapter 1: Crumbling Unity</div>
+                    <div class="text-content" id="en-textContent4">
+                        <p>Winter had come early to Eldoria, and with it a coldness that went deeper than skin – a coldness that reached the souls of people and lingered there. In the three months since the first encounter with the forgotten people, the four guardians had found themselves in a grinding battle against an enemy that stubbornly eluded their understanding.</p>
+
+                        <p>Lyra stood alone on the highest platform of the Tower of Eternity and looked over a land that had changed dramatically. Where once green meadows and blooming fields had lain, now stretched vast areas of dark earth from which the eerie black roses grew in ever-larger circles. It was as if the world itself had lost its color.</p>
+
+                        <p>The unity of the guardians, which had once been their greatest strength, began to crumble under the pressure of the ongoing crisis. Each of them had a different idea of how to deal with the threat, and the disagreements became fiercer with each passing day.</p>
+
+                        <p>Theron advocated direct attack. "We defeated Lord Malachar with sword and magic," he argued in their nightly councils. "Why should we proceed differently with this enemy? We must descend into the depths and destroy the source of the threat."</p>
+
+                        <p>Elara, on the other hand, was convinced that a diplomatic solution was possible. "The forgotten people were once part of this world," she reminded the others. "Perhaps we can make a pact, find a compromise that allows both sides to exist."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSpeech = null;
+        let currentBand = 1;
+        let currentLanguage = 'de';
+        let currentWordIndex = 0;
+        let allBandWords = {}; // Speichert Wörter für alle Bände und Sprachen
+        let isReading = false;
+        let lastHighlightedWord = null;
+
+        // Initialisiere alle Bände beim Seitenstart
+        function initializeAllBands() {
+            ['de', 'en'].forEach(lang => {
+                allBandWords[lang] = {};
+                for (let bandNumber = 1; bandNumber <= 4; bandNumber++) {
+                    const bandContent = document.querySelector(`#${lang}-band${bandNumber} .text-content`);
+                    if (bandContent && !bandContent.querySelector('.word')) {
+                        const paragraphs = bandContent.querySelectorAll('p');
+                        let wordCounter = 0;
+                        let bandWords = [];
+
+                        paragraphs.forEach((paragraph) => {
+                            const paragraphText = paragraph.textContent;
+                            const paragraphWords = paragraphText.split(/\s+/).filter(word => word.length > 0);
+                            
+                            let paragraphHTML = '';
+                            paragraphWords.forEach((word) => {
+                                paragraphHTML += `<span class="word" data-word-index="${wordCounter}" onclick="startFromWord(${wordCounter})">${word}</span> `;
+                                bandWords.push(word);
+                                wordCounter++;
+                            });
+                            
+                            paragraph.innerHTML = paragraphHTML;
+                        });
+
+                        // Speichere Wörter für diesen Band und Sprache
+                        allBandWords[lang][bandNumber] = bandWords;
+                    }
+                }
+            });
+        }
+
+        function switchLanguage(lang) {
+            // Stoppe aktuelles Vorlesen
+            stopReading();
+            
+            // Verstecke alle Sprachen
+            document.querySelectorAll('.language-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            
+            // Zeige ausgewählte Sprache
+            document.getElementById(lang + '-content').classList.remove('hidden');
+            
+            // Update Sprachbuttons
+            document.querySelectorAll('.btn-lang').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            currentLanguage = lang;
+            currentWordIndex = 0;
+            clearHighlight();
+            
+            showBand(currentBand); // Zeige aktuellen Band in neuer Sprache
+        }
+
+        function showBand(bandNumber) {
+            // Stoppe aktuelles Vorlesen
+            stopReading();
+            
+            // Verstecke alle Bände in aktueller Sprache
+            for (let i = 1; i <= 4; i++) {
+                const bandElement = document.getElementById(`${currentLanguage}-band${i}`);
+                if (bandElement) {
+                    bandElement.classList.add('hidden');
+                }
+            }
+            
+            // Update Band-Buttons
+            document.querySelectorAll('.btn-band').forEach((btn, index) => {
+                btn.classList.remove('active');
+                if (index === bandNumber - 1) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // Zeige ausgewählten Band
+            const targetBand = document.getElementById(`${currentLanguage}-band${bandNumber}`);
+            if (targetBand) {
+                targetBand.classList.remove('hidden');
+            }
+            
+            currentBand = bandNumber;
+            currentWordIndex = 0;
+            clearHighlight();
+        }
+
+        function startReading() {
+            currentWordIndex = 0;
+            clearHighlight();
+            continueReading();
+        }
+
+        function continueReading() {
+            if (currentSpeech) {
+                currentSpeech.cancel();
+            }
+
+            const currentWords = allBandWords[currentLanguage] && allBandWords[currentLanguage][currentBand];
+            if (currentWords && currentWords.length > 0) {
+                // Text ab der aktuellen Position
+                const remainingText = currentWords.slice(currentWordIndex).join(' ');
+                
+                currentSpeech = new SpeechSynthesisUtterance(remainingText);
+                currentSpeech.rate = 0.9;
+                currentSpeech.lang = currentLanguage === 'de' ? 'de-DE' : 'en-US';
+                
+                let wordCount = currentWordIndex;
+                currentSpeech.onboundary = function(event) {
+                    if (event.name === 'word') {
+                        highlightCurrentWord(wordCount);
+                        wordCount++;
+                        currentWordIndex = wordCount;
+                    }
+                };
+                
+                currentSpeech.onend = function() {
+                    isReading = false;
+                };
+                
+                isReading = true;
+                speechSynthesis.speak(currentSpeech);
+            }
+        }
+
+        function startFromWord(wordIndex) {
+            currentWordIndex = wordIndex;
+            clearHighlight();
+            continueReading();
+        }
+
+        function highlightCurrentWord(wordIndex) {
+            // Entferne vorherige Highlights
+            if (lastHighlightedWord) {
+                lastHighlightedWord.classList.remove('word-highlight');
+            }
+            
+            // Highlights das entsprechende Wort im aktuellen Band und Sprache
+            const wordSpan = document.querySelector(`#${currentLanguage}-band${currentBand} [data-word-index="${wordIndex}"]`);
+            if (wordSpan) {
+                wordSpan.classList.add('word-highlight');
+                lastHighlightedWord = wordSpan;
+            }
+        }
+
+        function clearHighlight() {
+            document.querySelectorAll('.word-highlight').forEach(el => {
+                el.classList.remove('word-highlight');
+            });
+            lastHighlightedWord = null;
+        }
+
+        function stopReading() {
+            if (currentSpeech) {
+                speechSynthesis.cancel();
+                currentSpeech = null;
+                isReading = false;
+            }
+            
+            // Zurück zum Anfang + alle Markierungen löschen
+            currentWordIndex = 0;
+            clearHighlight();
+        }
+
+        // Initialisierung beim Seitenstart
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeAllBands(); // Initialisiere ALLE Bände und Sprachen
+            showBand(1); // Zeige Band 1
+        });
+    </script>
+</body>
+</html>
