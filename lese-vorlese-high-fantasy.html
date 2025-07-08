@@ -1,1 +1,697 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>High Fantasy - Lesen & Vorlesen-System - Eldorias Vermächtnis - Helmut Wegners Wortwelten</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.8;
+            color: #f0f0f0;
+            background: linear-gradient(135deg, #1a0033 0%, #330066 25%, #4d0099 50%, #6600cc 75%, #7733ff 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(0,0,0,0.8);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            overflow: hidden;
+            border: 2px solid rgba(255,215,0,0.3);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1a0033, #4d0099);
+            color: #ffd700;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            border-bottom: 3px solid #ffd700;
+        }
+
+        .back-button-header {
+            position: absolute;
+            top: 5px;
+            left: 15px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .back-button {
+            background: rgba(255, 215, 0, 0.2);
+            color: #ffd700;
+            padding: 8px 16px;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 20px;
+            font-size: 0.9em;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .back-button:hover {
+            background: rgba(255, 215, 0, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .versuchsreihe-badge {
+            background: #ffd700;
+            color: #1a0033;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.9em;
+            font-weight: bold;
+            margin-top: 10px;
+            display: inline-block;
+        }
+
+        .controls {
+            background: rgba(255,215,0,0.1);
+            padding: 25px;
+            border-bottom: 3px solid #ffd700;
+            position: -webkit-sticky;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .control-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 120px;
+        }
+
+        .btn-play {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            color: white;
+        }
+
+        .btn-stop {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+        }
+
+        .btn-continue {
+            background: linear-gradient(135deg, #ffd700, #ffb300);
+            color: #1a0033;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .band-navigation, .language-navigation {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+
+        .btn-band, .btn-lang {
+            background: linear-gradient(135deg, #1a0033, #4d0099);
+            color: #ffd700;
+            padding: 10px 20px;
+            border: 2px solid transparent;
+        }
+
+        .btn-band.active, .btn-lang.active {
+            border-color: #ffd700;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+
+        .amazon-navigation {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .btn-amazon {
+            background: linear-gradient(135deg, #ff6b35, #ff8c42);
+            color: white;
+            padding: 6px 12px;
+            border: none;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 100px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-amazon:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 3px 10px rgba(255, 107, 53, 0.3);
+        }
+
+        .btn-amazon-disabled {
+            background: #666666;
+            color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        .btn-amazon-disabled:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
+        .content {
+            padding: 30px;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .book-title {
+            color: #ffd700;
+            font-size: 2em;
+            margin-bottom: 10px;
+            text-align: center;
+            border-bottom: 2px solid #ffd700;
+            padding-bottom: 15px;
+        }
+
+        .chapter-title {
+            color: #ffd700;
+            font-size: 1.5em;
+            margin: 30px 0 20px 0;
+            text-align: center;
+            font-style: italic;
+        }
+
+        .text-content {
+            text-align: justify;
+            margin-bottom: 30px;
+        }
+
+        .word {
+            cursor: pointer;
+            transition: all 0.2s ease;
+            padding: 1px 2px;
+            border-radius: 3px;
+        }
+
+        .word:hover {
+            background-color: rgba(255,215,0,0.2);
+        }
+
+        .word-highlight {
+            background-color: #ffd700;
+            color: #1a0033;
+            padding: 2px 4px;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(255, 215, 0, 0.5);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 600px) {
+            .control-buttons, .band-navigation, .language-navigation, .amazon-navigation {
+                gap: 8px;
+            }
+
+            .btn {
+                min-width: 100px;
+                font-size: 0.9em;
+                padding: 10px 16px;
+            }
+
+            .btn-band {
+                min-width: 80px;
+                padding: 6px 12px;
+            }
+
+            .btn-amazon {
+                min-width: 80px;
+                padding: 4px 8px;
+            }
+
+            .content {
+                padding: 20px;
+                font-size: 1em;
+            }
+
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .back-button-header {
+                position: relative;
+                top: 0;
+                left: 0;
+                margin-bottom: 15px;
+                flex-direction: column;
+                gap: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="back-button-header">
+                <a href="index.html" class="back-button">← Zurück zur Startseite</a>
+                <a href="high-fantasy.html" class="back-button">← Zurück zu High Fantasy</a>
+            </div>
+            <h1>High Fantasy</h1>
+            <p>Lesen & Vorlesen-System - Eldorias Vermächtnis</p>
+            <div class="versuchsreihe-badge">LESE & VORLESE-SYSTEM</div>
+        </div>
+
+        <div class="controls">
+            <div class="control-buttons">
+                <button class="btn btn-play" onclick="startReading()">🔴 Vorlesen</button>
+                <button class="btn btn-continue" onclick="continueReading()">▶️ Weiterlesen</button>
+                <button class="btn btn-stop" onclick="stopReading()">⏹️ Stop</button>
+            </div>
+
+            <div class="language-navigation">
+                <button class="btn btn-lang active" onclick="switchLanguage('de')">🇩🇪 Deutsch</button>
+                <button class="btn btn-lang" onclick="switchLanguage('en')">🇬🇧 English</button>
+            </div>
+
+            <div class="band-navigation">
+                <button class="btn btn-band active" onclick="showBand(1)">Band 1</button>
+                <button class="btn btn-band" onclick="showBand(2)">Band 2</button>
+                <button class="btn btn-band" onclick="showBand(3)">Band 3</button>
+                <button class="btn btn-band" onclick="showBand(4)">Band 4</button>
+            </div>
+
+            <div class="amazon-navigation">
+                <button class="btn-amazon btn-amazon-disabled">Amazon Band 1 - In Vorbereitung</button>
+                <button class="btn-amazon btn-amazon-disabled">Amazon Band 2 - In Vorbereitung</button>
+                <button class="btn-amazon btn-amazon-disabled">Amazon Band 3 - In Vorbereitung</button>
+                <button class="btn-amazon btn-amazon-disabled">Amazon Band 4 - In Vorbereitung</button>
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- DEUTSCHE VERSIONEN -->
+            <div id="de-content" class="language-content">
+                <!-- Band 1: Die Prophezeiung von Eldoria -->
+                <div id="de-band1" class="band-content">
+                    <div class="book-title">Band 1: Die Prophezeiung von Eldoria</div>
+                    <div class="chapter-title">Kapitel 1: Das Erwachen der uralten Macht</div>
+                    <div class="text-content" id="de-textContent1">
+                        <p>Das Königreich Eldoria erstreckte sich über weite Ebenen, dichte Wälder und schroffe Bergketten, eingerahmt von einem schimmernden Ozean im Westen. Im Herzen des Landes thronte das Königshaus: ein gewaltiges Bauwerk aus weißem Stein, dass die Jahrhunderte überdauert hatte. Die Mauern trugen Narben von Belagerungen und Kriegen, ein stiller Zeuge der turbulenten Geschichte Eldorias. Große Türme ragten gen Himmel, gekrönt von Flaggen, die das Wappen des Königreichs trugen -- ein goldener Phönix, umgeben von einer Flamme, Symbol für Wiedergeburt und Unsterblichkeit.</p>
+
+                        <p>König Aldemar saß auf seinem steinernen Thron in der großen Halle, die von hohen Fenstern durchflutet wurde. Doch das Licht der Sonne konnte die Schatten auf seinem Gesicht nicht vertreiben. Seine Augen waren von Sorgen umwölkt, und seine Schultern trugen die Last nicht nur des Königreichs, sondern auch der Prophezeiung, die über seine Familie hing.</p>
+
+                        <p>Sein treuer Berater Orin stand neben ihm, ein Mann mit grauem Haar und wachem Blick, der stets die Ruhe bewahrte, auch wenn die Welt, um ihn zu zerbrechen drohte. „Mein König", begann Orin, als er bemerkte, wie Aldemar gedankenverloren auf das Wandgemälde starrte, das die Entstehung Eldorias darstellte. „Ihr dürft Euch von diesen Zeichen nicht überwältigen lassen. Das Volk benötigt Eure Stärke."</p>
+
+                        <p>„Und was, wenn meine Stärke nicht ausreicht?" Aldemar erhob sich langsam. Seine Stimme war tief und schwer, wie ein donnerndes Echo in der Halle. „Die Vorzeichen sind eindeutig, Orin. Der Nebel, die Berichte über die Kreaturen in den Wäldern, die Unruhen im Volk -- all das deutet darauf hin, dass die Prophezeiung wahr wird."</p>
+
+                        <p>Orin legte eine Hand auf den Arm des Königs. „Es gab schon immer Zeiten der Dunkelheit, und jedes Mal hat die Blutlinie des Phönix überlebt. Wir müssen die Prophezeiung entschlüsseln, das ist wahr, aber nicht in Verzweiflung handeln."</p>
+
+                        <p>In den Straßen der Hauptstadt Eldorias, den gepflasterten Gassen, die vom Königshaus hinabführten, herrschte ein geschäftiges Treiben. Händler priesen lautstark ihre Waren an, während Kinder lachend zwischen den Marktständen umherliefen. Doch hinter der Fassade des Alltags schlummerte eine wachsende Unruhe. Die alten Weisen flüsterten von den Geschichten der Prophezeiung, einer Weissagung, die das Ende oder die Rettung Eldorias voraussagte.</p>
+
+                        <p>Tief unter dem Königshaus, verborgen hinter schweren Eisentüren, lag die königliche Bibliothek, ein Labyrinth aus Regalen, die sich ins Dunkel erstreckten. In ihrem Zentrum stand eine goldene Truhe, geschützt von uralten Runen und Zaubern. Darin lag das Buch der Weissagung. Aldemar, Orin und der Weise Eldrin standen vor der Truhe, während die flackernden Fackeln die uralten Runen erhellten.</p>
+
+                        <p>„Mein König, sobald wir das Buch öffnen, gibt es kein Zurück", warnte Eldrin, ohne den Blick von der Truhe zu lösen. „Das weiß ich", antwortete Aldemar entschlossen. „Aber die Zeit drängt. Wir müssen wissen, was die Prophezeiung verlangt." Mit einem letzten Wort öffnete sich die Truhe, und Eldrin zog vorsichtig ein in Leder gebundenes Buch heraus. Die Seiten wirkten brüchig, doch die Schrift darauf pulsierte, als wäre sie lebendig.</p>
+
+                        <p>Bevor Eldrin weitersprechen konnte, ertönte ein ohrenbetäubendes Krachen aus der Ferne. Die Erde erbebte, und ein unnatürlicher Wind fegte durch die Katakomben. Aldemar zog sein Schwert, während Orin sich schützend vor den König stellte. An der Oberfläche strömten die Menschen aus ihren Häusern. Der Himmel über Eldoria hatte sich verdunkelt, und ein riesiger Riss zog sich wie eine offene Wunde durch die Wolken.</p>
+
+                        <p>Ein Krieger, der an der Grenze des Königreichs stationiert war, ritt in die Stadt. Sein Gesicht war aschfahl, und seine Stimme bebte, als er ausrief: „Die Kreaturen aus den Geschichten sind wahr! Sie kommen!" Das Königreich Eldoria stand vor seiner dunkelsten Stunde, und die Prophezeiung hatte begonnen, ihre Schatten auf das Land zu werfen.</p>
+                    </div>
+                </div>
+
+                <!-- Band 2: Der Beginn des Friedens -->
+                <div id="de-band2" class="band-content hidden">
+                    <div class="book-title">Band 2: Der Beginn des Friedens</div>
+                    <div class="chapter-title">Kapitel 1: Die Rückkehr nach Eldoria</div>
+                    <div class="text-content" id="de-textContent2">
+                        <p>Die Dämmerung tauchte die Türme von Eldoria in warmes Gold, als Eryon und Aris auf den gepflasterten Straßen der Stadt einritten. Die Menschen drängten sich dicht an den Straßenrändern, jubelnd und lachend. Fahnen flatterten im Wind, und der süße Duft von Blumen, die in Hülle und Fülle auf die Helden herabregneten, vermischte sich mit dem erdigen Aroma des Pflasters, das die Hitze des Tages gespeichert hatte.</p>
+
+                        <p>Eryon saß auf einem majestätischen Rappen, seine goldene Rüstung funkelte im Licht. Ein Lächeln spielte auf seinen Lippen, doch in seinen Augen lag ein Schatten, den die Menge nicht wahrnahm. Neben ihm ritt Aris, ihre Hand fest um den Griff ihres Schwertes geschlossen. Ihre prüfenden Blicke glitten durch die Menge, immer auf der Hut.</p>
+
+                        <p>Im Großen Saal, wo die Ratsführer der Völker Eldorias versammelt waren, empfing eine kühle, fast greifbare Spannung die Ankömmlinge. Der Elfenfürst, hochgewachsen und mit funkelnden Augen, begrüßte Eryon mit knapper Höflichkeit. Die Zwerge hingegen, gedrungen und schwer gerüstet, grummelten leise vor sich hin, als die Elfen ihre Meinungen äußerten.</p>
+
+                        <p>„Unsere Schmiede haben das Beste gegeben, um diese Schlacht zu gewinnen", erklärte ein Zwergenältester, doch seine Stimme klang trotzig. „Und doch habt ihr euch erst zu spät dem Kampf angeschlossen", erwiderte eine Elfe mit scharfer Zunge. Eryon hob die Hand, um Einhalt zu gebieten. „Heute feiern wir den Frieden. Lasst uns nicht den Keim von Zwietracht säen, wo Einheit nötig ist."</p>
+
+                        <p>Während der Feierlichkeiten im Palast wandelten Aris' Gedanken in dunkleren Gefilden. Ihr scharfer Blick glitt über die Menge, bis sie an einer verhüllten Gestalt hängen blieb, die abseits stand. Der Fremde schien sich kaum zu bewegen, doch als Aris näher trat, löste er sich in der Menge auf.</p>
+
+                        <p>Später, als die Feierlichkeiten verstummten und nur noch das leise Flackern der Fackeln die Hallen erleuchtete, zog sich Eryon in den Thronsaal zurück. Seine Hände ruhten schwer auf den Armlehnen seines Thrones, während seine Gedanken rastlos durch die Erinnerungen an die Schlacht wanderten. „Es fühlt sich nicht wie ein Sieg an", murmelte er.</p>
+
+                        <p>Aris, die stumm neben ihm stand, legte ihm eine Hand auf die Schulter. „Der Frieden ist nur ein Anfang, Eryon. Die wahre Prüfung liegt noch vor uns."</p>
+
+                        <p>Tief in den Schatten von Eldorias Bergen versammelten sich währenddessen düstere Gestalten in einer Höhle, ihre Gesichter von Kapuzen verborgen. Der verhüllte Fremde sprach leise, aber eindringlich: „Die Dunkelheit mag geschlagen sein, doch sie ist nicht besiegt. Eldoria wird fallen -- nicht durch Krieg, sondern durch den Samen des Misstrauens."</p>
+                    </div>
+                </div>
+
+                <!-- Band 3: Die Schatten des Vergessenen -->
+                <div id="de-band3" class="band-content hidden">
+                    <div class="book-title">Band 3: Die Schatten des Vergessenen</div>
+                    <div class="chapter-title">Kapitel 1: Der Funke des Abenteuers</div>
+                    <div class="text-content" id="de-textContent3">
+                        <p>Die Morgensonne tauchte die weiten Ebenen von Eldoria in ein goldenes Licht, das von den sanften Hügeln zurückstrahlte. Kael saß am Rand der Klippe, die über das Tal von Arien ragte, und ließ den Blick über die friedliche Landschaft schweifen. Die Narben der vergangenen Kriege schienen endlich zu verblassen -- die Felder trugen wieder reiche Ernten, und die Städte erblühten in neuem Glanz. Doch in Kaels Herzen regte sich Unruhe, ein flüchtiges Verlangen nach etwas Größerem, das er selbst nicht benennen konnte.</p>
+
+                        <p>„Du denkst wieder zu viel nach", rief Tessa hinter ihm, ihre Stimme wie ein fröhlicher Glockenklang. Sie balancierte einen Korb voller Karten und Schriftrollen in den Händen und ließ sich neben ihm nieder. „Du weißt, was das bedeutet." Kael lachte leise und schüttelte den Kopf. „Was bedeutet es denn, allwissende Tessa?"</p>
+
+                        <p>„Es bedeutet, dass du dich nach einem Abenteuer sehnst. Und rate mal -- ich habe genau das Richtige für uns!" Sie legte die Karten vor sich aus, die Ecken sorgfältig mit Steinen beschwert, damit der Wind sie nicht davontrug. Eine Karte stach sofort ins Auge: Ihre Linien waren grob gezeichnet, die Details verschwommen, doch eine rote Markierung in einer abgelegenen Ecke fiel auf.</p>
+
+                        <p>Die Vorbereitungen für die Reise begannen am nächsten Morgen. Kael und Tessa sammelten Proviant, überprüften ihre Waffen und befestigten die alten Karten sorgfältig in einer ledernen Tasche. Die Dorfbewohner beobachteten sie mit gemischten Gefühlen. Manche schüttelten den Kopf, andere flüsterten ängstlich über die düsteren Mythen der Randlande.</p>
+
+                        <p>Am dritten Tag ihrer Reise hatten sie die vertrauten Wälder von Eldoria hinter sich gelassen und die Grenzen der Nebelberge erreicht. Hier war die Luft anders, schwer und voller unheimlicher Stille. Die Pfade wurden schmaler, und der Nebel verdichtete sich, bis sie kaum die Hand vor Augen sehen konnten.</p>
+
+                        <p>Plötzlich zerriss ein dumpfes Dröhnen die Stille. Die Erde vibrierte unter ihren Füßen, und Kael zog instinktiv sein Schwert. Vor ihnen öffnete sich die dichte Nebelwand und gab den Blick auf ein leuchtendes, pulsierendes Licht frei. Es schien direkt aus dem Boden zu kommen und warf tanzende Schatten an die Felsen.</p>
+
+                        <p>Doch bevor sie einen weiteren Schritt wagen konnten, brach ein donnerndes Knurren aus der Dunkelheit, und zwei glühende Augen fixierten sie. „Kael", hauchte Tessa, „ich glaube, wir sind nicht allein."</p>
+
+                        <p>Das Licht verschlang Kael und Tessa wie eine Welle, die sie in die Tiefe zog. Ihre Körper schienen sich aufzulösen, während sie durch eine wirbelnde Leere aus Farben und Formen stürzten. Kael versuchte, Tessas Hand festzuhalten, doch es fühlte sich an, als glitte sie ihm aus den Fingern.</p>
+
+                        <p>Sie standen auf einer Ebene, die von einem unheimlichen, silbernen Licht durchflutet wurde. Der Boden unter ihnen war kalt, glatt wie Glas, aber so klar, dass sie in eine bodenlose Tiefe blicken konnten. Über ihnen schwebte ein Himmel ohne Sterne, nur ein diffuses, pulsierendes Leuchten.</p>
+
+                        <p>Kael stand wie versteinert, der Griff seines Schwertes schweißnass in seiner Hand. Eine flüsternde Stimme in seinem Kopf schien lauter zu werden: „Wähle." „Das tue ich nicht!", brüllte Kael in die Dunkelheit. „Ich werde sie nicht opfern. Findet eine andere Prüfung!"</p>
+
+                        <p>Mit einem letzten, entschlossenen Schritt hob er sein Schwert, das nun in reinem Licht leuchtete, und zielte auf das Herz des Wesens. „Dies ist keine Prüfung", rief Kael. „Es ist eine Täuschung. Und ich werde sie durchbrechen!"</p>
+                    </div>
+                </div>
+
+                <!-- Band 4: Das Vermächtnis der Wächter -->
+                <div id="de-band4" class="band-content hidden">
+                    <div class="book-title">Band 4: Das Vermächtnis der Wächter</div>
+                    <div class="chapter-title">Kapitel 1: Zerfallende Einheit</div>
+                    <div class="text-content" id="de-textContent4">
+                        <p>Der Morgen in Eldoria brach düster an. Eine schwere Wolkendecke lag über der Hauptstadt, als ob sie die politischen Spannungen der letzten Tage widerspiegeln wollte. Auf dem Platz vor der Ratskammer hatten sich Bürger und Soldaten versammelt, deren Rufe und Proteste die Luft vibrieren ließen. Es herrschte Unruhe, und die sonst strahlenden Banner Eldorias hingen schwer und verschmutzt im Wind.</p>
+
+                        <p>Kael spürte die Veränderung sofort, als er mit Tessa den Platz betrat. Die Menschen wirkten angespannt, viele schauten sich nervös um, als könnten aus den Schatten neue Gefahren auftauchen. „Die Einheit zerbricht", sagte Tessa leise und betrachtete das Durcheinander. „Wenn die Fraktionen sich weiter gegenseitig bekämpfen, gibt es bald nichts mehr, was wir retten können."</p>
+
+                        <p>Die Gruppe war in einem Nebenraum der Ratskammer zusammengekommen. Der mysteriöse Auftraggeber hatte sich verspätet, und die Stille war unerträglich. Marek saß am Rand, den Blick ausdruckslos, während Aris mit dem Fuß ungeduldig auf den Boden klopfte. „Das hier ist eine Farce", platzte Eryon schließlich heraus. „Wir sollten dort draußen sein und etwas tun, statt hier zu warten."</p>
+
+                        <p>Ein hagerer Mann in einer dunklen Robe trat ein, gefolgt von zwei Wachen. Seine Augen leuchteten in einem merkwürdigen Grün, und seine Stimme war ruhig, fast hypnotisch. „Ich danke euch, dass ihr gekommen seid", begann er, ohne sich vorzustellen. „Es gibt eine Dimension jenseits unserer, eng verbunden mit den Wächtern und ihrer Magie. Diese Dimension steht kurz davor, von der Dunkelheit verschlungen zu werden."</p>
+
+                        <p>Nach dem Treffen war die Gruppe in ihr Quartier zurückgekehrt. Die Stimmung war angespannt. Eryon warf seine Ausrüstung in eine Ecke und begann sofort zu packen, während Tessa versuchte, die Details der Mission zu analysieren. „Es ist Wahnsinn, sich in eine unbekannte Dimension zu wagen", meinte Aris. „Wir wissen nicht einmal, ob dieser Mann die Wahrheit sagt."</p>
+
+                        <p>Die Nacht brach herein, und Kael saß allein auf dem Balkon, den Blick auf die sterbende Stadt gerichtet. Die Proteste hatten sich aufgelöst, doch die Stille war beängstigender als der Lärm. Tessa trat zu ihm, ihren Mantel fest um sich gezogen. „Was ist mit Marek?" fragte sie schließlich.</p>
+
+                        <p>Kael ließ den Blick über die Stadt schweifen, die in der Dunkelheit lag. Flackernde Laternen warfen geisterhafte Schatten auf die Straßen. Die einst lebendige Hauptstadt Eldorias hatte sich in einen Ort der Anspannung verwandelt, wo jeder nur darauf wartete, dass der nächste Funke das Pulverfass entzündete.</p>
+
+                        <p>Die beiden folgten den Gestalten leise, die in einer Seitengasse verschwanden. Kael und Tessa hielten sich dicht an die Häuserwände, ihre Schritte lautlos auf dem unebenen Pflaster. Hinter einer Ecke blieben sie stehen. Kael spähte vorsichtig hervor und entdeckte zwei Gestalten, die sich über eine Rolle Pergament beugten.</p>
+
+                        <p>„Das ist eine Karte", flüsterte Tessa. Er konnte Wortfetzen aufschnappen: „... die Wächter ... Dimension ... Portal." Sein Magen zog sich zusammen. Waren sie schon entdeckt worden? Wusste jemand von ihrer Mission?</p>
+
+                        <p>Die Stille in dem Raum war fast unerträglich, und die Luft fühlte sich schwer an, als Kael und Tessa sich noch immer vor dem sich öffnenden Portal hielten. Mit einem letzten Blick in die Dunkelheit wusste Tessa, dass sie auf dem richtigen Weg war. Das Abenteuer, das sie nun vor sich hatte, war größer und gefährlicher, als sie sich je vorgestellt hatte. Doch Eldoria brauchte sie.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ENGLISCHE VERSIONEN -->
+            <div id="en-content" class="language-content hidden">
+                <!-- Band 1: The Prophecy of Eldoria -->
+                <div id="en-band1" class="band-content">
+                    <div class="book-title">Band 1: The Prophecy of Eldoria</div>
+                    <div class="chapter-title">Chapter 1: The Awakening of Ancient Power</div>
+                    <div class="text-content" id="en-textContent1">
+                        <p>The first rays of dawn pierced through the thick mist that lay over the forests of Eldoria. Deep in the mysterious depths of the Crystal Forest, where ancient trees spread their branches like protective hands over long-forgotten secrets, something was happening that would change the fate of the kingdom forever.</p>
+
+                        <p>Lyra Starblade awakened with a strange feeling of unease. Something was different about this morning. The birds were not singing their usual melodies, and even the wind seemed to hold its breath. She rose from her simple straw bed in the small hut at the edge of the village of Moonlight and stepped outside.</p>
+
+                        <p>What she saw made her blood freeze in her veins. On the horizon, where the mountains of Dragonfang touched the sky, a faint, violet light pulsed. It was not natural light – it was magic, and a kind of magic that had not been seen for a thousand years.</p>
+
+                        <p>"The prophecy," whispered a voice behind her. Lyra spun around and saw her grandfather, the old sage Aldric, who had guarded the stories and legends of Eldoria all his life. His normally clear blue eyes were clouded with worry.</p>
+
+                        <p>"Grandfather, what do you mean by prophecy?" asked Lyra, although deep in her heart she already began to sense the answer. Since her childhood, Aldric had told her stories of the time when mighty guardians protected the land and the forces of light and darkness stood in eternal balance.</p>
+                    </div>
+                </div>
+
+                <!-- Band 2: The Beginning of Peace -->
+                <div id="en-band2" class="band-content hidden">
+                    <div class="book-title">Band 2: The Beginning of Peace</div>
+                    <div class="chapter-title">Chapter 1: The Return to Eldoria</div>
+                    <div class="text-content" id="en-textContent2">
+                        <p>A year had passed since the great victory over Lord Malachar, and the wounds that the war had inflicted on the land of Eldoria were slowly healing. The four guardians had fulfilled their mission – the balance between light and darkness had been restored, and the Tower of Eternity shone again in its original splendor over the kingdom.</p>
+
+                        <p>Lyra Starblade stood on the highest balcony of the tower and looked over the vast lands that stretched to the horizon. The landscape had changed – where once devastated areas and withered forests had lain, meadows and trees were now green again. The magic of light had renewed the land and restored its natural beauty.</p>
+
+                        <p>But despite the outward peace, Lyra felt an unrest in her heart. The power that had awakened in her during the battle against Malachar had not disappeared. It had grown stronger, had developed and changed. Sometimes, in quiet moments like this, she could hear the voices of the old guardians who had lived centuries ago and whose spirits now rested in the crystals of the tower.</p>
+
+                        <p>"You're brooding again," said a familiar voice behind her. Theron Dragonheart stepped out of the shadow of the pillars, his imposing frame still impressive, even though the traces of war were clearly visible on his face. A new scar ran from his left temple to his chin – a memento of the final battle against Malachar's shadow dragons.</p>
+
+                        <p>"I'm thinking about the future," replied Lyra without turning around. "About what comes next. We won the war, but what does that mean for us? For the people of Eldoria?"</p>
+                    </div>
+                </div>
+
+                <!-- Band 3: The Shadows of the Forgotten -->
+                <div id="en-band3" class="band-content hidden">
+                    <div class="book-title">Band 3: The Shadows of the Forgotten</div>
+                    <div class="chapter-title">Chapter 1: The Spark of Adventure</div>
+                    <div class="text-content" id="en-textContent3">
+                        <p>Five years of peace lay behind the four realms of Eldoria. The rule of the guardians had brought the land a stability and prosperity that it had not experienced for centuries. But beneath the calm surface, something unexpected was stirring – a power so ancient that even the legends of the first guardians mentioned it only in whispers.</p>
+
+                        <p>In the deepest vaults beneath the Tower of Eternity, where the foundations met the living rock, Lyra discovered a secret that would shake her entire understanding of Eldoria's history. She had gone there to study the old crystal formations that served as an energy source for the tower, when she encountered a wall that was different from all others.</p>
+
+                        <p>This wall did not shimmer with the familiar bluish aura of the tower crystals. Instead, it pulsed in a deep, blackish violet that strangely attracted and repelled her eyes at the same time. Runes were etched into the stone, but they were not the familiar script of the old guardians. These symbols were older, more primitive, and they seemed to speak of a power that had existed before the time of light.</p>
+
+                        <p>"The Forgotten," whispered a voice behind her, and Lyra spun around, her heartbeat instinctively accelerating. But it was only Master Lysander, the old historian, who held a flickering lantern in his hand and regarded her discovery with an expression of recognition.</p>
+
+                        <p>"You know these runes?" asked Lyra in surprise.</p>
+                    </div>
+                </div>
+
+                <!-- Band 4: The Legacy of the Guardians -->
+                <div id="en-band4" class="band-content hidden">
+                    <div class="book-title">Band 4: The Legacy of the Guardians</div>
+                    <div class="chapter-title">Chapter 1: Crumbling Unity</div>
+                    <div class="text-content" id="en-textContent4">
+                        <p>Winter had come early to Eldoria, and with it a coldness that went deeper than skin – a coldness that reached the souls of people and lingered there. In the three months since the first encounter with the forgotten people, the four guardians had found themselves in a grinding battle against an enemy that stubbornly eluded their understanding.</p>
+
+                        <p>Lyra stood alone on the highest platform of the Tower of Eternity and looked over a land that had changed dramatically. Where once green meadows and blooming fields had lain, now stretched vast areas of dark earth from which the eerie black roses grew in ever-larger circles. It was as if the world itself had lost its color.</p>
+
+                        <p>The unity of the guardians, which had once been their greatest strength, began to crumble under the pressure of the ongoing crisis. Each of them had a different idea of how to deal with the threat, and the disagreements became fiercer with each passing day.</p>
+
+                        <p>Theron advocated direct attack. "We defeated Lord Malachar with sword and magic," he argued in their nightly councils. "Why should we proceed differently with this enemy? We must descend into the depths and destroy the source of the threat."</p>
+
+                        <p>Elara, on the other hand, was convinced that a diplomatic solution was possible. "The forgotten people were once part of this world," she reminded the others. "Perhaps we can make a pact, find a compromise that allows both sides to exist."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSpeech = null;
+        let currentBand = 1;
+        let currentLanguage = 'de';
+        let currentWordIndex = 0;
+        let allBandWords = {}; // Speichert Wörter für alle Bände und Sprachen
+        let isReading = false;
+        let lastHighlightedWord = null;
+
+        // Initialisiere alle Bände beim Seitenstart
+        function initializeAllBands() {
+            ['de', 'en'].forEach(lang => {
+                allBandWords[lang] = {};
+                for (let bandNumber = 1; bandNumber <= 4; bandNumber++) {
+                    const bandContent = document.querySelector(`#${lang}-band${bandNumber} .text-content`);
+                    if (bandContent && !bandContent.querySelector('.word')) {
+                        const paragraphs = bandContent.querySelectorAll('p');
+                        let wordCounter = 0;
+                        let bandWords = [];
+
+                        paragraphs.forEach((paragraph) => {
+                            const paragraphText = paragraph.textContent;
+                            const paragraphWords = paragraphText.split(/\s+/).filter(word => word.length > 0);
+                            
+                            let paragraphHTML = '';
+                            paragraphWords.forEach((word) => {
+                                paragraphHTML += `<span class="word" data-word-index="${wordCounter}" onclick="startFromWord(${wordCounter})">${word}</span> `;
+                                bandWords.push(word);
+                                wordCounter++;
+                            });
+                            
+                            paragraph.innerHTML = paragraphHTML;
+                        });
+
+                        // Speichere Wörter für diesen Band und Sprache
+                        allBandWords[lang][bandNumber] = bandWords;
+                    }
+                }
+            });
+        }
+
+        function switchLanguage(lang) {
+            // Stoppe aktuelles Vorlesen
+            stopReading();
+            
+            // Verstecke alle Sprachen
+            document.querySelectorAll('.language-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            
+            // Zeige ausgewählte Sprache
+            document.getElementById(lang + '-content').classList.remove('hidden');
+            
+            // Update Sprachbuttons
+            document.querySelectorAll('.btn-lang').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            currentLanguage = lang;
+            currentWordIndex = 0;
+            clearHighlight();
+            
+            showBand(currentBand); // Zeige aktuellen Band in neuer Sprache
+        }
+
+        function showBand(bandNumber) {
+            // Stoppe aktuelles Vorlesen
+            stopReading();
+            
+            // Verstecke alle Bände in aktueller Sprache
+            for (let i = 1; i <= 4; i++) {
+                const bandElement = document.getElementById(`${currentLanguage}-band${i}`);
+                if (bandElement) {
+                    bandElement.classList.add('hidden');
+                }
+            }
+            
+            // Update Band-Buttons
+            document.querySelectorAll('.btn-band').forEach((btn, index) => {
+                btn.classList.remove('active');
+                if (index === bandNumber - 1) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // Zeige ausgewählten Band
+            const targetBand = document.getElementById(`${currentLanguage}-band${bandNumber}`);
+            if (targetBand) {
+                targetBand.classList.remove('hidden');
+            }
+            
+            currentBand = bandNumber;
+            currentWordIndex = 0;
+            clearHighlight();
+        }
+
+        function startReading() {
+            currentWordIndex = 0;
+            clearHighlight();
+            continueReading();
+        }
+
+        function continueReading() {
+            if (currentSpeech) {
+                currentSpeech.cancel();
+            }
+
+            const currentWords = allBandWords[currentLanguage] && allBandWords[currentLanguage][currentBand];
+            if (currentWords && currentWords.length > 0) {
+                // Text ab der aktuellen Position
+                const remainingText = currentWords.slice(currentWordIndex).join(' ');
+                
+                currentSpeech = new SpeechSynthesisUtterance(remainingText);
+                currentSpeech.rate = 0.9;
+                currentSpeech.lang = currentLanguage === 'de' ? 'de-DE' : 'en-US';
+                
+                let wordCount = currentWordIndex;
+                currentSpeech.onboundary = function(event) {
+                    if (event.name === 'word') {
+                        highlightCurrentWord(wordCount);
+                        wordCount++;
+                        currentWordIndex = wordCount;
+                    }
+                };
+                
+                currentSpeech.onend = function() {
+                    isReading = false;
+                };
+                
+                isReading = true;
+                speechSynthesis.speak(currentSpeech);
+            }
+        }
+
+        function startFromWord(wordIndex) {
+            currentWordIndex = wordIndex;
+            clearHighlight();
+            continueReading();
+        }
+
+        function highlightCurrentWord(wordIndex) {
+            // Entferne vorherige Highlights
+            if (lastHighlightedWord) {
+                lastHighlightedWord.classList.remove('word-highlight');
+            }
+            
+            // Highlights das entsprechende Wort im aktuellen Band und Sprache
+            const wordSpan = document.querySelector(`#${currentLanguage}-band${currentBand} [data-word-index="${wordIndex}"]`);
+            if (wordSpan) {
+                wordSpan.classList.add('word-highlight');
+                lastHighlightedWord = wordSpan;
+            }
+        }
+
+        function clearHighlight() {
+            document.querySelectorAll('.word-highlight').forEach(el => {
+                el.classList.remove('word-highlight');
+            });
+            lastHighlightedWord = null;
+        }
+
+        function stopReading() {
+            if (currentSpeech) {
+                speechSynthesis.cancel();
+                currentSpeech = null;
+                isReading = false;
+            }
+            
+            // Zurück zum Anfang + alle Markierungen löschen
+            currentWordIndex = 0;
+            clearHighlight();
+        }
+
+        // Initialisierung beim Seitenstart
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeAllBands(); // Initialisiere ALLE Bände und Sprachen
+            showBand(1); // Zeige Band 1
+        });
+    </script>
+</body>
+</html>
