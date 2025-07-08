@@ -149,6 +149,49 @@
             margin-top: 3px;
         }
 
+        .book-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            min-width: 80px;
+        }
+
+        .btn-read {
+            background: #4285f4;
+            color: white;
+        }
+
+        .btn-read:hover {
+            background: #3367d6;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(66, 133, 244, 0.3);
+        }
+
+        .btn-amazon {
+            background: #999;
+            color: white;
+            cursor: not-allowed;
+        }
+
+        .btn-amazon:disabled {
+            background: #ccc;
+            color: #666;
+            cursor: not-allowed;
+        }
+
         .status-badge {
             padding: 6px 12px;
             border-radius: 20px;
@@ -249,41 +292,21 @@
                             <div class="book-title">Band 1: Verborgene Gefühle</div>
                             <div class="book-subtitle">Die Nachricht, die alles veränderte</div>
                         </div>
-                        <span class="status-badge status-available">Verfügbar</span>
+                        <div class="book-buttons">
+                            <a href="lese-vorlese-new-adult.html" class="btn btn-read">Lesen</a>
+                            <button class="btn btn-amazon" disabled>In Vorbereitung</button>
+                        </div>
                     </div>
                     
-                    <div class="book-item in-progress">
+                    <div class="book-item available">
                         <div>
                             <div class="book-title">Band 2: Enthüllte Wahrheiten</div>
                             <div class="book-subtitle">Nähe, die flieht</div>
                         </div>
-                        <span class="status-badge status-coming">In Vorbereitung</span>
-                    </div>
-                    
-
-                </div>
-            </div>
-
-            <!-- Serie 2: Masken des Lebens -->
-            <div class="series-card">
-                <h2 class="series-title">Serie 2: Masken des Lebens</h2>
-                <p class="series-description">In einer Welt der Selbstoptimierung und perfekten Online-Präsenzen kämpfen junge Menschen um Authentizität. Eine bewegende Serie über den Mut, die Maske fallen zu lassen und die Wahrheit hinter den Filtern zu entdecken.</p>
-                
-                <div class="books-list">
-                    <div class="book-item in-progress">
-                        <div>
-                            <div class="book-title">Band 1: Die Wahrheit hinter dem Filter</div>
-                            <div class="book-subtitle">Zwischen Schein und Sein</div>
+                        <div class="book-buttons">
+                            <a href="lese-vorlese-new-adult.html" class="btn btn-read">Lesen</a>
+                            <button class="btn btn-amazon" disabled>In Vorbereitung</button>
                         </div>
-                        <span class="status-badge status-coming">In Vorbereitung</span>
-                    </div>
-                    
-                    <div class="book-item in-progress">
-                        <div>
-                            <div class="book-title">Band 2: Digitale Herzen</div>
-                            <div class="book-subtitle">Coming Soon</div>
-                        </div>
-                        <span class="status-badge status-coming">In Vorbereitung</span>
                     </div>
                 </div>
             </div>
@@ -295,7 +318,7 @@
         </div>
 
         <div style="text-align: center;">
-            <a href="#" class="back-link">← Zurück zur Startseite</a>
+            <a href="index.html" class="back-link">← Zurück zur Startseite</a>
         </div>
     </div>
 </body>
