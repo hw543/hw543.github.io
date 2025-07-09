@@ -1,1 +1,519 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Der Rätseldetektivclub - Vorlesen</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.8;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #FFE5B4 0%, #FFB6C1 50%, #98FB98 100%);
+            min-height: 100vh;
+        }
+        
+        .rainbow-header {
+            height: 20px;
+            background: linear-gradient(90deg, 
+                #FF0000 0%, 
+                #FF7F00 14%, 
+                #FFFF00 28%, 
+                #00FF00 42%, 
+                #0000FF 56%, 
+                #4B0082 70%, 
+                #9400D3 84%, 
+                #FF1493 100%);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background: linear-gradient(135deg, #FFF8DC 0%, #F0F8FF 100%);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border: 3px solid #FFD700;
+        }
+        
+        h1 {
+            color: #FF6347;
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(255,105,180,0.3);
+        }
+        
+        .author {
+            text-align: center;
+            color: #9370DB;
+            font-style: italic;
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+        
+        .controls {
+            position: sticky;
+            top: 20px;
+            text-align: center;
+            margin: 30px 0 10px 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #FFE4E1 0%, #E6E6FA 100%);
+            border-radius: 15px;
+            border: 2px solid #FFB6C1;
+            z-index: 1000;
+            box-shadow: 0 5px 15px rgba(255,182,193,0.3);
+        }
+        
+        .language-navigation {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            margin: 5px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .btn-lang {
+            background: linear-gradient(135deg, #FF69B4, #FF1493);
+            color: white;
+            border: 2px solid transparent;
+        }
+        
+        .btn-lang.active {
+            border-color: #FFD700;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+        }
+        
+        .btn-lang:hover {
+            background: linear-gradient(135deg, #FF1493, #C71585);
+            transform: translateY(-2px);
+        }
+        
+        .btn-nav {
+            background: linear-gradient(135deg, #9370DB, #8A2BE2);
+            color: white;
+            text-decoration: none;
+            border: 2px solid transparent;
+        }
+        
+        .btn-nav:hover {
+            background: linear-gradient(135deg, #8A2BE2, #7B68EE);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(138,43,226,0.4);
+        }
+        
+        .btn-read {
+            background: linear-gradient(135deg, #FF6347, #FF4500);
+            color: white;
+        }
+        
+        .btn-read:hover {
+            background: linear-gradient(135deg, #FF4500, #FF2400);
+            transform: translateY(-2px);
+        }
+        
+        .btn-continue {
+            background: linear-gradient(135deg, #32CD32, #228B22);
+            color: white;
+        }
+        
+        .btn-continue:hover {
+            background: linear-gradient(135deg, #228B22, #006400);
+            transform: translateY(-2px);
+        }
+        
+        .btn-stop {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #8B4513;
+        }
+        
+        .btn-stop:hover {
+            background: linear-gradient(135deg, #FFA500, #FF8C00);
+            transform: translateY(-2px);
+        }
+        
+        .story-text {
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: #2F4F4F;
+            text-align: justify;
+            background: linear-gradient(135deg, #FFFAF0 0%, #FFF8DC 100%);
+            padding: 25px;
+            border-radius: 15px;
+            border: 2px solid #DDA0DD;
+            box-shadow: 0 5px 15px rgba(221,160,221,0.2);
+        }
+        
+        .story-text p {
+            margin-bottom: 20px;
+        }
+        
+        .word {
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .word:hover {
+            background-color: #FFE4E1;
+            border-radius: 3px;
+        }
+        
+        .current {
+            background-color: #FF69B4 !important;
+            color: white !important;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            .controls {
+                padding: 15px;
+            }
+            
+            .btn {
+                display: block;
+                margin: 10px auto;
+                width: 200px;
+            }
+            
+            .language-navigation {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="rainbow-header"></div>
+    
+    <div class="container">
+        <h1 id="main-title">Der Rätseldetektivclub</h1>
+        <p class="author" id="author">von Helmut Wegner</p>
+        
+        <div class="controls">
+            <div class="language-navigation">
+                <a href="index.html" class="btn btn-nav">🏠 Startseite</a>
+                <button class="btn btn-lang active" onclick="switchLanguage('de')">🇩🇪 Deutsch</button>
+                <button class="btn btn-lang" onclick="switchLanguage('en')">🇬🇧 English</button>
+                <a href="kinderbuecher.html" class="btn btn-nav">📚 Kinderbücher</a>
+            </div>
+            
+            <button class="btn btn-read" onclick="startReading()">🔴 <span id="btn-read-text">Vorlesen</span></button>
+            <button class="btn btn-continue" onclick="continueReading()">▶️ <span id="btn-continue-text">Weiterlesen</span></button>
+            <button class="btn btn-stop" onclick="stopReading()">⏹️ <span id="btn-stop-text">Stop</span></button>
+        </div>
+        
+        <!-- Deutsche Version -->
+        <div id="de-content" class="language-content">
+            <div class="story-text" id="storyText">
+                <p>Die Nachmittagssonne schien durch die hohen Fenster der Schulbibliothek, und Max blätterte gelangweilt in einem alten Buch. Sein Blick wanderte über die staubigen Regale, als er plötzlich einen alten, vergilbten Umschlag bemerkte, der aus einem zerlesenen Band hervorstand. Neugierig zog er den Umschlag heraus und öffnete ihn vorsichtig. Innen befand sich eine Notiz in geschwungener Handschrift: „Suche dort, wo die Schatten Geschichten erzählen, und finde den ersten Schlüssel."</p>
 
+                <p>Max' Herz schlug schneller. Das klang nach einem Rätsel, das nur darauf wartete, gelöst zu werden. Ohne zu zögern, steckte er den Umschlag ein und eilte aus der Bibliothek. Der Club versammelte sich in ihrem geheimen Hauptquartier: dem alten Baumhaus im Garten von Jonas. Die Wände des Baumhauses waren mit Landkarten, Zeitungsausschnitten und Fotos dekoriert, die sie von ihren bisherigen Abenteuern gesammelt hatten.</p>
+
+                <p>„Was hast du da, Max?", fragte Emma neugierig, als er den Umschlag auf den Tisch legte. „Das ist ein Rätsel!" Max erklärte aufgeregt, was er in der Bibliothek gefunden hatte. Jonas lehnte sich nach vorn, die Stirn gerunzelt. „Wo die Schatten Geschichten erzählen" ... Das klingt wie das alte Theater in der Stadt." „Oder vielleicht das Museum?", warf Lena ein. „Dort gibt es doch diese Abteilung mit alten Märchenfiguren."</p>
+
+                <p>Die Gruppe diskutierte lebhaft, bis sie sich schließlich darauf einigte, zuerst das Theater zu untersuchen. Am Abend schlichen sich die vier Freunde in das alte, längst geschlossene Theater. Der große Saal war dunkel, und Staub tanzte in den Lichtstrahlen ihrer Taschenlampen. Überall standen alte Kulissen und Requisiten. „Hier erzählen die Schatten wirklich Geschichten", murmelte Lena und zeigte auf die seltsamen Schatten, die die Kulissen auf die Wände warfen.</p>
+
+                <p>Emma entdeckte schließlich eine unscheinbare Holztruhe, die halb unter einer Bühne verborgen war. Sie kniete sich hin und zog sie hervor. „Hier! Das könnte der Schlüssel sein!" Mit klopfendem Herzen öffneten sie die Truhe und fanden darin eine kleine Karte und eine weitere Nachricht: „Der Weg beginnt mit einem Schritt ins Ungewisse. Folge den Sternen, und du wirst den zweiten Hinweis finden."</p>
+
+                <p>Jonas hielt die Karte hoch. „Das ist ein Plan von unserer Stadt ... und diese Markierung zeigt den alten Uhrenturm. Das ist unser nächster Halt." Als die Kinder das Theater verließen, bemerkten sie, dass sie nicht allein waren. Ein dunkler Schatten bewegte sich hinter einem der Fenster, und draußen auf der Straße war das leise Summen eines Motors zu hören. „Jemand beobachtet uns", flüsterte Emma, während sie sich an Jonas klammerte.</p>
+
+                <p>„Weg hier!", rief Max und rannte los, die anderen dicht hinter ihm. In letzter Sekunde schlüpften sie in eine schmale Gasse und versteckten sich hinter einem Stapel alter Kisten. Keuchend lauschten sie, wie schwere Schritte näherkamen und dann wieder verschwanden. „Das war knapp", sagte Lena atemlos. „Aber jetzt wissen wir, dass wir nicht die Einzigen sind, die hinter diesem Rätsel her sind."</p>
+
+                <p>Max nickte. „Das macht es nur noch spannender. Morgen gehen wir zum Uhrenturm." Die Freunde trennten sich schließlich, jeder in Gedanken versunken. Max lag in seinem Bett und starrte an die Decke. Wer könnte noch hinter dem Rätsel her sein? Und was würde sie am Uhrenturm erwarten? Max wusste, dass dies kein gewöhnliches Abenteuer werden würde -- und der wahre Schlüssel im Verborgenen lag.</p>
+
+                <p>Max konnte kaum die Augen schließen. Das geheimnisvolle Rätsel ließ ihn nicht los. Die Worte der Nachricht hallten in seinem Kopf wider wie ein Echo in einer endlosen Höhle: „Der Weg beginnt mit einem Schritt ins Ungewisse." Die Nacht war ungewöhnlich still, fast bedrückend. Selbst das gelegentliche Knarren der alten Holzdielen in seinem Zimmer, das ihn sonst beruhigte, schien jetzt eine andere Bedeutung zu tragen.</p>
+
+                <p>Er drehte sich auf die Seite und starrte auf die Karte, die er auf seinem Nachttisch ausgebreitet hatte. „Was steckt nur dahinter?", murmelte er leise und versuchte, die Markierung auf dem Plan zu deuten. Der alte Uhrenturm -- ein verlassener Ort voller Gerüchte und Geschichten. Es hieß, er sei einst von einem seltsamen Architekten gebaut worden, der spurlos verschwand.</p>
+
+                <p>Plötzlich ertönte ein leises Kratzen an seinem Fenster. Max' Herz setzte einen Schlag aus. Mit zitternden Fingern griff er nach seiner Taschenlampe, die immer neben seinem Bett lag, und schaltete sie ein. Ein Schatten bewegte sich draußen im Garten, kaum erkennbar im schwachen Mondlicht. Er spähte hinaus, hielt den Atem an. „Nur der Wind ...", flüsterte er zu sich selbst, doch ein ungutes Gefühl blieb.</p>
+
+                <p>Schließlich zwang er sich, die Augen zu schließen. Morgen würde ein langer Tag werden. Ein neuer Tag, ein neues Rätsel. Am nächsten Morgen wirkte alles normal -- zumindest auf den ersten Blick. Die Sonne strahlte warm durch die Fenster, und der Duft von frisch gebackenem Brot zog aus der Küche in Max' Zimmer. Doch das Kratzen der vergangenen Nacht ließ ihn nicht los.</p>
+
+                <p>„Max, beeil dich, du kommst noch zu spät!", rief seine Mutter. Er schnappte sich seinen Rucksack, in dem er die Karte und die Notizen sicher verstaut hatte, und eilte hinaus. Am Treffpunkt im Park warteten Jonas, Emma und Lena bereits ungeduldig. „Du siehst aus, als hättest du die ganze Nacht nicht geschlafen", bemerkte Emma und runzelte die Stirn.</p>
+
+                <p>„Habe ich auch nicht", gab Max zu und zog die Karte hervor. „Ich habe nachgedacht. Der Uhrenturm ... glaubt ihr, dass dort wirklich etwas versteckt ist?" „Das werden wir gleich herausfinden", sagte Jonas entschlossen. „Aber wir müssen vorsichtig sein. Wenn uns wirklich jemand beobachtet hat, könnte das gefährlich werden." Lena nickte und sah sich nervös um. „Vielleicht sollten wir einen Plan machen, bevor wir einfach hineinstürmen."</p>
+
+                <p>Der Uhrenturm ragte düster vor ihnen auf, als sie das verlassene Gelände betraten. Die Zeit hatte ihre Spuren hinterlassen -- bröckelnde Steine, verwilderte Ranken und ein Tor, das nur noch an einer Scharnierhälfte hing. „Das fühlt sich unheimlich an", flüsterte Lena. „Genau richtig für ein Abenteuer", entgegnete Jonas mit einem schiefen Grinsen und schob das quietschende Tor auf.</p>
+
+                <p>Drinnen roch es nach feuchtem Holz und Staub. Der Boden war mit alten Blättern und Schutt bedeckt, und in der Ferne hörten sie das Tropfen von Wasser. Max leuchtete mit seiner Taschenlampe umher, während Emma das Tagebuch hervorzog, das sie am Abend zuvor gefunden hatten. „Hier steht etwas über eine geheime Treppe", sagte sie. „Sie soll hinter einer Falltür sein."</p>
+
+                <p>Jonas klopfte mit seinem Fuß gegen die Dielen und lauschte. „Hier! Das klingt hohl." Gemeinsam schafften sie es, die schwere Holzklappe anzuheben, die eine schmale, steinerne Treppe freigab, die hinab in die Dunkelheit führte. „Ich gehe zuerst", sagte Jonas, doch Max hielt ihn zurück. „Warte. Lass mich. Ich habe die Karte."</p>
+
+                <p>Die Stufen knarrten unter Max' Gewicht, während er langsam hinunterstieg. Die anderen folgten ihm dicht auf den Fersen. Die Luft wurde kühler, und ein schwaches Licht flackerte am Ende der Treppe -- als würde eine alte Lampe mit letzter Kraft kämpfen, nicht zu erlöschen. „Was ist das für ein Ort?", fragte Lena flüsternd, während sie in einen kleinen Raum traten.</p>
+
+                <p>Die Wände waren mit seltsamen Symbolen bemalt, die Max an alte Karten erinnerten, die er einmal in einem Geschichtsbuch gesehen hatte. In der Mitte des Raumes stand ein Podest, auf dem eine kleine Truhe lag, umgeben von einer dünnen Staubschicht. Emma trat vorsichtig näher und untersuchte sie. „Keine Schlösser, keine Fallen ... zumindest keine, die ich sehe", murmelte sie, bevor sie den Deckel öffnete.</p>
+
+                <p>Drinnen lag ein seltsames Medaillon, das in die Karte eingearbeitet zu sein schien. „Das sieht aus wie ... ein Teil von etwas Größerem", bemerkte Max. „Vielleicht ein Schlüssel", überlegte Jonas. Doch bevor sie weiter nachdenken konnten, hallte ein lautes Geräusch durch den Raum -- Schritte, die sich der Treppe näherten.</p>
+
+                <p>„Schnell, wir müssen hier raus!", flüsterte Lena panisch. Die Freunde griffen nach dem Medaillon und suchten verzweifelt nach einem zweiten Ausgang. Der Raum schien jedoch keine weiteren Türen zu haben. Die Schritte wurden lauter, und eine dunkle Silhouette erschien oben an der Treppe. Max presste das Medaillon fest an sich und flüsterte: „Egal, was passiert -- wir dürfen das Rätsel nicht aufgeben."</p>
+
+                <p>Das Abenteuer hatte gerade erst begonnen, doch sie ahnten bereits, dass der Weg gefährlicher war, als sie sich vorgestellt hatten. Die Schritte hallten bedrohlich durch den Raum, jedes Geräusch ein scharfes Echo, das die Nerven der Kinder zum Zerreißen brachte. Max schloss für einen Moment die Augen und zwang sich, ruhig zu bleiben. „Wir müssen etwas tun", flüsterte er, doch die Panik in den Gesichtern seiner Freunde zeigte, dass auch sie keine Idee hatten.</p>
+
+                <p>Emma deutete plötzlich auf eine schmale Öffnung in der Wand, kaum groß genug, um hindurchzukriechen. „Da! Vielleicht führt das nach draußen!" Jonas zögerte keine Sekunde und schob den schweren Stein beiseite, der die Öffnung verdeckte. „Los, schnell!" Lena war die Erste, die in die Dunkelheit kroch, gefolgt von Emma und Max. Jonas hielt kurz inne, sah zur Treppe, wo die Silhouette stehen geblieben war, und verschwand dann ebenfalls durch den schmalen Spalt.</p>
+            </div>
+        </div>
+        
+        <!-- Englische Version -->
+        <div id="en-content" class="language-content hidden">
+            <div class="story-text" id="storyTextEn">
+                <p>The afternoon sun shone through the tall windows of the school library, and Max listlessly flipped through an old book. His gaze wandered over the dusty shelves when he suddenly noticed an old, yellowed envelope protruding from a well-worn volume. Curious, he pulled the envelope out and opened it carefully. Inside was a note in flowing handwriting: "Search where shadows tell stories, and find the first key."</p>
+
+                <p>Max's heart beat faster. This sounded like a riddle just waiting to be solved. Without hesitation, he pocketed the envelope and hurried out of the library. The club gathered in their secret headquarters: the old tree house in Jonas's garden. The walls of the tree house were decorated with maps, newspaper clippings, and photos they had collected from their previous adventures.</p>
+
+                <p>"What do you have there, Max?" asked Emma curiously as he placed the envelope on the table. "It's a riddle!" Max excitedly explained what he had found in the library. Jonas leaned forward, his brow furrowed. "Where shadows tell stories"... That sounds like the old theater in town." "Or maybe the museum?" suggested Lena. "There's that section with old fairy tale figures there."</p>
+
+                <p>The group discussed animatedly until they finally agreed to investigate the theater first. In the evening, the four friends snuck into the old, long-closed theater. The large hall was dark, and dust danced in the light beams of their flashlights. Old sets and props were everywhere. "Here shadows really do tell stories," murmured Lena, pointing to the strange shadows that the sets cast on the walls.</p>
+
+                <p>Emma finally discovered an inconspicuous wooden chest that was half hidden under a stage. She knelt down and pulled it out. "Here! This could be the key!" With pounding hearts, they opened the chest and found inside a small map and another message: "The path begins with a step into the unknown. Follow the stars, and you will find the second clue."</p>
+
+                <p>Jonas held up the map. "This is a plan of our city... and this marking shows the old clock tower. That's our next stop." As the children left the theater, they noticed they were not alone. A dark shadow moved behind one of the windows, and outside on the street, the quiet hum of a motor could be heard. "Someone is watching us," whispered Emma as she clung to Jonas.</p>
+
+                <p>"Get out of here!" shouted Max and ran off, the others close behind him. At the last second, they slipped into a narrow alley and hid behind a pile of old boxes. Panting, they listened as heavy footsteps approached and then disappeared again. "That was close," said Lena breathlessly. "But now we know we're not the only ones after this riddle."</p>
+
+                <p>Max nodded. "That just makes it more exciting. Tomorrow we go to the clock tower." The friends finally separated, each lost in thought. Max lay in his bed staring at the ceiling. Who else could be after the riddle? And what would await them at the clock tower? Max knew this would be no ordinary adventure -- and the true key lay hidden.</p>
+
+                <p>Max could barely close his eyes. The mysterious riddle wouldn't let him go. The words of the message echoed in his head like an echo in an endless cave: "The path begins with a step into the unknown." The night was unusually quiet, almost oppressive. Even the occasional creaking of the old wooden floorboards in his room, which usually calmed him, now seemed to carry a different meaning.</p>
+
+                <p>He turned on his side and stared at the map he had spread out on his nightstand. "What's behind it all?" he murmured quietly, trying to interpret the marking on the plan. The old clock tower -- an abandoned place full of rumors and stories. It was said to have been built by a strange architect who disappeared without a trace.</p>
+
+                <p>Suddenly there was a quiet scratching at his window. Max's heart skipped a beat. With trembling fingers, he reached for his flashlight, which always lay beside his bed, and turned it on. A shadow moved outside in the garden, barely visible in the weak moonlight. He peered out, holding his breath. "Just the wind..." he whispered to himself, but an uneasy feeling remained.</p>
+
+                <p>Finally, he forced himself to close his eyes. Tomorrow would be a long day. A new day, a new riddle. The next morning everything seemed normal -- at least at first glance. The sun shone warmly through the windows, and the scent of freshly baked bread drifted from the kitchen into Max's room. But the scratching from the previous night wouldn't leave him alone.</p>
+
+                <p>"Max, hurry up, you'll be late!" called his mother. He grabbed his backpack, in which he had safely stored the map and notes, and hurried out. At the meeting point in the park, Jonas, Emma, and Lena were already waiting impatiently. "You look like you didn't sleep all night," Emma remarked, frowning.</p>
+
+                <p>"I didn't," Max admitted, pulling out the map. "I've been thinking. The clock tower... do you think something is really hidden there?" "We'll find out soon," said Jonas determinedly. "But we have to be careful. If someone really was watching us, this could be dangerous." Lena nodded and looked around nervously. "Maybe we should make a plan before we just rush in."</p>
+
+                <p>The clock tower loomed gloomily before them as they entered the abandoned grounds. Time had left its marks -- crumbling stones, wild vines, and a gate hanging only on one hinge. "This feels creepy," whispered Lena. "Perfect for an adventure," replied Jonas with a crooked grin and pushed open the squeaking gate.</p>
+
+                <p>Inside it smelled of damp wood and dust. The floor was covered with old leaves and debris, and in the distance they could hear water dripping. Max shone his flashlight around while Emma pulled out the diary they had found the evening before. "It says something here about a secret staircase," she said. "It's supposed to be behind a trapdoor."</p>
+
+                <p>Jonas tapped his foot against the floorboards and listened. "Here! This sounds hollow." Together they managed to lift the heavy wooden hatch, which revealed a narrow stone staircase leading down into the darkness. "I'll go first," said Jonas, but Max held him back. "Wait. Let me. I have the map."</p>
+
+                <p>The steps creaked under Max's weight as he slowly descended. The others followed close behind. The air became cooler, and a faint light flickered at the end of the stairs -- as if an old lamp was fighting with its last strength not to go out. "What kind of place is this?" asked Lena in a whisper as they entered a small room.</p>
+
+                <p>The walls were painted with strange symbols that reminded Max of old maps he had once seen in a history book. In the middle of the room stood a pedestal on which lay a small chest, surrounded by a thin layer of dust. Emma stepped carefully closer and examined it. "No locks, no traps... at least none that I can see," she murmured before opening the lid.</p>
+
+                <p>Inside lay a strange medallion that seemed to be incorporated into the map. "This looks like... part of something bigger," Max observed. "Maybe a key," Jonas considered. But before they could think further, a loud noise echoed through the room -- footsteps approaching the stairs.</p>
+
+                <p>"Quick, we have to get out of here!" whispered Lena in panic. The friends grabbed the medallion and desperately searched for a second exit. However, the room seemed to have no other doors. The footsteps grew louder, and a dark silhouette appeared at the top of the stairs. Max pressed the medallion tightly to himself and whispered: "No matter what happens -- we must not give up the riddle."</p>
+
+                <p>The adventure had just begun, but they already sensed that the path was more dangerous than they had imagined. The footsteps echoed threateningly through the room, each sound a sharp echo that stretched the children's nerves to the breaking point. Max closed his eyes for a moment and forced himself to stay calm. "We have to do something," he whispered, but the panic in his friends' faces showed that they had no idea either.</p>
+
+                <p>Emma suddenly pointed to a narrow opening in the wall, barely large enough to crawl through. "There! Maybe that leads outside!" Jonas didn't hesitate for a second and pushed aside the heavy stone that covered the opening. "Come on, quick!" Lena was the first to crawl into the darkness, followed by Emma and Max. Jonas paused briefly, looked toward the stairs where the silhouette had stopped, and then also disappeared through the narrow gap.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSpeech = null;
+        let currentWordIndex = 0;
+        let allWords = [];
+        let isReading = false;
+        let lastHighlightedWord = null;
+        let currentLanguage = 'de';
+        let stoppedAtIndex = 0;
+
+        // Spracheinstellungen
+        const languageTexts = {
+            de: {
+                title: "Der Rätseldetektivclub",
+                author: "von Helmut Wegner",
+                btnRead: "Vorlesen",
+                btnContinue: "Weiterlesen",
+                btnStop: "Stop",
+                lang: "de-DE"
+            },
+            en: {
+                title: "The Mystery Detective Club",
+                author: "by Helmut Wegner",
+                btnRead: "Read Aloud",
+                btnContinue: "Continue",
+                btnStop: "Stop",
+                lang: "en-US"
+            }
+        };
+
+        function switchLanguage(lang) {
+            // Stoppe aktuelles Vorlesen
+            if (currentSpeech) {
+                speechSynthesis.cancel();
+                isReading = false;
+            }
+            
+            // Verstecke alle Sprachen
+            document.querySelectorAll('.language-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            
+            // Zeige ausgewählte Sprache
+            document.getElementById(lang + '-content').classList.remove('hidden');
+            
+            // Update Sprachbuttons
+            document.querySelectorAll('.btn-lang').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Update Texte
+            currentLanguage = lang;
+            const texts = languageTexts[lang];
+            document.getElementById('main-title').textContent = texts.title;
+            document.getElementById('author').textContent = texts.author;
+            document.getElementById('btn-read-text').textContent = texts.btnRead;
+            document.getElementById('btn-continue-text').textContent = texts.btnContinue;
+            document.getElementById('btn-stop-text').textContent = texts.btnStop;
+            
+            // Initialisiere Wörter für neue Sprache
+            currentWordIndex = 0;
+            stoppedAtIndex = 0;
+            clearHighlights();
+            initializeWords();
+        }
+
+        function initializeWords() {
+            const storyText = document.querySelector('#' + currentLanguage + '-content .story-text');
+            if (!storyText) return;
+            
+            const paragraphs = storyText.querySelectorAll('p');
+            allWords = [];
+            
+            paragraphs.forEach((paragraph) => {
+                const paragraphText = paragraph.textContent;
+                const paragraphWords = paragraphText.split(/\s+/).filter(word => word.length > 0);
+                
+                let paragraphHTML = '';
+                paragraphWords.forEach((word) => {
+                    paragraphHTML += `<span class="word" data-word-index="${allWords.length}" onclick="startFromWord(${allWords.length})">${word}</span> `;
+                    allWords.push(word);
+                });
+                
+                paragraph.innerHTML = paragraphHTML;
+            });
+        }
+
+        function startReading() {
+            currentWordIndex = 0;
+            stoppedAtIndex = 0;
+            clearHighlights();
+            continueReading();
+        }
+
+        function continueReading() {
+            if (currentSpeech) {
+                speechSynthesis.cancel();
+            }
+            
+            if (allWords && allWords.length > 0) {
+                const remainingText = allWords.slice(currentWordIndex).join(' ');
+                
+                currentSpeech = new SpeechSynthesisUtterance(remainingText);
+                currentSpeech.rate = 1.0;
+                currentSpeech.lang = languageTexts[currentLanguage].lang;
+                
+                let wordCount = currentWordIndex;
+                
+                currentSpeech.onboundary = function(event) {
+                    if (event.name === 'word') {
+                        highlightCurrentWord(wordCount);
+                        wordCount++;
+                        currentWordIndex = wordCount;
+                    }
+                };
+                
+                currentSpeech.onend = function() {
+                    isReading = false;
+                };
+                
+                isReading = true;
+                speechSynthesis.speak(currentSpeech);
+            }
+        }
+
+        function startFromWord(wordIndex) {
+            currentWordIndex = wordIndex;
+            stoppedAtIndex = wordIndex;
+            clearHighlights();
+            continueReading();
+        }
+
+        function highlightCurrentWord(wordIndex) {
+            if (lastHighlightedWord) {
+                lastHighlightedWord.classList.remove('current');
+            }
+            
+            const wordSpan = document.querySelector(`#${currentLanguage}-content [data-word-index="${wordIndex}"]`);
+            if (wordSpan) {
+                wordSpan.classList.add('current');
+                lastHighlightedWord = wordSpan;
+                
+                // Sanftes Scrolling OHNE die Controls aus dem Blickfeld zu nehmen
+                const rect = wordSpan.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
+                const controlsHeight = 150;
+                
+                // Nur scrollen wenn das Wort zu weit unten oder oben ist
+                if (rect.bottom > windowHeight - 100 || rect.top < controlsHeight + 50) {
+                    wordSpan.scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'nearest',
+                        inline: 'nearest'
+                    });
+                }
+            }
+        }
+
+        function clearHighlights() {
+            document.querySelectorAll('.current').forEach(el => {
+                el.classList.remove('current');
+            });
+            lastHighlightedWord = null;
+        }
+
+        function stopReading() {
+            if (currentSpeech) {
+                speechSynthesis.cancel();
+                currentSpeech = null;
+                isReading = false;
+            }
+            stoppedAtIndex = currentWordIndex;
+        }
+
+        // Initialisierung beim Seitenstart
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeWords();
+        });
+    </script>
+</body>
+</html>
