@@ -1,1 +1,270 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krimis - Helmut Wegners Wortwelten</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #2c1810 0%, #8B0000 50%, #B22222 100%);
+            min-height: 100vh;
+            color: #f5f5f5;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 40px 20px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(178, 34, 34, 0.8);
+            color: white;
+            padding: 10px 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            font-size: 0.9em;
+        }
+
+        .back-button:hover {
+            background: rgba(178, 34, 34, 1);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            color: #DC143C;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
+        }
+
+        .header p {
+            font-size: 1.3em;
+            color: #f0f0f0;
+            font-style: italic;
+        }
+
+        .content-sections {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .section {
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+            border: 2px solid rgba(178, 34, 34, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8);
+            border-color: rgba(220, 20, 60, 0.6);
+        }
+
+        .section h2 {
+            font-size: 2.2em;
+            color: #DC143C;
+            margin-bottom: 20px;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        .section-description {
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            text-align: center;
+            color: #d0d0d0;
+            line-height: 1.6;
+        }
+
+        .series-item {
+            background: rgba(139, 0, 0, 0.3);
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(178, 34, 34, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .series-item:hover {
+            background: rgba(139, 0, 0, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .series-cover {
+            width: 120px;
+            height: 180px;
+            background: linear-gradient(135deg, #4a4a4a, #2a2a2a);
+            border-radius: 8px;
+            margin: 0 auto 20px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ccc;
+            font-size: 0.9em;
+            text-align: center;
+            border: 2px solid #8B0000;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
+        }
+
+        .series-title {
+            font-size: 1.6em;
+            color: #DC143C;
+            margin-bottom: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .series-description {
+            font-size: 1em;
+            color: #d0d0d0;
+            margin-bottom: 20px;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .series-stats {
+            font-size: 0.9em;
+            color: #b0b0b0;
+            text-align: center;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .discover-button {
+            display: block;
+            background: linear-gradient(135deg, #DC143C, #8B0000);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1em;
+            font-weight: bold;
+            text-decoration: none;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 0 auto;
+            min-width: 200px;
+        }
+
+        .discover-button:hover {
+            background: linear-gradient(135deg, #FF1493, #DC143C);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(220, 20, 60, 0.4);
+        }
+
+        .placeholder-content {
+            text-align: center;
+            padding: 40px 20px;
+            color: #888;
+            font-style: italic;
+        }
+
+        .placeholder-content h3 {
+            color: #aaa;
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .content-sections {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .header h1 {
+                font-size: 2.2em;
+            }
+            
+            .section h2 {
+                font-size: 1.8em;
+            }
+            
+            .back-button {
+                position: relative;
+                top: 0;
+                left: 0;
+                margin-bottom: 20px;
+                display: inline-block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="index.html" class="back-button">← Zurück zur Startseite</a>
+            <h1>Krimis</h1>
+            <p>Düstere Geheimnisse der Lüneburger Heide</p>
+        </div>
+
+        <div class="content-sections">
+            <!-- Krimi-Serien Bereich -->
+            <div class="section">
+                <h2>Krimi-Serien</h2>
+                <p class="section-description">
+                    Mehrteilige Kriminalgeschichten mit durchgehenden Charakteren und zusammenhängenden Handlungssträngen.
+                </p>
+                
+                <div class="series-item">
+                    <div class="series-cover">
+                        Mysterien<br>der<br>Heide<br>Serie
+                    </div>
+                    <div class="series-title">Mysterien der Heide</div>
+                    <div class="series-description">
+                        Eine fesselnde Krimi-Trilogie, die die dunklen Geheimnisse der Lüneburger Heide aufdeckt. Von mysteriösen Geistern bis hin zu verschwundenen Dörfern - eine atmosphärische Reise in die Abgründe der menschlichen Seele.
+                    </div>
+                    <div class="series-stats">
+                        3 Bände • Deutsch & Englisch • Lesen & Vorlesen-System
+                    </div>
+                    <a href="mysterien-der-heide.html" class="discover-button">Serie entdecken</a>
+                </div>
+            </div>
+
+            <!-- Einzelne Krimis Bereich -->
+            <div class="section">
+                <h2>Einzelne Krimis</h2>
+                <p class="section-description">
+                    Standalone Kriminalromane mit abgeschlossenen Handlungen und eigenständigen Charakteren.
+                </p>
+                
+                <div class="placeholder-content">
+                    <h3>🔍 Bald verfügbar</h3>
+                    <p>Spannende Einzelkrimis befinden sich in der Entwicklung...</p>
+                    <br>
+                    <p>Freuen Sie sich auf eigenständige Geschichten mit neuen Ermittlern, frischen Fällen und überraschenden Wendungen!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
