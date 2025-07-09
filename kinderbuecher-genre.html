@@ -1,1 +1,326 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kinderbücher - Helmut Wegners Wortwelten</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: linear-gradient(135deg, #FFE5B4 0%, #FFCCCB 25%, #E6E6FA 50%, #F0FFF0 75%, #FFE4E1 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #2c3e50;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #FF6B6B, #4ECDC4);
+            color: white;
+            padding: 20px;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            position: relative;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 8px 16px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 0.9em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .header h1 {
+            font-size: 2.8em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.3em;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .chambers-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .chamber {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            border: 3px solid transparent;
+        }
+
+        .chamber:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+
+        .chamber-serien {
+            border-color: #FF6B6B;
+        }
+
+        .chamber-einzeln {
+            border-color: #4ECDC4;
+        }
+
+        .chamber-title {
+            font-size: 1.8em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-align: center;
+            padding: 10px;
+            border-radius: 10px;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .chamber-serien .chamber-title {
+            background: linear-gradient(135deg, #FF6B6B, #FF8E8E);
+        }
+
+        .chamber-einzeln .chamber-title {
+            background: linear-gradient(135deg, #4ECDC4, #6FD4D4);
+        }
+
+        .chamber-description {
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #555;
+        }
+
+        .chamber-content {
+            text-align: center;
+        }
+
+        .serie-preview {
+            background: linear-gradient(135deg, #FFE5B4, #FFCCCB);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border: 2px dashed #FF6B6B;
+        }
+
+        .serie-preview h3 {
+            color: #FF6B6B;
+            font-size: 1.3em;
+            margin-bottom: 10px;
+        }
+
+        .serie-preview p {
+            color: #666;
+            font-style: italic;
+            font-size: 1.1em;
+        }
+
+        .einzelbuecher-preview {
+            background: linear-gradient(135deg, #E6E6FA, #F0FFF0);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .book-mini {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            border: 2px solid #4ECDC4;
+        }
+
+        .book-mini h4 {
+            color: #4ECDC4;
+            font-size: 1em;
+            margin-bottom: 5px;
+        }
+
+        .book-mini p {
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .chamber-button {
+            background: linear-gradient(135deg, #FF6B6B, #4ECDC4);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .chamber-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .chamber-button-disabled {
+            background: #ccc;
+            color: #666;
+            cursor: not-allowed;
+        }
+
+        .chamber-button-disabled:hover {
+            transform: none;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .info-text {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .chambers-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2.2em;
+            }
+            
+            .header p {
+                font-size: 1.1em;
+            }
+            
+            .chamber {
+                padding: 20px;
+            }
+            
+            .chamber-title {
+                font-size: 1.5em;
+            }
+            
+            .books-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .back-button {
+                position: relative;
+                top: 0;
+                left: 0;
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="index.html" class="back-button">← Zurück zur Startseite</a>
+            <h1>📚 Kinderbücher</h1>
+            <p>Spannende Abenteuer zum Vorlesen und Entdecken<br>Magische Geschichten, die Kinder begeistern!</p>
+        </div>
+
+        <div class="chambers-container">
+            <!-- Kammer 1: Kinderbuch-Serien -->
+            <div class="chamber chamber-serien">
+                <div class="chamber-title">🌟 Kinderbuch-Serien</div>
+                <div class="chamber-description">
+                    Mehrteilige Kindergeschichten mit durchgehenden Charakteren und zusammenhängenden Handlungssträngen.
+                </div>
+                
+                <div class="chamber-content">
+                    <div class="serie-preview">
+                        <h3>🔮 Bald verfügbar</h3>
+                        <p>Spannende Kinderbuch-Serien befinden sich in der Entwicklung...</p>
+                        <br>
+                        <p>Freuen Sie sich auf zusammenhängende Geschichten mit neuen Charakteren, frischen Fabeln und überraschenden Wendungen!</p>
+                    </div>
+                    
+                    <a href="#" class="chamber-button chamber-button-disabled">Serie entdecken</a>
+                    <div class="info-text">Erscheint demnächst mit der ersten Kinderbuch-Serie!</div>
+                </div>
+            </div>
+
+            <!-- Kammer 2: Einzelne Kinderbücher -->
+            <div class="chamber chamber-einzeln">
+                <div class="chamber-title">📖 Einzelne Kinderbücher</div>
+                <div class="chamber-description">
+                    Standalone Kindergeschichten mit abgeschlossenen Handlungen und eigenständigen Charakteren.
+                </div>
+                
+                <div class="chamber-content">
+                    <div class="einzelbuecher-preview">
+                        <div class="books-grid">
+                            <div class="book-mini">
+                                <img src="zauberakademie.jpg" alt="Die Zauberakademie von Morgenstern Cover" style="width: 80px; height: 120px; object-fit: cover; border-radius: 8px; margin-bottom: 10px;">
+                                <h4>🏰 Die Zauberakademie</h4>
+                                <p>Magische Abenteuer</p>
+                            </div>
+                            <div class="book-mini">
+                                <img src="zeitnarr.jpg" alt="Der Zeitnarr Cover" style="width: 80px; height: 120px; object-fit: cover; border-radius: 8px; margin-bottom: 10px;">
+                                <h4>⏰ Der Zeitnarr</h4>
+                                <p>Zeitreise-Abenteuer</p>
+                            </div>
+                            <div class="book-mini">
+                                <img src="raetseldetektivclub.jpg" alt="Der Rätseldetektiv-Club Cover" style="width: 80px; height: 120px; object-fit: cover; border-radius: 8px; margin-bottom: 10px;">
+                                <h4>🕵️ Rätseldetektiv-Club</h4>
+                                <p>Spannende Krimis</p>
+                            </div>
+                            <div class="book-mini">
+                                <img src="verborgenerwald.jpg" alt="Das Geheimnis des verborgenen Waldes Cover" style="width: 80px; height: 120px; object-fit: cover; border-radius: 8px; margin-bottom: 10px;">
+                                <h4>🌲 Verborgener Wald</h4>
+                                <p>Natur-Abenteuer</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <a href="kinderbuecher.html" class="chamber-button">📚 Bücher entdecken</a>
+                    <div class="info-text">4 Bücher - Deutsch & Englisch - Lesen & Vorlesen System</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
