@@ -12,215 +12,143 @@
         }
 
         body {
-            font-family: 'Georgia', 'Times New Roman', serif;
-            background: linear-gradient(135deg, #2c1810 0%, #8b4513 25%, #1a1a2e 50%, #16213e 75%, #d2691e 100%);
-            color: #fff;
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #FFE5E5 0%, #FFB6C1 25%, #FF69B4 50%, #FFC0CB 75%, #FFCCCB 100%);
             min-height: 100vh;
             padding: 20px;
+            color: #8B1538;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .header {
-            text-align: center;
-            margin-bottom: 40px;
-            background: rgba(0,0,0,0.4);
+            background: linear-gradient(135deg, #C2185B, #E91E63);
+            color: white;
             padding: 30px;
             border-radius: 20px;
-            backdrop-filter: blur(15px);
-            border: 2px solid rgba(255,215,0,0.3);
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(199, 21, 133, 0.3);
+            position: relative;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 8px 16px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 0.9em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
         }
 
         .header h1 {
-            font-size: 3.2rem;
-            background: linear-gradient(45deg, #ffd700, #c9b037, #ffd700);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
-            margin-bottom: 15px;
+            font-size: 2.8em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
-        .header .subtitle {
-            font-size: 1.3rem;
-            color: #ffebcd;
-            font-style: italic;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
-        }
-
-        .navigation {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .nav-breadcrumb {
-            display: inline-flex;
-            align-items: center;
-            background: rgba(255,255,255,0.1);
-            padding: 18px 30px;
-            border-radius: 30px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,215,0,0.3);
-        }
-
-        .nav-breadcrumb span {
-            color: #ffd700;
-            font-weight: bold;
-            margin: 0 12px;
-        }
-
-        .nav-breadcrumb .arrow {
-            color: #ffebcd;
-            margin: 0 18px;
-            font-size: 1.3rem;
-        }
-
-        .intro-section {
-            max-width: 900px;
-            margin: 0 auto 40px;
-            text-align: center;
-            background: rgba(0,0,0,0.3);
-            padding: 30px;
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,215,0,0.2);
-        }
-
-        .intro-section h2 {
-            color: #ffd700;
-            font-size: 2.2rem;
-            margin-bottom: 15px;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
-        }
-
-        .intro-section p {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            color: #ffebcd;
-            margin-bottom: 20px;
-        }
-
-        .books-button {
-            background: linear-gradient(45deg, #4169E1, #0047AB);
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 25px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-            box-shadow: 0 6px 15px rgba(65, 105, 225, 0.3);
-        }
-
-        .books-button:hover {
-            background: linear-gradient(45deg, #0047AB, #4169E1);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(65, 105, 225, 0.4);
-        }
-
-        .series-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            padding: 30px 0;
-        }
-
-        .series-card {
-            background: rgba(0,0,0,0.4);
-            border-radius: 15px;
-            padding: 25px;
-            backdrop-filter: blur(15px);
-            border: 2px solid transparent;
-            background-clip: padding-box;
-            text-align: center;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-            height: 300px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .series-card.romantic {
-            border-image: linear-gradient(45deg, #ffd700, #ffb347, #ffd700) 1;
-            background: rgba(139, 69, 19, 0.2);
-        }
-
-        .series-card.mysterious {
-            border-image: linear-gradient(45deg, #c9b037, #1a1a2e, #c9b037) 1;
-            background: rgba(26, 26, 46, 0.3);
-        }
-
-        .series-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 25px rgba(255,215,0,0.3);
-        }
-
-        .series-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, transparent 0%, rgba(255,215,0,0.1) 50%, transparent 100%);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-
-        .series-card:hover::before {
-            opacity: 1;
-        }
-
-        .series-content {
-            position: relative;
-            z-index: 2;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .series-header {
-            margin-bottom: 15px;
-        }
-
-        .series-title {
-            font-size: 1.5rem;
-            margin-bottom: 8px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
-        }
-
-        .romantic .series-title {
-            color: #ffd700;
-        }
-
-        .mysterious .series-title {
-            color: #c9b037;
-        }
-
-        .series-subtitle {
-            font-size: 0.9rem;
-            font-style: italic;
-            color: #ffebcd;
+        .header p {
+            font-size: 1.3em;
             opacity: 0.9;
+            font-style: italic;
         }
 
-        .series-description {
+        .chambers-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .chamber {
+            background: linear-gradient(135deg, #FFF0F5 0%, #FFE4E6 100%);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border: 2px solid #FF69B4;
+            transition: all 0.3s ease;
+        }
+
+        .chamber:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(255, 105, 180, 0.2);
+            border-color: #FF1493;
+        }
+
+        .chamber-verlangen {
+            border-color: #FF69B4;
+        }
+
+        .chamber-kammern {
+            border-color: #C2185B;
+        }
+
+        .chamber-title {
+            font-size: 1.8em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-align: center;
+            padding: 15px;
+            border-radius: 15px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .chamber-verlangen .chamber-title {
+            background: linear-gradient(135deg, #FF69B4, #FF1493);
+        }
+
+        .chamber-kammern .chamber-title {
+            background: linear-gradient(135deg, #C2185B, #8B1538);
+        }
+
+        .chamber-description {
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #8B1538;
+        }
+
+        .chamber-content {
+            text-align: center;
+        }
+
+        .serie-preview {
+            background: linear-gradient(135deg, #FFE4E6, #FFF0F5);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border: 2px solid #FF69B4;
+        }
+
+        .serie-preview h3 {
+            color: #C2185B;
+            font-size: 1.4em;
+            margin-bottom: 10px;
+        }
+
+        .serie-preview p {
+            color: #8B1538;
+            font-size: 1.1em;
             margin-bottom: 15px;
         }
 
-        .series-description p {
-            font-size: 0.9rem;
-            line-height: 1.4;
-            color: #e6ddc4;
-        }
-
-        .series-stats {
+        .serie-stats {
             display: flex;
             justify-content: center;
             gap: 20px;
@@ -229,181 +157,159 @@
 
         .stat-item {
             text-align: center;
+            background: white;
+            padding: 10px 15px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
         }
 
         .stat-number {
-            font-size: 1.4rem;
+            font-size: 1.3em;
             font-weight: bold;
-            color: #ffd700;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+            color: #C2185B;
+            margin-bottom: 5px;
         }
 
         .stat-label {
-            font-size: 0.8rem;
-            color: #ffebcd;
-            opacity: 0.8;
+            font-size: 0.9em;
+            color: #8B1538;
         }
 
-        .button-container {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .series-btn {
-            background: linear-gradient(45deg, #28a745, #20c997);
+        .chamber-button {
+            background: linear-gradient(135deg, #FF69B4, #C2185B);
             color: white;
+            padding: 15px 30px;
             border: none;
-            padding: 10px 20px;
-            border-radius: 20px;
-            font-size: 0.9rem;
+            border-radius: 25px;
+            font-size: 1.2em;
             font-weight: bold;
             cursor: pointer;
-            transition: all 0.3s ease;
             text-decoration: none;
             display: inline-block;
-            box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
-        }
-
-        .series-btn:hover {
-            background: linear-gradient(45deg, #20c997, #28a745);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(40, 167, 69, 0.4);
-        }
-
-        .back-link {
-            text-align: center;
-            margin-top: 50px;
-        }
-
-        .back-link a {
-            color: #ffd700;
-            text-decoration: none;
-            font-size: 1.2rem;
-            padding: 15px 30px;
-            border: 2px solid #ffd700;
-            border-radius: 25px;
             transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.3);
         }
 
-        .back-link a:hover {
-            background: #ffd700;
-            color: #2c1810;
+        .chamber-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(255,215,0,0.3);
+            box-shadow: 0 8px 20px rgba(255, 105, 180, 0.4);
+        }
+
+        .info-text {
+            font-size: 0.9em;
+            color: #8B1538;
+            margin-top: 10px;
+            font-style: italic;
         }
 
         @media (max-width: 768px) {
-            .series-container {
+            .chambers-container {
                 grid-template-columns: 1fr;
                 gap: 20px;
             }
-
+            
             .header h1 {
-                font-size: 2.5rem;
+                font-size: 2.2em;
             }
-
-            .series-card {
+            
+            .chamber {
                 padding: 20px;
-                height: auto;
-                min-height: 280px;
             }
-
-            .series-title {
-                font-size: 1.3rem;
+            
+            .chamber-title {
+                font-size: 1.5em;
+            }
+            
+            .serie-stats {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .back-button {
+                position: relative;
+                top: 0;
+                left: 0;
+                margin-bottom: 15px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>Romantik Fiktion</h1>
-        <div class="subtitle">Fesselnde Serien voller Leidenschaft und Geheimnisse</div>
-    </div>
-
-    <div class="navigation">
-        <div class="nav-breadcrumb">
-            <span>Genres</span>
-            <div class="arrow">→</div>
-            <span>Romantik</span>
-            <div class="arrow">→</div>
-            <span style="color: #ffebcd;">Serien-Übersicht</span>
+    <div class="container">
+        <div class="header">
+            <a href="index.html" class="back-button">← Zurück zur Startseite</a>
+            <h1>💕 Romantik Fiktion</h1>
+            <p>Fesselnde Serien voller Leidenschaft und Geheimnisse<br>Emotionale Reisen durch die Welt der Liebe</p>
         </div>
-        <div style="margin-top: 20px;">
-            <a href="lese-vorlese-verlangen-der-herzen.html" class="books-button">📚 Romane entdecken</a>
-        </div>
-    </div>
 
-    <div class="intro-section">
-        <h2>Willkommen in der Welt der Romantik</h2>
-        <p>Entdecken Sie fesselnde Serien, die Sie in völlig verschiedene Welten entführen. Von emotionalen Reisen der Liebe bis hin zu geheimnisvollen Kunstschätzen und verbotener Leidenschaft.</p>
-    </div>
-
-    <div class="series-container">
-        <!-- Serie 1: Verlangen der Herzen -->
-        <div class="series-card romantic">
-            <div class="series-content">
-                <div class="series-header">
-                    <h3 class="series-title">Verlangen der Herzen</h3>
-                    <div class="series-subtitle">Adelaide Hills Serie</div>
+        <div class="chambers-container">
+            <!-- Kammer 1: Verlangen der Herzen -->
+            <div class="chamber chamber-verlangen">
+                <div class="chamber-title">💖 Verlangen der Herzen</div>
+                <div class="chamber-description">
+                    Eine emotionale Reise durch die Höhen und Tiefen der Liebe in den malerischen Adelaide Hills.
                 </div>
                 
-                <div class="series-description">
-                    <p>Eine emotionale Reise durch die Höhen und Tiefen der Liebe. Clara und Alex entdecken in den malerischen Adelaide Hills zueinander.</p>
-                </div>
-
-                <div class="series-stats">
-                    <div class="stat-item">
-                        <div class="stat-number">4</div>
-                        <div class="stat-label">Bände</div>
+                <div class="chamber-content">
+                    <div class="serie-preview">
+                        <h3>Clara & Alex - Adelaide Hills Serie</h3>
+                        <p>Eine emotionale Reise durch die Höhen und Tiefen der Liebe. Clara und Alex entdecken in den malerischen Adelaide Hills zueinander und durchleben gemeinsam die schönsten und schwierigsten Momente ihrer Beziehung.</p>
+                        
+                        <div class="serie-stats">
+                            <div class="stat-item">
+                                <div class="stat-number">4</div>
+                                <div class="stat-label">Bände</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">🇩🇪🇬🇧</div>
+                                <div class="stat-label">Sprachen</div>
+                            </div>
+                        </div>
+                        
+                        <p><strong>Band 1:</strong> Unter dem Sternenhimmel - Deutsch & Englisch<br>
+                        <strong>Band 2:</strong> Im Netz der Liebe - Deutsch & Englisch<br>
+                        <strong>Band 3:</strong> Ankommen im neuen Leben - Deutsch & Englisch<br>
+                        <strong>Band 4:</strong> Gemeinsam in die Zukunft - Deutsch & Englisch</p>
                     </div>
-                    <div class="stat-item">
-                        <div class="stat-number">🇩🇪🇬🇧</div>
-                        <div class="stat-label">Sprachen</div>
-                    </div>
+                    
+                    <a href="verlangen-der-herzen.html" class="chamber-button">💕 Serie entdecken</a>
+                    <div class="info-text">4 Bände - Deutsch & Englisch - Lesen & Vorlesen System</div>
                 </div>
+            </div>
 
-                <div class="button-container">
-                    <a href="lese-vorlese-verlangen-der-herzen.html" class="series-btn">Serie entdecken</a>
+            <!-- Kammer 2: Die verborgenen Kammern -->
+            <div class="chamber chamber-kammern">
+                <div class="chamber-title">🌹 Die verborgenen Kammern</div>
+                <div class="chamber-description">
+                    In den Schatten alter Gemäuer verbergen sich die tiefsten Geheimnisse des Herzens und verbotene Leidenschaft.
+                </div>
+                
+                <div class="chamber-content">
+                    <div class="serie-preview">
+                        <h3>Geheimnisvolle Romanzen</h3>
+                        <p>In den Schatten alter Gemäuer verbergen sich nicht nur architektonische Schätze, sondern auch die tiefsten Geheimnisse des Herzens. Elena entdeckt eine verborgene Welt voller Leidenschaft und Geheimnisse.</p>
+                        
+                        <div class="serie-stats">
+                            <div class="stat-item">
+                                <div class="stat-number">3</div>
+                                <div class="stat-label">Bände</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">🇩🇪🇬🇧🇪🇸</div>
+                                <div class="stat-label">Sprachen</div>
+                            </div>
+                        </div>
+                        
+                        <p><strong>Band 1:</strong> Hinter verschlossenen Türen - Deutsch & Englisch & Spanisch<br>
+                        <strong>Band 2:</strong> Die Kunst der Hingabe - Deutsch & Englisch<br>
+                        <strong>Band 3:</strong> Die Tiefe der Begierde - Deutsch & Englisch</p>
+                    </div>
+                    
+                    <a href="die-verborgenen-kammern.html" class="chamber-button">🌹 Serie entdecken</a>
+                    <div class="info-text">3 Bände - Deutsch & Englisch & Spanisch - Lesen & Vorlesen System</div>
                 </div>
             </div>
         </div>
-
-        <!-- Serie 2: Die verborgenen Kammern -->
-        <div class="series-card mysterious">
-            <div class="series-content">
-                <div class="series-header">
-                    <h3 class="series-title">Die verborgenen Kammern</h3>
-                    <div class="series-subtitle">Geheimnisvolle Romanzen</div>
-                </div>
-                
-                <div class="series-description">
-                    <p>In den Schatten alter Gemäuer verbergen sich nicht nur architektonische Schätze, sondern auch die tiefsten Geheimnisse des Herzens.</p>
-                </div>
-
-                <div class="series-stats">
-                    <div class="stat-item">
-                        <div class="stat-number">3</div>
-                        <div class="stat-label">Bände</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">🇩🇪🇬🇧🇪🇸</div>
-                        <div class="stat-label">Sprachen</div>
-                    </div>
-                </div>
-
-                <div class="button-container">
-                    <a href="lese-vorlese-verborgene-kammern.html" class="series-btn">Serie entdecken</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="back-link">
-        <a href="index.html">← Zurück zur Hauptseite</a>
     </div>
 </body>
 </html>
