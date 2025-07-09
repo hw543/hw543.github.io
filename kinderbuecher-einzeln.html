@@ -3,22 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kinderbücher - Helmut Wegners Wortwelten</title>
+    <title>Einzelne Kinderbücher - Helmut Wegners Wortwelten</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
             font-family: 'Georgia', serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
             background: linear-gradient(135deg, #FFE5B4 0%, #FFB6C1 50%, #98FB98 100%);
             min-height: 100vh;
-            padding: 20px;
-            color: #2F4F4F;
         }
-
+        
         .rainbow-header {
             height: 20px;
             background: linear-gradient(90deg, 
@@ -31,21 +26,21 @@
                 #9400D3 84%, 
                 #FF1493 100%);
             box-shadow: 0 3px 10px rgba(0,0,0,0.2);
-            margin-bottom: 20px;
         }
-
+        
         .container {
             max-width: 1200px;
-            margin: 0 auto;
+            margin: 20px auto;
+            padding: 0 20px;
         }
-
+        
         .header {
             background: linear-gradient(135deg, #FFE4E1 0%, #E6E6FA 100%);
             color: #2F4F4F;
-            padding: 30px;
+            padding: 40px;
             border-radius: 20px;
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
             border: 3px solid #FFD700;
             position: relative;
@@ -72,215 +67,154 @@
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(138,43,226,0.4);
         }
-
+        
         .header h1 {
-            font-size: 2.8em;
+            font-size: 3em;
             margin-bottom: 10px;
             color: #FF6347;
             text-shadow: 2px 2px 4px rgba(255,105,180,0.3);
         }
-
+        
         .header p {
             font-size: 1.3em;
             color: #9370DB;
             font-style: italic;
+            margin-bottom: 20px;
         }
-
-        .chambers-container {
+        
+        .books-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 30px;
-            margin-top: 30px;
+            margin-bottom: 40px;
         }
-
-        .chamber {
+        
+        .book-card {
             background: linear-gradient(135deg, #FFF8DC 0%, #F0F8FF 100%);
             border-radius: 20px;
             padding: 30px;
+            text-align: center;
             box-shadow: 0 10px 25px rgba(0,0,0,0.15);
             border: 2px solid #DDA0DD;
             transition: all 0.3s ease;
         }
-
-        .chamber:hover {
+        
+        .book-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 15px 35px rgba(0,0,0,0.2);
             border-color: #FFD700;
         }
-
-        .chamber-serien {
-            border-color: #FF6347;
+        
+        .book-cover {
+            width: 180px;
+            height: 260px;
+            margin: 0 auto 20px;
+            border-radius: 15px;
+            border: 3px solid #FFD700;
+            object-fit: cover;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+            transition: transform 0.3s ease;
         }
-
-        .chamber-einzeln {
-            border-color: #32CD32;
+        
+        .book-cover:hover {
+            transform: scale(1.05);
         }
-
-        .chamber-title {
+        
+        .book-title {
             font-size: 1.8em;
-            font-weight: bold;
-            margin-bottom: 15px;
-            text-align: center;
-            padding: 15px;
-            border-radius: 15px;
-            color: white;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-
-        .chamber-serien .chamber-title {
-            background: linear-gradient(135deg, #FF6347, #FF4500);
-        }
-
-        .chamber-einzeln .chamber-title {
-            background: linear-gradient(135deg, #32CD32, #00FA9A);
-        }
-
-        .chamber-description {
-            font-size: 1.1em;
-            line-height: 1.6;
-            margin-bottom: 20px;
-            text-align: center;
-            color: #2F4F4F;
-        }
-
-        .chamber-content {
-            text-align: center;
-        }
-
-        .serie-preview {
-            background: linear-gradient(135deg, #FFF0F5, #E6E6FA);
-            padding: 20px;
-            border-radius: 15px;
-            margin-bottom: 20px;
-            border: 2px solid #FF6347;
-        }
-
-        .serie-preview h3 {
             color: #FF6347;
-            font-size: 1.4em;
-            margin-bottom: 10px;
-        }
-
-        .serie-preview p {
-            color: #2F4F4F;
-            font-size: 1.1em;
             margin-bottom: 15px;
+            font-weight: bold;
         }
-
-        .serie-cover {
-            width: 80px;
-            height: 120px;
-            border-radius: 10px;
-            border: 2px solid #FFD700;
-            object-fit: cover;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            margin: 0 auto 15px;
-        }
-
-        .einzelbuecher-preview {
-            background: linear-gradient(135deg, #F0FFF0, #FFFACD);
-            padding: 20px;
-            border-radius: 15px;
-            margin-bottom: 20px;
-            border: 2px solid #32CD32;
-        }
-
-        .books-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .book-mini {
-            background: white;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            text-align: center;
-            border: 2px solid #32CD32;
-        }
-
-        .book-mini img {
-            width: 60px;
-            height: 90px;
-            object-fit: cover;
-            border-radius: 8px;
-            margin-bottom: 8px;
-            border: 1px solid #FFD700;
-        }
-
-        .book-mini h4 {
-            color: #32CD32;
-            font-size: 0.9em;
-            margin-bottom: 5px;
-        }
-
-        .book-mini p {
+        
+        .book-description {
+            font-size: 1.1em;
             color: #2F4F4F;
-            font-size: 0.8em;
+            margin-bottom: 20px;
+            line-height: 1.6;
         }
-
-        .chamber-button {
-            background: linear-gradient(135deg, #FF6347, #32CD32);
-            color: white;
-            padding: 15px 30px;
+        
+        .book-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 12px 24px;
             border: none;
             border-radius: 25px;
-            font-size: 1.2em;
+            font-size: 1.1em;
             font-weight: bold;
             cursor: pointer;
             text-decoration: none;
-            display: inline-block;
             transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            display: inline-block;
+            min-width: 120px;
         }
-
-        .chamber-button:hover {
+        
+        .btn-read {
+            background: linear-gradient(135deg, #FF6347, #FF4500);
+            color: white;
+        }
+        
+        .btn-read:hover {
+            background: linear-gradient(135deg, #FF4500, #FF2400);
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            box-shadow: 0 5px 15px rgba(255,99,71,0.4);
+        }
+        
+        .btn-amazon {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #8B4513;
         }
 
-        .chamber-button-disabled {
+        .btn-amazon:hover {
+            background: linear-gradient(135deg, #FFA500, #FF8C00);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255,215,0,0.4);
+        }
+
+        .btn-disabled {
             background: #ccc;
             color: #666;
             cursor: not-allowed;
         }
 
-        .chamber-button-disabled:hover {
+        .btn-disabled:hover {
             transform: none;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            box-shadow: none;
         }
-
-        .info-text {
-            font-size: 0.9em;
-            color: #666;
-            margin-top: 10px;
-            font-style: italic;
-        }
-
+        
         @media (max-width: 768px) {
-            .chambers-container {
+            .books-grid {
                 grid-template-columns: 1fr;
                 gap: 20px;
             }
             
             .header h1 {
-                font-size: 2.2em;
+                font-size: 2.5em;
             }
             
-            .chamber {
-                padding: 20px;
+            .book-cover {
+                width: 150px;
+                height: 220px;
             }
             
-            .chamber-title {
+            .book-title {
                 font-size: 1.5em;
             }
             
-            .books-grid {
-                grid-template-columns: 1fr;
+            .book-actions {
+                flex-direction: column;
+                align-items: center;
             }
             
+            .btn {
+                width: 200px;
+            }
+
             .back-button {
                 position: relative;
                 top: 0;
@@ -295,67 +229,66 @@
     
     <div class="container">
         <div class="header">
-            <a href="index.html" class="back-button">← Zurück zur Startseite</a>
-            <h1>📚 Kinderbücher</h1>
-            <p>Spannende Abenteuer zum Vorlesen und Entdecken<br>Magische Geschichten, die Kinder begeistern!</p>
+            <a href="kinderbuecher.html" class="back-button">← Zurück zur Übersicht</a>
+            <h1>📚 Einzelne Kinderbücher</h1>
+            <p>Spannende Abenteuer zum Vorlesen und Entdecken</p>
+            <p>Magische Geschichten, die Kinder begeistern!</p>
         </div>
-
-        <div class="chambers-container">
-            <!-- Kammer 1: Kinderbuch-Serien -->
-            <div class="chamber chamber-serien">
-                <div class="chamber-title">🌟 Kinderbuch-Serien</div>
-                <div class="chamber-description">
-                    Mehrteilige Kindergeschichten mit durchgehenden Charakteren und zusammenhängenden Handlungssträngen.
-                </div>
-                
-                <div class="chamber-content">
-                    <div class="serie-preview">
-                        <img src="mondstein.jpg" alt="Mondstein Serie Cover" class="serie-cover">
-                        <h3>🌙 Die Mondstein-Serie</h3>
-                        <p><strong>Eine aufregende neue Buchreihe mit 3 Bänden!</strong></p>
-                        <p>Eine magische Trilogie voller Abenteuer und Geheimnisse wartet auf euch! Die Mondstein-Serie wird bald mit drei spannenden Bändern erscheinen.</p>
-                    </div>
-                    
-                    <a href="#" class="chamber-button chamber-button-disabled">Serie entdecken</a>
-                    <div class="info-text">Erscheint demnächst mit der ersten Kinderbuch-Serie!</div>
+        
+        <div class="books-grid">
+            <!-- Buch 1: Die Zauberakademie von Morgenstern -->
+            <div class="book-card">
+                <img src="die-zauberakademie.jpg" alt="Die Zauberakademie von Morgenstern Cover" class="book-cover">
+                <h2 class="book-title">Die Zauberakademie von Morgenstern</h2>
+                <p class="book-description">
+                    Leonas ist anders als andere Kinder. Tiere vertrauen ihm, und Pflanzen gedeihen unter seinen Händen. 
+                    Als ein geheimnisvoller Bote ihm eine magische Einladung bringt, beginnt das größte Abenteuer seines Lebens.
+                </p>
+                <div class="book-actions">
+                    <a href="lese-vorlese-zauberakademie.html" class="btn btn-read">🎵 Vorlesen</a>
+                    <a href="https://www.amazon.de/dp/B0F8V7TLVT" class="btn btn-amazon">🛒 Bei Amazon kaufen</a>
                 </div>
             </div>
-
-            <!-- Kammer 2: Einzelne Kinderbücher -->
-            <div class="chamber chamber-einzeln">
-                <div class="chamber-title">📖 Einzelne Kinderbücher</div>
-                <div class="chamber-description">
-                    Standalone Kindergeschichten mit abgeschlossenen Handlungen und eigenständigen Charakteren.
+            
+            <!-- Buch 2: Das Geheimnis des verborgenen Waldes -->
+            <div class="book-card">
+                <img src="verborgener-wald.jpg" alt="Das Geheimnis des verborgenen Waldes Cover" class="book-cover">
+                <h2 class="book-title">Das Geheimnis des verborgenen Waldes</h2>
+                <p class="book-description">
+                    Max und Lisa finden eine geheimnisvolle Karte, die sie zu einem magischen Ort führt. 
+                    Gemeinsam mit ihrem Hund Bruno begeben sie sich auf eine Reise voller Wunder und Geheimnisse.
+                </p>
+                <div class="book-actions">
+                    <a href="lese-vorlese-verborgenerwald.html" class="btn btn-read">🎵 Vorlesen</a>
+                    <a href="#" class="btn btn-amazon btn-disabled">🛒 Bald verfügbar</a>
                 </div>
-                
-                <div class="chamber-content">
-                    <div class="einzelbuecher-preview">
-                        <div class="books-grid">
-                            <div class="book-mini">
-                                <img src="die-zauberakademie.jpg" alt="Die Zauberakademie Cover">
-                                <h4>🏰 Die Zauberakademie</h4>
-                                <p>Magische Abenteuer</p>
-                            </div>
-                            <div class="book-mini">
-                                <img src="zeitnarr.jpg" alt="Der Zeitnarr Cover">
-                                <h4>⏰ Der Zeitnarr</h4>
-                                <p>Zeitreise-Abenteuer</p>
-                            </div>
-                            <div class="book-mini">
-                                <img src="raetseldetektivclub.jpg" alt="Rätseldetektiv-Club Cover">
-                                <h4>🕵️ Rätseldetektiv-Club</h4>
-                                <p>Spannende Rätsel</p>
-                            </div>
-                            <div class="book-mini">
-                                <img src="verborgener-wald.jpg" alt="Verborgener Wald Cover">
-                                <h4>🌲 Verborgener Wald</h4>
-                                <p>Natur-Abenteuer</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <a href="kinderbuecher-einzeln.html" class="chamber-button">📚 Bücher entdecken</a>
-                    <div class="info-text">4 Bücher - Deutsch & Englisch - Lesen & Vorlesen System</div>
+            </div>
+            
+            <!-- Buch 3: Der Rätseldetektivclub -->
+            <div class="book-card">
+                <img src="raetseldetektivclub.jpg" alt="Der Rätseldetektivclub Cover" class="book-cover">
+                <h2 class="book-title">Der Rätseldetektivclub</h2>
+                <p class="book-description">
+                    Max, Emma, Jonas und Lena sind die besten Rätseldetektive weit und breit! 
+                    Als sie eine geheimnisvolle Notiz finden, führt sie diese in ein aufregendes Abenteuer voller Mysterien.
+                </p>
+                <div class="book-actions">
+                    <a href="lese-vorlese-raetseldetektivclub.html" class="btn btn-read">🎵 Vorlesen</a>
+                    <a href="https://www.amazon.de/dp/B0F8Q3LQ6K" class="btn btn-amazon">🛒 Bei Amazon kaufen</a>
+                </div>
+            </div>
+            
+            <!-- Buch 4: Der Zeitnarr -->
+            <div class="book-card">
+                <img src="zeitnarr.jpg" alt="Der Zeitnarr Cover" class="book-cover">
+                <h2 class="book-title">Der Zeitnarr</h2>
+                <p class="book-description">
+                    Max findet auf einem Flohmarkt eine geheimnisvolle Taschenuhr. 
+                    Doch als er sie aufzieht, wird er in ein unglaubliches Abenteuer durch die Zeit geschleudert!
+                </p>
+                <div class="book-actions">
+                    <a href="lese-vorlese-zeitnarr.html" class="btn btn-read">🎵 Vorlesen</a>
+                    <a href="https://www.amazon.de/dp/B0F8HY1P5G" class="btn btn-amazon">🛒 Bei Amazon kaufen</a>
                 </div>
             </div>
         </div>
