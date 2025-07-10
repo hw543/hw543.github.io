@@ -178,21 +178,34 @@
         }
 
         .amazon-btn {
-            background: #cccccc;
-            color: #666666;
+            background: linear-gradient(135deg, #ff7b54, #ff6b35);
+            color: white;
             border: none;
             padding: 8px 15px;
             border-radius: 15px;
-            cursor: not-allowed;
+            cursor: pointer;
             font-size: 0.85em;
             font-weight: bold;
             min-width: 110px;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
         }
 
-        .amazon-btn.active {
-            background: linear-gradient(135deg, #ff7b54, #ff6b35);
-            color: white;
-            cursor: pointer;
+        .amazon-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
+        }
+
+        .amazon-btn.disabled {
+            background: #cccccc;
+            color: #666666;
+            cursor: not-allowed;
+        }
+
+        .amazon-btn.disabled:hover {
+            transform: none;
+            box-shadow: none;
         }
 
         .language-content {
@@ -325,7 +338,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <a href="die-verborgenen-kammern.html" class="back-button">← Zurück zur Serie</a>
+            <a href="romantik-fiktion.html" class="back-button">← Zurück zur Romantik</a>
             <h1>Die Verborgenen Kammern</h1>
             <p>Lesen & Vorlesen-System für alle drei Bände</p>
         </div>
@@ -337,10 +350,10 @@
                 <button class="voice-btn stop" onclick="stopReading()">⏹️ Stop</button>
             </div>
             
-            <div class="language-navigation">
+            <div class="language-navigation" id="languageNav">
                 <button class="btn-lang active" onclick="switchLanguage('de')">🇩🇪 Deutsch</button>
                 <button class="btn-lang" onclick="switchLanguage('en')">🇬🇧 English</button>
-                <button class="btn-lang" onclick="switchLanguage('es')">🇪🇸 Español</button>
+                <button class="btn-lang" onclick="switchLanguage('es')" id="spanishBtn">🇪🇸 Español</button>
             </div>
             
             <div class="band-nav">
@@ -349,10 +362,8 @@
                 <button class="band-btn" onclick="showBand(3)" id="band3-btn">Band 3</button>
             </div>
             
-            <div class="amazon-nav">
-                <button class="amazon-btn active" id="amazon-de1" onclick="window.open('https://amazon.de/dp/B0F1YC3J79', '_blank')">Band 1 - Amazon DE</button>
-                <button class="amazon-btn" id="amazon-de2">Band 2 - In Vorbereitung</button>
-                <button class="amazon-btn" id="amazon-de3">Band 3 - In Vorbereitung</button>
+            <div class="amazon-nav" id="amazonNav">
+                <a href="https://amazon.de/dp/B0F1YC3J79" target="_blank" class="amazon-btn" id="amazonBtn">Bei Amazon kaufen</a>
             </div>
         </div>
 
@@ -571,7 +582,7 @@
                 </div>
             </div>
 
-            <!-- SPANISCHE VERSIONEN -->
+            <!-- SPANISCHE VERSIONEN NUR FÜR BAND 1 -->
             <div id="es-content" class="language-content hidden">
                 <!-- Band 1: Tras Puertas Cerradas -->
                 <div class="band-content active" id="es-band1">
@@ -604,78 +615,6 @@
                         <p>"Muy bien, treinta minutos".</p>
                     </div>
                 </div>
-
-                <!-- Band 2: El Arte de la Entrega -->
-                <div class="band-content" id="es-band2">
-                    <div class="band-cover">
-                        <img src="die-kunst-der-hingabe.jpg" alt="El Arte de la Entrega Cover">
-                    </div>
-                    <h2 class="band-title">Volumen 2: El Arte de la Entrega</h2>
-                    <h3 class="chapter-title">Capítulo 1: El Legado</h3>
-                    <div class="story-text">
-                        <p>La noticia de la muerte de su tía Marie llegó a Marcus en una fría mañana de otoño. El sol estaba bajo en el horizonte, bañando el paisaje toscano en luz dorada que apenas podía penetrar las sombras del pasado. Elena, que estaba a su lado, sintió el peso de la noticia que presionaba fuertemente sobre los hombros de Marcus. Marie, la matriarca de la familia Castellano, había sido más que una pariente; había sido la guardiana de un legado que se extendía mucho más allá del arte y la historia.</p>
-                        
-                        <p>El viaje a la finca familiar en la Toscana estuvo marcado por un extraño silencio. Elena observó cómo los rasgos de Marcus se endurecían con cada kilómetro, como si se estuviera escondiendo detrás de una máscara de control y deber. Sabía que el funeral era más que una despedida -- era una confrontación con el pasado que Marcus había tratado tanto tiempo de suprimir.</p>
-                        
-                        <p>La finca, un edificio imponente de piedra e historia, se alzaba ante ellos como un testigo silencioso del tiempo. En el gran salón, donde la luz caía a través de altas ventanas, se reunió la familia. El aire estaba pesado con palabras no dichas y viejos secretos. Cuando se leyó el testamento, Elena sintió que la atmósfera cambiaba. Se mencionó una parte desconocida de la colección, un "tesoro perdido" que había acompañado a la familia durante generaciones.</p>
-                        
-                        <p>Marie había dejado a Marcus un mensaje cifrado que hablaba de un legado mucho más que simples posesiones materiales. Elena vio cómo las manos de Marcus temblaban ligeramente cuando recibió el documento. El dolor y la dinámica familiar parecían llevarlo de vuelta a viejos patrones de comportamiento, y Elena se preguntó si la carga del pasado alguna vez caería de él.</p>
-                        
-                        <p>En este momento de silencio, mientras la familia se retiraba, Elena permaneció al lado de Marcus. Sintió la vulnerabilidad detrás de su fachada y supo que el viaje por delante no era solo una búsqueda de un tesoro perdido, sino también un viaje hacia sí mismo.</p>
-                        
-                        <p>El silencio en la habitación era casi tangible mientras Marcus contemplaba el documento en sus manos. El mensaje cifrado de su tía Marie no era solo un rompecabezas, sino una clave a un mundo que apenas conocía. Elena lo observó intensamente, sus ojos buscando signos de debilidad o incertidumbre, pero Marcus permaneció exteriormente compuesto.</p>
-                        
-                        <p>"¿Qué crees que está tratando de decirnos?" preguntó Elena en voz baja, su voz apenas más que un susurro.</p>
-                        
-                        <p>Marcus levantó la mirada y la miró, sus ojos reflejando una mezcla de dolor y determinación. "Marie siempre fue una maestra de los secretos. Quería que encontráramos la verdad por nosotros mismos, que confrontáramos el pasado."</p>
-                        
-                        <p>Elena asintió y gentilmente puso su mano en su hombro. "Lo resolveremos juntos. Pero primero necesitamos ocuparnos del funeral."</p>
-                        
-                        <p>El funeral fue un evento silencioso y digno. La familia y amigos cercanos se reunieron para rendir sus últimos respetos a Marie. El sacerdote habló palabras de consuelo, pero los pensamientos de Marcus estaban muy lejos. Pensó en las muchas historias que Marie le había contado, en los secretos que había guardado.</p>
-                    </div>
-                </div>
-
-                <!-- Band 3: La Profundidad del Deseo -->
-                <div class="band-content" id="es-band3">
-                    <div class="band-cover">
-                        <img src="die-tiefe-der-begierde.jpg" alt="La Profundidad del Deseo Cover">
-                    </div>
-                    <h2 class="band-title">Volumen 3: La Profundidad del Deseo</h2>
-                    <h3 class="chapter-title">Capítulo 1: La Oferta</h3>
-                    <div class="story-text">
-                        <p>El pigmento se desmoronó bajo los cuidadosos movimientos de Elena. Diminutas partículas de color, antes rojo brillante, ahora desvanecidas en un marrón apagado, se deslizaron sobre la tela blanca que había extendido debajo de la pintura. Hacía más de doscientos años, un artista había mezclado este tono con sulfuro de mercurio y aglutinantes orgánicos, sin saber que su creación algún día yacería bajo el microscopio y el bisturí de Elena.</p>
-                        
-                        <p>"Siglos", murmuró, mientras descubría la siguiente capa con dedos expertos. "Y aun así me revelas tus secretos."</p>
-                        
-                        <p>Elena Winters trabajaba en el espacioso estudio de restauración del Museo Friedrich de Berlín, rodeada de instrumentos especializados, productos químicos y obras de referencia. Los altos ventanales dejaban entrar una luz constante del norte, la luz ideal para su preciso trabajo. La pintura del Barroco tardío, una representación de la diosa Diana cazando, había sido su proyecto durante tres semanas. Era un desafío, pero eso era precisamente lo que hacía que el trabajo fuera tan satisfactorio.</p>
-                        
-                        <p>El móvil de Elena vibró sobre la mesa de trabajo. Lo ignoró. La zona alrededor del ojo derecho de Diana requería toda su concentración: demasiadas capas de pintura, demasiado barniz, aplicado por restauradores bienintencionados pero ignorantes de siglos pasados. Su tarea consistía en penetrar a través de todas esas capas hasta llegar al original sin dañarlo.</p>
-                        
-                        <p>El teléfono volvió a vibrar. Elena suspiró, dejó el bisturí y se quitó los guantes de látex. Era el director Schumann, como revelaba la pantalla. El director del museo rara vez la llamaba directamente; solía comunicarse a través de su asistente o por correo electrónico.</p>
-                        
-                        <p>"Winters", respondió secamente.</p>
-                        
-                        <p>"Elena, me alegro de contactarla". La voz del director sonaba inusualmente entusiasta. "¿Podría estar en mi oficina en media hora? Tengo a alguien aquí que quiere conocerla".</p>
-                        
-                        <p>Miró la pintura a medio restaurar. "Estoy trabajando en la Diana, señor director".</p>
-                        
-                        <p>"Eso puede esperar. Esta oportunidad no."</p>
-                        
-                        <p>Elena reprimió un suspiro. En su profesión, había aprendido que el tiempo era relativo. Para ella, los minutos a veces marcaban la diferencia entre la historia preservada y la destruida. Para administradores como Schumann, las citas y las conversaciones para establecer contactos eran más importantes.</p>
-                        
-                        <p>"Muy bien, treinta minutos".</p>
-                        
-                        <p>Cuando Elena entró en la oficina del director, Schumann se levantó apresuradamente de su escritorio. Un segundo hombre estaba de pie en la ventana, de espaldas a ella. Se giró lentamente -- alto, delgado, en un traje gris oscuro perfectamente ajustado. Su rostro estaba finamente cortado, con pómulos altos que recordaban a las esculturas clásicas.</p>
-                        
-                        <p>"Señora Winters", comenzó Schumann, "permítame presentarle: Marcus Castellano."</p>
-                        
-                        <p>El hombre se acercó y extendió su mano a Elena. Su apretón de manos fue firme y seco, su piel fría. "Es un placer conocerla, señora Winters", dijo con una voz que sonaba sorprendentemente cálida. Se podía escuchar un ligero acento -- mediterráneo, tal vez italiano.</p>
-                        
-                        <p>"El señor Castellano es el propietario del Museo Privado Castellano", explicó Schumann. "Una de las colecciones de arte privadas más importantes de Europa."</p>
-                        
-                        <p>Elena asintió brevemente. El nombre Castellano le era familiar -- una antigua familia europea, coleccionistas de arte por generaciones, su museo privado legendario pero notoriamente difícil de acceder.</p>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -685,15 +624,43 @@
         let currentBand = 1;
         let currentLanguage = 'de';
         let currentWordIndex = 0;
-        let allBandWords = {}; // Speichert Wörter für alle Bände und Sprachen
+        let allBandWords = {};
         let isReading = false;
         let lastHighlightedWord = null;
 
-        // Initialisiere alle Bände beim Seitenstart
+        // Amazon-Links je nach Band und Sprache
+        const amazonLinks = {
+            1: {
+                de: "https://amazon.de/dp/B0F1YC3J79",
+                en: "https://amazon.de/dp/B0F311L2ZQ", 
+                es: "https://amazon.de/dp/B0F37NJD39"
+            },
+            2: { de: null, en: null },
+            3: { de: null, en: null }
+        };
+
+        const amazonTexts = {
+            1: {
+                de: "Bei Amazon kaufen",
+                en: "Buy on Amazon",
+                es: "Comprar en Amazon"
+            },
+            2: {
+                de: "In Vorbereitung",
+                en: "In Preparation"
+            },
+            3: {
+                de: "In Vorbereitung", 
+                en: "In Preparation"
+            }
+        };
+
         function initializeAllBands() {
             ['de', 'en', 'es'].forEach(lang => {
                 allBandWords[lang] = {};
-                for (let bandNumber = 1; bandNumber <= 3; bandNumber++) {
+                const maxBands = lang === 'es' ? 1 : 3; // Spanisch nur für Band 1
+                
+                for (let bandNumber = 1; bandNumber <= maxBands; bandNumber++) {
                     const bandContent = document.querySelector(`#${lang}-band${bandNumber} .story-text`);
                     if (bandContent && !bandContent.querySelector('.word')) {
                         const paragraphs = bandContent.querySelectorAll('p');
@@ -701,7 +668,6 @@
                         let bandWords = [];
                         
                         paragraphs.forEach((paragraph) => {
-                            // Skip placeholder paragraphs
                             if (paragraph.style.textAlign === 'center') return;
                             
                             const paragraphText = paragraph.textContent;
@@ -717,89 +683,85 @@
                             paragraph.innerHTML = paragraphHTML;
                         });
                         
-                        // Speichere Wörter für diesen Band und Sprache
                         allBandWords[lang][bandNumber] = bandWords;
                     }
                 }
             });
         }
 
+        function updateLanguageButtons() {
+            const spanishBtn = document.getElementById('spanishBtn');
+            if (currentBand === 1) {
+                spanishBtn.style.display = 'inline-block';
+            } else {
+                spanishBtn.style.display = 'none';
+                if (currentLanguage === 'es') {
+                    switchLanguage('de');
+                }
+            }
+        }
+
+        function updateAmazonButton() {
+            const amazonBtn = document.getElementById('amazonBtn');
+            const link = amazonLinks[currentBand] && amazonLinks[currentBand][currentLanguage];
+            const text = amazonTexts[currentBand] && amazonTexts[currentBand][currentLanguage];
+            
+            if (link) {
+                amazonBtn.href = link;
+                amazonBtn.className = 'amazon-btn';
+                amazonBtn.onclick = null;
+            } else {
+                amazonBtn.href = '#';
+                amazonBtn.className = 'amazon-btn disabled';
+                amazonBtn.onclick = function(e) { e.preventDefault(); };
+            }
+            
+            amazonBtn.textContent = text || 'In Vorbereitung';
+        }
+
         function switchLanguage(lang) {
-            // Stoppe aktuelles Vorlesen
             stopReading();
             
-            // Verstecke alle Sprachen
             document.querySelectorAll('.language-content').forEach(content => {
                 content.classList.add('hidden');
             });
             
-            // Zeige ausgewählte Sprache
             document.getElementById(lang + '-content').classList.remove('hidden');
             
-            // Update Sprachbuttons
             document.querySelectorAll('.btn-lang').forEach(btn => {
                 btn.classList.remove('active');
             });
-            event.target.classList.add('active');
             
-            // Update Amazon-Button Texte
-            updateAmazonButtons(lang);
+            // Aktiviere Button nur wenn er sichtbar ist
+            const targetBtn = document.querySelector(`.btn-lang[onclick="switchLanguage('${lang}')"]`);
+            if (targetBtn && targetBtn.style.display !== 'none') {
+                targetBtn.classList.add('active');
+            }
             
             currentLanguage = lang;
             currentWordIndex = 0;
             clearHighlight();
-            
-            showBand(currentBand); // Zeige aktuellen Band in neuer Sprache
-        }
-
-        function updateAmazonButtons(lang) {
-            const amazonTexts = {
-                'de': ['Band 1 - Amazon DE', 'Band 2 - In Vorbereitung', 'Band 3 - In Vorbereitung'],
-                'en': ['Volume 1 - Amazon DE', 'Volume 2 - In Preparation', 'Volume 3 - In Preparation'],
-                'es': ['Volumen 1 - Amazon ES', 'Volumen 2 - En Preparación', 'Volumen 3 - En Preparación']
-            };
-            
-            const amazonLinks = {
-                'de': ['https://amazon.de/dp/B0F1YC3J79', null, null],
-                'en': ['https://amazon.de/dp/B0F311L2ZQ', null, null],
-                'es': ['https://amazon.es/dp/B0F37NJD39', null, null]
-            };
-            
-            for (let i = 1; i <= 3; i++) {
-                const btn = document.getElementById(`amazon-de${i}`);
-                if (btn) {
-                    btn.textContent = amazonTexts[lang][i-1];
-                    
-                    // Update click handler
-                    btn.onclick = null;
-                    if (amazonLinks[lang][i-1]) {
-                        btn.classList.remove('amazon-btn');
-                        btn.classList.add('amazon-btn', 'active');
-                        btn.onclick = function() {
-                            window.open(amazonLinks[lang][i-1], '_blank');
-                        };
-                        btn.style.cursor = 'pointer';
-                    } else {
-                        btn.classList.remove('active');
-                        btn.style.cursor = 'not-allowed';
-                    }
-                }
-            }
+            showBand(currentBand);
+            updateAmazonButton();
         }
 
         function showBand(bandNumber) {
-            // Stoppe aktuelles Vorlesen
             stopReading();
             
-            // Verstecke alle Bände in aktueller Sprache
-            for (let i = 1; i <= 3; i++) {
-                const bandElement = document.getElementById(`${currentLanguage}-band${i}`);
-                if (bandElement) {
-                    bandElement.classList.remove('active');
-                }
+            // Für Spanisch: nur Band 1 verfügbar
+            if (currentLanguage === 'es' && bandNumber > 1) {
+                bandNumber = 1;
             }
             
-            // Update Band-Buttons
+            for (let i = 1; i <= 3; i++) {
+                ['de', 'en', 'es'].forEach(lang => {
+                    const bandElement = document.getElementById(`${lang}-band${i}`);
+                    if (bandElement) {
+                        bandElement.classList.remove('active');
+                    }
+                });
+            }
+            
             document.querySelectorAll('.band-btn').forEach((btn, index) => {
                 btn.classList.remove('active');
                 if (index === bandNumber - 1) {
@@ -807,7 +769,6 @@
                 }
             });
             
-            // Zeige ausgewählten Band
             const targetBand = document.getElementById(`${currentLanguage}-band${bandNumber}`);
             if (targetBand) {
                 targetBand.classList.add('active');
@@ -816,6 +777,14 @@
             currentBand = bandNumber;
             currentWordIndex = 0;
             clearHighlight();
+            updateLanguageButtons();
+            updateAmazonButton();
+        }
+
+        function startReading() {
+            currentWordIndex = 0;
+            clearHighlight();
+            continueReading();
         }
 
         function continueReading() {
@@ -825,7 +794,6 @@
             
             const currentWords = allBandWords[currentLanguage] && allBandWords[currentLanguage][currentBand];
             if (currentWords && currentWords.length > 0) {
-                // Text ab der aktuellen Position
                 const remainingText = currentWords.slice(currentWordIndex).join(' ');
                 
                 currentSpeech = new SpeechSynthesisUtterance(remainingText);
@@ -851,32 +819,22 @@
             }
         }
 
-        function highlightCurrentWord(wordIndex) {
-            // Entferne vorherige Highlights
-            if (lastHighlightedWord) {
-                lastHighlightedWord.classList.remove('word-highlight');
-            }
-            
-            // Highlights das entsprechende Wort im aktuellen Band und Sprache
-            const wordSpan = document.querySelector(`#${currentLanguage}-band${currentBand} [data-word-index="${wordIndex}"]`);
-            if (wordSpan) {
-                wordSpan.classList.add('word-highlight');
-                lastHighlightedWord = wordSpan;
-                
-                // KEIN automatisches Scrolling - Leser bleibt bei Controls!
-            }
-        }
-
-        function startReading() {
-            currentWordIndex = 0;
-            clearHighlight();
-            continueReading();
-        }
-
         function startFromWord(wordIndex) {
             currentWordIndex = wordIndex;
             clearHighlight();
             continueReading();
+        }
+
+        function highlightCurrentWord(wordIndex) {
+            if (lastHighlightedWord) {
+                lastHighlightedWord.classList.remove('word-highlight');
+            }
+            
+            const wordSpan = document.querySelector(`#${currentLanguage}-band${currentBand} [data-word-index="${wordIndex}"]`);
+            if (wordSpan) {
+                wordSpan.classList.add('word-highlight');
+                lastHighlightedWord = wordSpan;
+            }
         }
 
         function clearHighlight() {
@@ -892,15 +850,15 @@
                 currentSpeech = null;
                 isReading = false;
             }
-            // Zurück zum Anfang + alle Markierungen löschen
             currentWordIndex = 0;
             clearHighlight();
         }
 
-        // Initialisierung beim Seitenstart
         document.addEventListener('DOMContentLoaded', function() {
-            initializeAllBands(); // Initialisiere ALLE Bände und Sprachen
-            showBand(1); // Zeige Band 1
+            initializeAllBands();
+            updateLanguageButtons();
+            updateAmazonButton();
+            showBand(1);
         });
     </script>
 </body>
