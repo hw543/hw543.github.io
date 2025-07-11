@@ -11,7 +11,115 @@
     <title>Romantik Fiktion - Helmut Wegners Wortwelten</title>
     <style>
         /* Ihr vorhandener CSS-Code */
-    </style><!DOCTYPE html>
+    </style><!DOCTYPE html><!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verlangen der Herzen - Lesen & Vorlesen-System - Helmut Wegners Wortwelten</title>
+    <style>
+        /* Ihr vorhandener CSS-Code */
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="back-button-header">
+                <a href="index.html" class="back-button">← Zurück zur Startseite</a>
+                <a href="romantik-fiktion.html" class="back-button">← Zurück zur Romantik</a>
+                <a href="verlangen-der-herzen.html" class="back-button">← Zurück zu Verlangen der Herzen</a>
+            </div>
+            <h1>Verlangen der Herzen</h1>
+            <p>Lesen & Vorlesen-System - Emotionale Romanzen aus den Adelaide Hills</p>
+            <div class="versuchsreihe-badge">LESE & VORLESE-SYSTEM</div>
+        </div>
+        <div class="controls">
+            <div class="control-buttons">
+                <button class="btn btn-play" onclick="startReading()">🔴 Vorlesen</button>
+                <button class="btn btn-continue" onclick="continueReading()">▶️ Weiterlesen</button>
+                <button class="btn btn-stop" onclick="stopReading()">⏹️ Stop</button>
+            </div>
+            <div class="language-navigation">
+                <button class="btn btn-lang active" onclick="switchLanguage('de')">🇩🇪 Deutsch</button>
+                <button class="btn btn-lang" onclick="switchLanguage('en')">🇬🇧 English</button>
+            </div>
+            <div class="band-navigation">
+                <div class="band-block">
+                    <button class="btn btn-band active" onclick="showBand(1)">
+                        <span>Band 1</span>
+                    </button>
+                    <div class="amazon-buttons">
+                        <a href="https://amazon.de/dp/B0F9Y4L5LK" class="btn btn-amazon" target="_blank">📖 Taschenbuch</a>
+                        <a href="https://amazon.de/dp/B0F9XFG5BR" class="btn btn-amazon" target="_blank">📱 eBook</a>
+                    </div>
+                </div>
+                <div class="band-block">
+                    <button class="btn btn-band" onclick="showBand(2)">
+                        <span>Band 2</span>
+                    </button>
+                    <div class="amazon-buttons">
+                        <a href="https://amazon.de/dp/B0FBL167H5" class="btn btn-amazon" target="_blank">📖 Taschenbuch</a>
+                        <a href="https://amazon.de/dp/B0FBKGJNY7" class="btn btn-amazon" target="_blank">📱 eBook</a>
+                    </div>
+                </div>
+                <div class="band-block">
+                    <button class="btn btn-band" onclick="showBand(3)">
+                        <span>Band 3</span>
+                    </button>
+                    <div class="amazon-buttons">
+                        <a href="https://amazon.de/dp/B0FBKKW3HF" class="btn btn-amazon" target="_blank">📱 eBook</a>
+                    </div>
+                </div>
+                <div class="band-block">
+                    <button class="btn btn-band" onclick="showBand(4)">
+                        <span>Band 4</span>
+                    </button>
+                    <div class="amazon-buttons">
+                        <button class="btn btn-amazon-disabled">Bald verfügbar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <div id="de-content" class="language-content">
+                <div id="de-band1" class="band-content">
+                    <div class="book-title">Unter dem Sternenhimmel</div>
+                    <div class="cover-image-frame">
+                        <img src="unter-dem-sternenhimmel.jpg" alt="Cover Band 1">
+                    </div>
+                    <div class="chapter-title">Kapitel 1: Begegnung</div>
+                    <div class="text-content" id="de-textContent1">
+                        <p>Die sanfte Brise des späten Nachmittags trug den salzigen Duft des Meeres in die kleinen Gassen der Küstenstadt Adelaide. Clara versank in Gedanken, während sie über die blühende Bougainvillea entlang der Straßen schlenderte. Die warmen Farben der Sommerblumen spiegelten ihre Leidenschaft für die Kunst wider, die sie täglich in ihrem Job als Kunsthistorikerin im örtlichen Museum lebte. Diese Stadt war nicht nur ihr Zuhause, sie war ihre Muse.</p>
+                        <p>Heute war ein besonders schöner Tag. Die Sonne strahlte hell am Himmel, und die Wellen schimmerten im goldenen Licht. Clara stellte sich vor, wie sie mit Pinsel und Leinwand am Strand saß, ihre Umgebung in lebendigen Farben festhaltend. Diese Vorstellung erfüllte sie mit einem tiefen Glücksgefühl. Doch trotz der Schönheit um sie herum spürte sie eine leise Melancholie in ihrem Herzen, ein Verlangen nach etwas, das sie nicht benennen konnte.</p>
+                        <p>Gerade als sie an einem kleinen Café vorbeikam, hörte sie das Lachen von Menschen. Es zog sie magisch an, und sie beschloss, einen Moment innezuhalten und die lebhafte Atmosphäre aufzusaugen. Die Stimmen der Gäste, die Klänge von klirrenden Tassen und das Aroma von frisch gebrühtem Kaffee schienen sie in eine andere Welt zu entführen. Sie beobachtete, wie ein älteres Paar zusammensaß und die kleinen Freuden des Lebens genoss.</p>
+                        <p>Doch während sie schaute, lenkte plötzlich eine neue Person ihre Aufmerksamkeit ab. Ein Mann trat aus dem Café, und Clara konnte nicht anders, als ihn zu mustern. Er hatte eine ergreifende Ausstrahlung: groß und athletisch, mit markanten Gesichtszügen und einem selbstbewussten Lächeln. Seine dunklen Haare fielen leger über seine Stirn, und während er sich mit einem freundlichen Gruß zu einem anderen Gast drehte, bemerkte Clara, wie seine Augen in der Sonne funkelten.</p>
+                        <p>In diesem Augenblick hielt die Zeit für sie an. Als ihre Blicke sich trafen, überkam sie ein unerklärliches Prickeln. Es war, als ob die Luft zwischen ihnen elektrisch geladen war. Jeder Atemzug schien synchron zu einem tiefen, inneren Verlangen zu werden, das sie nie zuvor so intensiv gefühlt hatte. Sie war plötzlich lebendig, spürte die Sehnsucht, die sie oft in ihrer Kunst ausdrückte, doch jetzt war sie greifbar, lebendig und vor allem real.</p>
+                        <p>„Hi, ich bin Alex", sagte der Mann, als er sich Clara näherte, seine Stimme warm und einladend. „Ich hoffe, ich habe dich nicht belästigt."</p>
+                        <p>„Oh, nein! Ich bin Clara", sagte sie leise und spürte noch immer die Überraschung über die Intensität des Augenblicks. „Ich war nur... in Gedanken versunken." Ein verschmitztes Lächeln breitete sich auf Alex' Gesicht aus. „In diesem Fall könnte ich dir einen Kaffee anbieten, um die Gedanken zu sortieren?"</p>
+                        <p>Nach einem kurzen Zögern stimmte Clara zu. Es war untypisch für sie, in solchen Momenten impulsiv zu handeln, doch etwas an Alex's Ausstrahlung zog sie an. Sie ließ die Vertrautheit ihrer künstlerischen Welt hinter sich und folgte ihm ins Café.</p>
+                        <p>Sobald sie drinnen waren, bemerkte Clara, wie sich die Atmosphäre veränderte. Der Klang des Betriebs wurde zu einer sanften Melodie, und in dieser kleinen Blase fühlten sie sich wie in einer anderen Realität. Sie setzten sich an einen Tisch am Fenster, von wo aus sie die Wellen beobachten konnten, die sanft gegen die Küste brandeten.</p>
+                        <p>„Was führt dich in unsere kleine Stadt?", fragte Alex, während er den Kellner herbeirief. Clara spürte, wie ihre Nervosität allmählich verschwand, als sie ihm von ihrer Arbeit und ihrer Leidenschaft für die Kunst erzählte.</p>
+                        <p>„Ich liebe es, alte Meisterwerke zu studieren und zu verstehen, was sie über die Vergangenheit erzählen", erklärte sie begeistert. „Tatsächlich plane ich eine Ausstellung über lokale Künstler und deren Bedeutung für die Gemeinschaft."</p>
+                        <p>Seine Augen weiteten sich vor Interesse. „Das klingt fantastisch. Kunst hat eine unglaubliche Kraft, uns zu verbinden und Geschichten zu erzählen, nicht wahr?"</p>
+                        <p>„Absolut", antwortete Clara, ihre Stimme wurde lebhafter. „Es ist eine Sprache, die jeder versteht, egal woher man kommt."</p>
+                        <p>Alex nickte zustimmend. „Ich arbeite tatsächlich auch im kreativen Bereich. Ich bin Fotograf und spezialisiere mich auf Landschaftsfotografie. Die Adelaide Hills haben es mir besonders angetan."</p>
+                        <p>„Wirklich?" Claras Augen leuchteten auf. „Die Hügel sind wunderschön, besonders bei Sonnenuntergang. Das warme Licht, das über die Weinberge fällt..."</p>
+                        <p>„Genau das meine ich", sagte Alex begeistert. „Du verstehst es. Die meisten Menschen sehen nur die Oberfläche, aber du siehst die Schönheit dahinter."</p>
+                        <p>Sie verbrachten den Rest des Nachmittags damit, über Kunst, Träume und ihre gemeinsame Liebe zur Schönheit der Natur zu sprechen. Clara fühlte sich zum ersten Mal seit langem wirklich verstanden. Es war, als hätte sie endlich jemanden gefunden, der ihre Seele berührte.</p>
+                        <p>Als die Sonne langsam unterging und das Café sich leerte, wusste Clara, dass dies der Beginn von etwas Besonderem war. Alex hatte nicht nur ihr Herz zum Schlagen gebracht, sondern auch eine Tür zu einer Welt geöffnet, die sie nie für möglich gehalten hatte.</p>
+                    </div>
+                </div>
+                <!-- Weitere Bände hier -->
+            </div>
+            <!-- Weitere Sprachen hier -->
+        </div>
+    </div>
+    <script>
+        // Ihr vorhandener JavaScript-Code
+    </script>
+</body>
+</html>
+
 <html lang="de">
 <head>
     <meta charset="UTF-8">
