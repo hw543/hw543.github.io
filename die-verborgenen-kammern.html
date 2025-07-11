@@ -1,1 +1,313 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Die verborgenen Kammern - Helmut Wegners Wortwelten</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #FFE5E5 0%, #FFB6C1 25%, #FF69B4 50%, #FFC0CB 75%, #FFCCCB 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #8B1538;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #C2185B, #8B1538);
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(194, 24, 91, 0.3);
+            position: relative;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 8px 16px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 0.9em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .book-card {
+            background: linear-gradient(135deg, #FFF0F5 0%, #FFE4E6 100%);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border: 2px solid #C2185B;
+            transition: all 0.3s ease;
+        }
+
+        .book-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 35px rgba(194, 24, 91, 0.2);
+            border-color: #8B1538;
+        }
+
+        .book-cover {
+            width: 200px;
+            height: 300px;
+            margin: 0 auto 20px auto;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            position: relative;
+        }
+
+        .book-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .cover-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #C2185B, #8B1538);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2em;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .book-title {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #C2185B;
+            margin-bottom: 10px;
+        }
+
+        .book-subtitle {
+            font-size: 1em;
+            color: #8B1538;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+        .book-description {
+            font-size: 0.95em;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .language-flags {
+            margin-bottom: 15px;
+        }
+
+        .language-flags span {
+            font-size: 1.2em;
+            margin: 0 5px;
+        }
+
+        .book-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .btn-read {
+            background: linear-gradient(135deg, #4285f4, #1976d2);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(66, 133, 244, 0.3);
+        }
+
+        .btn-read:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(66, 133, 244, 0.4);
+        }
+
+        .btn-amazon {
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+        }
+
+        .btn-amazon:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+        }
+
+        .btn-disabled {
+            background: #ccc;
+            color: #666;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: not-allowed;
+        }
+
+        @media (max-width: 768px) {
+            .books-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .book-card {
+                padding: 20px;
+            }
+            
+            .book-cover {
+                width: 150px;
+                height: 225px;
+            }
+            
+            .back-button {
+                position: relative;
+                top: 0;
+                left: 0;
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="romantik.html" class="back-button">← Zurück zur Romantik</a>
+            <h1>🌹 Die verborgenen Kammern</h1>
+            <p>Geheimnisvolle Romanzen</p>
+        </div>
+
+        <div class="books-grid">
+            <!-- Band 1: Hinter verschlossenen Türen -->
+            <div class="book-card">
+                <div class="book-cover">
+                    <img src="hinter-verschlossenen-tueren.jpg" alt="Hinter verschlossenen Türen" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="cover-placeholder" style="display:none;">
+                        🌹<br>Band 1<br>Hinter<br>verschlossenen<br>Türen
+                    </div>
+                </div>
+                <div class="book-title">Band 1: Hinter verschlossenen Türen</div>
+                <div class="book-subtitle">Elena entdeckt eine verborgene Welt</div>
+                <div class="book-description">
+                    In den Schatten alter Gemäuer verbergen sich nicht nur architektonische Schätze, sondern auch die tiefsten Geheimnisse des Herzens. Elena, eine junge Architektin, entdeckt eine verborgene Welt voller Leidenschaft und Geheimnisse.
+                </div>
+                <div class="language-flags">
+                    <span>🇩🇪</span> <span>🇬🇧</span> <span>🇪🇸</span>
+                </div>
+                <div class="book-buttons">
+                    <a href="hinter-verschlossenen-tueren-lesen.html" class="btn-read">📖 Lesen</a>
+                    <a href="https://amazon.de/dp/B0F1YC3J79" class="btn-amazon" target="_blank">🛒 Bei Amazon kaufen</a>
+                </div>
+            </div>
+
+            <!-- Band 2: Die Kunst der Hingabe -->
+            <div class="book-card">
+                <div class="book-cover">
+                    <img src="die-kunst-der-hingabe.jpg" alt="Die Kunst der Hingabe" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="cover-placeholder" style="display:none;">
+                        🌹<br>Band 2<br>Die Kunst<br>der Hingabe
+                    </div>
+                </div>
+                <div class="book-title">Band 2: Die Kunst der Hingabe</div>
+                <div class="book-subtitle">Verbotene Leidenschaft erwacht</div>
+                <div class="book-description">
+                    Elena taucht tiefer in die Geheimnisse der alten Villa ein und entdeckt dabei nicht nur architektonische Wunder, sondern auch die Kunst der wahren Hingabe. Doch jede Leidenschaft hat ihren Preis.
+                </div>
+                <div class="language-flags">
+                    <span>🇩🇪</span> <span>🇬🇧</span>
+                </div>
+                <div class="book-buttons">
+                    <a href="die-kunst-der-hingabe-lesen.html" class="btn-read">📖 Lesen</a>
+                    <button class="btn-disabled">In Vorbereitung</button>
+                </div>
+            </div>
+
+            <!-- Band 3: Die Tiefe der Begierde -->
+            <div class="book-card">
+                <div class="book-cover">
+                    <img src="die-tiefe-der-begierde.jpg" alt="Die Tiefe der Begierde" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="cover-placeholder" style="display:none;">
+                        🌹<br>Band 3<br>Die Tiefe<br>der Begierde
+                    </div>
+                </div>
+                <div class="book-title">Band 3: Die Tiefe der Begierde</div>
+                <div class="book-subtitle">Das finale Geheimnis</div>
+                <div class="book-description">
+                    Im dramatischen Finale der Serie enthüllt Elena das letzte Geheimnis der verborgenen Kammern. Eine emotionale Reise zu den tiefsten Abgründen der Leidenschaft und den höchsten Höhen der Liebe.
+                </div>
+                <div class="language-flags">
+                    <span>🇩🇪</span> <span>🇬🇧</span>
+                </div>
+                <div class="book-buttons">
+                    <a href="die-tiefe-der-begierde-lesen.html" class="btn-read">📖 Lesen</a>
+                    <button class="btn-disabled">In Vorbereitung</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
