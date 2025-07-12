@@ -21,7 +21,7 @@
             overflow-x: hidden;
         }
 
-       .container {
+      .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
@@ -29,7 +29,7 @@
             z-index: 2;
         }
 
-       .back-button {
+      .back-button {
             background: rgba(255, 215, 0, 0.2);
             color: #ffd700;
             padding: 10px 20px;
@@ -44,20 +44,20 @@
             transition: all 0.3s ease;
         }
 
-       .back-button:hover {
+      .back-button:hover {
             background: rgba(255, 215, 0, 0.3);
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
         }
 
-       .header {
+      .header {
             text-align: center;
             margin-bottom: 50px;
             padding: 60px 20px;
             position: relative;
         }
 
-       .header h1 {
+      .header h1 {
             font-size: 4.5rem;
             color: #ffd700;
             text-shadow: 3px 3px 8px rgba(0,0,0,0.5);
@@ -67,7 +67,7 @@
             position: relative;
         }
 
-       .header-subtitle {
+      .header-subtitle {
             font-size: 1.5rem;
             color: rgba(255,215,0,0.9);
             font-style: italic;
@@ -77,7 +77,7 @@
             text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
         }
 
-       .genre-motto {
+      .genre-motto {
             font-size: 1.2rem;
             color: #ffd700;
             font-weight: bold;
@@ -86,7 +86,7 @@
             text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
 
-       .series-container {
+      .series-container {
             background: linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(26,0,51,0.9) 100%);
             border-radius: 25px;
             padding: 50px;
@@ -96,7 +96,7 @@
             position: relative;
         }
 
-       .series-title {
+      .series-title {
             font-size: 3.2rem;
             background: linear-gradient(135deg, #ffd700 0%, #ffb300 50%, #ff6b35 100%);
             -webkit-background-clip: text;
@@ -107,14 +107,14 @@
             text-align: center;
         }
 
-       .books-grid {
+      .books-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
             margin-top: 40px;
         }
 
-       .book-card {
+      .book-card {
             background: linear-gradient(135deg, rgba(26,0,51,0.9) 0%, rgba(77,0,153,0.7) 100%);
             border-radius: 20px;
             padding: 30px;
@@ -124,33 +124,15 @@
             overflow: hidden;
         }
 
-       .book-card:hover {
+      .book-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 25px 50px rgba(255,215,0,0.2);
             border-color: rgba(255,215,0,0.6);
         }
 
-        /* NEUE CSS-REGELN FÜR BUCHCOVER */
-       .book-cover {
-            margin-bottom: 20px; /* Abstand zwischen Cover und Titel */
-            border-radius: 15px; /* Passend zum Kartenrand */
-            overflow: hidden; /* Stellt sicher, dass die Bildecken abgerundet sind */
-            box-shadow: 0 10px 20px rgba(0,0,0,0.4); /* Schatten für Tiefe */
-            border: 1px solid rgba(255,215,0,0.1); /* Dezenter Rand */
-            display: flex; /* Zum Zentrieren des Bildes */
-            justify-content: center;
-            align-items: center;
-        }
+        /* Die NEUEN CSS-REGELN FÜR BUCHCOVER wurden entfernt */
 
-       .book-cover img {
-            max-width: 100%; /* Bild responsiv machen */
-            height: auto; /* Seitenverhältnis beibehalten */
-            display: block; /* Entfernt zusätzlichen Platz unter dem Bild */
-            border-radius: 15px; /* Passend zum Container-Rand */
-        }
-        /* ENDE NEUE CSS-REGELN */
-
-       .book-title {
+      .book-title {
             font-size: 1.7rem;
             color: #ffd700;
             margin-bottom: 10px;
@@ -158,26 +140,26 @@
             text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
         }
 
-       .book-meta {
+      .book-meta {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 20px;
         }
 
-       .language-flags {
+      .language-flags {
             display: flex;
             gap: 8px;
         }
 
-       .flag {
+      .flag {
             font-size: 1.2rem;
             padding: 4px 8px;
             background: rgba(255, 215, 0, 0.2);
             border-radius: 8px;
         }
 
-       .status-badge {
+      .status-badge {
             padding: 6px 14px;
             border-radius: 20px;
             font-size: 0.8rem;
@@ -189,12 +171,12 @@
             color: #1a0033;
         }
 
-       .status-badge:hover {
+      .status-badge:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
         }
 
-       .discover-button {
+      .discover-button {
             background: linear-gradient(135deg, #ffd700, #ffb300);
             color: #1a0033;
             padding: 15px 30px;
@@ -209,7 +191,7 @@
             transition: all 0.3s ease;
         }
 
-       .discover-button:hover {
+      .discover-button:hover {
             transform: translateY(-3px);
             box-shadow: 0 10px 25px rgba(255, 215, 0, 0.4);
         }
@@ -230,9 +212,6 @@
 
             <div class="books-grid">
                 <div class="book-card">
-                    <div class="book-cover">
-                        <img src="https://raw.githubusercontent.com///main/covers/die%20prophezeiung.jpg" alt="Coverbild für 'Band 1: Die Prophezeiung von Eldoria'">
-                    </div>
                     <h3 class="book-title">Band 1: Die Prophezeiung von Eldoria</h3>
                     <div class="book-meta">
                         <div class="language-flags">
@@ -244,9 +223,6 @@
                 </div>
 
                 <div class="book-card">
-                    <div class="book-cover">
-                        <img src="https://raw.githubusercontent.com///main/covers/beginn%20des%20friedens.jpg" alt="Coverbild für 'Band 2: Der Beginn des Friedens'">
-                    </div>
                     <h3 class="book-title">Band 2: Der Beginn des Friedens</h3>
                     <div class="book-meta">
                         <div class="language-flags">
@@ -258,9 +234,6 @@
                 </div>
 
                 <div class="book-card">
-                    <div class="book-cover">
-                        <img src="https://raw.githubusercontent.com///main/covers/die%20schatten%20des%20vergessens.jpg" alt="Coverbild für 'Band 3: Die Schatten des Vergessenen'">
-                    </div>
                     <h3 class="book-title">Band 3: Die Schatten des Vergessenen</h3>
                     <div class="book-meta">
                         <div class="language-flags">
@@ -272,9 +245,6 @@
                 </div>
 
                 <div class="book-card">
-                    <div class="book-cover">
-                        <img src="https://raw.githubusercontent.com///main/covers/das%20vermächtnis%20der%20wächter.jpg" alt="Coverbild für 'Band 4: Das Vermächtnis der Wächter'">
-                    </div>
                     <h3 class="book-title">Band 4: Das Vermächtnis der Wächter</h3>
                     <div class="book-meta">
                         <div class="language-flags">
