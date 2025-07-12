@@ -59,43 +59,6 @@
             }
         }
 
-        /* Runen-Animation im Hintergrund */
-        .runes-background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-            opacity: 0.1;
-        }
-
-        .rune {
-            position: absolute;
-            color: #ffd700;
-            font-size: 2rem;
-            animation: runeGlow 6s infinite;
-        }
-
-        .rune:nth-child(1) { top: 15%; left: 15%; content: "⚔"; animation-delay: 0s; }
-        .rune:nth-child(2) { top: 25%; left: 85%; content: "🗡"; animation-delay: 2s; }
-        .rune:nth-child(3) { top: 75%; left: 25%; content: "🏰"; animation-delay: 4s; }
-        .rune:nth-child(4) { top: 85%; left: 75%; content: "🔮"; animation-delay: 1s; }
-        .rune:nth-child(5) { top: 45%; left: 5%; content: "🌟"; animation-delay: 3s; }
-        .rune:nth-child(6) { top: 55%; left: 95%; content: "⚡"; animation-delay: 5s; }
-
-        @keyframes runeGlow {
-            0%, 100% { 
-                opacity: 0.05; 
-                transform: scale(1); 
-            }
-            50% { 
-                opacity: 0.2; 
-                transform: scale(1.1); 
-            }
-        }
-
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -200,61 +163,6 @@
             text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
 
-        .intro-section {
-            background: linear-gradient(135deg, rgba(255,215,0,0.15) 0%, rgba(255,215,0,0.08) 100%);
-            border-radius: 25px;
-            padding: 40px;
-            margin-bottom: 50px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
-            backdrop-filter: blur(15px);
-            border: 2px solid rgba(255,215,0,0.3);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .intro-section::before {
-            content: "";
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,215,0,0.1), transparent);
-            animation: magicShimmer 4s infinite;
-        }
-
-        @keyframes magicShimmer {
-            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
-        }
-
-        .intro-section h2 {
-            color: #ffd700;
-            margin-bottom: 25px;
-            font-size: 2.8rem;
-            text-align: center;
-            position: relative;
-            z-index: 2;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
-
-        .intro-section h2::before {
-            content: "🔮";
-            margin-right: 15px;
-        }
-
-        .intro-text {
-            font-size: 1.3rem;
-            line-height: 1.8;
-            text-align: center;
-            color: #f0f0f0;
-            position: relative;
-            z-index: 2;
-            max-width: 800px;
-            margin: 0 auto;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-        }
-
         .series-container {
             background: linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(26,0,51,0.9) 100%);
             border-radius: 25px;
@@ -305,6 +213,7 @@
             border: 2px solid rgba(255,215,0,0.2);
             position: relative;
             overflow: hidden;
+            text-align: center;
         }
 
         .book-card::before {
@@ -327,6 +236,24 @@
 
         .book-card:hover::before {
             opacity: 1;
+        }
+
+        .book-cover {
+            width: 180px;
+            height: 250px;
+            margin: 0 auto 20px auto;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            overflow: hidden;
+            position: relative;
+            z-index: 2;
+        }
+
+        .book-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
         }
 
         .book-number {
@@ -368,86 +295,52 @@
             z-index: 2;
         }
 
-        .book-meta {
+        .book-buttons {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
+            flex-direction: column;
+            gap: 10px;
             position: relative;
             z-index: 2;
         }
 
-        .language-flags {
-            display: flex;
-            gap: 8px;
-        }
-
-        .flag {
-            font-size: 1.2rem;
-            padding: 4px 8px;
-            background: rgba(255, 215, 0, 0.2);
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-        }
-
-        .status-badge {
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .status-available {
-            background: linear-gradient(135deg, #ffd700, #ffb300);
-            color: #1a0033;
-            box-shadow: 0 3px 10px rgba(255, 215, 0, 0.3);
-        }
-
-        .status-coming {
-            background: linear-gradient(135deg, #6c757d, #495057);
+        .lesen-button {
+            background: linear-gradient(135deg, #4285f4, #1976d2);
             color: white;
-        }
-
-        .discover-button {
-            background: linear-gradient(135deg, #ffd700, #ffb300);
-            color: #1a0033;
-            padding: 15px 30px;
+            padding: 12px 24px;
             border: none;
             border-radius: 25px;
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: bold;
             cursor: pointer;
             text-decoration: none;
-            display: block;
+            display: inline-block;
             text-align: center;
-            margin: 40px auto 0 auto;
-            max-width: 300px;
             transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            z-index: 2;
         }
 
-        .discover-button::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.5s;
+        .lesen-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(66, 133, 244, 0.3);
         }
 
-        .discover-button:hover::before {
-            left: 100%;
+        .amazon-button {
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            transition: all 0.3s ease;
         }
 
-        .discover-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.4);
+        .amazon-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 107, 53, 0.3);
         }
 
         .legend-quote {
@@ -521,7 +414,7 @@
                 padding: 15px;
             }
             
-            .intro-section, .series-container {
+            .series-container {
                 padding: 25px;
             }
         }
@@ -540,16 +433,6 @@
         <div class="particle"></div>
     </div>
 
-    <!-- Runen-Hintergrund -->
-    <div class="runes-background">
-        <div class="rune">⚔</div>
-        <div class="rune">🗡</div>
-        <div class="rune">🏰</div>
-        <div class="rune">🔮</div>
-        <div class="rune">🌟</div>
-        <div class="rune">⚡</div>
-    </div>
-
     <div class="container">
         <a href="index.html" class="back-button">← Zurück zur Startseite</a>
 
@@ -557,13 +440,6 @@
             <h1>High Fantasy</h1>
             <p class="header-subtitle">Epische Abenteuer in magischen Welten - Wo Helden geboren werden und Legenden entstehen</p>
             <p class="genre-motto">Das Schicksal von Eldoria liegt in deinen Händen</p>
-        </div>
-
-        <div class="intro-section">
-            <h2>Willkommen in der Welt von Eldoria</h2>
-            <p class="intro-text">
-                Tauche ein in eine Welt voller Magie, Heldentum und epischer Schlachten. In den Königreichen von Eldoria erwachen uralte Mächte, prophezeite Helden erheben sich und das Schicksal ganzer Völker hängt am seidenen Faden. Erlebe Abenteuer von unvorstellbarem Ausmaß, wo Gut und Böse in ewigem Kampf stehen und nur die Tapfersten das Licht der Hoffnung am Leben erhalten können.
-            </p>
         </div>
 
         <div class="series-container">
@@ -577,78 +453,72 @@
             <div class="books-grid">
                 <!-- Band 1 -->
                 <div class="book-card">
+                    <div class="book-cover">
+                        <img src="die-prophezeiung-von-eldoria.jpg" alt="Band 1: Die Prophezeiung von Eldoria">
+                    </div>
                     <div class="book-number">Band 1</div>
                     <h3 class="book-title">Die Prophezeiung von Eldoria</h3>
                     <p class="book-subtitle">Das Erwachen der uralten Macht</p>
                     <p class="book-description">
                         König Aldemar steht vor seiner dunkelsten Stunde. Uralte Prophezeiungen erwachen zum Leben, mysteriöse Kreaturen bedrohen das Königreich, und ein Riss im Himmel kündet von kommenden Katastrophen. Das Vermächtnis der Wächter muss entschlüsselt werden.
                     </p>
-                    
-                    <div class="book-meta">
-                        <div class="language-flags">
-                            <span class="flag">🇩🇪</span>
-                            <span class="flag">🇬🇧</span>
-                        </div>
-                        <span class="status-badge status-available">Verfügbar</span>
+                    <div class="book-buttons">
+                        <a href="lese-vorlese-high-fantasy.html" class="lesen-button">📖 Lesen & Vorlesen</a>
+                        <a href="#" class="amazon-button">📚 Bei Amazon kaufen</a>
                     </div>
                 </div>
 
                 <!-- Band 2 -->
                 <div class="book-card">
+                    <div class="book-cover">
+                        <img src="der-beginn-des-friedens.jpg" alt="Band 2: Der Beginn des Friedens">
+                    </div>
                     <div class="book-number">Band 2</div>
                     <h3 class="book-title">Der Beginn des Friedens</h3>
                     <p class="book-subtitle">Die Rückkehr der Helden</p>
                     <p class="book-description">
                         Eryon und Aris kehren als Helden nach Eldoria zurück, doch der Frieden ist fragil. Elfen und Zwerge misstrauen einander, und in den Schatten sammeln sich düstere Gestalten. Der wahre Kampf um Eldorias Seele hat gerade erst begonnen.
                     </p>
-                    
-                    <div class="book-meta">
-                        <div class="language-flags">
-                            <span class="flag">🇩🇪</span>
-                            <span class="flag">🇬🇧</span>
-                        </div>
-                        <span class="status-badge status-available">Verfügbar</span>
+                    <div class="book-buttons">
+                        <a href="lese-vorlese-high-fantasy.html" class="lesen-button">📖 Lesen & Vorlesen</a>
+                        <a href="#" class="amazon-button">📚 Bei Amazon kaufen</a>
                     </div>
                 </div>
 
                 <!-- Band 3 -->
                 <div class="book-card">
+                    <div class="book-cover">
+                        <img src="die-schatten-des-vergessenen.jpg" alt="Band 3: Die Schatten des Vergessenen">
+                    </div>
                     <div class="book-number">Band 3</div>
                     <h3 class="book-title">Die Schatten des Vergessenen</h3>
                     <p class="book-subtitle">Der Funke des Abenteuers</p>
                     <p class="book-description">
                         Kael und Tessa begeben sich auf eine gefährliche Reise in die Nebelberge. Dort erwartet sie eine Prüfung, die ihre Freundschaft auf die härteste Probe stellt und sie zwingt, zwischen Macht und Moral zu wählen.
                     </p>
-                    
-                    <div class="book-meta">
-                        <div class="language-flags">
-                            <span class="flag">🇩🇪</span>
-                            <span class="flag">🇬🇧</span>
-                        </div>
-                        <span class="status-badge status-available">Verfügbar</span>
+                    <div class="book-buttons">
+                        <a href="lese-vorlese-high-fantasy.html" class="lesen-button">📖 Lesen & Vorlesen</a>
+                        <a href="#" class="amazon-button">📚 Bei Amazon kaufen</a>
                     </div>
                 </div>
 
                 <!-- Band 4 -->
                 <div class="book-card">
+                    <div class="book-cover">
+                        <img src="das-vermaechtnis-der-waechter.jpg" alt="Band 4: Das Vermächtnis der Wächter">
+                    </div>
                     <div class="book-number">Band 4</div>
                     <h3 class="book-title">Das Vermächtnis der Wächter</h3>
                     <p class="book-subtitle">Das finale Schicksal</p>
                     <p class="book-description">
                         Die Einheit von Eldoria zerbricht, als eine unbekannte Dimension von der Dunkelheit bedroht wird. Die Helden müssen sich in unbekannte Welten wagen, um das ultimative Vermächtnis der uralten Wächter zu entdecken und zu bewahren.
                     </p>
-                    
-                    <div class="book-meta">
-                        <div class="language-flags">
-                            <span class="flag">🇩🇪</span>
-                            <span class="flag">🇬🇧</span>
-                        </div>
-                        <span class="status-badge status-available">Verfügbar</span>
+                    <div class="book-buttons">
+                        <a href="lese-vorlese-high-fantasy.html" class="lesen-button">📖 Lesen & Vorlesen</a>
+                        <a href="#" class="amazon-button">📚 Bei Amazon kaufen</a>
                     </div>
                 </div>
             </div>
-
-            <a href="lese-vorlese-high-fantasy.html" class="discover-button">⚔️ Das Abenteuer beginnt - Jetzt lesen & vorlesen! 🏰</a>
         </div>
 
         <div class="legend-quote">
