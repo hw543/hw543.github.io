@@ -1,1 +1,261 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>High Fantasy - Das Vermächtnis von Eldoria | Helmut Wegners Wortwelten</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #1a0033 0%, #330066 25%, #4d0099 50%, #6600cc 75%, #7733ff 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            color: #f0f0f0;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .back-button {
+            background: rgba(255, 215, 0, 0.2);
+            color: #ffd700;
+            padding: 10px 20px;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 0.95em;
+            font-weight: bold;
+            margin-bottom: 30px;
+            display: inline-block;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: rgba(255, 215, 0, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding: 60px 20px;
+            position: relative;
+        }
+
+        .header h1 {
+            font-size: 4.5rem;
+            color: #ffd700;
+            text-shadow: 3px 3px 8px rgba(0,0,0,0.5);
+            margin-bottom: 20px;
+            font-weight: 300;
+            letter-spacing: 3px;
+            position: relative;
+        }
+
+        .header-subtitle {
+            font-size: 1.5rem;
+            color: rgba(255,215,0,0.9);
+            font-style: italic;
+            max-width: 700px;
+            margin: 0 auto 30px auto;
+            line-height: 1.7;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+
+        .genre-motto {
+            font-size: 1.2rem;
+            color: #ffd700;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .series-container {
+            background: linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(26,0,51,0.9) 100%);
+            border-radius: 25px;
+            padding: 50px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(255,215,0,0.3);
+            position: relative;
+        }
+
+        .series-title {
+            font-size: 3.2rem;
+            background: linear-gradient(135deg, #ffd700 0%, #ffb300 50%, #ff6b35 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .book-card {
+            background: linear-gradient(135deg, rgba(26,0,51,0.9) 0%, rgba(77,0,153,0.7) 100%);
+            border-radius: 20px;
+            padding: 30px;
+            transition: all 0.4s ease;
+            border: 2px solid rgba(255,215,0,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .book-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(255,215,0,0.2);
+            border-color: rgba(255,215,0,0.6);
+        }
+
+        .book-title {
+            font-size: 1.7rem;
+            color: #ffd700;
+            margin-bottom: 10px;
+            font-weight: 600;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .book-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .language-flags {
+            display: flex;
+            gap: 8px;
+        }
+
+        .flag {
+            font-size: 1.2rem;
+            padding: 4px 8px;
+            background: rgba(255, 215, 0, 0.2);
+            border-radius: 8px;
+        }
+
+        .status-badge {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, #ffd700, #ffb300);
+            color: #1a0033;
+        }
+
+        .status-badge:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+        }
+
+        .discover-button {
+            background: linear-gradient(135deg, #ffd700, #ffb300);
+            color: #1a0033;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+            margin: 40px auto 0 auto;
+            max-width: 300px;
+            transition: all 0.3s ease;
+        }
+
+        .discover-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-button">← Zurück zur Startseite</a>
+
+        <div class="header">
+            <h1>High Fantasy</h1>
+            <p class="header-subtitle">Epische Abenteuer in magischen Welten - Wo Helden geboren werden und Legenden entstehen</p>
+            <p class="genre-motto">Das Schicksal von Eldoria liegt in deinen Händen</p>
+        </div>
+
+        <div class="series-container">
+            <h2 class="series-title">Das Vermächtnis von Eldoria</h2>
+
+            <div class="books-grid">
+                <div class="book-card">
+                    <h3 class="book-title">Band 1: Die Prophezeiung von Eldoria</h3>
+                    <div class="book-meta">
+                        <div class="language-flags">
+                            <span class="flag">🇩🇪</span>
+                            <span class="flag">🇬🇧</span>
+                        </div>
+                        <a href="lese-vorlese-high-fantasy.html#band1" class="status-badge">📖 Lesen & Vorlesen</a>
+                    </div>
+                </div>
+
+                <div class="book-card">
+                    <h3 class="book-title">Band 2: Der Beginn des Friedens</h3>
+                    <div class="book-meta">
+                        <div class="language-flags">
+                            <span class="flag">🇩🇪</span>
+                            <span class="flag">🇬🇧</span>
+                        </div>
+                        <a href="lese-vorlese-high-fantasy.html#band2" class="status-badge">📖 Lesen & Vorlesen</a>
+                    </div>
+                </div>
+
+                <div class="book-card">
+                    <h3 class="book-title">Band 3: Die Schatten des Vergessenen</h3>
+                    <div class="book-meta">
+                        <div class="language-flags">
+                            <span class="flag">🇩🇪</span>
+                            <span class="flag">🇬🇧</span>
+                        </div>
+                        <a href="lese-vorlese-high-fantasy.html#band3" class="status-badge">📖 Lesen & Vorlesen</a>
+                    </div>
+                </div>
+
+                <div class="book-card">
+                    <h3 class="book-title">Band 4: Das Vermächtnis der Wächter</h3>
+                    <div class="book-meta">
+                        <div class="language-flags">
+                            <span class="flag">🇩🇪</span>
+                            <span class="flag">🇬🇧</span>
+                        </div>
+                        <a href="lese-vorlese-high-fantasy.html#band4" class="status-badge">📖 Lesen & Vorlesen</a>
+                    </div>
+                </div>
+            </div>
+
+            <a href="lese-vorlese-high-fantasy.html" class="discover-button">⚔️ Das Abenteuer beginnt!</a>
+        </div>
+    </div>
+</body>
+</html>
