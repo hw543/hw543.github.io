@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mysterien der Heide - Lesen & Vorlesen - Helmut Wegners Wortwelten</title>
+    <title>High Fantasy - Lesen & Vorlesen | Helmut Wegners Wortwelten</title>
     <style>
         * {
             margin: 0;
@@ -13,305 +13,222 @@
 
         body {
             font-family: 'Georgia', serif;
-            background: linear-gradient(135deg, #8B4513 0%, #D2691E 50%, #F5DEB3 100%);
+            line-height: 1.8;
+            color: #2c1810;
+            background: linear-gradient(135deg, #1a0033 0%, #330066 25%, #4d0099 50%, #6600cc 75%, #7733ff 100%);
             min-height: 100vh;
             padding: 20px;
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 900px;
             margin: 0 auto;
-            background: rgba(255, 255, 255, 0.95);
+            background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,248,240,0.95) 100%);
             border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            overflow: hidden;
         }
 
         .header {
+            background: linear-gradient(135deg, #4d0099, #6600cc);
+            color: #FFF8F0;
+            padding: 30px;
             text-align: center;
-            margin-bottom: 30px;
-            padding: 20px;
-            background: linear-gradient(135deg, #8B4513, #D2691E);
-            border-radius: 10px;
-            color: white;
             position: relative;
         }
 
-        .back-button {
+        .back-button-header {
             position: absolute;
             top: 15px;
             left: 15px;
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
+        }
+
+        .back-button {
+            background: rgba(255, 215, 0, 0.2);
+            color: #ffd700;
             padding: 8px 16px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
+            border: 2px solid rgba(255, 215, 0, 0.3);
             border-radius: 20px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: all 0.3s ease;
             font-size: 0.9em;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            font-weight: bold;
         }
 
         .back-button:hover {
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 215, 0, 0.3);
             transform: translateY(-2px);
         }
 
         .header h1 {
             font-size: 2.5em;
             margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
         .header p {
             font-size: 1.2em;
+            opacity: 0.9;
             font-style: italic;
         }
 
         .controls {
-            position: sticky;
-            top: 20px;
-            background: #f8f9fa;
+            background: linear-gradient(135deg, rgba(255,215,0,0.1) 0%, rgba(255,215,0,0.05) 100%);
             padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-            z-index: 1000;
+            border-bottom: 3px solid #6600cc;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
-        .voice-controls {
+        .control-buttons {
             display: flex;
-            align-items: center;
             gap: 15px;
-            flex-wrap: wrap;
             justify-content: center;
-            margin-bottom: 20px;
-        }
-
-        .voice-btn {
-            background: #dc3545;
-            color: white;
-            border: none;
-            padding: 15px 25px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 1.1em;
-            font-weight: bold;
-            transition: all 0.3s ease;
-        }
-
-        .voice-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .voice-btn.stop {
-            background: #6c757d;
-        }
-
-        .band-nav {
-            display: flex;
-            gap: 10px;
             flex-wrap: wrap;
-            justify-content: center;
             margin-bottom: 15px;
         }
 
-        .band-btn {
-            background: #8B4513;
-            color: white;
+        .btn {
+            padding: 12px 24px;
             border: none;
-            padding: 12px 20px;
             border-radius: 25px;
-            cursor: pointer;
             font-size: 1em;
             font-weight: bold;
+            cursor: pointer;
             transition: all 0.3s ease;
+            min-width: 120px;
         }
 
-        .band-btn:hover {
-            background: #A0522D;
+        .btn-play {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+        }
+
+        .btn-pause {
+            background: linear-gradient(135deg, #ffc107, #fd7e14);
+            color: white;
+        }
+
+        .btn-stop {
+            background: linear-gradient(135deg, #dc3545, #e83e8c);
+            color: white;
+        }
+
+        .btn-continue {
+            background: linear-gradient(135deg, #17a2b8, #6f42c1);
+            color: white;
+        }
+
+        .btn:hover {
             transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
 
-        .band-btn.active {
-            background: #D2691E;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .language-navigation {
+        .band-navigation, .language-navigation {
             display: flex;
             gap: 10px;
-            flex-wrap: wrap;
             justify-content: center;
-            margin-bottom: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
         }
 
-        .btn-lang {
-            background: #8B4513;
-            color: white;
-            border: none;
+        .btn-band, .btn-lang {
+            background: linear-gradient(135deg, #6600cc, #4d0099);
+            color: #FFF8F0;
             padding: 10px 20px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 1em;
-            font-weight: bold;
-            transition: all 0.3s ease;
             border: 2px solid transparent;
         }
 
-        .btn-lang:hover {
-            background: #A0522D;
-            transform: translateY(-2px);
-        }
-
-        .btn-lang.active {
-            border-color: #D2691E;
-            box-shadow: 0 0 10px rgba(210, 105, 30, 0.5);
-        }
-
-        .amazon-nav {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .amazon-btn {
-            background: #cccccc;
-            color: #666666;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 15px;
-            cursor: not-allowed;
-            font-size: 0.85em;
-            font-weight: bold;
-            min-width: 110px;
-        }
-
-        .language-content {
-            display: block;
-        }
-
-        .language-content.hidden {
-            display: none;
-        }
-
-        .band-cover {
-            width: 140px;
-            height: 210px;
-            margin: 0 auto 20px auto;
-            background: #666;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #ccc;
-            font-size: 0.9em;
-            text-align: center;
-            border: 2px solid #8B4513;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        .btn-band.active, .btn-lang.active {
+            border-color: #FFD700;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
         }
 
         .content {
-            margin-top: 30px;
-        }
-
-        .band-content {
-            display: none;
-            background: rgba(139, 69, 19, 0.1);
             padding: 30px;
-            border-radius: 10px;
-            margin-bottom: 20px;
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: #2c1810;
         }
 
-        .band-content.active {
-            display: block;
-        }
-
-        .band-title {
-            font-size: 2.2em;
-            color: #8B4513;
-            margin-bottom: 15px;
+        .book-title {
+            color: #6600cc;
+            font-size: 2em;
+            margin-bottom: 10px;
             text-align: center;
-            font-weight: bold;
+            border-bottom: 2px solid #ffd700;
+            padding-bottom: 15px;
         }
 
         .chapter-title {
+            color: #4d0099;
             font-size: 1.5em;
-            color: #D2691E;
-            margin-bottom: 20px;
+            margin: 30px 0 20px 0;
             text-align: center;
             font-style: italic;
         }
 
-        .story-text {
-            line-height: 1.8;
-            font-size: 1.1em;
-            color: #333;
+        .text-content {
             text-align: justify;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
         }
 
-        .story-text p {
-            margin-bottom: 15px;
+        .text-content p {
+            margin-bottom: 1.5em;
         }
 
         .word {
             cursor: pointer;
+            transition: all 0.2s ease;
+            padding: 1px 2px;
+            border-radius: 3px;
         }
 
         .word:hover {
-            background-color: #f0f0f0;
+            background-color: rgba(255, 215, 0, 0.2);
         }
 
         .word-highlight {
             background-color: #4169E1;
             color: white;
             padding: 2px 4px;
-            border-radius: 3px;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(65, 105, 225, 0.3);
         }
 
-        @media (max-width: 768px) {
-            .controls {
-                flex-direction: column;
-                gap: 15px;
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 600px) {
+            .control-buttons, .band-navigation, .language-navigation {
+                gap: 10px;
             }
 
-            .band-nav, .amazon-nav, .language-navigation {
-                justify-content: center;
+            .btn {
+                min-width: 100px;
+                font-size: 0.9em;
+                padding: 10px 16px;
             }
 
-            .voice-controls {
-                justify-content: center;
+            .content {
+                padding: 20px;
+                font-size: 1em;
             }
 
             .header h1 {
                 font-size: 2em;
             }
 
-            .band-title {
-                font-size: 1.8em;
-            }
-
-            .back-button {
+            .back-button-header {
                 position: relative;
                 top: 0;
                 left: 0;
                 margin-bottom: 15px;
-                display: block;
-                text-align: center;
-            }
-
-            .amazon-btn {
-                font-size: 0.75em;
-                padding: 6px 10px;
-                min-width: 90px;
-            }
-
-            .btn-lang {
-                padding: 8px 16px;
-                font-size: 0.9em;
             }
         }
     </style>
@@ -319,303 +236,237 @@
 <body>
     <div class="container">
         <div class="header">
-            <a href="mysterien-der-heide.html" class="back-button">← Zurück zur Serie</a>
-            <h1>Mysterien der Heide</h1>
-            <p>Lesen & Vorlesen-System für alle drei Bände</p>
+            <div class="back-button-header">
+                <a href="high_fantasy_genre.html" class="back-button">← Zurück zur Serie</a>
+            </div>
+            <h1>Das Vermächtnis von Eldoria</h1>
+            <p>Lesen & Vorlesen-System - Tauchen Sie ein in die epischen Abenteuer von Eldoria</p>
         </div>
 
         <div class="controls">
-            <div class="voice-controls">
-                <button class="voice-btn" onclick="startReading()">🔴 Vorlesen</button>
-                <button class="voice-btn" onclick="continueReading()" id="continueBtn" style="background: #28a745;">▶️ Weiterlesen</button>
-                <button class="voice-btn stop" onclick="stopReading()">⏹️ Stop</button>
+            <div class="control-buttons">
+                <button class="btn btn-play" onclick="startReading()">🔴 Vorlesen</button>
+                <button class="btn btn-continue" onclick="continueReading()">▶️ Weiterlesen</button>
+                <button class="btn btn-pause" onclick="pauseReading()">⏸️ Pause</button>
+                <button class="btn btn-stop" onclick="stopReading()">⏹️ Stop</button>
             </div>
-            
+
             <div class="language-navigation">
-                <button class="btn-lang active" onclick="switchLanguage('de')">🇩🇪 Deutsch</button>
-                <button class="btn-lang" onclick="switchLanguage('en')">🇬🇧 English</button>
+                <button class="btn btn-lang active" onclick="switchLanguage('de')">🇩🇪 Deutsch</button>
+                <button class="btn btn-lang" onclick="switchLanguage('en')">🇬🇧 English</button>
             </div>
-            
-            <div class="band-nav">
-                <button class="band-btn active" onclick="showBand(1)" id="band1-btn">Band 1</button>
-                <button class="band-btn" onclick="showBand(2)" id="band2-btn">Band 2</button>
-                <button class="band-btn" onclick="showBand(3)" id="band3-btn">Band 3</button>
-            </div>
-            
-            <div class="amazon-nav">
-                <button class="amazon-btn" id="amazon-de1">Band 1 - In Vorbereitung</button>
-                <button class="amazon-btn" id="amazon-de2">Band 2 - In Vorbereitung</button>
-                <button class="amazon-btn" id="amazon-de3">Band 3 - In Vorbereitung</button>
+
+            <div class="band-navigation">
+                <button class="btn btn-band active" onclick="showBand(1)">Band 1</button>
+                <button class="btn btn-band" onclick="showBand(2)">Band 2</button>
+                <button class="btn btn-band" onclick="showBand(3)">Band 3</button>
+                <button class="btn btn-band" onclick="showBand(4)">Band 4</button>
             </div>
         </div>
 
         <div class="content">
             <!-- DEUTSCHE VERSIONEN -->
             <div id="de-content" class="language-content">
-                <!-- Band 1: Der Geist der Heide -->
-                <div class="band-content active" id="de-band1">
-                    <div class="band-cover">
-                        Band 1<br>Cover
-                    </div>
-                    <h2 class="band-title">Band 1: Der Geist der Heide</h2>
-                    <h3 class="chapter-title">Kapitel 1: Der Beginn</h3>
-                    <div class="story-text">
-                        <p>Der Regen prasselte in unregelmäßigen Tropfen auf die Kopfsteinpflasterstraße und formte kleine, glitzernde Pfützen in den Vertiefungen des alten Gesteins. Die Dämmerung war bereits hereingebrochen, und das fahle Licht der Gaslaternen tauchte die Umgebung in ein schummriges Halbdunkel, das Schatten in den Ecken verstärkte und die Formen der Gebäude verzerrte. In der Ferne drang das schrille Pfeifen eines Zuges durch die Nacht, als ein junger Mann, in einen dunklen Mantel gehüllt, langsam die Straße entlangging. Er war nicht älter als zwanzig, doch sein Blick schien eine Reife auszustrahlen, die sein Alter Lügen strafte. Seine Augen waren von einer ungewöhnlichen Intensität, als ob sie Geheimnisse bargen, die nur er kannte.</p>
-                        
-                        <p>Elias Hartwell war sein Name, und er hatte einen weiten Weg hinter sich. Die kleine Stadt Heidersdorf lag abgelegen in der Lüneburger Heide, umgeben von dichten Wäldern und weiten Moorlandschaften, die sich wie ein Teppich aus Geheimnissen über die Landschaft legten. Hier, in dieser entlegenen Ecke Norddeutschlands, sollte er die nächsten Monate verbringen, als Assistent des örtlichen Arztes Dr. Wilhelm Brenner. Doch was ihn wirklich hierhergeführt hatte, war nicht nur die Aussicht auf Arbeit und ein bescheidenes Auskommen. Es waren die Gerüchte, die Geschichten, die man sich in den Gasthäusern der größeren Städte zuflüsterte – Geschichten von unerklärlichen Ereignissen, von Menschen, die spurlos verschwanden, und von einem Geist, der in den nebligen Nächten der Heide sein Unwesen treiben sollte.</p>
-                        
-                        <p>Elias war ein Mann der Wissenschaft, rational und skeptisch. Doch tief in seinem Inneren schlummerte eine Neugier, die stärker war als jede Vernunft. Die Mysterien der Heide hatten ihn schon als Kind fasziniert, als seine Großmutter ihm Geschichten von den alten Legenden erzählte. Nun, da er erwachsen war und die Möglichkeit hatte, diese Geschichten zu erkunden, konnte er nicht widerstehen.</p>
-                        
-                        <p>Als er die Hauptstraße von Heidersdorf entlangschritt, bemerkte er, wie sich die Vorhänge in den Fenstern bewegten. Die Dorfbewohner waren misstrauisch gegenüber Fremden, das hatte Dr. Brenner ihm bereits in seinem Brief geschrieben. Doch Elias spürte, dass da mehr war – eine Anspannung, die in der Luft lag, als ob das ganze Dorf ein Geheimnis hütete.</p>
-                        
-                        <p>Das Haus von Dr. Brenner lag am Ende der Straße, ein stattliches Gebäude aus dunklem Backstein, das von einem kleinen Garten umgeben war. Elias klopfte an die schwere Holztür, und nach einem Moment öffnete ein älterer Herr mit grauem Haar und freundlichen Augen.</p>
-                        
-                        <p>"Sie müssen Elias Hartwell sein", sagte Dr. Brenner mit einem warmen Lächeln. "Willkommen in Heidersdorf. Kommen Sie herein, Sie sehen durchgefroren aus."</p>
-                        
-                        <p>Das Innere des Hauses war warm und einladend, mit dunklen Holzverkleidungen und einem Kamin, in dem ein Feuer knisterte. Dr. Brenner führte Elias in sein Arbeitszimmer, wo die Wände voller Bücher standen und medizinische Instrumente ordentlich auf einem Schreibtisch arrangiert waren.</p>
-                        
-                        <p>"Ich hoffe, die Reise war nicht zu beschwerlich", sagte Dr. Brenner, während er Elias einen Stuhl anbot. "Heidersdorf ist nicht gerade ein Ort, den viele junge Männer aufsuchen würden. Was hat Sie wirklich hierhergeführt?"</p>
-                        
-                        <p>Elias zögerte einen Moment, dann entschied er sich für die Wahrheit. "Die Geschichten, Herr Doktor. Die Gerüchte über die seltsamen Ereignisse hier in der Heide. Ich bin Medizinstudent, aber ich habe auch ein Interesse an... ungewöhnlichen Phänomenen."</p>
-                        
-                        <p>Dr. Brenner nickte langsam, sein Gesicht wurde ernst. "Ah, ich verstehe. Sie sind hier wegen des Geistes der Heide." Er stand auf und ging zum Fenster, blickte hinaus in die dunkle Nacht. "Ich muss Ihnen sagen, Elias, dass diese Geschichten nicht nur Aberglauben sind. In den letzten Monaten sind Dinge geschehen, die sich nicht rational erklären lassen. Menschen sind verschwunden, und diejenigen, die zurückgekehrt sind, sprechen von Visionen, von einer Gestalt, die sie in den Moor gelockt hat."</p>
-                        
-                        <p>Elias spürte, wie sich seine Nackenhaare aufstellten. "Glauben Sie an diese Geschichten, Herr Doktor?"</p>
-                        
-                        <p>Dr. Brenner drehte sich um und sah Elias ernst an. "Ich glaube an das, was ich mit eigenen Augen gesehen habe. Und ich habe Dinge gesehen, die sich nicht erklären lassen. Wenn Sie wirklich hier bleiben wollen, dann seien Sie vorsichtig. Die Heide birgt Geheimnisse, die älter sind als dieses Dorf, älter als unsere Zivilisation. Und manche Geheimnisse sind besser verborgen."</p>
+                <!-- Band 1: Die Prophezeiung von Eldoria (Deutsch) -->
+                <div id="de-band1" class="band-content">
+                    <div class="book-title">Band 1: Die Prophezeiung von Eldoria</div>
+                    <div class="chapter-title">Kapitel 1: Einführung in Eldoria und die Prophezeiung</div>
+                    <div class="text-content" id="de-textContent1">
+                        <p><strong>Das Königshaus</strong></p>
+                        <p>Das Königreich Eldoria erstreckte sich über weite Ebenen, dichte Wälder und schroffe Bergketten, eingerahmt von einem schimmernden Ozean im Westen. Im Herzen des Landes thronte das Königshaus: ein gewaltiges Bauwerk aus weißem Stein, dass die Jahrhunderte überdauert hatte. Die Mauern trugen Narben von Belagerungen und Kriegen, ein stiller Zeuge der turbulenten Geschichte Eldorias. Große Türme ragten gen Himmel, gekrönt von Flaggen, die das Wappen des Königreichs trugen -- ein goldener Phönix, umgeben von einer Flamme, Symbol für Wiedergeburt und Unsterblichkeit.</p>
+                        <p>König Aldemar saß auf seinem steinernen Thron in der großen Halle, die von hohen Fenstern durchflutet wurde. Doch das Licht der Sonne konnte die Schatten auf seinem Gesicht nicht vertreiben. Seine Augen waren von Sorgen umwölkt, und seine Schultern trugen die Last nicht nur des Königreichs, sondern auch der Prophezeiung, die über seine Familie hing.</p>
+                        <p>Sein treuer Berater Orin stand neben ihm, ein Mann mit grauem Haar und wachem Blick, der stets die Ruhe bewahrte, auch wenn die Welt, um ihn zu zerbrechen drohte. „Mein König", begann Orin, als er bemerkte, wie Aldemar gedankenverloren auf das Wandgemälde starrte, das die Entstehung Eldorias darstellte. „Ihr dürft Euch von diesen Zeichen nicht überwältigen lassen. Das Volk benötigt Eure Stärke."</p>
+                        <p>„Und was, wenn meine Stärke nicht ausreicht?" Aldemar erhob sich langsam. Seine Stimme war tief und schwer, wie ein donnerndes Echo in der Halle. „Die Vorzeichen sind eindeutig, Orin. Der Nebel, die Berichte über die Kreaturen in den Wäldern, die Unruhen im Volk -- all das deutet darauf hin, dass die Prophezeiung wahr wird."</p>
+                        <p>Orin legte eine Hand auf den Arm des Königs. „Es gab schon immer Zeiten der Dunkelheit, und jedes Mal hat die Blutlinie des Phönix überlebt. Wir müssen die Prophezeiung entschlüsseln, das ist wahr, aber nicht in Verzweiflung handeln."</p>
+                        <p><strong>Das Volk</strong></p>
+                        <p>In den Straßen der Hauptstadt Eldorias, den gepflasterten Gassen, die vom Königshaus hinabführten, herrschte ein geschäftiges Treiben. Händler priesen lautstark ihre Waren an, während Kinder lachend zwischen den Marktständen umherliefen. Doch hinter der Fassade des Alltags schlummerte eine wachsende Unruhe. Die alten Weisen flüsterten von den Geschichten der Prophezeiung, einer Weissagung, die das Ende oder die Rettung Eldorias voraussagte. Viele glaubten, dass die seltsamen Ereignisse -- der unnatürliche Nebel, das Verschwinden von Dorfbewohnern -- die Anfänge der düsteren Vorhersage waren.</p>
+                        <p>„Habt Ihr es gehört?", fragte eine Bäuerin, während sie einen Korb Äpfel feilbot. „Die Nacht war so still, kein einziger Vogel hat gezwitschert. Und mein Mann sagt, er hätte Augen im Nebel gesehen!"</p>
+                        <p>Ein alter Mann, der am Rand des Brunnens saß, nickte ernst. „Die Zeiten ändern sich. Wir haben die Götter verärgert, und nun werden wir den Preis zahlen."</p>
+                        <p>Doch nicht alle ließen sich von den Ängsten beherrschen. In den Tavernen sangen die Barden weiterhin Lieder über Heldentaten, und einige jüngere Bürger machten sich über die Geschichten der Alten lustig. Dennoch war die Furcht spürbar, wie ein dumpfer Donner am Horizont, der nur darauf wartete, sich zu entladen.</p>
+                        <p><strong>Die Prophezeiung</strong></p>
+                        <p>Tief unter dem Königshaus, verborgen hinter schweren Eisentüren, lag die königliche Bibliothek, ein Labyrinth aus Regalen, die sich ins Dunkel erstreckten. In ihrem Zentrum stand eine goldene Truhe, geschützt von uralten Runen und Zaubern. Darin lag das Buch der Weissagung. Aldemar, Orin und der Weise Eldrin standen vor der Truhe, während die flackernden Fackeln die uralten Runen erhellten. Eldrin, dessen lange Robe im Staub des Bodens schleifte, murmelte Beschwörungsworte, um die magische Versiegelung zu brechen.</p>
+                        <p>„Mein König, sobald wir das Buch öffnen, gibt es kein Zurück", warnte Eldrin, ohne den Blick von der Truhe zu lösen. „Das weiß ich", antwortete Aldemar entschlossen. „Aber die Zeit drängt. Wir müssen wissen, was die Prophezeiung verlangt." Mit einem letzten Wort öffnete sich die Truhe, und Eldrin zog vorsichtig ein in Leder gebundenes Buch heraus. Die Seiten wirkten brüchig, doch die Schrift darauf pulsierte, als wäre sie lebendig. „Hier steht es", sagte Eldrin, als er die erste Seite aufschlug. „Die Zeichen, die das Ende einleiten. Und der Weg, der zur Rettung führt."</p>
+                        <p><strong>Unheilvolle Vorzeichen</strong></p>
+                        <p>Bevor Eldrin weitersprechen konnte, ertönte ein ohrenbetäubendes Krachen aus der Ferne. Die Erde erbebte, und ein unnatürlicher Wind fegte durch die Katakomben. Aldemar zog sein Schwert, während Orin sich schützend vor den König stellte. „Was war das?", rief Orin. Eldrin blickte auf das Buch, dessen Schrift plötzlich verblasste, als ob es seine Warnung ausgesprochen hätte. „Etwas ist erwacht", sagte er mit bebender Stimme.</p>
+                        <p>An der Oberfläche strömten die Menschen aus ihren Häusern. Der Himmel über Eldoria hatte sich verdunkelt, und ein riesiger Riss zog sich wie eine offene Wunde durch die Wolken. Aus dem Nebel am Waldrand drangen grollende Laute, die die Herzen der Menschen vor Angst erzittern ließen.</p>
+                        <p>Ein Krieger, der an der Grenze des Königreichs stationiert war, ritt in die Stadt. Sein Gesicht war aschfahl, und seine Stimme bebte, als er ausrief: „Die Kreaturen aus den Geschichten sind wahr! Sie kommen!" Das Königreich Eldoria stand vor seiner dunkelsten Stunde, und die Prophezeiung hatte begonnen, ihre Schatten auf das Land zu werfen.</p>
                     </div>
                 </div>
 
-                <!-- Band 2: Das Moor des Vergessens -->
-                <div class="band-content" id="de-band2">
-                    <div class="band-cover">
-                        Band 2<br>Cover
-                    </div>
-                    <h2 class="band-title">Band 2: Das Moor des Vergessens</h2>
-                    <h3 class="chapter-title">Kapitel 1: Der Fund im Moor</h3>
-                    <div class="story-text">
-                        <p>Kommissarin Anna Hartmann stand am Rand des düsteren Moores und starrte auf die Leiche, die halb im schlammigen Wasser versunken war. Der Nebel hing wie ein grauer Schleier über der Landschaft und verschluckte jeden Laut bis auf das leise Plätschern des Moorwassers und das gelegentliche Rufen eines Reihers in der Ferne.</p>
-                        
-                        <p>Es war ein kalter Oktobertag, und die Feuchtigkeit kroch durch ihre Kleidung bis auf die Haut. Anna zog ihren Mantel enger um sich und betrachtete die Szene mit den geschulten Augen einer Ermittlerin, die bereits zehn Jahre bei der Polizei arbeitete. Doch dieser Fall war anders. Dieser Fall brachte Erinnerungen zurück, die sie längst begraben geglaubt hatte.</p>
-                        
-                        <p>Die Leiche gehörte einem Mann mittleren Alters, gekleidet in einen dunklen Anzug, der einst elegant gewesen sein mochte. Sein Gesicht war von der Zeit im Moor gezeichnet, aber noch erkennbar. Dr. Friedrich Müller, ein angesehener Psychiater aus Hamburg, der vor drei Wochen als vermisst gemeldet worden war.</p>
-                        
-                        <p>"Kommissarin Hartmann", rief Obermeister Koch, der ältere Polizist, der die Leiche gefunden hatte. "Hier ist etwas Seltsames."</p>
-                        
-                        <p>Anna watete vorsichtig durch das flache Wasser zu ihm hinüber. Koch hielt eine kleine, lederne Tasche in der Hand, die er aus dem Schlamm gezogen hatte. Sie war überraschend gut erhalten, als hätte das Moor sie konserviert.</p>
-                        
-                        <p>"Das lag direkt neben dem Körper", erklärte Koch. "Und schauen Sie sich das an." Er öffnete die Tasche und zog ein Notizbuch heraus. Die Seiten waren feucht, aber die Tinte war noch lesbar.</p>
-                        
-                        <p>Anna nahm das Notizbuch und blätterte vorsichtig durch die Seiten. Dr. Müllers Handschrift war ordentlich und präzise, aber der Inhalt der Einträge ließ ihr das Blut in den Adern gefrieren.</p>
-                        
-                        <p>"Datum: 15. September. Die Visionen werden stärker. Ich sehe sie jetzt auch am Tag. Die Gestalt im Nebel ruft meinen Namen. Ich muss zum Moor. Ich muss die Wahrheit herausfinden über das, was vor zwanzig Jahren geschehen ist."</p>
-                        
-                        <p>"Datum: 18. September. Ich habe mit anderen Betroffenen gesprochen. Dr. Richter aus Lüneburg berichtet von ähnlichen Symptomen bei seinen Patienten. Halluzinationen, die alle dasselbe Thema haben: Eine Gestalt in der Heide, die Menschen zu sich ruft. Ich beginne zu verstehen, dass dies mehr ist als nur psychische Störungen."</p>
-                        
-                        <p>"Datum: 20. September. Ich habe die alten Akten gefunden. Der Fall von 1982. Fünf Menschen verschwanden spurlos im Moor. Vier Leichen wurden nie gefunden. Eine Frau, Maria Brenner, kehrte nach drei Tagen zurück, aber sie war... verändert. Sie sprach von einem Geist, der die Seelen der Verstorbenen sammelt. Man hielt sie für verrückt."</p>
-                        
-                        <p>Anna spürte, wie sich ihr Magen zusammenzog. Der Name Maria Brenner war ihr nicht unbekannt. Es war der Name ihrer Großmutter, der Frau, die sie nach dem Tod ihrer Eltern aufgezogen hatte. Der Frau, die ihr immer wieder Geschichten von der Heide erzählt hatte, Geschichten, die Anna als Märchen abgetan hatte.</p>
-                        
-                        <p>"Datum: 22. September. Ich kann nicht mehr schlafen. Die Stimme wird lauter. Sie ruft mich ins Moor. Ich weiß, dass ich gehen muss. Ich weiß, dass ich vielleicht nicht zurückkommen werde. Aber ich muss die Wahrheit erfahren. Ich muss herausfinden, was damals wirklich geschehen ist."</p>
-                        
-                        <p>Das war der letzte Eintrag. Anna klappte das Notizbuch zu und sah Koch an. "Wir müssen die Spurensicherung rufen. Und ich will alle Akten von 1982 sehen. Alle Akten über verschwundene Personen in diesem Gebiet der letzten dreißig Jahre."</p>
-                        
-                        <p>Koch nickte. "Denken Sie, da ist etwas dran an diesen Geschichten?"</p>
-                        
-                        <p>Anna blickte hinaus über das Moor, wo der Nebel sich zu verdichten schien. "Ich denke, Dr. Müller ist nicht das erste Opfer. Und er wird nicht das letzte sein, wenn wir nicht herausfinden, was hier wirklich vor sich geht."</p>
-                        
-                        <p>Als sie sich umdrehte, um zum Wagen zurückzugehen, hätte sie schwören können, dass sie eine Gestalt im Nebel sah, eine dunkle Silhouette, die sie zu beobachten schien. Aber als sie genauer hinsah, war da nichts als der endlose graue Schleier, der das Moor wie ein Leichentuch bedeckte.</p>
-                        
-                        <p>Doch tief in ihrem Inneren wusste Anna, dass ihre Großmutter nicht verrückt gewesen war. Und dass sie selbst nun Teil einer Geschichte geworden war, die schon vor Jahrzehnten begonnen hatte – einer Geschichte, die sie in die dunkelsten Geheimnisse der Lüneburger Heide führen würde.</p>
+                <!-- Band 2: Der Beginn des Friedens (Deutsch) -->
+                <div id="de-band2" class="band-content hidden">
+                    <div class="book-title">Band 2: Der Beginn des Friedens</div>
+                    <div class="chapter-title">Kapitel 1: Die Rückkehr nach Eldoria</div>
+                    <div class="text-content" id="de-textContent2">
+                        <p><strong>Die Heimkehr des Königs und seiner Verbündeten</strong></p>
+                        <p>Die Dämmerung tauchte die Türme von Eldoria in warmes Gold, als Eryon und Aris auf den gepflasterten Straßen der Stadt einritten. Die Menschen drängten sich dicht an den Straßenrändern, jubelnd und lachend. Fahnen flatterten im Wind, und der süße Duft von Blumen, die in Hülle und Fülle auf die Helden herabregneten, vermischte sich mit dem erdigen Aroma des Pflasters, das die Hitze des Tages gespeichert hatte.</p>
+                        <p>Eryon saß auf einem majestätischen Rappen, seine goldene Rüstung funkelte im Licht. Ein Lächeln spielte auf seinen Lippen, doch in seinen Augen lag ein Schatten, den die Menge nicht wahrnahm. Neben ihm ritt Aris, ihre Hand fest um den Griff ihres Schwertes geschlossen. Ihre prüfenden Blicke glitten durch die Menge, immer auf der Hut.</p>
+                        <p>„Der König ist zurück!", schallte ein Ruf durch die Straßen, und die Menge antwortete mit einem Chor aus Jubel und Liedern. Doch zwischen den ausgelassenen Gesichtern bemerkte Aris vereinzelte, misstrauische Blicke.</p>
+                        <p><strong>Die Audienz im Großen Saal</strong></p>
+                        <p>Im Großen Saal, wo die Ratsführer der Völker Eldorias versammelt waren, empfing eine kühle, fast greifbare Spannung die Ankömmlinge. Der Elfenfürst, hochgewachsen und mit funkelnden Augen, begrüßte Eryon mit knapper Höflichkeit. Die Zwerge hingegen, gedrungen und schwer gerüstet, grummelten leise vor sich hin, als die Elfen ihre Meinungen äußerten.</p>
+                        <p>„Unsere Schmiede haben das Beste gegeben, um diese Schlacht zu gewinnen", erklärte ein Zwergenältester, doch seine Stimme klang trotzig. „Und doch habt ihr euch erst zu spät dem Kampf angeschlossen", erwiderte eine Elfe mit scharfer Zunge.</p>
+                        <p>Eryon hob die Hand, um Einhalt zu gebieten. „Heute feiern wir den Frieden. Lasst uns nicht den Keim von Zwietracht säen, wo Einheit nötig ist." Doch selbst seine kraftvollen Worte konnten die unterschwellige Spannung nicht ganz vertreiben.</p>
+                        <p><strong>Zwischen den Zeilen der Festlichkeit</strong></p>
+                        <p>Während der Feierlichkeiten im Palast wandelten Aris' Gedanken in dunkleren Gefilden. Ihr scharfer Blick glitt über die Menge, bis sie an einer verhüllten Gestalt hängen blieb, die abseits stand. Der Fremde schien sich kaum zu bewegen, doch als Aris näher trat, löste er sich in der Menge auf.</p>
+                        <p>„Hast du etwas bemerkt?" Eryons Stimme ließ sie zusammenzucken. „Vielleicht", antwortete sie knapp, doch der Anflug von Besorgnis in ihrem Tonfall blieb nicht unbemerkt.</p>
+                        <p><strong>Die stille Reflexion des Königs</strong></p>
+                        <p>Später, als die Feierlichkeiten verstummten und nur noch das leise Flackern der Fackeln die Hallen erleuchtete, zog sich Eryon in den Thronsaal zurück. Seine Hände ruhten schwer auf den Armlehnen seines Thrones, während seine Gedanken rastlos durch die Erinnerungen an die Schlacht wanderten.</p>
+                        <p>„Es fühlt sich nicht wie ein Sieg an", murmelte er. Aris, die stumm neben ihm stand, legte ihm eine Hand auf die Schulter. „Der Frieden ist nur ein Anfang, Eryon. Die wahre Prüfung liegt noch vor uns."</p>
+                        <p><strong>Die verborgene Gefahr</strong></p>
+                        <p>Tief in den Schatten von Eldorias Bergen versammelten sich währenddessen düstere Gestalten in einer Höhle, ihre Gesichter von Kapuzen verborgen. Der verhüllte Fremde sprach leise, aber eindringlich: „Die Dunkelheit mag geschlagen sein, doch sie ist nicht besiegt. Eldoria wird fallen -- nicht durch Krieg, sondern durch den Samen des Misstrauens."</p>
+                        <p>Ein dunkles Lachen erfüllte die Höhle, und die Flammen ihrer Fackeln flackerten wie böse Geister im Wind.</p>
                     </div>
                 </div>
 
-                <!-- Band 3: Die Schatten der Dörfer -->
-                <div class="band-content" id="de-band3">
-                    <div class="band-cover">
-                        Band 3<br>Cover
+                <!-- Band 3: Die Schatten des Vergessenen (Deutsch) -->
+                <div id="de-band3" class="band-content hidden">
+                    <div class="book-title">Band 3: Die Schatten des Vergessenen</div>
+                    <div class="chapter-title">Kapitel 1: Der Funke des Abenteuers</div>
+                    <div class="text-content" id="de-textContent3">
+                        <p>Die Morgensonne tauchte die weiten Ebenen von Eldoria in ein goldenes Licht, das von den sanften Hügeln zurückstrahlte. Kael saß am Rand der Klippe, die über das Tal von Arien ragte, und ließ den Blick über die friedliche Landschaft schweifen. Die Narben der vergangenen Kriege schienen endlich zu verblassen -- die Felder trugen wieder reiche Ernten, und die Städte erblühten in neuem Glanz. Doch in Kaels Herzen regte sich Unruhe, ein flüchtiges Verlangen nach etwas Größerem, das er selbst nicht benennen konnte.</p>
+                        <p>„Du denkst wieder zu viel nach", rief Tessa hinter ihm, ihre Stimme wie ein fröhlicher Glockenklang. Sie balancierte einen Korb voller Karten und Schriftrollen in den Händen und ließ sich neben ihm nieder. „Du weißt, was das bedeutet."</p>
+                        <p>Kael lachte leise und schüttelte den Kopf. „Was bedeutet es denn, allwissende Tessa?" „Es bedeutet, dass du dich nach einem Abenteuer sehnst. Und rate mal -- ich habe genau das Richtige für uns!" Sie legte die Karten vor sich aus, die Ecken sorgfältig mit Steinen beschwert, damit der Wind sie nicht davontrug. Eine Karte stach sofort ins Auge: Ihre Linien waren grob gezeichnet, die Details verschwommen, doch eine rote Markierung in einer abgelegenen Ecke fiel auf.</p>
+                        <p>„Das hier habe ich im Archiv von Eldarion gefunden", erklärte Tessa, ihre Augen vor Aufregung funkelnd. „Es zeigt die westlichen Grenzen von Eldoria. Oder besser gesagt, das, was wir darüber wissen -- nämlich fast nichts." Kael runzelte die Stirn. „Das sind die Randlande. Niemand geht dorthin. Die Geschichten, die man sich erzählt ..."</p>
+                        <p>„Geschichten", unterbrach sie ihn und hielt eine Pergamentrolle hoch, die mit einem königlichen Siegel versehen war. „Und doch schickt uns das Reich eine Botschaft. Diese Region ist nicht so verlassen, wie wir dachten." Kael nahm die Rolle und brach das Siegel. Die Worte darauf waren knapp und hinterließen ein mulmiges Gefühl:</p>
+                        <p><em>An die Kundschafter von Eldoria, Ein Licht wurde gesichtet, jenseits der Nebelberge. Seine Quelle ist unbekannt, doch seine Macht ist unübersehbar. Das Reich ersucht Erkundung -- und Klärung.</em></p>
+                        <p>Kael legte die Botschaft beiseite und betrachtete Tessa, die mit erwartungsvollem Blick auf ihn wartete. „Das klingt nach Ärger." „Es klingt nach einer Chance", entgegnete sie. „Eine Chance, das Unbekannte zu erforschen. Wer weiß, welche Geheimnisse dort verborgen liegen?"</p>
+                        <p>Kael spürte, wie das Verlangen in ihm wuchs, das ihn seit Wochen umtrieb. Eldoria war sicher, doch diese Sicherheit ließ ihn rastlos zurück. Vielleicht war dies der Funke, den er gesucht hatte.</p>
+                        <p>Die Vorbereitungen für die Reise begannen am nächsten Morgen. Kael und Tessa sammelten Proviant, überprüften ihre Waffen und befestigten die alten Karten sorgfältig in einer ledernen Tasche. Die Dorfbewohner beobachteten sie mit gemischten Gefühlen. Manche schüttelten den Kopf, andere flüsterten ängstlich über die düsteren Mythen der Randlande.</p>
+                        <p>„Wenn wir zurückkommen", sagte Tessa mit einem Augenzwinkern, „werde ich uns ewigen Ruhm sichern. Du wirst sehen, Kael, in Zukunft erzählen die Geschichtenerzähler in jeder Taverne von uns." Kael zog die Schnalle seines Rucksacks fest und warf einen letzten Blick auf das Dorf. „Und wenn wir nicht zurückkommen?" „Dann sind wir wenigstens nicht in Langeweile gestorben", antwortete sie grinsend.</p>
+                        <p>Am dritten Tag ihrer Reise hatten sie die vertrauten Wälder von Eldoria hinter sich gelassen und die Grenzen der Nebelberge erreicht. Hier war die Luft anders, schwer und voller unheimlicher Stille. Die Pfade wurden schmaler, und der Nebel verdichtete sich, bis sie kaum die Hand vor Augen sehen konnten.</p>
+                        <p>„Wir sind fast da", murmelte Tessa, als sie das rote Kreuz auf der Karte mit ihrem Standort abglich. „Zumindest hoffe ich das." Plötzlich zerriss ein dumpfes Dröhnen die Stille. Die Erde vibrierte unter ihren Füßen, und Kael zog instinktiv sein Schwert. „Was war das?"</p>
+                        <p>Tessa hielt den Atem an. Vor ihnen öffnete sich die dichte Nebelwand und gab den Blick auf ein leuchtendes, pulsierendes Licht frei. Es schien direkt aus dem Boden zu kommen und warf tanzende Schatten an die Felsen. „Das Licht", flüsterte sie ehrfürchtig. „Es existiert wirklich."</p>
+                        <p>Doch bevor sie einen weiteren Schritt wagen konnten, brach ein donnerndes Knurren aus der Dunkelheit, und zwei glühende Augen fixierten sie. „Kael", hauchte Tessa, „ich glaube, wir sind nicht allein."</p>
                     </div>
-                    <h2 class="band-title">Band 3: Die Schatten der Dörfer</h2>
-                    <h3 class="chapter-title">Kapitel 1: Die ersten Schatten</h3>
-                    <div class="story-text">
-                        <p>Erik Lindner parkte seinen Wagen am Rand von Düsselbrook, einem kleinen Dorf, das wie ein vergessener Fleck auf der Landkarte der Lüneburger Heide lag. Als Sozialarbeiter hatte er schon viele abgelegene Orte besucht, aber dieser Ort hatte etwas Besonderes – etwas, das ihm ein ungutes Gefühl gab, noch bevor er den ersten Schritt auf die Dorfstraße gesetzt hatte.</p>
-                        
-                        <p>Es war ein grauer Novembertag, und die Herbstblätter tanzten im Wind wie kleine Geister zwischen den Häusern. Das Dorf bestand aus kaum mehr als zwanzig Gebäuden, die sich um eine kleine Kirche scharten. Die meisten Häuser waren alt und zeigten Zeichen des Verfalls – abblätternde Farbe, gebrochene Fensterscheiben, überwucherte Gärten. Aber das war nicht das, was Erik störte. Es war die Stille.</p>
-                        
-                        <p>Es war nicht die normale Stille eines ruhigen Dorfes. Es war eine drückende, unnatürliche Stille, als ob das Leben selbst aus diesem Ort gewichen wäre. Kein Hundegebell, kein Vogelgesang, kein Lachen von Kindern. Nur das Rascheln der Blätter und das gelegentliche Knarren einer Tür im Wind.</p>
-                        
-                        <p>Erik hatte einen Anruf von der Bezirksregierung erhalten. Besorgte Angehörige hatten gemeldet, dass sie seit Wochen nichts von ihren Verwandten in Düsselbrook gehört hatten. Telefone wurden nicht beantwortet, Briefe blieben unbeantwortet. Es war Zeit für eine Überprüfung vor Ort.</p>
-                        
-                        <p>Er ging zur ersten Haustür und klopfte. Keine Antwort. Er versuchte es bei der nächsten. Wieder nichts. Beim dritten Haus bemerkte er, dass die Tür einen Spalt offen stand. Er drückte sie vorsichtig auf.</p>
-                        
-                        <p>"Hallo? Ist jemand da?" rief er ins Innere. Seine Stimme hallte in der Leere wider.</p>
-                        
-                        <p>Das Haus war ordentlich, aber verlassen. Auf dem Küchentisch stand noch eine Tasse Kaffee, längst kalt geworden. Eine Zeitung lag aufgeschlagen dabei, datiert auf den 15. Oktober – drei Wochen zuvor. Es sah aus, als ob die Bewohner mitten in ihrem Alltag einfach verschwunden wären.</p>
-                        
-                        <p>Erik ging von Haus zu Haus, und überall fand er dasselbe Bild: Verlassene Häuser, in denen die Zeit stehen geblieben zu sein schien. Keine Anzeichen von Gewalt, keine Zeichen eines Kampfes. Die Menschen waren einfach weg, als ob sie sich in Luft aufgelöst hätten.</p>
-                        
-                        <p>Im Zentrum des Dorfes stand die kleine Kirche, ein Gebäude aus dem 17. Jahrhundert mit einem Friedhof, der von alten Eichen umgeben war. Erik bemerkte, dass die Kirchentür offen stand, und beschloss, einen Blick hineinzuwerfen.</p>
-                        
-                        <p>Das Innere der Kirche war dunkel und kühl. Schwaches Licht fiel durch die bunten Glasfenster und warf seltsame Schatten auf die Kirchenbänke. Aber das war nicht das Ungewöhnlichste. Alle Kirchenbänke waren besetzt.</p>
-                        
-                        <p>Erik blieb wie erstarrt stehen. Die Dorfbewohner saßen still in den Bänken, ihre Gesichter nach vorne gerichtet, als ob sie dem Altar lauschten. Aber sie bewegten sich nicht. Sie atmeten nicht. Ihre Augen starrten ins Leere, als ob sie in eine andere Welt blickten.</p>
-                        
-                        <p>"Entschuldigung", sagte Erik vorsichtig und ging zu der ersten Bank. "Sind Sie in Ordnung?"</p>
-                        
-                        <p>Keine Reaktion. Er berührte die Schulter einer älteren Frau. Sie war warm, aber reglos. Ihr Puls war schwach, aber vorhanden. Es war, als ob sie sich in einem tiefen Schlaf befänden, aus dem sie nicht erwachen konnten.</p>
-                        
-                        <p>Erik ging durch die Reihen und zählte fast sechzig Menschen – Männer, Frauen, Kinder, alle in derselben tranceähnlichen Starre gefangen. Ihre Gesichter waren friedlich, aber ihre Augen... ihre Augen waren leer, als ob ihre Seelen an einen anderen Ort gewandert wären.</p>
-                        
-                        <p>Als er den Altar erreichte, sah er etwas, das ihm das Blut in den Adern gefrieren ließ. Auf dem Altar lag ein altes Buch, aufgeschlagen bei einer Seite mit handgeschriebenen Symbolen und Texten in einer Sprache, die er nicht erkannte. Neben dem Buch lag eine alte Photographie, die das Dorf zeigte, aber auf dem Bild waren Schatten zu sehen, die sich bewegten, als ob sie ein Eigenleben hätten.</p>
-                        
-                        <p>Erik griff nach seinem Handy, um die Polizei zu rufen, aber er hatte keinen Empfang. Er musste aus dem Dorf heraus, um Hilfe zu holen. Aber als er sich umwandte, um die Kirche zu verlassen, sah er, dass alle Augen auf ihn gerichtet waren.</p>
-                        
-                        <p>Die Dorfbewohner saßen noch immer reglos in ihren Bänken, aber ihre Köpfe hatten sich gedreht, und ihre leeren Augen verfolgten jede seiner Bewegungen. Ihre Lippen bewegten sich langsam, aber lautlos, als ob sie ein Gebet oder eine Beschwörung murmelten.</p>
-                        
-                        <p>Erik spürte, wie Panik in ihm aufstieg. Er rannte zur Tür, aber als er hinauseilte, sah er, dass das Dorf sich verändert hatte. Die Häuser sahen älter aus, verfallener. Der Himmel war Von einem unnatürlichen Grau, und die Schatten schienen sich zu bewegen, als ob sie lebten.</p>
-                        
-                        <p>Und dann hörte er es: ein leises Summen, das aus den Häusern zu kommen schien, ein Chor von Stimmen, die eine Melodie sangen, die ihm gleichzeitig fremd und vertraut vorkam. Es war ein Lied, das seine Großmutter ihm als Kind vorgesungen hatte, ein altes Lied aus der Heide, das von Geistern und verlorenen Seelen erzählte.</p>
-                        
-                        <p>Erik rannte zu seinem Wagen, aber als er den Schlüssel ins Schloss steckte, spürte er eine Hand auf seiner Schulter. Er drehte sich um und sah eine alte Frau, die ihn mit trüben Augen anstarrte.</p>
-                        
-                        <p>"Du kannst nicht gehen", sagte sie mit einer Stimme, die wie Wind durch trockene Blätter klang. "Du gehörst jetzt zu uns. Du bist ein Teil der Schatten."</p>
-                        
-                        <p>Erik wollte schreien, aber seine Stimme versagte. Er spürte, wie seine Gedanken langsam verschwommen wurden, wie ein Nebel, der sich über seinen Verstand legte. Die Welt um ihn herum wurde dunkler, und das letzte, was er sah, bevor die Dunkelheit ihn verschlang, waren die Schatten der Dörfer, die sich wie lebende Wesen um ihn schlossen.</p>
+                </div>
+
+                <!-- Band 4: Das Vermächtnis der Wächter (Deutsch) -->
+                <div id="de-band4" class="band-content hidden">
+                    <div class="book-title">Band 4: Das Vermächtnis der Wächter</div>
+                    <div class="chapter-title">Kapitel 1: Zerfallende Einheit</div>
+                    <div class="text-content" id="de-textContent4">
+                        <p>Der Morgen in Eldoria brach düster an. Eine schwere Wolkendecke lag über der Hauptstadt, als ob sie die politischen Spannungen der letzten Tage widerspiegeln wollte. Auf dem Platz vor der Ratskammer hatten sich Bürger und Soldaten versammelt, deren Rufe und Proteste die Luft vibrieren ließen. Es herrschte Unruhe, und die sonst strahlenden Banner Eldorias hingen schwer und verschmutzt im Wind.</p>
+                        <p>Kael spürte die Veränderung sofort, als er mit Tessa den Platz betrat. Die Menschen wirkten angespannt, viele schauten sich nervös um, als könnten aus den Schatten neue Gefahren auftauchen. „Die Einheit zerbricht", sagte Tessa leise und betrachtete das Durcheinander. „Wenn die Fraktionen sich weiter gegenseitig bekämpfen, gibt es bald nichts mehr, was wir retten können."</p>
+                        <p>Kael nickte, doch seine Gedanken waren woanders. Marek, der seit Wochen zunehmend verschlossen war, hatte sich heute Morgen nicht einmal beim Frühstück gezeigt. Ein ungutes Gefühl regte sich in ihm, doch er verdrängte es. Die Mission hatte Vorrang.</p>
+                        <p><strong>Die Nachricht des Auftraggebers</strong></p>
+                        <p>Die Gruppe war in einem Nebenraum der Ratskammer zusammengekommen. Der mysteriöse Auftraggeber hatte sich verspätet, und die Stille war unerträglich. Marek saß am Rand, den Blick ausdruckslos, während Aris mit dem Fuß ungeduldig auf den Boden klopfte.</p>
+                        <p>„Das hier ist eine Farce", platzte Eryon schließlich heraus. „Wir sollten dort draußen sein und etwas tun, statt hier zu warten." „Etwas tun? Was genau?" Tessa wandte sich ihm zu, ihre Stimme scharf. „Die Fraktionen zerfleischen sich, weil niemand bereit ist, die Verantwortung zu übernehmen. Jeder Schritt muss wohlüberlegt sein."</p>
+                        <p>Eryon wollte widersprechen, doch in diesem Moment öffnete sich die Tür. Ein hagerer Mann in einer dunklen Robe trat ein, gefolgt von zwei Wachen. Seine Augen leuchteten in einem merkwürdigen Grün, und seine Stimme war ruhig, fast hypnotisch.</p>
+                        <p>„Ich danke euch, dass ihr gekommen seid", begann er, ohne sich vorzustellen. „Meine Zeit ist begrenzt, also werde ich direkt zur Sache kommen. Es gibt eine Dimension jenseits unserer, eng verbunden mit den Wächtern und ihrer Magie. Diese Dimension steht kurz davor, von der Dunkelheit verschlungen zu werden. Und wenn das geschieht, wird Eldoria folgen."</p>
+                        <p>Die Worte hingen schwer im Raum. Kael spürte, wie eine Welle des Zweifels durch die Gruppe ging. „Was genau erwartet ihr von uns?" fragte er schließlich, bemüht, seine Stimme ruhig zu halten.</p>
+                        <p>Der Mann lächelte kaum merklich. „Ihr werdet dorthin reisen und das Vermächtnis der Wächter finden. Es ist die einzige Hoffnung, beide Welten zu retten."</p>
+                        <p><strong>Die Spannungen eskalieren</strong></p>
+                        <p>Nach dem Treffen war die Gruppe in ihr Quartier zurückgekehrt. Die Stimmung war angespannt. Eryon warf seine Ausrüstung in eine Ecke und begann sofort zu packen, während Tessa versuchte, die Details der Mission zu analysieren.</p>
+                        <p>„Es ist Wahnsinn, sich in eine unbekannte Dimension zu wagen", meinte Aris, die an der Tür lehnte und Marek beobachtete. „Wir wissen nicht einmal, ob dieser Mann die Wahrheit sagt." „Haben wir eine Wahl?" Kael trat vor und verschränkte die Arme. „Eldoria steht am Abgrund. Wenn wir nichts tun, ist das hier alles verloren."</p>
+                        <p>Marek stand plötzlich auf. Sein Gesicht war verschlossen, und er schob sich an Aris vorbei. „Vielleicht sollten wir erst einmal herausfinden, wem wir vertrauen können, bevor wir eine ganze Welt retten."</p>
+                        <p>Die Worte schnitten tief. Kael wollte ihm folgen, doch Tessa legte eine Hand auf seinen Arm. „Lass ihn. Er wird seine Gründe haben." Doch in Kaels Kopf häuften sich die Fragen: Warum zog Marek sich zurück? Und was wusste er, dass die anderen nicht wussten?</p>
+                        <p><strong>Der innere Konflikt</strong></p>
+                        <p>Die Nacht brach herein, und Kael saß allein auf dem Balkon, den Blick auf die sterbende Stadt gerichtet. Die Proteste hatten sich aufgelöst, doch die Stille war beängstigender als der Lärm.</p>
+                        <p>Tessa trat zu ihm, ihren Mantel fest um sich gezogen. „Was ist mit Marek?" fragte sie schließlich. „Ich weiß es nicht", gab Kael zu. „Aber ich werde es herausfinden. Bevor es zu spät ist." Tessa nickte und setzte sich neben ihn. „Diese Mission wird uns verändern, Kael. Vielleicht mehr, als wir bereit sind zuzugeben."</p>
+                        <p>Ihre Worte hallten in der Stille wider, während der Mond über Eldoria aufstieg. Die erste Etappe der Reise lag vor ihnen, doch die Risse in ihrer Gruppe drohten, alles zu zerstören, bevor sie überhaupt begonnen hatten.</p>
                     </div>
                 </div>
             </div>
 
             <!-- ENGLISCHE VERSIONEN -->
             <div id="en-content" class="language-content hidden">
-                <!-- Band 1: The Ghost of the Heath -->
-                <div class="band-content active" id="en-band1">
-                    <div class="band-cover">
-                        Volume 1<br>Cover
-                    </div>
-                    <h2 class="band-title">Volume 1: The Ghost of the Heath</h2>
-                    <h3 class="chapter-title">Chapter 1: The Beginning</h3>
-                    <div class="story-text">
-                        <p>Rain drummed in irregular droplets on the cobblestone street, forming small, glittering puddles in the crevices of the old stone. Twilight had already fallen, and the pale light of the gas lanterns bathed the surroundings in a dim half-light that intensified shadows in the corners and distorted the shapes of buildings. In the distance, the shrill whistle of a train pierced through the night as a young man, wrapped in a dark coat, slowly walked down the street. He was no older than twenty, yet his gaze seemed to radiate a maturity that belied his age. His eyes held an unusual intensity, as if they harbored secrets known only to him.</p>
-                        
-                        <p>Elias Hartwell was his name, and he had traveled a long way. The small town of Heidersdorf lay remote in the Lüneburg Heath, surrounded by dense forests and vast moorlands that spread like a tapestry of secrets across the landscape. Here, in this secluded corner of northern Germany, he was to spend the next months as assistant to the local doctor, Dr. Wilhelm Brenner. But what had truly brought him here was not just the prospect of work and modest income. It was the rumors, the stories whispered in the taverns of larger cities – stories of inexplicable events, of people who vanished without a trace, and of a ghost that was said to roam the misty nights of the heath.</p>
-                        
-                        <p>Elias was a man of science, rational and skeptical. Yet deep within him slumbered a curiosity stronger than any reason. The mysteries of the heath had fascinated him since childhood, when his grandmother told him stories of ancient legends. Now that he was grown and had the opportunity to explore these stories, he could not resist.</p>
-                        
-                        <p>As he walked down the main street of Heidersdorf, he noticed curtains moving in the windows. The villagers were suspicious of strangers, Dr. Brenner had already written to him in his letter. But Elias sensed there was more – a tension that hung in the air, as if the entire village guarded a secret.</p>
-                        
-                        <p>Dr. Brenner's house stood at the end of the street, an imposing building of dark brick surrounded by a small garden. Elias knocked on the heavy wooden door, and after a moment, an elderly gentleman with gray hair and kind eyes opened it.</p>
-                        
-                        <p>"You must be Elias Hartwell," said Dr. Brenner with a warm smile. "Welcome to Heidersdorf. Come in, you look frozen through."</p>
-                        
-                        <p>The interior of the house was warm and inviting, with dark wood paneling and a fireplace where a fire crackled. Dr. Brenner led Elias to his study, where the walls were lined with books and medical instruments were neatly arranged on a desk.</p>
-                        
-                        <p>"I hope the journey wasn't too arduous," said Dr. Brenner, offering Elias a chair. "Heidersdorf is hardly a place that many young men would seek out. What really brought you here?"</p>
-                        
-                        <p>Elias hesitated for a moment, then decided on the truth. "The stories, Doctor. The rumors about the strange events here in the heath. I am a medical student, but I also have an interest in... unusual phenomena."</p>
-                        
-                        <p>Dr. Brenner nodded slowly, his face growing serious. "Ah, I understand. You are here because of the Ghost of the Heath." He stood and went to the window, looking out into the dark night. "I must tell you, Elias, that these stories are not mere superstition. In recent months, things have happened that cannot be rationally explained. People have disappeared, and those who have returned speak of visions, of a figure that lured them into the moor."</p>
-                        
-                        <p>Elias felt his neck hairs rise. "Do you believe these stories, Doctor?"</p>
-                        
-                        <p>Dr. Brenner turned and looked at Elias seriously. "I believe what I have seen with my own eyes. And I have seen things that cannot be explained. If you truly wish to stay here, then be careful. The heath harbors secrets older than this village, older than our civilization. And some secrets are better left buried."</p>
+                <!-- Band 1: The Prophecy of Eldoria (English) -->
+                <div id="en-band1" class="band-content">
+                    <div class="book-title">Volume 1: The Prophecy of Eldoria</div>
+                    <div class="chapter-title">Chapter 1: Introduction to Eldoria and the Prophecy</div>
+                    <div class="text-content" id="en-textContent1">
+                        <p><strong>The Royal House</strong></p>
+                        <p>The Kingdom of Eldoria stretched across vast plains, dense forests, and rugged mountain ranges, framed by a shimmering ocean to the west. At the heart of the land stood the royal house: a massive structure of white stone that had endured the centuries. The walls bore scars from sieges and wars, a silent witness to the turbulent history of Eldoria. Great towers reached toward the sky, crowned with flags bearing the kingdom's coat of arms -- a golden phoenix surrounded by flame, symbol of rebirth and immortality.</p>
+                        <p>King Aldemar sat on his stone throne in the great hall, flooded with light from tall windows. Yet the sunlight could not dispel the shadows on his face. His eyes were clouded with worry, and his shoulders bore the burden not only of the kingdom but also of the prophecy that hung over his family.</p>
+                        <p>His faithful advisor Orin stood beside him, a man with gray hair and alert eyes who always maintained his composure, even when the world around him threatened to break apart. "My King," Orin began, noticing how Aldemar stared thoughtfully at the wall painting depicting the creation of Eldoria. "You must not let these signs overwhelm you. The people need your strength."</p>
+                        <p>"And what if my strength is not enough?" Aldemar rose slowly. His voice was deep and heavy, like a thunderous echo in the hall. "The omens are clear, Orin. The fog, the reports of creatures in the forests, the unrest among the people -- all of this points to the prophecy coming true."</p>
+                        <p>Orin placed a hand on the king's arm. "There have always been times of darkness, and each time the phoenix bloodline has survived. We must decipher the prophecy, that is true, but not act in desperation."</p>
+                        <p><strong>The People</strong></p>
+                        <p>In the streets of Eldoria's capital, the cobbled alleys that led down from the royal house, bustling activity reigned. Merchants loudly praised their wares while children ran laughing between market stalls. Yet behind the facade of daily life, a growing unrest slumbered. The old wise ones whispered of stories of the prophecy, a divination that foretold either the end or salvation of Eldoria. Many believed that the strange events -- the unnatural fog, the disappearance of villagers -- were the beginnings of the dark prediction.</p>
+                        <p>"Have you heard?" asked a peasant woman while hawking a basket of apples. "The night was so quiet, not a single bird chirped. And my husband says he saw eyes in the fog!"</p>
+                        <p>An old man sitting by the edge of the well nodded gravely. "Times are changing. We have angered the gods, and now we will pay the price."</p>
+                        <p>But not all allowed themselves to be ruled by fears. In the taverns, bards continued to sing songs of heroic deeds, and some younger citizens mocked the stories of the old. Nevertheless, fear was palpable, like a dull thunder on the horizon, waiting to be unleashed.</p>
+                        <p><strong>The Prophecy</strong></p>
+                        <p>Deep beneath the royal house, hidden behind heavy iron doors, lay the royal library, a labyrinth of shelves extending into darkness. At its center stood a golden chest, protected by ancient runes and spells. Within lay the Book of Prophecy. Aldemar, Orin, and the wise Eldrin stood before the chest while flickering torches illuminated the ancient runes. Eldrin, whose long robe dragged in the dust of the floor, murmured incantations to break the magical seal.</p>
+                        <p>"My King, once we open the book, there is no going back," warned Eldrin without taking his eyes off the chest. "I know that," Aldemar replied with determination. "But time is pressing. We must know what the prophecy demands." With a final word, the chest opened, and Eldrin carefully drew out a leather-bound book. The pages seemed brittle, yet the writing on them pulsed as if alive. "Here it is," said Eldrin as he opened the first page. "The signs that herald the end. And the path that leads to salvation."</p>
+                        <p><strong>Ominous Portents</strong></p>
+                        <p>Before Eldrin could continue speaking, a deafening crash sounded from the distance. The earth trembled, and an unnatural wind swept through the catacombs. Aldemar drew his sword while Orin positioned himself protectively before the king. "What was that?" cried Orin. Eldrin looked at the book, whose writing suddenly faded as if it had spoken its warning. "Something has awakened," he said with a trembling voice.</p>
+                        <p>At the surface, people streamed from their houses. The sky over Eldoria had darkened, and a massive rift stretched like an open wound through the clouds. From the fog at the forest's edge came rumbling sounds that made people's hearts tremble with fear.</p>
+                        <p>A warrior stationed at the kingdom's border rode into the city. His face was ashen, and his voice trembled as he called out: "The creatures from the stories are real! They're coming!" The Kingdom of Eldoria stood before its darkest hour, and the prophecy had begun to cast its shadows upon the land.</p>
                     </div>
                 </div>
 
-                <!-- Band 2: The Moor of Forgetting -->
-                <div class="band-content" id="en-band2">
-                    <div class="band-cover">
-                        Volume 2<br>Cover
-                    </div>
-                    <h2 class="band-title">Volume 2: The Moor of Forgetting</h2>
-                    <h3 class="chapter-title">Chapter 1: The Find in the Moor</h3>
-                    <div class="story-text">
-                        <p>Detective Inspector Anna Hartmann stood at the edge of the gloomy moor, staring at the corpse half-submerged in the muddy water. Fog hung like a gray veil over the landscape, swallowing every sound except the gentle lapping of the moor water and the occasional call of a heron in the distance.</p>
-                        
-                        <p>It was a cold October day, and the moisture crept through her clothing to her skin. Anna pulled her coat tighter and examined the scene with the trained eyes of an investigator who had worked for the police for ten years. But this case was different. This case brought back memories she thought she had long buried.</p>
-                        
-                        <p>The corpse belonged to a middle-aged man, dressed in a dark suit that might once have been elegant. His face was marked by time in the moor but still recognizable. Dr. Friedrich Müller, a respected psychiatrist from Hamburg who had been reported missing three weeks ago.</p>
-                        
-                        <p>"Detective Inspector Hartmann," called Sergeant Koch, the older policeman who had found the body. "There's something strange here."</p>
-                        
-                        <p>Anna waded carefully through the shallow water to him. Koch held a small leather bag that he had pulled from the mud. It was surprisingly well preserved, as if the moor had conserved it.</p>
-                        
-                        <p>"This was lying right next to the body," Koch explained. "And look at this." He opened the bag and pulled out a notebook. The pages were damp, but the ink was still legible.</p>
-                        
-                        <p>Anna took the notebook and carefully leafed through the pages. Dr. Müller's handwriting was neat and precise, but the content of the entries made her blood freeze in her veins.</p>
-                        
-                        <p>"Date: September 15th. The visions are getting stronger. I see them during the day now. The figure in the fog calls my name. I must go to the moor. I must find out the truth about what happened twenty years ago."</p>
-                        
-                        <p>"Date: September 18th. I have spoken with other affected individuals. Dr. Richter from Lüneburg reports similar symptoms in his patients. Hallucinations all with the same theme: A figure in the heath calling people to it. I begin to understand that this is more than just psychological disorders."</p>
-                        
-                        <p>"Date: September 20th. I have found the old files. The case from 1982. Five people disappeared without a trace in the moor. Four bodies were never found. One woman, Maria Brenner, returned after three days, but she was... changed. She spoke of a ghost that collects the souls of the dead. They thought her mad."</p>
-                        
-                        <p>Anna felt her stomach contract. The name Maria Brenner was not unknown to her. It was the name of her grandmother, the woman who had raised her after her parents' death. The woman who had always told her stories of the heath, stories that Anna had dismissed as fairy tales.</p>
-                        
-                        <p>"Date: September 22nd. I can no longer sleep. The voice grows louder. It calls me to the moor. I know I must go. I know I may not return. But I must learn the truth. I must find out what really happened back then."</p>
-                        
-                        <p>That was the last entry. Anna closed the notebook and looked at Koch. "We need to call forensics. And I want to see all the files from 1982. All files about missing persons in this area for the last thirty years."</p>
-                        
-                        <p>Koch nodded. "Do you think there's something to these stories?"</p>
-                        
-                        <p>Anna looked out over the moor, where the fog seemed to be thickening. "I think Dr. Müller is not the first victim. And he won't be the last if we don't find out what's really going on here."</p>
-                        
-                        <p>As she turned to return to the car, she could have sworn she saw a figure in the fog, a dark silhouette that seemed to be watching her. But when she looked more closely, there was nothing but the endless gray veil that covered the moor like a shroud.</p>
-                        
-                        <p>Yet deep inside, Anna knew that her grandmother had not been mad. And that she herself had now become part of a story that had begun decades ago – a story that would lead her into the darkest secrets of the Lüneburg Heath.</p>
+                <!-- Band 2: The Beginning of Peace (English) -->
+                <div id="en-band2" class="band-content hidden">
+                    <div class="book-title">Volume 2: The Beginning of Peace</div>
+                    <div class="chapter-title">Chapter 1: The Return to Eldoria</div>
+                    <div class="text-content" id="en-textContent2">
+                        <p><strong>The Homecoming of the King and His Allies</strong></p>
+                        <p>Twilight bathed the towers of Eldoria in warm gold as Eryon and Aris rode through the cobbled streets of the city. People pressed close to the roadside, cheering and laughing. Banners fluttered in the wind, and the sweet scent of flowers, which rained down upon the heroes in abundance, mingled with the earthy aroma of the pavement that had stored the day's heat.</p>
+                        <p>Eryon sat upon a majestic black horse, his golden armor sparkling in the light. A smile played on his lips, yet in his eyes lay a shadow that the crowd did not perceive. Beside him rode Aris, her hand firmly grasping the hilt of her sword. Her examining glances swept through the crowd, always on guard.</p>
+                        <p>"The king has returned!" echoed a cry through the streets, and the crowd responded with a chorus of jubilation and songs. Yet among the exuberant faces, Aris noticed scattered, mistrustful looks.</p>
+                        <p><strong>The Audience in the Great Hall</strong></p>
+                        <p>In the Great Hall, where the council leaders of Eldoria's peoples were assembled, a cool, almost tangible tension greeted the arrivals. The Elf Prince, tall and with sparkling eyes, welcomed Eryon with curt courtesy. The dwarves, however, stocky and heavily armored, grumbled quietly to themselves as the elves voiced their opinions.</p>
+                        <p>"Our forges gave their best to win this battle," declared a dwarf elder, yet his voice sounded defiant. "And yet you joined the fight too late," retorted an elf with a sharp tongue.</p>
+                        <p>Eryon raised his hand to call for silence. "Today we celebrate peace. Let us not sow the seeds of discord where unity is needed." Yet even his powerful words could not completely dispel the underlying tension.</p>
+                        <p><strong>Between the Lines of Festivity</strong></p>
+                        <p>During the celebrations in the palace, Aris's thoughts wandered in darker realms. Her sharp gaze swept over the crowd until it settled on a veiled figure standing apart. The stranger seemed barely to move, yet when Aris approached, he dissolved into the crowd.</p>
+                        <p>"Did you notice something?" Eryon's voice made her start. "Perhaps," she answered curtly, yet the hint of concern in her tone did not go unnoticed.</p>
+                        <p><strong>The King's Silent Reflection</strong></p>
+                        <p>Later, when the festivities had subsided and only the quiet flickering of torches illuminated the halls, Eryon withdrew to the throne room. His hands rested heavily on the armrests of his throne while his thoughts restlessly wandered through memories of the battle.</p>
+                        <p>"It doesn't feel like a victory," he murmured. Aris, who stood silently beside him, placed a hand on his shoulder. "Peace is only a beginning, Eryon. The true test still lies before us."</p>
+                        <p><strong>The Hidden Danger</strong></p>
+                        <p>Deep in the shadows of Eldoria's mountains, meanwhile, dark figures gathered in a cave, their faces hidden by hoods. The veiled stranger spoke quietly but urgently: "Darkness may be defeated, but it is not vanquished. Eldoria will fall -- not through war, but through the seed of mistrust."</p>
+                        <p>Dark laughter filled the cave, and the flames of their torches flickered like evil spirits in the wind.</p>
                     </div>
                 </div>
 
-                <!-- Band 3: The Shadows of the Villages -->
-                <div class="band-content" id="en-band3">
-                    <div class="band-cover">
-                        Volume 3<br>Cover
+                <!-- Band 3: The Shadows of the Forgotten (English) -->
+                <div id="en-band3" class="band-content hidden">
+                    <div class="book-title">Volume 3: The Shadows of the Forgotten</div>
+                    <div class="chapter-title">Chapter 1: The Spark of Adventure</div>
+                    <div class="text-content" id="en-textContent3">
+                        <p>The morning sun bathed the vast plains of Eldoria in golden light, reflecting off the gentle hills. Kael sat at the edge of the cliff that overlooked the valley of Arien, letting his gaze sweep over the peaceful landscape. The scars of past wars seemed finally to be fading -- the fields bore rich harvests again, and the cities bloomed in new splendor. Yet in Kael's heart, unrest stirred, a fleeting longing for something greater that he could not name.</p>
+                        <p>"You're thinking too much again," Tessa called behind him, her voice like a cheerful bell. She balanced a basket full of maps and scrolls in her hands and settled down beside him. "You know what that means."</p>
+                        <p>Kael laughed softly and shook his head. "What does it mean, all-knowing Tessa?" "It means you're yearning for an adventure. And guess what -- I have just the right thing for us!" She laid the maps before her, corners carefully weighted with stones so the wind wouldn't carry them away. One map immediately caught the eye: Its lines were roughly drawn, details blurred, yet a red marking in a remote corner stood out.</p>
+                        <p>"I found this in the archive of Eldarion," Tessa explained, her eyes sparkling with excitement. "It shows the western borders of Eldoria. Or rather, what we know about them -- namely, almost nothing." Kael furrowed his brow. "Those are the borderlands. No one goes there. The stories they tell..."</p>
+                        <p>"Stories," she interrupted him, holding up a parchment scroll sealed with a royal seal. "And yet the realm sends us a message. This region is not as abandoned as we thought." Kael took the scroll and broke the seal. The words on it were brief and left an uneasy feeling:</p>
+                        <p><em>To the scouts of Eldoria, A light has been sighted beyond the Mist Mountains. Its source is unknown, yet its power is unmistakable. The realm requests exploration -- and clarification.</em></p>
+                        <p>Kael set the message aside and looked at Tessa, who waited with expectant eyes. "That sounds like trouble." "It sounds like an opportunity," she countered. "A chance to explore the unknown. Who knows what secrets lie hidden there?"</p>
+                        <p>Kael felt the longing grow within him that had been driving him for weeks. Eldoria was safe, yet this safety left him restless. Perhaps this was the spark he had been seeking.</p>
+                        <p>Preparations for the journey began the next morning. Kael and Tessa gathered provisions, checked their weapons, and carefully secured the old maps in a leather pouch. The villagers watched them with mixed feelings. Some shook their heads, others whispered anxiously about the dark myths of the borderlands.</p>
+                        <p>"When we return," Tessa said with a wink, "I'll secure eternal glory for us. You'll see, Kael, in the future storytellers in every tavern will tell tales of us." Kael tightened the buckle of his backpack and cast a final glance at the village. "And if we don't return?" "Then at least we won't have died of boredom," she replied with a grin.</p>
+                        <p>On the third day of their journey, they had left the familiar forests of Eldoria behind and reached the borders of the Mist Mountains. Here the air was different, heavy and full of eerie silence. The paths became narrower, and the fog thickened until they could barely see their hands before their eyes.</p>
+                        <p>"We're almost there," Tessa murmured, matching the red cross on the map with their location. "At least I hope so." Suddenly a dull rumbling tore through the silence. The earth vibrated beneath their feet, and Kael instinctively drew his sword. "What was that?"</p>
+                        <p>Tessa held her breath. Before them, the dense fog wall opened and revealed a glowing, pulsating light. It seemed to come directly from the ground and cast dancing shadows on the rocks. "The light," she whispered reverently. "It really exists."</p>
+                        <p>But before they could take another step, a thunderous growl broke from the darkness, and two glowing eyes fixed on them. "Kael," Tessa breathed, "I think we're not alone."</p>
                     </div>
-                    <h2 class="band-title">Volume 3: The Shadows of the Villages</h2>
-                    <h3 class="chapter-title">Chapter 1: The First Shadows</h3>
-                    <div class="story-text">
-                        <p>Erik Lindner parked his car at the edge of Düsselbrook, a small village that lay like a forgotten spot on the map of the Lüneburg Heath. As a social worker, he had visited many remote places, but this place had something special – something that gave him an uneasy feeling even before he had taken his first step onto the village street.</p>
-                        
-                        <p>It was a gray November day, and autumn leaves danced in the wind like little ghosts between the houses. The village consisted of barely more than twenty buildings clustered around a small church. Most houses were old and showed signs of decay – peeling paint, broken windowpanes, overgrown gardens. But that wasn't what disturbed Erik. It was the silence.</p>
-                        
-                        <p>It wasn't the normal silence of a quiet village. It was an oppressive, unnatural silence, as if life itself had departed from this place. No barking dogs, no birdsong, no children's laughter. Only the rustling of leaves and the occasional creaking of a door in the wind.</p>
-                        
-                        <p>Erik had received a call from the district government. Concerned relatives had reported that they hadn't heard from their family members in Düsselbrook for weeks. Phones went unanswered, letters remained unreturned. It was time for an on-site inspection.</p>
-                        
-                        <p>He went to the first front door and knocked. No answer. He tried the next one. Again nothing. At the third house, he noticed the door stood slightly ajar. He pushed it open carefully.</p>
-                        
-                        <p>"Hello? Is anyone there?" he called into the interior. His voice echoed in the emptiness.</p>
-                        
-                        <p>The house was tidy but abandoned. On the kitchen table stood a cup of coffee, long since gone cold. A newspaper lay open beside it, dated October 15th – three weeks ago. It looked as if the residents had simply vanished in the middle of their daily routine.</p>
-                        
-                        <p>Erik went from house to house, and everywhere he found the same picture: abandoned houses where time seemed to have stood still. No signs of violence, no traces of struggle. The people were simply gone, as if they had dissolved into thin air.</p>
-                        
-                        <p>In the center of the village stood the small church, a 17th-century building with a cemetery surrounded by old oaks. Erik noticed that the church door stood open and decided to take a look inside.</p>
-                        
-                        <p>The interior of the church was dark and cool. Weak light fell through the stained glass windows, casting strange shadows on the pews. But that wasn't the most unusual thing. All the pews were occupied.</p>
-                        
-                        <p>Erik froze. The villagers sat quietly in the pews, their faces turned forward as if listening to the altar. But they didn't move. They didn't breathe. Their eyes stared into emptiness, as if they were looking into another world.</p>
-                        
-                        <p>"Excuse me," Erik said carefully, approaching the first pew. "Are you all right?"</p>
-                        
-                        <p>No reaction. He touched the shoulder of an elderly woman. She was warm but motionless. Her pulse was weak but present. It was as if they were in a deep sleep from which they could not awaken.</p>
-                        
-                        <p>Erik walked through the rows and counted almost sixty people – men, women, children, all trapped in the same trance-like rigidity. Their faces were peaceful, but their eyes... their eyes were empty, as if their souls had wandered to another place.</p>
-                        
-                        <p>When he reached the altar, he saw something that made his blood freeze. On the altar lay an old book, open to a page with handwritten symbols and texts in a language he didn't recognize. Next to the book lay an old photograph showing the village, but in the picture were shadows that seemed to move as if they had a life of their own.</p>
-                        
-                        <p>Erik reached for his phone to call the police, but he had no reception. He had to get out of the village to get help. But as he turned to leave the church, he saw that all eyes were fixed on him.</p>
-                        
-                        <p>The villagers still sat motionless in their pews, but their heads had turned, and their empty eyes followed his every movement. Their lips moved slowly but silently, as if they were murmuring a prayer or incantation.</p>
-                        
-                        <p>Erik felt panic rising within him. He ran to the door, but as he rushed out, he saw that the village had changed. The houses looked older, more dilapidated. The sky was an unnatural gray, and the shadows seemed to move as if they were alive.</p>
-                        
-                        <p>And then he heard it: a soft humming that seemed to come from the houses, a chorus of voices singing a melody that seemed both foreign and familiar to him. It was a song his grandmother had sung to him as a child, an old song from the heath that told of ghosts and lost souls.</p>
-                        
-                        <p>Erik ran to his car, but as he put the key in the lock, he felt a hand on his shoulder. He turned around and saw an old woman staring at him with cloudy eyes.</p>
-                        
-                        <p>"You cannot leave," she said in a voice like wind through dry leaves. "You belong to us now. You are part of the shadows."</p>
-                        
-                        <p>Erik wanted to scream, but his voice failed him. He felt his thoughts slowly becoming blurred, like a fog settling over his mind. The world around him grew darker, and the last thing he saw before darkness consumed him were the shadows of the villages, closing around him like living beings.</p>
+                </div>
+
+                <!-- Band 4: The Legacy of the Guardians (English) -->
+                <div id="en-band4" class="band-content hidden">
+                    <div class="book-title">Volume 4: The Legacy of the Guardians</div>
+                    <div class="chapter-title">Chapter 1: Crumbling Unity</div>
+                    <div class="text-content" id="en-textContent4">
+                        <p>Morning broke gloomily over Eldoria. A heavy cloud cover lay over the capital, as if reflecting the political tensions of recent days. In the square before the council chamber, citizens and soldiers had gathered, their shouts and protests making the air vibrate. Unrest prevailed, and the usually radiant banners of Eldoria hung heavy and soiled in the wind.</p>
+                        <p>Kael felt the change immediately as he entered the square with Tessa. The people seemed tense, many looking around nervously as if new dangers might emerge from the shadows. "Unity is breaking," Tessa said quietly, observing the chaos. "If the factions continue to fight each other, there will soon be nothing left for us to save."</p>
+                        <p>Kael nodded, but his thoughts were elsewhere. Marek, who had been increasingly withdrawn for weeks, hadn't even shown up for breakfast this morning. An uneasy feeling stirred in him, but he suppressed it. The mission took priority.</p>
+                        <p><strong>The Client's Message</strong></p>
+                        <p>The group had assembled in a side room of the council chamber. The mysterious client was late, and the silence was unbearable. Marek sat at the edge, his expression blank, while Aris tapped her foot impatiently on the floor.</p>
+                        <p>"This is a farce," Eryon finally burst out. "We should be out there doing something, instead of waiting here." "Doing something? What exactly?" Tessa turned to him, her voice sharp. "The factions are tearing each other apart because no one is willing to take responsibility. Every step must be carefully considered."</p>
+                        <p>Eryon wanted to object, but at that moment the door opened. A gaunt man in a dark robe entered, followed by two guards. His eyes gleamed with a strange green, and his voice was calm, almost hypnotic.</p>
+                        <p>"I thank you for coming," he began without introducing himself. "My time is limited, so I will get straight to the point. There is a dimension beyond ours, closely connected to the Guardians and their magic. This dimension is about to be consumed by darkness. And when that happens, Eldoria will follow."</p>
+                        <p>The words hung heavy in the room. Kael felt a wave of doubt sweep through the group. "What exactly do you expect from us?" he finally asked, trying to keep his voice steady.</p>
+                        <p>The man smiled barely perceptibly. "You will travel there and find the Legacy of the Guardians. It is the only hope to save both worlds."</p>
+                        <p><strong>Tensions Escalate</strong></p>
+                        <p>After the meeting, the group had returned to their quarters. The mood was tense. Eryon threw his equipment into a corner and immediately began packing, while Tessa tried to analyze the details of the mission.</p>
+                        <p>"It's madness to venture into an unknown dimension," Aris said, leaning against the door and watching Marek. "We don't even know if this man is telling the truth." "Do we have a choice?" Kael stepped forward and crossed his arms. "Eldoria stands on the precipice. If we do nothing, all of this is lost."</p>
+                        <p>Marek suddenly stood up. His face was closed, and he pushed past Aris. "Maybe we should first find out whom we can trust before we save an entire world."</p>
+                        <p>The words cut deep. Kael wanted to follow him, but Tessa placed a hand on his arm. "Let him go. He'll have his reasons." But questions multiplied in Kael's head: Why was Marek withdrawing? And what did he know that the others didn't?</p>
+                        <p><strong>The Inner Conflict</strong></p>
+                        <p>Night fell, and Kael sat alone on the balcony, gazing at the dying city. The protests had dissolved, but the silence was more frightening than the noise.</p>
+                        <p>Tessa joined him, her cloak wrapped tightly around her. "What's wrong with Marek?" she finally asked. "I don't know," Kael admitted. "But I'll find out. Before it's too late." Tessa nodded and sat beside him. "This mission will change us, Kael. Perhaps more than we're ready to admit."</p>
+                        <p>Her words echoed in the silence as the moon rose over Eldoria. The first stage of the journey lay before them, but the cracks in their group threatened to destroy everything before they had even begun.</p>
                     </div>
                 </div>
             </div>
@@ -627,36 +478,34 @@
         let currentBand = 1;
         let currentLanguage = 'de';
         let currentWordIndex = 0;
-        let allBandWords = {}; // Speichert Wörter für alle Bände und Sprachen
+        let allBandWords = {};
         let isReading = false;
         let lastHighlightedWord = null;
 
-        // Initialisiere alle Bände beim Seitenstart
         function initializeAllBands() {
             ['de', 'en'].forEach(lang => {
                 allBandWords[lang] = {};
-                for (let bandNumber = 1; bandNumber <= 3; bandNumber++) {
-                    const bandContent = document.querySelector(`#${lang}-band${bandNumber} .story-text`);
+                for (let bandNumber = 1; bandNumber <= 4; bandNumber++) {
+                    const bandContent = document.querySelector(`#${lang}-band${bandNumber} .text-content`);
                     if (bandContent && !bandContent.querySelector('.word')) {
                         const paragraphs = bandContent.querySelectorAll('p');
                         let wordCounter = 0;
                         let bandWords = [];
-                        
+
                         paragraphs.forEach((paragraph) => {
                             const paragraphText = paragraph.textContent;
                             const paragraphWords = paragraphText.split(/\s+/).filter(word => word.length > 0);
-                            
+
                             let paragraphHTML = '';
                             paragraphWords.forEach((word) => {
                                 paragraphHTML += `<span class="word" data-word-index="${wordCounter}" onclick="startFromWord(${wordCounter})">${word}</span> `;
                                 bandWords.push(word);
                                 wordCounter++;
                             });
-                            
+
                             paragraph.innerHTML = paragraphHTML;
                         });
-                        
-                        // Speichere Wörter für diesen Band und Sprache
+
                         allBandWords[lang][bandNumber] = bandWords;
                     }
                 }
@@ -664,136 +513,48 @@
         }
 
         function switchLanguage(lang) {
-            // Stoppe aktuelles Vorlesen
-            stopReading();
-            
-            // Verstecke alle Sprachen
+            pauseReading();
             document.querySelectorAll('.language-content').forEach(content => {
                 content.classList.add('hidden');
             });
-            
-            // Zeige ausgewählte Sprache
             document.getElementById(lang + '-content').classList.remove('hidden');
-            
-            // Update Sprachbuttons
+
             document.querySelectorAll('.btn-lang').forEach(btn => {
                 btn.classList.remove('active');
             });
             event.target.classList.add('active');
-            
-            // Update Amazon-Button Texte
-            updateAmazonButtons(lang);
-            
+
             currentLanguage = lang;
             currentWordIndex = 0;
             clearHighlight();
-            
-            showBand(currentBand); // Zeige aktuellen Band in neuer Sprache
-        }
-
-        function updateAmazonButtons(lang) {
-            const amazonTexts = {
-                'de': ['Band 1 - In Vorbereitung', 'Band 2 - In Vorbereitung', 'Band 3 - In Vorbereitung'],
-                'en': ['Volume 1 - In Preparation', 'Volume 2 - In Preparation', 'Volume 3 - In Preparation']
-            };
-            
-            for (let i = 1; i <= 3; i++) {
-                const btn = document.getElementById(`amazon-de${i}`);
-                if (btn) {
-                    btn.textContent = amazonTexts[lang][i-1];
-                }
-            }
+            showBand(currentBand);
         }
 
         function showBand(bandNumber) {
-            // Stoppe aktuelles Vorlesen
-            stopReading();
-            
-            // Verstecke alle Bände in aktueller Sprache
-            for (let i = 1; i <= 3; i++) {
+            pauseReading();
+
+            for (let i = 1; i <= 4; i++) {
                 const bandElement = document.getElementById(`${currentLanguage}-band${i}`);
                 if (bandElement) {
-                    bandElement.classList.remove('active');
+                    bandElement.classList.add('hidden');
                 }
             }
-            
-            // Update Band-Buttons
-            document.querySelectorAll('.band-btn').forEach((btn, index) => {
+
+            document.querySelectorAll('.btn-band').forEach((btn, index) => {
                 btn.classList.remove('active');
                 if (index === bandNumber - 1) {
                     btn.classList.add('active');
                 }
             });
-            
-            // Zeige ausgewählten Band
+
             const targetBand = document.getElementById(`${currentLanguage}-band${bandNumber}`);
             if (targetBand) {
-                targetBand.classList.add('active');
+                targetBand.classList.remove('hidden');
             }
-            
+
             currentBand = bandNumber;
             currentWordIndex = 0;
             clearHighlight();
-            
-            // Update URL
-            window.location.hash = `#band${bandNumber}`;
-        }
-
-        function continueReading() {
-            if (currentSpeech) {
-                currentSpeech.cancel();
-            }
-            
-            const currentWords = allBandWords[currentLanguage] && allBandWords[currentLanguage][currentBand];
-            if (currentWords && currentWords.length > 0) {
-                // Text ab der aktuellen Position
-                const remainingText = currentWords.slice(currentWordIndex).join(' ');
-                
-                currentSpeech = new SpeechSynthesisUtterance(remainingText);
-                currentSpeech.rate = 1.0;
-                currentSpeech.lang = currentLanguage === 'de' ? 'de-DE' : 'en-US';
-                
-                let wordCount = currentWordIndex;
-                
-                currentSpeech.onboundary = function(event) {
-                    if (event.name === 'word') {
-                        highlightCurrentWord(wordCount);
-                        wordCount++;
-                        currentWordIndex = wordCount;
-                    }
-                };
-                
-                currentSpeech.onend = function() {
-                    isReading = false;
-                };
-                
-                isReading = true;
-                speechSynthesis.speak(currentSpeech);
-            }
-        }
-
-        function highlightCurrentWord(wordIndex) {
-            // Entferne vorherige Highlights
-            if (lastHighlightedWord) {
-                lastHighlightedWord.classList.remove('word-highlight');
-            }
-            
-            // Highlights das entsprechende Wort im aktuellen Band und Sprache
-            const wordSpan = document.querySelector(`#${currentLanguage}-band${currentBand} [data-word-index="${wordIndex}"]`);
-            if (wordSpan) {
-                wordSpan.classList.add('word-highlight');
-                lastHighlightedWord = wordSpan;
-                
-                // KEIN automatisches Scrolling - Leser bleibt bei Controls!
-            }
-        }
-
-        // URL-Parameter prüfen für direkten Band-Zugriff
-        function checkURLForBand() {
-            const hash = window.location.hash;
-            if (hash === '#band1') showBand(1);
-            else if (hash === '#band2') showBand(2);
-            else if (hash === '#band3') showBand(3);
         }
 
         function startReading() {
@@ -802,10 +563,53 @@
             continueReading();
         }
 
+        function continueReading() {
+            if (currentSpeech) {
+                currentSpeech.cancel();
+            }
+
+            const currentWords = allBandWords[currentLanguage] && allBandWords[currentLanguage][currentBand];
+            if (currentWords && currentWords.length > 0) {
+                const remainingText = currentWords.slice(currentWordIndex).join(' ');
+                currentSpeech = new SpeechSynthesisUtterance(remainingText);
+                currentSpeech.rate = 0.9;
+                currentSpeech.lang = currentLanguage === 'de' ? 'de-DE' : 'en-US';
+
+                let wordCount = currentWordIndex;
+                currentSpeech.onboundary = function(event) {
+                    if (event.name === 'word') {
+                        highlightCurrentWord(wordCount);
+                        wordCount++;
+                        currentWordIndex = wordCount;
+                    }
+                };
+
+                currentSpeech.onend = function() {
+                    isReading = false;
+                };
+
+                isReading = true;
+                speechSynthesis.speak(currentSpeech);
+            }
+        }
+
         function startFromWord(wordIndex) {
             currentWordIndex = wordIndex;
             clearHighlight();
             continueReading();
+        }
+
+        function highlightCurrentWord(wordIndex) {
+            if (lastHighlightedWord) {
+                lastHighlightedWord.classList.remove('word-highlight');
+            }
+
+            const wordSpan = document.querySelector(`#${currentLanguage}-band${currentBand} [data-word-index="${wordIndex}"]`);
+            if (wordSpan) {
+                wordSpan.classList.add('word-highlight');
+                lastHighlightedWord = wordSpan;
+                wordSpan.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
         }
 
         function clearHighlight() {
@@ -815,22 +619,27 @@
             lastHighlightedWord = null;
         }
 
+        function pauseReading() {
+            if (currentSpeech) {
+                speechSynthesis.cancel();
+                currentSpeech = null;
+                isReading = false;
+            }
+        }
+
         function stopReading() {
             if (currentSpeech) {
                 speechSynthesis.cancel();
                 currentSpeech = null;
                 isReading = false;
             }
-            // Zurück zum Anfang + alle Markierungen löschen
             currentWordIndex = 0;
             clearHighlight();
         }
 
-        // Initialisierung beim Seitenstart
         document.addEventListener('DOMContentLoaded', function() {
-            initializeAllBands(); // Initialisiere ALLE Bände und Sprachen
-            checkURLForBand(); // Prüfe URL für direkten Band-Zugriff
-            showBand(1); // Zeige Band 1
+            initializeAllBands();
+            showBand(1);
         });
     </script>
 </body>
