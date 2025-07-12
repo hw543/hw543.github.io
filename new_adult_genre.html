@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Adult - Zwischen Träumen und Realität</title>
+    <title>New Adult - Der Weg ins Erwachsenenleben | Helmut Wegners Wortwelten</title>
     <style>
         * {
             margin: 0;
@@ -12,313 +12,573 @@
         }
 
         body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #2D1B69 0%, #11998e 30%, #38ef7d 70%, #FFD700 100%);
+            background-attachment: fixed;
             min-height: 100vh;
-            color: #333;
+            color: #2c3e50;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Sterne-Animation */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .star {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        .star:nth-child(1) { width: 2px; height: 2px; top: 10%; left: 20%; animation-delay: 0s; }
+        .star:nth-child(2) { width: 3px; height: 3px; top: 20%; left: 80%; animation-delay: 1s; }
+        .star:nth-child(3) { width: 1px; height: 1px; top: 30%; left: 60%; animation-delay: 2s; }
+        .star:nth-child(4) { width: 2px; height: 2px; top: 40%; left: 30%; animation-delay: 1.5s; }
+        .star:nth-child(5) { width: 3px; height: 3px; top: 60%; left: 70%; animation-delay: 0.5s; }
+        .star:nth-child(6) { width: 1px; height: 1px; top: 70%; left: 40%; animation-delay: 2.5s; }
+        .star:nth-child(7) { width: 2px; height: 2px; top: 80%; left: 90%; animation-delay: 3s; }
+        .star:nth-child(8) { width: 3px; height: 3px; top: 15%; left: 10%; animation-delay: 1.2s; }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .back-button {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 10px 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 0.95em;
+            font-weight: bold;
+            margin-bottom: 30px;
+            display: inline-block;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
         }
 
         .header {
             text-align: center;
-            margin-bottom: 40px;
-            padding: 40px 0;
+            margin-bottom: 50px;
+            padding: 60px 20px;
+            position: relative;
+        }
+
+        .header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            border-radius: 20px;
         }
 
         .header h1 {
-            font-size: 3.5rem;
+            font-size: 4rem;
             color: white;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            margin-bottom: 15px;
-            font-weight: 300;
-            letter-spacing: 2px;
-        }
-
-        .header p {
-            font-size: 1.3rem;
-            color: rgba(255,255,255,0.9);
-            font-style: italic;
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.6;
-        }
-
-        .genre-intro {
-            background: rgba(255,255,255,0.95);
-            border-radius: 20px;
-            padding: 30px;
-            margin-bottom: 50px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            backdrop-filter: blur(10px);
-        }
-
-        .genre-intro h2 {
-            color: #764ba2;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
             margin-bottom: 20px;
-            font-size: 2.2rem;
-            text-align: center;
+            font-weight: 300;
+            letter-spacing: 3px;
+            position: relative;
         }
 
-        .genre-intro p {
+        .header h1::after {
+            content: "✨";
+            position: absolute;
+            right: -50px;
+            top: -10px;
+            font-size: 2rem;
+            animation: float 2s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .header-subtitle {
+            font-size: 1.4rem;
+            color: rgba(255,255,255,0.95);
+            font-style: italic;
+            max-width: 700px;
+            margin: 0 auto 30px auto;
+            line-height: 1.7;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+
+        .genre-motto {
             font-size: 1.1rem;
+            color: #FFD700;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+
+        .intro-section {
+            background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.85) 100%);
+            border-radius: 25px;
+            padding: 40px;
+            margin-bottom: 50px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,255,255,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .intro-section::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,215,0,0.1), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .intro-section h2 {
+            color: #2D1B69;
+            margin-bottom: 25px;
+            font-size: 2.5rem;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .intro-section h2::before {
+            content: "🌅";
+            margin-right: 15px;
+        }
+
+        .intro-text {
+            font-size: 1.2rem;
             line-height: 1.8;
             text-align: center;
-            color: #555;
+            color: #4a5568;
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
-        .series-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-            gap: 40px;
-            margin-top: 40px;
+        .series-container {
+            background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.8) 100%);
+            border-radius: 25px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,255,255,0.3);
+            position: relative;
         }
 
-        .series-card {
-            background: rgba(255,255,255,0.95);
-            border-radius: 20px;
-            padding: 35px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        .series-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+        .series-header {
+            text-align: center;
+            margin-bottom: 35px;
         }
 
         .series-title {
-            font-size: 2rem;
-            color: #667eea;
+            font-size: 2.8rem;
+            background: linear-gradient(135deg, #2D1B69 0%, #11998e 50%, #FFD700 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             margin-bottom: 15px;
-            text-align: center;
             font-weight: 600;
         }
 
         .series-description {
-            font-size: 1rem;
-            color: #666;
-            margin-bottom: 25px;
-            text-align: center;
-            line-height: 1.6;
+            font-size: 1.15rem;
+            color: #5a6c7d;
+            line-height: 1.7;
+            max-width: 600px;
+            margin: 0 auto;
+            font-style: italic;
         }
 
-        .books-list {
-            margin-top: 20px;
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 35px;
         }
 
-        .book-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 20px;
-            margin-bottom: 12px;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            border-left: 4px solid transparent;
+        .book-card {
+            background: linear-gradient(135deg, #f8faff 0%, #e8f4f8 100%);
+            border-radius: 20px;
+            padding: 30px;
+            transition: all 0.4s ease;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
         }
 
-        .book-item:hover {
-            transform: translateX(5px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        .book-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(45, 27, 105, 0.05) 0%, rgba(17, 153, 142, 0.05) 50%, rgba(255, 215, 0, 0.05) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
-        .book-item.available {
-            border-left-color: #4CAF50;
+        .book-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+            border-color: rgba(255, 215, 0, 0.3);
         }
 
-        .book-item.in-progress {
-            border-left-color: #FF9800;
+        .book-card:hover::before {
+            opacity: 1;
+        }
+
+        .book-number {
+            font-size: 0.9rem;
+            color: #11998e;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 2;
         }
 
         .book-title {
+            font-size: 1.6rem;
+            color: #2D1B69;
+            margin-bottom: 8px;
             font-weight: 600;
-            color: #333;
-            font-size: 1.1rem;
+            position: relative;
+            z-index: 2;
         }
 
         .book-subtitle {
-            color: #777;
-            font-size: 0.9rem;
-            margin-top: 3px;
+            color: #11998e;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            font-style: italic;
+            position: relative;
+            z-index: 2;
+        }
+
+        .book-description {
+            font-size: 0.95rem;
+            color: #6b7280;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .book-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .language-flags {
+            display: flex;
+            gap: 8px;
+        }
+
+        .flag {
+            font-size: 1.2rem;
+            padding: 4px 8px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .status-badge {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-available {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            box-shadow: 0 3px 10px rgba(16, 185, 129, 0.3);
         }
 
         .book-buttons {
             display: flex;
-            gap: 10px;
-            margin-top: 10px;
+            gap: 12px;
+            position: relative;
+            z-index: 2;
         }
 
         .btn {
-            padding: 8px 16px;
+            padding: 12px 24px;
             border: none;
-            border-radius: 20px;
-            font-size: 0.9rem;
+            border-radius: 25px;
+            font-size: 0.95rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
             text-decoration: none;
             display: inline-block;
             text-align: center;
-            min-width: 80px;
+            min-width: 100px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
         }
 
         .btn-read {
-            background: #4285f4;
+            background: linear-gradient(135deg, #4285f4, #1976d2);
             color: white;
+            box-shadow: 0 5px 15px rgba(66, 133, 244, 0.3);
         }
 
         .btn-read:hover {
-            background: #3367d6;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(66, 133, 244, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(66, 133, 244, 0.4);
         }
 
         .btn-amazon {
-            background: #999;
+            background: linear-gradient(135deg, #9ca3af, #6b7280);
             color: white;
             cursor: not-allowed;
+            opacity: 0.7;
         }
 
-        .btn-amazon:disabled {
-            background: #ccc;
-            color: #666;
-            cursor: not-allowed;
-        }
-
-        .status-badge {
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .status-available {
-            background: #4CAF50;
-            color: white;
-        }
-
-        .status-coming {
-            background: #FF9800;
-            color: white;
-        }
-
-        .author-info {
+        .inspiration-quote {
             text-align: center;
-            margin-top: 30px;
-            padding: 20px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 15px;
+            margin: 50px 0;
+            padding: 30px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.1) 100%);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
         }
 
-        .author-info h3 {
+        .quote-text {
+            font-size: 1.3rem;
             color: white;
-            margin-bottom: 10px;
-            font-size: 1.5rem;
-        }
-
-        .author-info p {
-            color: rgba(255,255,255,0.8);
             font-style: italic;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
         }
 
-        .back-link {
-            display: inline-block;
-            margin-top: 30px;
-            padding: 12px 25px;
-            background: rgba(255,255,255,0.2);
+        .quote-author {
+            font-size: 1rem;
+            color: #FFD700;
+            font-weight: bold;
+        }
+
+        .author-section {
+            text-align: center;
+            margin-top: 50px;
+            padding: 30px;
+            background: linear-gradient(135deg, rgba(255,215,0,0.2) 0%, rgba(255,215,0,0.1) 100%);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,215,0,0.3);
+        }
+
+        .author-section h3 {
             color: white;
-            text-decoration: none;
-            border-radius: 25px;
-            transition: all 0.3s ease;
-            border: 2px solid rgba(255,255,255,0.3);
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
         }
 
-        .back-link:hover {
-            background: rgba(255,255,255,0.3);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        .author-section p {
+            color: rgba(255,255,255,0.9);
+            font-style: italic;
+            font-size: 1.1rem;
+            line-height: 1.6;
         }
 
         @media (max-width: 768px) {
             .header h1 {
-                font-size: 2.5rem;
+                font-size: 2.8rem;
             }
             
-            .series-grid {
+            .header h1::after {
+                right: -30px;
+                font-size: 1.5rem;
+            }
+            
+            .books-grid {
                 grid-template-columns: 1fr;
-                gap: 30px;
+                gap: 25px;
             }
             
-            .series-card {
+            .book-card {
                 padding: 25px;
             }
             
             .container {
                 padding: 15px;
             }
+            
+            .intro-section, .series-container {
+                padding: 25px;
+            }
+            
+            .book-buttons {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Sterne-Animation -->
+    <div class="stars">
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+    </div>
+
     <div class="container">
+        <a href="index.html" class="back-button">← Zurück zur Startseite</a>
+
         <div class="header">
             <h1>New Adult</h1>
-            <p>Zwischen Träumen und Realität - Geschichten für eine Generation im Aufbruch</p>
+            <p class="header-subtitle">Zwischen Träumen und Realität - Geschichten für eine Generation im Aufbruch</p>
+            <p class="genre-motto">Der Horizont ruft - Die Zukunft beginnt jetzt</p>
         </div>
 
-        <div class="genre-intro">
-            <h2>Willkommen im New Adult Bereich</h2>
-            <p>Entdecke emotionale Geschichten über junge Erwachsene, die ihren Weg zwischen Studium, ersten großen Lieben und der Suche nach der eigenen Identität finden. Authentische Charaktere, intensive Gefühle und die Herausforderungen des Erwachsenwerdens stehen im Mittelpunkt dieser fesselnden Romane.</p>
+        <div class="intro-section">
+            <h2>Willkommen im New Adult Universum</h2>
+            <p class="intro-text">
+                Entdecke emotionale Geschichten über junge Erwachsene, die ihren Weg zwischen Studium, ersten großen Lieben und der Suche nach der eigenen Identität finden. Hier erwachen Träume zum Leben, werden erste wichtige Entscheidungen getroffen und die Weichen für die Zukunft gestellt. Authentische Charaktere, intensive Gefühle und die aufregenden Herausforderungen des Erwachsenwerdens stehen im Mittelpunkt dieser inspirierenden Romane.
+            </p>
         </div>
 
-        <div class="series-grid">
-            <!-- Serie 1: Zwischen Herz und Verstand -->
-            <div class="series-card">
+        <div class="series-container">
+            <div class="series-header">
                 <h2 class="series-title">Serie 1: Zwischen Herz und Verstand</h2>
-                <p class="series-description">Lena Winter, Literaturstudentin mit einer Leidenschaft für Bücher, entdeckt durch geheimnisvolle Notizen in Bibliotheksbüchern eine unerwartete Verbindung. Eine Geschichte über die Macht der Worte, verborgene Gefühle und die Herausforderungen authentischer Nähe.</p>
-                
-                <div class="books-list">
-                    <div class="book-item available">
-                        <div>
-                            <div class="book-title">Band 1: Verborgene Gefühle</div>
-                            <div class="book-subtitle">Die Nachricht, die alles veränderte</div>
+                <p class="series-description">
+                    Lena Winter, Literaturstudentin mit einer Leidenschaft für Bücher, entdeckt durch geheimnisvolle Notizen in Bibliotheksbüchern eine unerwartete Verbindung. Eine Geschichte über die Macht der Worte, verborgene Gefühle und die mutigen Schritte ins Erwachsenenleben.
+                </p>
+            </div>
+
+            <div class="books-grid">
+                <!-- Band 1 -->
+                <div class="book-card">
+                    <div class="book-number">Band 1</div>
+                    <h3 class="book-title">Verborgene Gefühle</h3>
+                    <p class="book-subtitle">Die Nachricht, die alles veränderte</p>
+                    <p class="book-description">
+                        Die Bibliothek war Lenas Zufluchtsort - bis sie geheimnisvolle Notizen zwischen den Buchseiten entdeckt. Eine emotionale Reise über erste Liebe, Mut zur Veränderung und die Kraft, die eigenen Träume zu verfolgen.
+                    </p>
+                    
+                    <div class="book-meta">
+                        <div class="language-flags">
+                            <span class="flag">🇩🇪</span>
+                            <span class="flag">🇬🇧</span>
                         </div>
-                        <div class="book-buttons">
-                            <a href="lese-vorlese-new-adult.html" class="btn btn-read">Lesen</a>
-                            <button class="btn btn-amazon" disabled>In Vorbereitung</button>
-                        </div>
+                        <span class="status-badge status-available">Verfügbar</span>
                     </div>
                     
-                    <div class="book-item available">
-                        <div>
-                            <div class="book-title">Band 2: Enthüllte Wahrheiten</div>
-                            <div class="book-subtitle">Nähe, die flieht</div>
+                    <div class="book-buttons">
+                        <a href="lese-vorlese-new-adult.html" class="btn btn-read">📖 Lesen & Vorlesen</a>
+                        <button class="btn btn-amazon" disabled>🛒 In Vorbereitung</button>
+                    </div>
+                </div>
+
+                <!-- Band 2 -->
+                <div class="book-card">
+                    <div class="book-number">Band 2</div>
+                    <h3 class="book-title">Enthüllte Wahrheiten</h3>
+                    <p class="book-subtitle">Nähe, die flieht</p>
+                    <p class="book-description">
+                        Lena erwacht mit dem Gefühl, dass etwas fehlt. Während sie die Geheimnisse ihrer neuen Verbindung entschlüsselt, muss sie lernen, dass wahre Nähe Mut erfordert und manchmal die größten Wahrheiten in der Stille gefunden werden.
+                    </p>
+                    
+                    <div class="book-meta">
+                        <div class="language-flags">
+                            <span class="flag">🇩🇪</span>
+                            <span class="flag">🇬🇧</span>
                         </div>
-                        <div class="book-buttons">
-                            <a href="lese-vorlese-new-adult.html" class="btn btn-read">Lesen</a>
-                            <button class="btn btn-amazon" disabled>In Vorbereitung</button>
-                        </div>
+                        <span class="status-badge status-available">Verfügbar</span>
+                    </div>
+                    
+                    <div class="book-buttons">
+                        <a href="lese-vorlese-new-adult.html" class="btn btn-read">📖 Lesen & Vorlesen</a>
+                        <button class="btn btn-amazon" disabled>🛒 In Vorbereitung</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="author-info">
-            <h3>Helmut Wegner</h3>
-            <p>Autor authentischer New Adult Geschichten, die das Leben junger Erwachsener in all seinen Facetten einfangen</p>
+        <div class="inspiration-quote">
+            <p class="quote-text">"Jeder neue Tag ist eine leere Seite in deinem Lebensbuch - schreibe etwas Wunderschönes hinein."</p>
+            <p class="quote-author">~ Für alle, die den Mut haben zu träumen ~</p>
         </div>
 
-        <div style="text-align: center;">
-            <a href="index.html" class="back-link">← Zurück zur Startseite</a>
+        <div class="author-section">
+            <h3>Helmut Wegner</h3>
+            <p>Autor authentischer New Adult Geschichten, die das Leben junger Erwachsener in all seinen Facetten einfangen - mit der Weisheit des Alters und dem Verständnis für die Träume der Jugend.</p>
         </div>
     </div>
 </body>
