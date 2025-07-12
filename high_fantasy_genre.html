@@ -21,7 +21,6 @@
             overflow-x: hidden;
         }
 
-        /* Magische Partikel-Animation */
         .magic-particles {
             position: fixed;
             top: 0;
@@ -95,17 +94,6 @@
             position: relative;
         }
 
-        .header::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at center, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
-            border-radius: 20px;
-        }
-
         .header h1 {
             font-size: 4.5rem;
             color: #ffd700;
@@ -114,34 +102,6 @@
             font-weight: 300;
             letter-spacing: 3px;
             position: relative;
-        }
-
-        .header h1::before {
-            content: "⚔️";
-            position: absolute;
-            left: -70px;
-            top: 10px;
-            font-size: 3rem;
-            animation: swordGlow 3s ease-in-out infinite;
-        }
-
-        .header h1::after {
-            content: "🏰";
-            position: absolute;
-            right: -70px;
-            top: 10px;
-            font-size: 3rem;
-            animation: castleGlow 3s ease-in-out infinite reverse;
-        }
-
-        @keyframes swordGlow {
-            0%, 100% { transform: rotate(-10deg) scale(1); }
-            50% { transform: rotate(10deg) scale(1.1); }
-        }
-
-        @keyframes castleGlow {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
         }
 
         .header-subtitle {
@@ -216,26 +176,10 @@
             text-align: center;
         }
 
-        .book-card::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(255,215,0,0.05) 0%, rgba(255,179,0,0.05) 50%, rgba(255,107,53,0.05) 100%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
         .book-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 25px 50px rgba(255,215,0,0.2);
             border-color: rgba(255,215,0,0.6);
-        }
-
-        .book-card:hover::before {
-            opacity: 1;
         }
 
         .book-cover {
@@ -396,11 +340,6 @@
                 font-size: 3rem;
             }
             
-            .header h1::before,
-            .header h1::after {
-                display: none;
-            }
-            
             .books-grid {
                 grid-template-columns: 1fr;
                 gap: 25px;
@@ -434,7 +373,7 @@
     </div>
 
     <div class="container">
-        <a href="index.html" class="back-button">← Zurück zur Startseite</a>
+        <a href="high-fantasy.html" class="back-button">← Zurück zur Startseite</a>
 
         <div class="header">
             <h1>High Fantasy</h1>
@@ -454,7 +393,7 @@
                 <!-- Band 1 -->
                 <div class="book-card">
                     <div class="book-cover">
-                        <img src="die-prophezeiung-von-eldoria.jpg" alt="Band 1: Die Prophezeiung von Eldoria">
+                        <img src="die prophezeiung.jpg" alt="Band 1: Die Prophezeiung von Eldoria">
                     </div>
                     <div class="book-number">Band 1</div>
                     <h3 class="book-title">Die Prophezeiung von Eldoria</h3>
@@ -471,7 +410,7 @@
                 <!-- Band 2 -->
                 <div class="book-card">
                     <div class="book-cover">
-                        <img src="der-beginn-des-friedens.jpg" alt="Band 2: Der Beginn des Friedens">
+                        <img src="beginn des friedens.jpg" alt="Band 2: Der Beginn des Friedens">
                     </div>
                     <div class="book-number">Band 2</div>
                     <h3 class="book-title">Der Beginn des Friedens</h3>
@@ -488,7 +427,7 @@
                 <!-- Band 3 -->
                 <div class="book-card">
                     <div class="book-cover">
-                        <img src="die-schatten-des-vergessenen.jpg" alt="Band 3: Die Schatten des Vergessenen">
+                        <img src="die schatten des vergessens.jpg" alt="Band 3: Die Schatten des Vergessenen">
                     </div>
                     <div class="book-number">Band 3</div>
                     <h3 class="book-title">Die Schatten des Vergessenen</h3>
@@ -505,7 +444,7 @@
                 <!-- Band 4 -->
                 <div class="book-card">
                     <div class="book-cover">
-                        <img src="das-vermaechtnis-der-waechter.jpg" alt="Band 4: Das Vermächtnis der Wächter">
+                        <img src="das vermächtnis der wächter.jpg" alt="Band 4: Das Vermächtnis der Wächter">
                     </div>
                     <div class="book-number">Band 4</div>
                     <h3 class="book-title">Das Vermächtnis der Wächter</h3>
