@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Die Kunst der Hingabe - Lesen - Helmut Wegners Wortwelten</title>
+    <title>Die Kunst der Hingabe - Lesen & Vorlesen - Helmut Wegners Wortwelten</title>
     <style>
         * {
             margin: 0;
@@ -62,35 +62,6 @@
             transform: translateY(-2px);
         }
 
-        .language-switch {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            display: flex;
-            gap: 10px;
-        }
-
-        .lang-btn {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            padding: 8px 12px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 15px;
-            text-decoration: none;
-            font-size: 0.9em;
-            font-weight: bold;
-            transition: all 0.3s ease;
-        }
-
-        .lang-btn.active {
-            background: rgba(255, 255, 255, 0.4);
-            border-color: #FFD700;
-        }
-
-        .lang-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-        }
-
         .header h1 {
             font-size: 2.5em;
             margin-bottom: 10px;
@@ -101,6 +72,74 @@
             font-size: 1.2em;
             opacity: 0.9;
             font-style: italic;
+        }
+
+        .controls {
+            background: #fff8f8;
+            padding: 20px;
+            border-bottom: 3px solid #C2185B;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .control-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 120px;
+        }
+
+        .btn-play {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+        }
+
+        .btn-stop {
+            background: linear-gradient(135deg, #dc3545, #e83e8c);
+            color: white;
+        }
+
+        .btn-continue {
+            background: linear-gradient(135deg, #17a2b8, #6f42c1);
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .language-navigation {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-lang {
+            background: linear-gradient(135deg, #C2185B, #8B1538);
+            color: #FFF8F0;
+            padding: 10px 20px;
+            border: 2px solid transparent;
+        }
+
+        .btn-lang.active {
+            border-color: #FFD700;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
         }
 
         .content {
@@ -137,11 +176,40 @@
             font-weight: bold;
         }
 
+        .word {
+            cursor: pointer;
+            transition: all 0.2s ease;
+            padding: 1px 2px;
+            border-radius: 3px;
+        }
+
+        .word:hover {
+            background-color: #FFE5E5;
+        }
+
+        .word-highlight {
+            background-color: #4169E1;
+            color: white;
+            padding: 2px 4px;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(65, 105, 225, 0.3);
+        }
+
         .hidden {
             display: none;
         }
 
         @media (max-width: 600px) {
+            .control-buttons, .language-navigation {
+                gap: 10px;
+            }
+
+            .btn {
+                min-width: 100px;
+                font-size: 0.9em;
+                padding: 10px 16px;
+            }
+
             .content {
                 padding: 20px;
                 font-size: 1em;
@@ -151,18 +219,11 @@
                 font-size: 2em;
             }
 
-            .back-button-header,
-            .language-switch {
+            .back-button-header {
                 position: relative;
                 top: 0;
                 left: 0;
-                right: 0;
                 margin-bottom: 15px;
-                text-align: center;
-            }
-
-            .language-switch {
-                justify-content: center;
             }
         }
     </style>
@@ -173,19 +234,28 @@
             <div class="back-button-header">
                 <a href="die-verborgenen-kammern.html" class="back-button">← Zurück zur Serie</a>
             </div>
-            <div class="language-switch">
-                <a href="#" class="lang-btn active" onclick="switchLanguage('de')">🇩🇪</a>
-                <a href="#" class="lang-btn" onclick="switchLanguage('en')">🇬🇧</a>
-            </div>
             <h1>🌹 Die Kunst der Hingabe</h1>
-            <p>Band 2 der verborgenen Kammern</p>
+            <p>Band 2 der verborgenen Kammern - Lesen & Vorlesen System</p>
+        </div>
+
+        <div class="controls">
+            <div class="control-buttons">
+                <button class="btn btn-play" onclick="startReading()">🔴 Vorlesen</button>
+                <button class="btn btn-continue" onclick="continueReading()">▶️ Weiterlesen</button>
+                <button class="btn btn-stop" onclick="stopReading()">⏹️ Stop</button>
+            </div>
+
+            <div class="language-navigation">
+                <button class="btn btn-lang active" onclick="switchLanguage('de')">🇩🇪 Deutsch</button>
+                <button class="btn btn-lang" onclick="switchLanguage('en')">🇬🇧 English</button>
+            </div>
         </div>
 
         <div class="content">
             <!-- Deutsche Version -->
             <div id="de-content" class="language-content">
                 <div class="chapter-title">Kapitel 1: Der Schatz von Venedig</div>
-                <div class="chapter-content">
+                <div class="chapter-content" id="de-textContent">
                     <p>Das Licht der untergehenden Sonne brach sich auf der Lagune Venedigs und tauchte die Stadt in ein goldenes Glühen, das sich in den unzähligen Fenstern des Palazzo Grassi spiegelte. Elena Winters ließ ihren Blick über den Canale Grande schweifen, während sie dem Gemurmel der Auktionsbesucher lauschte, die sich um sie herum im opulenten Saal versammelten. Vor weniger als einem Jahr hätte sie es für unmöglich gehalten, an diesem Ort zu stehen -- als Begleiterin eines der bedeutendsten privaten Kunstsammler Europas und mit der Aussicht, ein Stück zur Vervollständigung einer der exklusivsten Kollektionen erotischer Renaissancekunst zu erwerben.</p>
 
                     <p>Marcus Castellano stand neben ihr, seine Präsenz so ruhig und kontrolliert wie immer, doch sie spürte die feine Spannung, die seinen Körper durchlief. Es war die subtile Intensität eines Jägers, der seine Beute bereits im Visier hatte. Seit drei Monaten bereiteten sie sich auf diese Auktion vor -- seit sie in den Archiven des Museums auf Hinweise zu einer verschollenen Serie erotischer Skulpturen aus dem 16. Jahrhundert gestoßen waren, von denen heute eines der Hauptstücke versteigert werden sollte.</p>
@@ -219,7 +289,7 @@
             <!-- Englische Version -->
             <div id="en-content" class="language-content hidden">
                 <div class="chapter-title">Chapter 1: The Treasure of Venice</div>
-                <div class="chapter-content">
+                <div class="chapter-content" id="en-textContent">
                     <p>The light of the setting sun refracted across the Venetian lagoon and bathed the city in a golden glow that reflected in the countless windows of the Palazzo Grassi. Elena Winters let her gaze drift over the Grand Canal while listening to the murmur of auction visitors gathering around her in the opulent hall. Less than a year ago, she would have considered it impossible to stand in this place -- as the companion of one of Europe's most significant private art collectors and with the prospect of acquiring a piece to complete one of the most exclusive collections of erotic Renaissance art.</p>
 
                     <p>Marcus Castellano stood beside her, his presence as calm and controlled as always, yet she sensed the fine tension coursing through his body. It was the subtle intensity of a hunter who already had his prey in sight. They had been preparing for this auction for three months -- since they had discovered clues in the museum archives about a lost series of erotic sculptures from the 16th century, one of whose main pieces was to be auctioned today.</p>
@@ -253,7 +323,45 @@
     </div>
 
     <script>
+        let currentSpeech = null;
+        let currentLanguage = 'de';
+        let currentWordIndex = 0;
+        let allWords = [];
+        let isReading = false;
+        let lastHighlightedWord = null;
+
+        // Initialisiere beim Seitenstart
+        function initializeContent() {
+            processTextContent();
+        }
+
+        function processTextContent() {
+            const textContent = document.querySelector(`#${currentLanguage}-textContent`);
+            if (textContent && !textContent.querySelector('.word')) {
+                const paragraphs = textContent.querySelectorAll('p');
+                let wordCounter = 0;
+                allWords = [];
+
+                paragraphs.forEach((paragraph) => {
+                    const paragraphText = paragraph.textContent;
+                    const paragraphWords = paragraphText.split(/\s+/).filter(word => word.length > 0);
+
+                    let paragraphHTML = '';
+                    paragraphWords.forEach((word) => {
+                        paragraphHTML += `<span class="word" data-word-index="${wordCounter}" onclick="startFromWord(${wordCounter})">${word}</span> `;
+                        allWords.push(word);
+                        wordCounter++;
+                    });
+
+                    paragraph.innerHTML = paragraphHTML;
+                });
+            }
+        }
+
         function switchLanguage(lang) {
+            // Stoppe aktuelles Vorlesen
+            stopReading();
+
             // Verstecke alle Sprachen
             document.querySelectorAll('.language-content').forEach(content => {
                 content.classList.add('hidden');
@@ -263,18 +371,99 @@
             document.getElementById(lang + '-content').classList.remove('hidden');
 
             // Update Sprachbuttons
-            document.querySelectorAll('.lang-btn').forEach(btn => {
+            document.querySelectorAll('.btn-lang').forEach(btn => {
                 btn.classList.remove('active');
             });
-            
-            // Finde und aktiviere den richtigen Button
-            const buttons = document.querySelectorAll('.lang-btn');
-            if (lang === 'de') {
-                buttons[0].classList.add('active');
-            } else if (lang === 'en') {
-                buttons[1].classList.add('active');
+
+            event.target.classList.add('active');
+
+            currentLanguage = lang;
+            currentWordIndex = 0;
+            clearHighlight();
+            processTextContent();
+        }
+
+        function startReading() {
+            currentWordIndex = 0;
+            clearHighlight();
+            continueReading();
+        }
+
+        function continueReading() {
+            if (currentSpeech) {
+                currentSpeech.cancel();
+            }
+
+            if (allWords.length > 0) {
+                // Text ab der aktuellen Position
+                const remainingText = allWords.slice(currentWordIndex).join(' ');
+
+                currentSpeech = new SpeechSynthesisUtterance(remainingText);
+                currentSpeech.rate = 0.9;
+                currentSpeech.lang = currentLanguage === 'de' ? 'de-DE' : 'en-US';
+
+                let wordCount = currentWordIndex;
+
+                currentSpeech.onboundary = function(event) {
+                    if (event.name === 'word') {
+                        highlightCurrentWord(wordCount);
+                        wordCount++;
+                        currentWordIndex = wordCount;
+                    }
+                };
+
+                currentSpeech.onend = function() {
+                    isReading = false;
+                };
+
+                isReading = true;
+                speechSynthesis.speak(currentSpeech);
             }
         }
+
+        function startFromWord(wordIndex) {
+            currentWordIndex = wordIndex;
+            clearHighlight();
+            continueReading();
+        }
+
+        function highlightCurrentWord(wordIndex) {
+            // Entferne vorherige Highlights
+            if (lastHighlightedWord) {
+                lastHighlightedWord.classList.remove('word-highlight');
+            }
+
+            // Highlights das entsprechende Wort
+            const wordSpan = document.querySelector(`[data-word-index="${wordIndex}"]`);
+            if (wordSpan) {
+                wordSpan.classList.add('word-highlight');
+                lastHighlightedWord = wordSpan;
+            }
+        }
+
+        function clearHighlight() {
+            document.querySelectorAll('.word-highlight').forEach(el => {
+                el.classList.remove('word-highlight');
+            });
+            lastHighlightedWord = null;
+        }
+
+        function stopReading() {
+            if (currentSpeech) {
+                speechSynthesis.cancel();
+                currentSpeech = null;
+                isReading = false;
+            }
+
+            // Zurück zum Anfang + alle Markierungen löschen
+            currentWordIndex = 0;
+            clearHighlight();
+        }
+
+        // Initialisierung beim Seitenstart
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeContent();
+        });
     </script>
 </body>
 </html>
