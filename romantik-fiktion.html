@@ -127,32 +127,70 @@
             text-align: center;
         }
 
-        .book-showcase {
-            text-align: center;
-            margin: 25px 0;
+        .series-grid {
+            display: grid;
+            gap: 20px;
+            margin-bottom: 25px;
         }
 
-        .css-book-cover {
-            width: 150px;
-            height: 200px;
-            background: linear-gradient(135deg, #FF69B4, #C2185B, #8B1538);
+        .series-item {
+            background: linear-gradient(135deg, #FFE4E6, #FFF0F5);
             border-radius: 10px;
-            margin: 0 auto 20px auto;
+            padding: 20px;
+            border: 2px solid #FF69B4;
+            text-align: center;
+        }
+
+        .series-cover {
+            width: 100px;
+            height: 130px;
+            background: linear-gradient(135deg, #FF69B4, #C2185B);
+            border-radius: 8px;
+            margin: 0 auto 15px auto;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 1.1em;
-            text-align: center;
+            font-size: 0.9em;
             font-weight: bold;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
         }
 
-        .css-book-cover::before {
-            content: '💕';
-            font-size: 2em;
-            margin-bottom: 10px;
+        .series-title {
+            font-size: 1.2em;
+            color: #C2185B;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .series-subtitle {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .series-button {
+            background: linear-gradient(135deg, #C2185B, #E91E63);
+            color: white;
+            padding: 8px 20px;
+            border: none;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .series-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 3px 10px rgba(194, 24, 91, 0.3);
+        }
+
+        .book-showcase {
+            text-align: center;
+            margin: 25px 0;
         }
 
         .book-title {
@@ -246,18 +284,27 @@
                         </div>
                     </div>
 
-                    <div class="book-showcase">
-                        <div class="css-book-cover">
-                            Romantik<br>Serien
+                    <div class="series-grid">
+                        <!-- Serie 1: Verlangen der Herzen -->
+                        <div class="series-item">
+                            <div class="series-cover">💖<br>Verlangen<br>der Herzen</div>
+                            <div class="series-title">💖 Verlangen der Herzen</div>
+                            <div class="series-subtitle">Adelaide Hills Serie - 4 Bände</div>
+                            <a href="verlangen-der-herzen.html" class="series-button">📖 Serie entdecken</a>
                         </div>
-                        <div class="book-title">💖 Zwei fesselnde Serien</div>
-                        <div class="book-subtitle">Verlangen der Herzen & Die verborgenen Kammern</div>
-                        <a href="romantik-serien.html" class="read-button">📖 Serien entdecken</a>
+
+                        <!-- Serie 2: Die verborgenen Kammern -->
+                        <div class="series-item">
+                            <div class="series-cover">🌹<br>Verborgene<br>Kammern</div>
+                            <div class="series-title">🌹 Die verborgenen Kammern</div>
+                            <div class="series-subtitle">Geheimnisvolle Romanzen - 3 Bände</div>
+                            <a href="die-verborgenen-kammern.html" class="series-button">📖 Serie entdecken</a>
+                        </div>
                     </div>
 
                     <div class="discover-text">
                         <strong>Serien entdecken</strong><br>
-                        Zwei emotionale Serien - "Verlangen der Herzen" (4 Bände) + "Die verborgenen Kammern" (3 Bände)
+                        Zwei emotionale Serien - Deutsch & Englisch & Spanisch - Lesen & Vorlesen System
                     </div>
                 </div>
 
