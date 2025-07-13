@@ -1,1 +1,453 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Die Tiefe der Begierde - Lesen & Vorlesen - Helmut Wegners Wortwelten</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.8;
+            color: #2c1810;
+            background: linear-gradient(135deg, #FFE5E5 0%, #FFB6C1 25%, #FF69B4 50%, #FFC0CB 75%, #FFCCCB 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #FFF8F0;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #C2185B, #8B1538);
+            color: #FFF8F0;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .back-button-header {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+        }
+
+        .back-button {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 8px 16px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            font-size: 0.9em;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .controls {
+            background: #fff8f8;
+            padding: 20px;
+            border-bottom: 3px solid #C2185B;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .control-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 120px;
+        }
+
+        .btn-play {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+        }
+
+        .btn-stop {
+            background: linear-gradient(135deg, #dc3545, #e83e8c);
+            color: white;
+        }
+
+        .btn-continue {
+            background: linear-gradient(135deg, #17a2b8, #6f42c1);
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .language-navigation {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-lang {
+            background: linear-gradient(135deg, #C2185B, #8B1538);
+            color: #FFF8F0;
+            padding: 10px 20px;
+            border: 2px solid transparent;
+        }
+
+        .btn-lang.active {
+            border-color: #FFD700;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+
+        .content {
+            padding: 30px;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .chapter-title {
+            color: #C2185B;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            text-align: center;
+            border-bottom: 2px solid #FFB74D;
+            padding-bottom: 15px;
+        }
+
+        .chapter-content {
+            text-align: justify;
+            margin-bottom: 30px;
+        }
+
+        .chapter-content p {
+            margin-bottom: 1.5em;
+        }
+
+        .chapter-content p:first-child::first-letter {
+            float: left;
+            font-size: 4em;
+            line-height: 0.8;
+            margin-right: 8px;
+            margin-top: 6px;
+            color: #C2185B;
+            font-weight: bold;
+        }
+
+        .word {
+            cursor: pointer;
+            transition: all 0.2s ease;
+            padding: 1px 2px;
+            border-radius: 3px;
+        }
+
+        .word:hover {
+            background-color: #FFE5E5;
+        }
+
+        .word-highlight {
+            background-color: #4169E1;
+            color: white;
+            padding: 2px 4px;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(65, 105, 225, 0.3);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 600px) {
+            .control-buttons, .language-navigation {
+                gap: 10px;
+            }
+
+            .btn {
+                min-width: 100px;
+                font-size: 0.9em;
+                padding: 10px 16px;
+            }
+
+            .content {
+                padding: 20px;
+                font-size: 1em;
+            }
+
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .back-button-header {
+                position: relative;
+                top: 0;
+                left: 0;
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="back-button-header">
+                <a href="die-verborgenen-kammern.html" class="back-button">← Zurück zur Serie</a>
+            </div>
+            <h1>🌹 Die Tiefe der Begierde</h1>
+            <p>Band 3 der verborgenen Kammern - Lesen & Vorlesen System</p>
+        </div>
+
+        <div class="controls">
+            <div class="control-buttons">
+                <button class="btn btn-play" onclick="startReading()">🔴 Vorlesen</button>
+                <button class="btn btn-continue" onclick="continueReading()">▶️ Weiterlesen</button>
+                <button class="btn btn-stop" onclick="stopReading()">⏹️ Stop</button>
+            </div>
+
+            <div class="language-navigation">
+                <button class="btn btn-lang active" onclick="switchLanguage('de')">🇩🇪 Deutsch</button>
+                <button class="btn btn-lang" onclick="switchLanguage('en')">🇬🇧 English</button>
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- Deutsche Version -->
+            <div id="de-content" class="language-content">
+                <div class="chapter-title">Kapitel 1: Das Vermächtnis</div>
+                <div class="chapter-content" id="de-textContent">
+                    <p>Die Nachricht vom Tod seiner Tante Marie erreichte Marcus an einem kühlen Herbstmorgen. Die Sonne stand tief am Horizont und tauchte die toskanische Landschaft in ein goldenes Licht, das die Schatten der Vergangenheit kaum zu durchdringen vermochte. Elena, die an seiner Seite stand, spürte die Last der Nachricht, die schwer auf Marcus' Schultern ruhte. Marie, die Matriarchin der Familie Castellano, war nicht nur eine Verwandte gewesen, sondern auch die Hüterin eines Erbes, das weit über Kunst und Geschichte hinausging.</p>
+
+                    <p>Die Reise zum Familienanwesen in der Toskana war von einer seltsamen Stille geprägt. Elena beobachtete, wie Marcus' Gesichtszüge mit jedem Kilometer härter wurden, als ob er sich hinter einer Maske aus Kontrolle und Pflichtbewusstsein versteckte. Sie wusste, dass die Beerdigung mehr war als nur ein Abschied -- es war eine Konfrontation mit der Vergangenheit, die Marcus so lange zu verdrängen versucht hatte.</p>
+
+                    <p>Das Anwesen, ein imposantes Gebäude aus Stein und Geschichte, ragte vor ihnen auf wie ein stummer Zeuge der Zeit. In der großen Halle, wo das Licht durch die hohen Fenster fiel, versammelte sich die Familie. Die Luft war schwer von unausgesprochenen Worten und alten Geheimnissen. Als das Testament verlesen wurde, spürte Elena, wie sich die Atmosphäre veränderte. Ein unbekannter Teil der Sammlung wurde erwähnt, ein "verlorener Schatz", der die Familie seit Generationen begleitete.</p>
+
+                    <p>Marie hatte Marcus eine verschlüsselte Botschaft hinterlassen, die von einem Erbe sprach, das weit mehr war als nur materieller Besitz. Elena sah, wie Marcus' Hände leicht zitterten, als er das Dokument entgegennahm. Die Trauer und die Familiendynamik schienen ihn in alte Verhaltensmuster zurückzuführen, und Elena fragte sich, ob die Last der Vergangenheit jemals von ihm abfallen würde.</p>
+
+                    <p>In diesem Moment der Stille, als die Familie sich zurückzog, blieb Elena an Marcus' Seite. Sie spürte die Verletzlichkeit hinter seiner Fassade und wusste, dass die Reise, die vor ihnen lag, nicht nur eine Suche nach einem verlorenen Schatz war, sondern auch eine Reise zu sich selbst.</p>
+
+                    <p>Die Stille im Raum war fast greifbar, als Marcus das Dokument in seinen Händen betrachtete. Die verschlüsselte Botschaft seiner Tante Marie war nicht nur ein Rätsel, sondern ein Schlüssel zu einer Welt, die er kaum kannte. Elena beobachtete ihn aufmerksam, ihre Augen suchten nach Anzeichen von Schwäche oder Unsicherheit, doch Marcus blieb äußerlich gefasst.</p>
+
+                    <p>"Was denkst du, was sie uns damit sagen will?" fragte Elena leise, ihre Stimme kaum mehr als ein Flüstern.</p>
+
+                    <p>Marcus hob den Blick und sah sie an, seine Augen spiegelten eine Mischung aus Trauer und Entschlossenheit wider. "Marie war immer eine Meisterin der Geheimnisse. Sie wollte, dass wir die Wahrheit selbst herausfinden, dass wir uns mit der Vergangenheit auseinandersetzen."</p>
+
+                    <p>Elena nickte und legte sanft ihre Hand auf seine Schulter. "Wir werden es gemeinsam herausfinden. Aber zuerst müssen wir uns um die Beerdigung kümmern."</p>
+
+                    <p>Die Beerdigung war ein stilles, würdevolles Ereignis. Die Familie und enge Freunde versammelten sich, um Marie die letzte Ehre zu erweisen. Der Priester sprach Worte des Trostes, doch Marcus' Gedanken waren weit entfernt. Er dachte an die vielen Geschichten, die Marie ihm erzählt hatte, an die Geheimnisse, die sie bewahrt hatte.</p>
+                </div>
+            </div>
+
+            <!-- Englische Version -->
+            <div id="en-content" class="language-content hidden">
+                <div class="chapter-title">Chapter 1: The Legacy</div>
+                <div class="chapter-content" id="en-textContent">
+                    <p>The news of his aunt Marie's death reached Marcus on a cool autumn morning. The sun stood low on the horizon and bathed the Tuscan landscape in a golden light that could barely penetrate the shadows of the past. Elena, who stood at his side, felt the weight of the news that rested heavily on Marcus' shoulders. Marie, the matriarch of the Castellano family, had not only been a relative but also the guardian of a legacy that extended far beyond art and history.</p>
+
+                    <p>The journey to the family estate in Tuscany was marked by a strange silence. Elena observed how Marcus' features became harder with each kilometer, as if he were hiding behind a mask of control and duty. She knew that the funeral was more than just a farewell -- it was a confrontation with the past that Marcus had tried so long to suppress.</p>
+
+                    <p>The estate, an imposing building of stone and history, loomed before them like a silent witness to time. In the great hall, where light fell through the tall windows, the family gathered. The air was heavy with unspoken words and old secrets. When the will was read, Elena felt how the atmosphere changed. An unknown part of the collection was mentioned, a "lost treasure" that had accompanied the family for generations.</p>
+
+                    <p>Marie had left Marcus an encrypted message that spoke of a legacy that was far more than just material possessions. Elena saw how Marcus' hands trembled slightly as he received the document. The grief and family dynamics seemed to lead him back into old behavioral patterns, and Elena wondered if the burden of the past would ever fall away from him.</p>
+
+                    <p>In this moment of silence, as the family withdrew, Elena remained at Marcus' side. She sensed the vulnerability behind his facade and knew that the journey that lay before them was not only a search for a lost treasure but also a journey to himself.</p>
+
+                    <p>The silence in the room was almost tangible as Marcus contemplated the document in his hands. His aunt Marie's encrypted message was not just a puzzle but a key to a world he barely knew. Elena watched him attentively, her eyes searching for signs of weakness or uncertainty, yet Marcus remained outwardly composed.</p>
+
+                    <p>"What do you think she wants to tell us with this?" Elena asked quietly, her voice barely more than a whisper.</p>
+
+                    <p>Marcus raised his gaze and looked at her, his eyes reflecting a mixture of grief and determination. "Marie was always a master of secrets. She wanted us to find out the truth ourselves, to confront the past."</p>
+
+                    <p>Elena nodded and gently placed her hand on his shoulder. "We will figure it out together. But first we must take care of the funeral."</p>
+
+                    <p>The funeral was a quiet, dignified event. Family and close friends gathered to pay their last respects to Marie. The priest spoke words of comfort, but Marcus' thoughts were far away. He thought of the many stories that Marie had told him, of the secrets she had kept.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSpeech = null;
+        let currentLanguage = 'de';
+        let currentWordIndex = 0;
+        let allWords = [];
+        let isReading = false;
+        let lastHighlightedWord = null;
+
+        // Initialisiere beim Seitenstart
+        function initializeContent() {
+            processTextContent();
+        }
+
+        function processTextContent() {
+            const textContent = document.querySelector(`#${currentLanguage}-textContent`);
+            if (textContent && !textContent.querySelector('.word')) {
+                const paragraphs = textContent.querySelectorAll('p');
+                let wordCounter = 0;
+                allWords = [];
+
+                paragraphs.forEach((paragraph) => {
+                    const paragraphText = paragraph.textContent;
+                    const paragraphWords = paragraphText.split(/\s+/).filter(word => word.length > 0);
+
+                    let paragraphHTML = '';
+                    paragraphWords.forEach((word) => {
+                        paragraphHTML += `<span class="word" data-word-index="${wordCounter}" onclick="startFromWord(${wordCounter})">${word}</span> `;
+                        allWords.push(word);
+                        wordCounter++;
+                    });
+
+                    paragraph.innerHTML = paragraphHTML;
+                });
+            }
+        }
+
+        function switchLanguage(lang) {
+            // Stoppe aktuelles Vorlesen
+            stopReading();
+
+            // Verstecke alle Sprachen
+            document.querySelectorAll('.language-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+
+            // Zeige ausgewählte Sprache
+            document.getElementById(lang + '-content').classList.remove('hidden');
+
+            // Update Sprachbuttons
+            document.querySelectorAll('.btn-lang').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            event.target.classList.add('active');
+
+            currentLanguage = lang;
+            currentWordIndex = 0;
+            clearHighlight();
+            processTextContent();
+        }
+
+        function startReading() {
+            currentWordIndex = 0;
+            clearHighlight();
+            continueReading();
+        }
+
+        function continueReading() {
+            if (currentSpeech) {
+                currentSpeech.cancel();
+            }
+
+            if (allWords.length > 0) {
+                // Text ab der aktuellen Position
+                const remainingText = allWords.slice(currentWordIndex).join(' ');
+
+                currentSpeech = new SpeechSynthesisUtterance(remainingText);
+                currentSpeech.rate = 0.9;
+                currentSpeech.lang = currentLanguage === 'de' ? 'de-DE' : 'en-US';
+
+                let wordCount = currentWordIndex;
+
+                currentSpeech.onboundary = function(event) {
+                    if (event.name === 'word') {
+                        highlightCurrentWord(wordCount);
+                        wordCount++;
+                        currentWordIndex = wordCount;
+                    }
+                };
+
+                currentSpeech.onend = function() {
+                    isReading = false;
+                };
+
+                isReading = true;
+                speechSynthesis.speak(currentSpeech);
+            }
+        }
+
+        function startFromWord(wordIndex) {
+            currentWordIndex = wordIndex;
+            clearHighlight();
+            continueReading();
+        }
+
+        function highlightCurrentWord(wordIndex) {
+            // Entferne vorherige Highlights
+            if (lastHighlightedWord) {
+                lastHighlightedWord.classList.remove('word-highlight');
+            }
+
+            // Highlights das entsprechende Wort
+            const wordSpan = document.querySelector(`[data-word-index="${wordIndex}"]`);
+            if (wordSpan) {
+                wordSpan.classList.add('word-highlight');
+                lastHighlightedWord = wordSpan;
+            }
+        }
+
+        function clearHighlight() {
+            document.querySelectorAll('.word-highlight').forEach(el => {
+                el.classList.remove('word-highlight');
+            });
+            lastHighlightedWord = null;
+        }
+
+        function stopReading() {
+            if (currentSpeech) {
+                speechSynthesis.cancel();
+                currentSpeech = null;
+                isReading = false;
+            }
+
+            // Zurück zum Anfang + alle Markierungen löschen
+            currentWordIndex = 0;
+            clearHighlight();
+        }
+
+        // Initialisierung beim Seitenstart
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeContent();
+        });
+    </script>
+</body>
+</html>
