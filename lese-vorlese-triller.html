@@ -1,1 +1,488 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flammen des Verrats - Lesen & Vorlesen - Helmut Wegners Wortwelten</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.8;
+            color: #2c1810;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 50%, #1a1a1a 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #FFF8F0;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #8B0000, #FF4500);
+            color: #FFF8F0;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .back-button-header {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+        }
+
+        .back-button {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 8px 16px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            font-size: 0.9em;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .controls {
+            background: #2c1810;
+            padding: 20px;
+            border-bottom: 3px solid #FF4500;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .control-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 120px;
+        }
+
+        .btn-play {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+        }
+
+        .btn-pause {
+            background: linear-gradient(135deg, #ffc107, #fd7e14);
+            color: white;
+        }
+
+        .btn-stop {
+            background: linear-gradient(135deg, #dc3545, #e83e8c);
+            color: white;
+        }
+
+        .btn-continue {
+            background: linear-gradient(135deg, #17a2b8, #6f42c1);
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .language-navigation {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-lang {
+            background: linear-gradient(135deg, #8B0000, #FF4500);
+            color: #FFF8F0;
+            padding: 10px 20px;
+            border: 2px solid transparent;
+        }
+
+        .btn-lang.active {
+            border-color: #FFD700;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+
+        .content {
+            padding: 30px;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .book-title {
+            color: #8B0000;
+            font-size: 2em;
+            margin-bottom: 10px;
+            text-align: center;
+            border-bottom: 2px solid #FF4500;
+            padding-bottom: 15px;
+        }
+
+        .chapter-title {
+            color: #FF4500;
+            font-size: 1.5em;
+            margin: 30px 0 20px 0;
+            text-align: center;
+            font-style: italic;
+        }
+
+        .text-content {
+            text-align: justify;
+            margin-bottom: 30px;
+        }
+
+        .word {
+            cursor: pointer;
+            transition: all 0.2s ease;
+            padding: 1px 2px;
+            border-radius: 3px;
+        }
+
+        .word:hover {
+            background-color: #FFE5E5;
+        }
+
+        .word-highlight {
+            background-color: #FF4500;
+            color: white;
+            padding: 2px 4px;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(255, 69, 0, 0.3);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 600px) {
+            .control-buttons, .language-navigation {
+                gap: 10px;
+            }
+
+            .btn {
+                min-width: 100px;
+                font-size: 0.9em;
+                padding: 10px 16px;
+            }
+
+            .content {
+                padding: 20px;
+                font-size: 1em;
+            }
+
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .back-button-header {
+                position: relative;
+                top: 0;
+                left: 0;
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="back-button-header">
+                <a href="thriller.html" class="back-button">← Zurück zu Thriller</a>
+            </div>
+            <h1>🔥 Flammen des Verrats</h1>
+            <p>Ein Feuerwehrmann mit dunklen Geheimnissen - Lesen & Vorlesen System</p>
+        </div>
+
+        <div class="controls">
+            <div class="control-buttons">
+                <button class="btn btn-play" onclick="startReading()">🔴 Vorlesen</button>
+                <button class="btn btn-continue" onclick="continueReading()">▶️ Weiterlesen</button>
+                <button class="btn btn-pause" onclick="pauseReading()">⏸️ Pause</button>
+                <button class="btn btn-stop" onclick="stopReading()">⏹️ Stop</button>
+            </div>
+
+            <div class="language-navigation">
+                <button class="btn btn-lang active" onclick="switchLanguage('de')">🇩🇪 Deutsch</button>
+                <button class="btn btn-lang" onclick="switchLanguage('en')">🇬🇧 English</button>
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- DEUTSCHE VERSION -->
+            <div id="de-content" class="language-content">
+                <div class="book-title">Flammen des Verrats</div>
+                <div class="chapter-title">Kapitel 1: Ein neues Leben bei der Feuerwehr</div>
+                <div class="text-content" id="de-textContent">
+                    <p>Lukas stand da, unsicher, mit einem Anflug von Nervosität, während die Flammen vor seinem inneren Auge in scharfer Erinnerung aufflackerten. Seit seiner Kindheit hatte das Feuer eine seltsame Faszination auf ihn ausgeübt -- eine mächtige, alles verzehrende Kraft, die ihn zugleich anzog und einschüchterte. In seiner rauen Umgebung, in der ihn oft eine bedrückende Einsamkeit umfing, war das Feuer das Einzige, was ihm intensiv und lebendig erschien. Hier, in der Feuerwehr, glaubte Lukas, endlich eine Möglichkeit gefunden zu haben, diese gewaltige Energie zu zähmen und in eine kontrollierte, sinnvolle Richtung zu lenken.</p>
+
+                    <p>Als er zum ersten Mal die Wache betrat, verspürte er den kühlen Betonboden unter seinen neuen Stiefeln und atmete den charakteristischen Geruch von Rauch, Metall und Motoröl ein, der ihm fast wie ein Versprechen vorkam. Die Geräuschkulisse war geschäftig und doch beruhigend; Männer und Frauen, die sich konzentriert auf ihren nächsten Einsatz vorbereiteten, Werkzeuge prüften und die Fahrzeuge für den Ernstfall inspizierten. Hier gehörte er hin, dachte Lukas. Ein neuer Anfang.</p>
+
+                    <p>Seine Kollegen musterten ihn kurz, nickten ihm zu und gingen wieder ihrer Arbeit nach. Niemand kannte seine Geschichte, die Leere, die ihn umgab, und das Leben, aus dem er kam. Lukas war nie gut darin gewesen, sich anderen zu öffnen oder enge Freundschaften zu knüpfen, aber hier zählte das nicht. Hier wurde er nicht nach seiner Vergangenheit beurteilt, sondern nur danach, ob er im Ernstfall die Nerven behielt und seinen Aufgaben gewachsen war.</p>
+
+                    <p>Die ersten Tage vergingen schnell. Lukas lernte, wie man die schwere Ausrüstung bedient, und absolvierte schweißtreibende Übungen. Jeder Handgriff musste sitzen; Präzision und Ausdauer waren gefragt. Schon bald entdeckte er eine neue Art von Erfüllung, die ihm die Arbeit gab. Die Routine, das harte Training und die Disziplin -- all das gab ihm ein Gefühl der Zugehörigkeit und der Kontrolle, das ihm bisher gefehlt hatte. Er fühlte sich endlich als Teil einer Gemeinschaft, die durch eine gemeinsame Aufgabe verbunden war. Doch in stillen Momenten, wenn das Tageslicht durch die Fenster der Wache fiel und sich die Hitze eines gerade überstandenen Einsatzes legte, spürte Lukas, wie die Flamme seiner inneren Leidenschaft wieder aufflammte. Das Feuer ließ ihn nicht los; es zog ihn wie einen stillen Ruf in seinen Bann.</p>
+
+                    <p>Eines Abends, nach einem besonders fordernden Training, blieb Lukas in der Fahrzeughalle zurück. Die anderen waren bereits gegangen, und die Stille legte sich wie eine Decke über die leeren Einsatzfahrzeuge. Er ging umher, betrachtete die Ausrüstung und ließ die Eindrücke auf sich wirken. Er wusste, dass er in der Feuerwehr eine neue Richtung gefunden hatte -- und doch war da etwas, das tief in ihm noch immer nagte. Es war wie ein Flüstern, das in den stillen Momenten zwischen den Einsätzen an Stärke gewann. Lukas hatte gehofft, dass seine Arbeit als Feuerwehrmann dieses Verlangen, das ihn seit Jahren begleitete, zum Schweigen bringen würde. Doch je mehr er sich an das Leben bei der Feuerwehr gewöhnte, desto stärker wurde das unerklärliche, brennende Verlangen, dem Feuer ganz nah zu sein -- nicht nur als Helfer, sondern als jemand, der es tatsächlich beherrschen konnte.</p>
+
+                    <p>Mit jedem Einsatz, bei dem die Flammen zurückgedrängt wurden, spürte Lukas eine ambivalente Mischung aus Stolz und Enttäuschung. Stolz, weil er Teil der Feuerwehr war, die die Ordnung wiederherstellte und das Chaos bändigte. Doch auch Enttäuschung, weil das Feuer stets nur von außen auf ihn wirkte, während es tief in ihm auf eine Art pulsierte, die niemand verstand -- er selbst kaum.</p>
+
+                    <p>Eines Nachts, als er nach einem langen Tag müde und gedankenverloren den Rückweg zur Feuerwache antrat, entdeckte er an einer kleinen, verlassenen Hütte am Stadtrand einen schwelenden Glut-Rest. Es war offensichtlich, dass das Feuer nur knapp nicht zum Inferno ausgebrochen war, möglicherweise durch einen Zufall frühzeitig erstickt. Lukas blieb stehen, den Blick fest auf den glimmenden Ort gerichtet, und spürte, wie sein Herz unruhig zu pochen begann. Sein Atem ging flach, als er in die tiefe Dunkelheit der Hütte starrte. Er hatte das unwiderstehliche Bedürfnis, die letzten Glut-Reste zu berühren, zu fühlen, wie nah er dem Feuer sein konnte, ohne es zu löschen.</p>
+
+                    <p>Er konnte sich kaum dazu zwingen, den Ort zu verlassen. Es war, als würde ein unsichtbares Band ihn an die Glut fesseln, ihm ins Ohr flüstern und ihn auffordern, sich dem Feuer ganz hinzugeben. Doch mit aller Kraft löste er sich schließlich aus dieser merkwürdigen Starre und kehrte zur Wache zurück. Die Gedanken an die Flammen, die so nah gewesen waren, ließen ihn die ganze Nacht wach liegen.</p>
+
+                    <p>Am nächsten Morgen bemerkte Lukas, dass sich etwas in ihm verändert hatte. Die stille Faszination für das Feuer, die bisher nur ein unterschwelliger Teil seines Wesens gewesen war, fühlte sich plötzlich stärker an, als hätte das Glimmen der Hütte es entfacht. Bei den nächsten Einsätzen wirkte er angespannter als sonst. Seine Kollegen, die die Veränderung an ihm spürten, fragten besorgt, ob es ihm gut geht. Lukas versicherte ihnen, dass alles in Ordnung sei, und bemühte sich, die innere Unruhe zu verbergen. Aber innerlich spürte er eine Macht, die immer stärker an ihn zog.</p>
+
+                    <p>In den darauffolgenden Tagen verbrachte Lukas Stunden allein in der Fahrzeughalle oder bei der Ausrüstung. Er übte Handgriffe, kontrollierte die Schläuche und die Helme immer und immer wieder -- doch diese Beschäftigungen reichten nicht aus, um das Verlangen in ihm zu stillen. Sein Blick wanderte ständig zu den Löschfahrzeugen, die so schwer und mächtig wirkten, doch auch eine erschreckende Faszination auf ihn ausübten, da sie gleichzeitig die Möglichkeit boten, dem Feuer auf besondere Weise nah nahezukommen. Es war, als würde er in ihnen nicht nur Werkzeuge zur Bekämpfung, sondern zugleich Schlüssel sehen, die ihm die Türen zu einer gefährlichen, fast verbotenen Welt öffnen könnten.</p>
+
+                    <p>Ein Gedanke keimte in ihm auf, so scheu und verstohlen wie eine Flamme, die sich unter einem Aschenhaufen verbarg. Was wäre, wenn er selbst einen Brand entfachen könnte, um zu sehen, wie es sich anfühlte, ein Feuer aus nächster Nähe zu beobachten, das ihm gänzlich unterstand?</p>
+
+                    <p>Lukas erschrak vor dem Gedanken, doch er war da, wie eine kleine Flamme, die langsam, aber beständig an Kraft gewann. Er versuchte, den Impuls niederzuringen, sich abzulenken und sich auf seine Aufgaben zu konzentrieren. Aber die Vorstellung ließ ihn nicht los. Sie schlich sich in seine Gedanken zurück, vor allem in den ruhigen Momenten, wenn er allein war, und flackerte wie ein lodernder Funke in der Dunkelheit seines Verstands.</p>
+
+                    <p>Er fragte sich, wie es sich anfühlen würde, die Kontrolle über ein Feuer zu haben, das er selbst entfacht hatte. Ein Teil von ihm wusste, dass es gefährlich war, diesen Gedanken weiterzuverfolgen, doch die Sehnsucht nach diesem Gefühl, nach dieser Macht wuchs mit jedem Tag. Es war wie ein Drang, den er nicht erklären konnte, den er aber auch nicht mehr ignorieren konnte. Immer öfter ertappte er sich dabei, wie er in Gedanken Situationen durchspielte: ein kleiner, sicherer Brand, der sich nur auf eine kleine Fläche beschränken würde, leicht zu kontrollieren und schnell zu löschen.</p>
+
+                    <p>Er verbrachte Abende damit, sich in Büchern und Artikeln über Brandursachen und Feuerverhalten zu vertiefen. Was einmal als eine Pflichtlektüre für seine Arbeit bei der Feuerwehr begonnen hatte, wurde nun zu einer geheimen Besessenheit. Lukas wollte jedes Detail wissen: die chemischen Reaktionen, die richtigen Bedingungen für einen Feuerstart, die unterschiedlichen Materialien und ihre Brenneigenschaften. Er studierte, wie sich Flammen ausbreiteten, wie sie sich in verschiedenen Umgebungen verhielten, und vor allem, wie sie kontrolliert werden konnten.</p>
+
+                    <p>Sein Wissen, kombiniert mit seiner Faszination, verlieh ihm das Gefühl einer außergewöhnlichen Macht. Doch mit dieser Macht kam auch die innere Zerrissenheit -- die Stimme der Vernunft, die ihm ins Gewissen sprach und ihn daran erinnerte, dass er als Feuerwehrmann geschworen hatte, Brände zu löschen und Leben zu retten, nicht zu gefährden.</p>
+
+                    <p>Trotzdem wuchs die Idee in ihm. Er begann, sich Orte vorzustellen, abgelegene Plätze, an denen er ein kleines Feuer entzünden könnte, ohne dass jemand in Gefahr wäre. Abgelegene Wiesen oder alte, verlassene Gebäude am Stadtrand erschienen ihm ideal, abgeschieden und fern von neugierigen Blicken. Der Gedanke an die Gefahr, die er selbst erschaffen würde, verlieh ihm ein seltsames Gefühl der Lebendigkeit, das er nirgendwo sonst fand.</p>
+
+                    <p>Eines Abends, als er allein in seinem Zimmer saß, griff er zum Telefon und begann, sich eine Liste mit Orten zusammenzustellen, die infrage kommen könnten. Jeder Eintrag brachte eine Mischung aus Nervosität und Vorfreude, als würde er ein Geheimnis hüten, das nur er selbst verstehen konnte.</p>
+
+                    <p>Doch als er kurz davor stand, diesen Plan in die Tat umzusetzen, kehrte ein Hauch von Zweifel zurück. War er wirklich bereit, diese Grenze zu überschreiten? Was, wenn jemand den Zusammenhang erkannte, wenn die anderen Feuerwehrleute Verdacht schöpften? Der Gedanke, entdeckt zu werden, erfüllte ihn mit einer dumpfen Furcht, aber auch mit einem unheilvollen Kribbeln, das ihn beinahe antrieb, weiterzumachen.</p>
+
+                    <p>Letzten Endes entschied er sich, die Entscheidung hinauszuzögern, aber das Verlangen blieb -- wie eine stille, flackernde Flamme, die sich heimlich in ihm ausbreitete und nur auf den richtigen Moment wartete, um sich in ein unkontrollierbares Feuer zu verwandeln.</p>
+                </div>
+            </div>
+
+            <!-- ENGLISCHE VERSION -->
+            <div id="en-content" class="language-content hidden">
+                <div class="book-title">Flames of Betrayal</div>
+                <div class="chapter-title">Chapter 1: A New Life at the Fire Department</div>
+                <div class="text-content" id="en-textContent">
+                    <p>Lukas stood there, uncertain, with a hint of nervousness, while the flames flickered in sharp memory before his mind's eye. Since childhood, fire had exerted a strange fascination on him -- a powerful, all-consuming force that both attracted and intimidated him. In his harsh environment, where oppressive loneliness often surrounded him, fire was the only thing that seemed intense and alive to him. Here, at the fire department, Lukas believed he had finally found a way to tame this tremendous energy and direct it in a controlled, meaningful direction.</p>
+
+                    <p>When he first entered the station, he felt the cool concrete floor under his new boots and breathed in the characteristic smell of smoke, metal, and motor oil, which seemed almost like a promise to him. The soundscape was busy yet calming; men and women who concentrated on preparing for their next deployment, checking tools and inspecting vehicles for emergencies. This is where he belonged, Lukas thought. A new beginning.</p>
+
+                    <p>His colleagues briefly examined him, nodded to him, and went back to their work. No one knew his story, the emptiness that surrounded him, and the life he came from. Lukas had never been good at opening up to others or forming close friendships, but that didn't matter here. Here he wasn't judged by his past, but only by whether he kept his nerve in an emergency and was up to his tasks.</p>
+
+                    <p>The first days passed quickly. Lukas learned how to operate the heavy equipment and completed grueling exercises. Every movement had to be perfect; precision and endurance were required. Soon he discovered a new kind of fulfillment that the work gave him. The routine, the hard training, and the discipline -- all of this gave him a sense of belonging and control that he had previously lacked. He finally felt like part of a community connected by a common purpose. But in quiet moments, when daylight fell through the station windows and the heat of a recently completed mission subsided, Lukas felt the flame of his inner passion flare up again. The fire wouldn't let him go; it drew him like a silent call under its spell.</p>
+
+                    <p>One evening, after particularly demanding training, Lukas remained behind in the vehicle hall. The others had already left, and silence settled like a blanket over the empty emergency vehicles. He walked around, looked at the equipment, and let the impressions sink in. He knew that he had found a new direction in the fire department -- and yet there was something that still gnawed deep inside him. It was like a whisper that gained strength in the quiet moments between deployments. Lukas had hoped that his work as a firefighter would silence this desire that had accompanied him for years. But the more he got used to life at the fire department, the stronger became the inexplicable, burning desire to be very close to fire -- not just as a helper, but as someone who could actually control it.</p>
+
+                    <p>With each deployment where flames were pushed back, Lukas felt an ambivalent mixture of pride and disappointment. Pride because he was part of the fire department that restored order and tamed chaos. But also disappointment because the fire always only affected him from the outside, while it pulsed deep within him in a way that no one understood -- he himself barely.</p>
+
+                    <p>One night, when he tiredly and pensively made his way back to the fire station after a long day, he discovered smoldering embers at a small, abandoned hut on the outskirts of town. It was obvious that the fire had barely not broken out into an inferno, possibly extinguished early by chance. Lukas stopped, his gaze fixed on the glowing spot, and felt his heart begin to beat restlessly. His breathing became shallow as he stared into the deep darkness of the hut. He had an irresistible urge to touch the last embers, to feel how close he could be to fire without extinguishing it.</p>
+
+                    <p>He could barely force himself to leave the place. It was as if an invisible bond tied him to the embers, whispered in his ear, and urged him to surrender completely to the fire. But with all his strength, he finally broke free from this strange paralysis and returned to the station. The thoughts of the flames that had been so close kept him awake all night.</p>
+
+                    <p>The next morning, Lukas noticed that something had changed in him. The quiet fascination with fire, which had previously been only a subliminal part of his being, suddenly felt stronger, as if the glow of the hut had ignited it. During the next deployments, he seemed more tense than usual. His colleagues, who sensed the change in him, asked with concern if he was okay. Lukas assured them that everything was fine and tried to hide his inner restlessness. But internally he felt a power that was pulling him ever stronger.</p>
+
+                    <p>In the following days, Lukas spent hours alone in the vehicle hall or with the equipment. He practiced movements, checked hoses and helmets over and over again -- but these activities weren't enough to satisfy the desire within him. His gaze constantly wandered to the fire trucks, which seemed so heavy and powerful, yet also exerted a frightening fascination on him, since they simultaneously offered the possibility of getting close to fire in a special way. It was as if he saw in them not just tools for fighting, but also keys that could open the doors to a dangerous, almost forbidden world.</p>
+
+                    <p>A thought sprouted in him, as shy and furtive as a flame hiding under a pile of ashes. What if he could ignite a fire himself to see how it felt to observe a fire from close up that was completely under his control?</p>
+
+                    <p>Lukas was startled by the thought, but it was there, like a small flame that slowly but steadily gained strength. He tried to suppress the impulse, to distract himself and concentrate on his tasks. But the idea wouldn't let him go. It crept back into his thoughts, especially in quiet moments when he was alone, and flickered like a blazing spark in the darkness of his mind.</p>
+
+                    <p>He wondered how it would feel to have control over a fire that he had ignited himself. Part of him knew it was dangerous to pursue this thought further, but the longing for this feeling, for this power, grew with each day. It was like an urge he couldn't explain, but also couldn't ignore anymore. More and more often he caught himself mentally playing through situations: a small, safe fire that would only be limited to a small area, easy to control and quick to extinguish.</p>
+
+                    <p>He spent evenings immersing himself in books and articles about fire causes and fire behavior. What had once begun as required reading for his work at the fire department had now become a secret obsession. Lukas wanted to know every detail: the chemical reactions, the right conditions for starting a fire, the different materials and their burning properties. He studied how flames spread, how they behaved in different environments, and especially how they could be controlled.</p>
+
+                    <p>His knowledge, combined with his fascination, gave him the feeling of extraordinary power. But with this power also came inner conflict -- the voice of reason that spoke to his conscience and reminded him that as a firefighter he had sworn to extinguish fires and save lives, not endanger them.</p>
+
+                    <p>Nevertheless, the idea grew in him. He began to imagine places, remote locations where he could light a small fire without putting anyone in danger. Remote meadows or old, abandoned buildings on the outskirts of town seemed ideal to him, secluded and far from prying eyes. The thought of the danger he would create himself gave him a strange feeling of vitality that he found nowhere else.</p>
+
+                    <p>One evening, sitting alone in his room, he reached for the phone and began to compile a list of places that could be suitable. Each entry brought a mixture of nervousness and anticipation, as if he were guarding a secret that only he could understand.</p>
+
+                    <p>But when he was on the verge of putting this plan into action, a touch of doubt returned. Was he really ready to cross this line? What if someone recognized the connection, if the other firefighters became suspicious? The thought of being discovered filled him with a dull fear, but also with an ominous tingling that almost drove him to continue.</p>
+
+                    <p>In the end, he decided to postpone the decision, but the desire remained -- like a quiet, flickering flame that secretly spread within him, waiting only for the right moment to transform into an uncontrollable fire.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSpeech = null;
+        let currentLanguage = 'de';
+        let currentWordIndex = 0;
+        let allWords = {};
+        let isReading = false;
+        let lastHighlightedWord = null;
+
+        // Initialize words for both languages
+        function initializeWords() {
+            ['de', 'en'].forEach(lang => {
+                const textContent = document.getElementById(`${lang}-textContent`);
+                if (textContent && !textContent.querySelector('.word')) {
+                    const paragraphs = textContent.querySelectorAll('p');
+                    let wordCounter = 0;
+                    let langWords = [];
+
+                    paragraphs.forEach((paragraph) => {
+                        const paragraphText = paragraph.textContent;
+                        const paragraphWords = paragraphText.split(/\s+/).filter(word => word.length > 0);
+                        let paragraphHTML = '';
+
+                        paragraphWords.forEach((word) => {
+                            paragraphHTML += `<span class="word" data-word-index="${wordCounter}" onclick="startFromWord(${wordCounter})">${word}</span> `;
+                            langWords.push(word);
+                            wordCounter++;
+                        });
+
+                        paragraph.innerHTML = paragraphHTML;
+                    });
+
+                    allWords[lang] = langWords;
+                }
+            });
+        }
+
+        function switchLanguage(lang) {
+            pauseReading();
+
+            document.querySelectorAll('.language-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+
+            document.getElementById(lang + '-content').classList.remove('hidden');
+
+            document.querySelectorAll('.btn-lang').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            currentLanguage = lang;
+            currentWordIndex = 0;
+            clearHighlight();
+        }
+
+        function startReading() {
+            currentWordIndex = 0;
+            clearHighlight();
+            continueReading();
+        }
+
+        function continueReading() {
+            if (currentSpeech) {
+                currentSpeech.cancel();
+            }
+
+            const currentWords = allWords[currentLanguage];
+            if (currentWords && currentWords.length > 0) {
+                const remainingText = currentWords.slice(currentWordIndex).join(' ');
+                currentSpeech = new SpeechSynthesisUtterance(remainingText);
+                currentSpeech.rate = 0.9;
+                currentSpeech.lang = currentLanguage === 'de' ? 'de-DE' : 'en-US';
+
+                let wordCount = currentWordIndex;
+                currentSpeech.onboundary = function(event) {
+                    if (event.name === 'word') {
+                        highlightCurrentWord(wordCount);
+                        wordCount++;
+                        currentWordIndex = wordCount;
+                    }
+                };
+
+                currentSpeech.onend = function() {
+                    isReading = false;
+                };
+
+                isReading = true;
+                speechSynthesis.speak(currentSpeech);
+            }
+        }
+
+        function startFromWord(wordIndex) {
+            currentWordIndex = wordIndex;
+            clearHighlight();
+            continueReading();
+        }
+
+        function highlightCurrentWord(wordIndex) {
+            if (lastHighlightedWord) {
+                lastHighlightedWord.classList.remove('word-highlight');
+            }
+
+            const wordSpan = document.querySelector(`#${currentLanguage}-content [data-word-index="${wordIndex}"]`);
+            if (wordSpan) {
+                wordSpan.classList.add('word-highlight');
+                lastHighlightedWord = wordSpan;
+                wordSpan.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+
+        function clearHighlight() {
+            document.querySelectorAll('.word-highlight').forEach(el => {
+                el.classList.remove('word-highlight');
+            });
+            lastHighlightedWord = null;
+        }
+
+        function pauseReading() {
+            if (currentSpeech) {
+                speechSynthesis.cancel();
+                currentSpeech = null;
+                isReading = false;
+            }
+        }
+
+        function stopReading() {
+            if (currentSpeech) {
+                speechSynthesis.cancel();
+                currentSpeech = null;
+                isReading = false;
+            }
+            currentWordIndex = 0;
+            clearHighlight();
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeWords();
+        });
+    </script>
+</body>
+</html>
