@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hinter verschlossenen Türen - Lesen - Helmut Wegners Wortwelten</title>
+    <title>Hinter verschlossenen Türen - Lesen & Vorlesen - Helmut Wegners Wortwelten</title>
     <style>
         * {
             margin: 0;
@@ -13,43 +13,48 @@
 
         body {
             font-family: 'Georgia', serif;
+            line-height: 1.8;
+            color: #2c1810;
             background: linear-gradient(135deg, #FFE5E5 0%, #FFB6C1 25%, #FF69B4 50%, #FFC0CB 75%, #FFCCCB 100%);
             min-height: 100vh;
             padding: 20px;
-            color: #8B1538;
-            line-height: 1.8;
         }
 
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
-            background: rgba(255, 255, 255, 0.95);
+            background: #FFF8F0;
             border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             overflow: hidden;
         }
 
         .header {
             background: linear-gradient(135deg, #C2185B, #8B1538);
-            color: white;
+            color: #FFF8F0;
             padding: 30px;
             text-align: center;
             position: relative;
         }
 
-        .back-button {
+        .back-button-header {
             position: absolute;
             top: 15px;
             left: 15px;
+        }
+
+        .back-button {
             background: rgba(255, 255, 255, 0.2);
             color: white;
             padding: 8px 16px;
             border: 2px solid rgba(255, 255, 255, 0.3);
             border-radius: 20px;
-            text-decoration: none;
             font-size: 0.9em;
-            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
             transition: all 0.3s ease;
+            font-weight: bold;
         }
 
         .back-button:hover {
@@ -58,141 +63,194 @@
         }
 
         .header h1 {
-            font-size: 2.2em;
+            font-size: 2.5em;
             margin-bottom: 10px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
         .header p {
-            font-size: 1.1em;
+            font-size: 1.2em;
             opacity: 0.9;
             font-style: italic;
         }
 
-        .language-nav {
-            background: rgba(255, 255, 255, 0.1);
+        .controls {
+            background: #fff8f8;
             padding: 20px;
-            text-align: center;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+            border-bottom: 3px solid #C2185B;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
-        .language-buttons {
+        .control-buttons {
             display: flex;
             gap: 15px;
             justify-content: center;
             flex-wrap: wrap;
+            margin-bottom: 15px;
         }
 
-        .btn-lang {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            padding: 10px 20px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
+        .btn {
+            padding: 12px 24px;
+            border: none;
             border-radius: 25px;
             font-size: 1em;
             font-weight: bold;
             cursor: pointer;
-            text-decoration: none;
             transition: all 0.3s ease;
+            min-width: 120px;
         }
 
-        .btn-lang:hover, .btn-lang.active {
-            background: rgba(255, 255, 255, 0.3);
+        .btn-play {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+        }
+
+        .btn-stop {
+            background: linear-gradient(135deg, #dc3545, #e83e8c);
+            color: white;
+        }
+
+        .btn-continue {
+            background: linear-gradient(135deg, #17a2b8, #6f42c1);
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .language-navigation {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+
+        .btn-lang {
+            background: linear-gradient(135deg, #C2185B, #8B1538);
+            color: #FFF8F0;
+            padding: 10px 20px;
+            border: 2px solid transparent;
+        }
+
+        .btn-lang.active {
             border-color: #FFD700;
             box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
         }
 
-        .content {
-            padding: 40px;
+        .amazon-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
         }
 
-        .language-content {
-            display: block;
-        }
-
-        .language-content.hidden {
-            display: none;
-        }
-
-        .book-title {
-            font-size: 2em;
-            color: #C2185B;
-            text-align: center;
-            margin-bottom: 10px;
+        .amazon-btn {
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 20px;
+            font-size: 0.9em;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
             font-weight: bold;
+        }
+
+        .amazon-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .content {
+            padding: 30px;
+            font-size: 1.1em;
+            line-height: 1.8;
         }
 
         .chapter-title {
-            font-size: 1.5em;
-            color: #8B1538;
-            text-align: center;
-            margin-bottom: 30px;
-            font-style: italic;
-        }
-
-        .story-text {
-            font-size: 1.1em;
-            line-height: 1.8;
-            color: #333;
-            text-align: justify;
-        }
-
-        .story-text p {
+            color: #C2185B;
+            font-size: 1.8em;
             margin-bottom: 20px;
-        }
-
-        .amazon-section {
-            background: linear-gradient(135deg, #FFE4E6, #FFF0F5);
-            padding: 20px;
-            margin-top: 30px;
-            border-radius: 10px;
             text-align: center;
-            border: 2px solid #FF69B4;
+            border-bottom: 2px solid #FFB74D;
+            padding-bottom: 15px;
         }
 
-        .btn-amazon {
-            background: linear-gradient(135deg, #ff6b35, #f7931e);
-            color: white;
-            padding: 15px 30px;
-            border: none;
-            border-radius: 25px;
-            font-size: 1.1em;
+        .chapter-content {
+            text-align: justify;
+            margin-bottom: 30px;
+        }
+
+        .chapter-content p {
+            margin-bottom: 1.5em;
+        }
+
+        .chapter-content p:first-child::first-letter {
+            float: left;
+            font-size: 4em;
+            line-height: 0.8;
+            margin-right: 8px;
+            margin-top: 6px;
+            color: #C2185B;
             font-weight: bold;
+        }
+
+        .word {
             cursor: pointer;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
-            display: inline-block;
+            transition: all 0.2s ease;
+            padding: 1px 2px;
+            border-radius: 3px;
         }
 
-        .btn-amazon:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+        .word:hover {
+            background-color: #FFE5E5;
         }
 
-        @media (max-width: 768px) {
+        .word-highlight {
+            background-color: #4169E1;
+            color: white;
+            padding: 2px 4px;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(65, 105, 225, 0.3);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 600px) {
+            .control-buttons, .language-navigation, .amazon-buttons {
+                gap: 10px;
+            }
+
+            .btn, .amazon-btn {
+                min-width: 100px;
+                font-size: 0.9em;
+                padding: 10px 16px;
+            }
+
             .content {
                 padding: 20px;
+                font-size: 1em;
             }
-            
+
             .header h1 {
-                font-size: 1.8em;
+                font-size: 2em;
             }
-            
-            .back-button {
+
+            .back-button-header {
                 position: relative;
                 top: 0;
                 left: 0;
                 margin-bottom: 15px;
-            }
-
-            .language-buttons {
-                gap: 10px;
-            }
-
-            .btn-lang {
-                padding: 8px 16px;
-                font-size: 0.9em;
             }
         }
     </style>
@@ -200,28 +258,43 @@
 <body>
     <div class="container">
         <div class="header">
-            <a href="die-verborgenen-kammern.html" class="back-button">← Zurück zur Serie</a>
+            <div class="back-button-header">
+                <a href="die-verborgenen-kammern.html" class="back-button">← Zurück zur Serie</a>
+            </div>
             <h1>🌹 Hinter verschlossenen Türen</h1>
-            <p>Band 1 der Serie "Die verborgenen Kammern"</p>
+            <p>Band 1 der verborgenen Kammern - Lesen & Vorlesen System</p>
         </div>
 
-        <div class="language-nav">
-            <div class="language-buttons">
-                <button class="btn-lang active" onclick="switchLanguage('de')">🇩🇪 Deutsch</button>
-                <button class="btn-lang" onclick="switchLanguage('en')">🇬🇧 English</button>
-                <button class="btn-lang" onclick="switchLanguage('es')">🇪🇸 Español</button>
+        <div class="controls">
+            <div class="control-buttons">
+                <button class="btn btn-play" onclick="startReading()">🔴 Vorlesen</button>
+                <button class="btn btn-continue" onclick="continueReading()">▶️ Weiterlesen</button>
+                <button class="btn btn-stop" onclick="stopReading()">⏹️ Stop</button>
+            </div>
+
+            <div class="language-navigation">
+                <button class="btn btn-lang active" onclick="switchLanguage('de')">🇩🇪 Deutsch</button>
+                <button class="btn btn-lang" onclick="switchLanguage('en')">🇬🇧 English</button>
+                <button class="btn btn-lang" onclick="switchLanguage('es')">🇪🇸 Español</button>
+            </div>
+
+            <div class="amazon-buttons">
+                <a href="https://www.amazon.de/dp/B0F1YC3J79" class="amazon-btn" target="_blank">📖 Taschenbuch DE</a>
+                <a href="https://www.amazon.de/dp/B0F8F1CVCL" class="amazon-btn" target="_blank">📱 eBook DE</a>
+                <a href="https://www.amazon.de/dp/B0F311L2ZQ" class="amazon-btn" target="_blank">📖 Paperback EN</a>
+                <a href="https://www.amazon.de/dp/B0F8NJQ56P" class="amazon-btn" target="_blank">📱 eBook EN</a>
+                <a href="https://www.amazon.de/dp/B0F37NJD39" class="amazon-btn" target="_blank">📖 Libro ES</a>
             </div>
         </div>
 
         <div class="content">
-            <!-- DEUTSCHE VERSION -->
+            <!-- Deutsche Version -->
             <div id="de-content" class="language-content">
-                <div class="book-title">Band 1: Hinter verschlossenen Türen</div>
                 <div class="chapter-title">Kapitel 1: Das Angebot</div>
-                <div class="story-text">
+                <div class="chapter-content" id="de-textContent">
                     <p>Das Pigment bröckelte unter Elenas behutsamen Bewegungen. Winzige Farbpartikel, einst leuchtend rot, nun zu einem matten Braun verblasst, rieselten auf das weiße Tuch, das sie unter dem Gemälde ausgebreitet hatte. Vor über zweihundert Jahren hatte ein Künstler diesen Farbton mit Quecksilbersulfid und organischen Bindemitteln angerührt, ohne zu ahnen, dass seine Schöpfung eines Tages unter Elenas Mikroskop und Skalpell liegen würde.</p>
 
-                    <p>„Jahrhunderte", murmelte sie, während sie mit geübten Fingern die nächste Schicht freilegte. „Und trotzdem verrätst du mir deine Geheimnisse."</p>
+                    <p>"Jahrhunderte", murmelte sie, während sie mit geübten Fingern die nächste Schicht freilegte. "Und trotzdem verrätst du mir deine Geheimnisse."</p>
 
                     <p>Elena Winters arbeitete im großzügigen Restaurierungsatelier des Friedrich-Museums in Berlin, umgeben von Spezialinstrumenten, Chemikalien und Referenzwerken. Die hohen Fenster ließen gleichmäßiges Nordlicht herein -- das ideale Licht für ihre präzise Arbeit. Das spätbarocke Gemälde, eine Darstellung der Göttin Diana bei der Jagd, war seit drei Wochen ihr Projekt. Es war eine Herausforderung, doch genau das machte die Arbeit für sie so befriedigend.</p>
 
@@ -229,101 +302,109 @@
 
                     <p>Das Telefon vibrierte erneut. Elena seufzte, legte ihr Skalpell beiseite und streifte die Latexhandschuhe ab. Es war Direktor Schumann, wie die Anzeige verriet. Der Museumsdirektor rief sie selten direkt an; normalerweise kommunizierte er über seine Assistentin oder E-Mail.</p>
 
-                    <p>„Winters", meldete sie sich knapp.</p>
+                    <p>"Winters", meldete sie sich knapp.</p>
 
-                    <p>„Elena, gut, dass ich Sie erreiche." Die Stimme des Direktors klang ungewöhnlich enthusiastisch. „Könnten Sie in einer halben Stunde in meinem Büro sein? Ich habe jemanden hier, der Sie kennenlernen möchte."</p>
+                    <p>"Elena, gut, dass ich Sie erreiche!" Die Stimme des Direktors klang ungewöhnlich enthusiastisch. "Könnten Sie in einer halben Stunde in meinem Büro sein? Ich habe jemanden hier, der Sie kennenlernen möchte."</p>
 
-                    <p>Sie blickte auf das halb restaurierte Gemälde. „Ich bin mitten in der Arbeit an der Diana, Herr Direktor."</p>
+                    <p>Sie blickte auf das halb restaurierte Gemälde. "Ich bin mitten in der Arbeit an der Diana, Herr Direktor."</p>
 
-                    <p>„Das kann warten. Diese Gelegenheit nicht."</p>
+                    <p>"Das kann warten. Diese Gelegenheit nicht."</p>
 
                     <p>Elena unterdrückte ein Seufzen. In ihrem Beruf hatte sie gelernt, dass Zeit relativ war. Für sie bedeuteten Minuten manchmal den Unterschied zwischen erhaltener und zerstörter Geschichte. Für Administratoren wie Schumann waren Termine und Netzwerkgespräche wichtiger.</p>
 
-                    <p>„In Ordnung. Dreißig Minuten."</p>
+                    <p>"In Ordnung. Dreißig Minuten."</p>
 
                     <p>Sie legte auf und begann methodisch, ihren Arbeitsplatz zu sichern. Das Gemälde wurde sorgfältig abgedeckt, die Instrumente gereinigt und die Chemikalien verschlossen. Elena zog ihren weißen Laborkittel aus und betrachtete ihr Spiegelbild in der Fensterscheibe. Ihr rotbraunes Haar war zu einem strengen Knoten gebunden, ihre Kleidung -- eine schlichte schwarze Hose und eine graue Seidenbluse -- war zweckmäßig und unauffällig. Die einzige Extravaganz, die sie sich erlaubte, war eine antike Brosche aus Silberfiligran -- ein Erbstück ihrer Großmutter und ein subtiler Hinweis auf ihre Verbundenheit mit der Vergangenheit.</p>
 
                     <p>Auf dem Weg zum Direktorenbüro passierte Elena die öffentlichen Galerien des Museums. Touristen und Kunstliebhaber schlenderten zwischen den Meisterwerken umher, nahmen Selfies vor Gemälden oder hörten aufmerksam den Erklärungen der Museumsführer zu. All diese Menschen sahen nur die glänzende Oberfläche -- den vollendeten Restaurierungsprozess, die polierte Präsentation. Die mühsame Arbeit, die sie und ihre Kollegen im Verborgenen leisteten, blieb unsichtbar. Genau so wollte Elena es haben. Sie arbeitete lieber im Hintergrund, tauchte ein in die Intimität der Kunstwerke, lernte ihre Geheimnisse kennen. Die Rampenlichtmomente überließ sie gerne anderen.</p>
 
-                    <p>Schumanns Büro lag im historischen Flügel des Museums, ein hoher, mit dunklem Holz getäfelter Raum mit Blick auf den Museumspark. Als Elena nach kurzem Klopfen eintrat, erhob sich der Direktor hastig von seinem Schreibtisch. „Frau Winters! Kommen Sie herein, kommen Sie herein."</p>
+                    <p>Schumanns Büro lag im historischen Flügel des Museums, ein hoher, mit dunklem Holz getäfelter Raum mit Blick auf den Museumspark. Als Elena nach kurzem Klopfen eintrat, erhob sich der Direktor hastig von seinem Schreibtisch.</p>
+
+                    <p>"Frau Winters! Kommen Sie herein, kommen Sie herein!"</p>
 
                     <p>Schumann war ein korpulenter Mann mit schütterem Haar und einer Vorliebe für teure, maßgeschneiderte Anzüge. Im Gegensatz zum klischeehaften zerstreuten Museumsdirektor war er ein scharfsinniger Administrator und brillanter Fundraiser -- Qualitäten, die das Museum dringend brauchte, um in Zeiten knapper öffentlicher Kassen zu überleben.</p>
 
-                    <p>Ein zweiter Mann stand am Fenster, den Rücken zu ihr gewandt. Er drehte sich langsam um, als Elena den Raum betrat -- groß, schlank, in einem perfekt sitzenden dunkelgrauen Anzug, der selbst Schumanns Garderobe in den Schatten stellte. Elena schätzte ihn auf Mitte bis Ende dreißig. Sein Gesicht war markant geschnitten, mit hohen Wangenknochen und einer geraden Nase, die an klassische Skulpturen erinnerte. Sein Haar, tiefschwarz und an den Schläfen leicht angegraut, war kurz und präzise geschnitten. Doch es waren seine Augen, die Elenas Aufmerksamkeit auf sich zogen -- dunkel, durchdringend und von einer Intensität, die sie unwillkürlich an die Porträts alter Renaissance-Meister denken ließ.</p>
+                    <p>Ein zweiter Mann stand am Fenster, den Rücken zu ihr gewandt. Er drehte sich langsam um, als Elena den Raum betrat: groß, schlank, in einem perfekt sitzenden dunkelgrauen Anzug, der selbst Schumanns Garderobe in den Schatten stellte. Elena schätzte ihn auf Mitte bis Ende dreißig. Sein Gesicht war markant geschnitten, mit hohen Wangenknochen und einer geraden Nase, die an klassische Skulpturen erinnerte. Sein Haar, tiefschwarz und an den Schläfen leicht angegraut, war kurz und präzise geschnitten. Doch es waren seine Augen, die Elenas Aufmerksamkeit auf sich zogen -- dunkel, durchdringend und von einer Intensität, die sie unwillkürlich an die Porträts alter Renaissance-Meister denken ließ.</p>
 
-                    <p>„Frau Winters", begann Schumann, seine Stimme eine Nuance zu enthusiastisch, „darf ich vorstellen: Marcus Castellano."</p>
+                    <p>"Frau Winters", begann Schumann, seine Stimme eine Nuance zu enthusiastisch, "darf ich vorstellen: Marcus Castellano."</p>
 
-                    <p>Der Mann trat vor und reichte Elena die Hand. Sein Händedruck war fest und trocken, seine Haut kühl. „Es ist mir eine Freude, Sie kennenzulernen, Frau Winters", sagte er mit einer Stimme, die überraschend warm klang, im Kontrast zu seiner kühlen Erscheinung. Ein leichter Akzent war zu hören -- mediterran, vielleicht italienisch oder spanisch.</p>
+                    <p>Der Mann trat vor und reichte Elena die Hand. Sein Händedruck war fest und trocken, seine Haut kühl.</p>
 
-                    <p>„Herr Castellano ist der Besitzer des Castellano-Privatmuseums", erklärte Schumann. „Eine der bedeutendsten privaten Kunstsammlungen Europas."</p>
+                    <p>"Es ist mir eine Freude, Sie kennenzulernen, Frau Winters", sagte er mit einer Stimme, die überraschend warm klang, im Kontrast zu seiner kühlen Erscheinung. Ein leichter Akzent war zu hören -- mediterran, vielleicht italienisch oder spanisch.</p>
+
+                    <p>"Herr Castellano ist der Besitzer des Castellano-Privatmuseums", erklärte Schumann. "Eine der bedeutendsten privaten Kunstsammlungen Europas."</p>
 
                     <p>Elena nickte knapp. Der Name Castellano war ihr bekannt, wenn auch nur am Rande. Eine alte europäische Familie, Kunstsammler seit Generationen, ihr Privatmuseum legendär, aber notorisch schwer zugänglich für die Öffentlichkeit.</p>
 
-                    <p>„Bitte, setzen wir uns", forderte Schumann sie auf und deutete auf die Sitzgruppe in der Ecke des Büros. Elena nahm auf einem der Ledersessel Platz, Castellano ihr gegenüber. Schumann platzierte sich auf einem dritten Sessel, leicht abseits, als wolle er bewusst die Interaktion zwischen seinen Gästen beobachten.</p>
+                    <p>"Bitte, setzen wir uns", forderte Schumann sie auf und deutete auf die Sitzgruppe in der Ecke des Büros. Elena nahm auf einem der Ledersessel Platz, Castellano ihr gegenüber. Schumann platzierte sich auf einem dritten Sessel, leicht abseits, als wolle er bewusst die Interaktion zwischen seinen Gästen beobachten.</p>
 
-                    <p>„Herr Castellano hat ein faszinierendes Angebot für Sie", begann der Direktor.</p>
+                    <p>"Herr Castellano hat ein faszinierendes Angebot für Sie", begann der Direktor.</p>
 
-                    <p>Castellano lehnte sich leicht vor. „Ich habe Ihre Arbeit an der Sammlung der flämischen Meister verfolgt, Frau Winters. Besonders Ihre Restaurierung der verlorenen Details in Van Dycks ‚Dame mit dem Hermelin' war bemerkenswert."</p>
+                    <p>Castellano lehnte sich leicht vor. "Ich habe Ihre Arbeit an der Sammlung der flämischen Meister verfolgt, Frau Winters. Besonders Ihre Restaurierung der verlorenen Details in Van Dycks 'Dame mit dem Hermelin' war bemerkenswert."</p>
 
                     <p>Elena hob überrascht eine Augenbraue. Die Van Dyck-Restaurierung war ein komplexes Projekt gewesen, das sie vor zwei Jahren abgeschlossen hatte. Es hatte in Fachkreisen einige Aufmerksamkeit erregt, aber sie hätte nicht erwartet, dass jemand außerhalb dieser Kreise davon Notiz genommen hatte.</p>
 
-                    <p>„Danke", erwiderte sie neutral. „Es war ein herausforderndes Projekt."</p>
+                    <p>"Danke", erwiderte sie neutral. "Es war ein herausforderndes Projekt."</p>
 
-                    <p>„Sie waren nicht nur herausfordernd. Sie haben etwas zurückgebracht, das für verloren gehalten wurde", sagte Castellano. Seine Augen ruhten unverwandt auf ihr, als suchte er nach etwas in ihrem Gesicht. „Diese Fähigkeit, verborgene Schichten zu enthüllen, ohne das Wesentliche zu zerstören -- das ist eine seltene Gabe."</p>
+                    <p>"Sie waren nicht nur herausfordernd. Sie haben etwas zurückgebracht, das für verloren gehalten wurde", sagte Castellano. Seine Augen ruhten unverwandt auf ihr, als suchte er nach etwas in ihrem Gesicht. "Diese Fähigkeit, verborgene Schichten zu enthüllen, ohne das Wesentliche zu zerstören -- das ist eine seltene Gabe."</p>
 
                     <p>Elena spürte ein leichtes Unbehagen. Sie war nicht gewohnt, so direkt beobachtet zu werden, noch weniger, so explizit gelobt zu werden. Ihre Arbeit sprach für sich selbst; sie brauchte keine verbalen Lorbeeren.</p>
 
-                    <p>„Worum geht es, Herr Castellano?"</p>
+                    <p>"Worum geht es, Herr Castellano?"</p>
 
-                    <p>Ein flüchtiges Lächeln huschte über sein Gesicht, als hätte er genau diese direkte Reaktion erwartet. „Mein Privatmuseum beherbergt eine umfangreiche Sammlung, die seit Generationen in meiner Familie ist", begann er. „Das Gebäude selbst ist ein historisches Juwel -- ein Stadtpalais aus dem frühen 19. Jahrhundert mit Elementen aus verschiedenen Epochen. In den letzten Jahren habe ich es umfassend renovieren lassen, aber..." Er machte eine kurze Pause. „Es gibt Bereiche, die einer speziellen Expertise bedürfen."</p>
+                    <p>Ein flüchtiges Lächeln huschte über sein Gesicht, als hätte er genau diese direkte Reaktion erwartet.</p>
 
-                    <p>„Was für Bereiche?", fragte Elena.</p>
+                    <p>"Mein Privatmuseum beherbergt eine umfangreiche Sammlung, die seit Generationen in meiner Familie ist", begann er. "Das Gebäude selbst ist ein historisches Juwel -- ein Stadtpalais aus dem frühen 19. Jahrhundert mit Elementen aus verschiedenen Epochen. In den letzten Jahren habe ich es umfassend renovieren lassen, aber es gibt Bereiche, die einer speziellen Expertise bedürfen."</p>
 
-                    <p>„Unter anderem ein Freskenzyklus aus dem späten 18. Jahrhundert, der sich in der Haupthalle befindet. Er ist in einem besorgniserregenden Zustand -- teilweise übermalt, teilweise beschädigt durch frühere unsachgemäße Restaurierungsversuche."</p>
+                    <p>"Was für Bereiche?", fragte Elena.</p>
+
+                    <p>"Unter anderem ein Freskenzyklus aus dem späten 18. Jahrhundert, der sich in der Haupthalle befindet. Er ist in einem besorgniserregenden Zustand -- teilweise übermalt, teilweise beschädigt durch frühere unsachgemäße Restaurierungsversuche."</p>
 
                     <p>Elena nickte langsam. Fresken waren eine besondere Herausforderung -- die Verbindung von Pigment und Putz machte sie anfälliger für Umwelteinflüsse als Leinwandgemälde.</p>
 
-                    <p>„Außerdem", fuhr Castellano fort, „gibt es eine Sammlung von Gemälden und Skulpturen, die ebenfalls Aufmerksamkeit benötigen. Manche wurden nie richtig restauriert, andere wurden von weniger talentierten Händen als den Ihren behandelt."</p>
+                    <p>"Außerdem", fuhr Castellano fort, "gibt es eine Sammlung von Gemälden und Skulpturen, die ebenfalls Aufmerksamkeit benötigen. Manche wurden nie richtig restauriert, andere wurden von weniger talentierten Händen als den Ihren behandelt."</p>
 
-                    <p>Schumann räusperte sich. „Herr Castellano möchte Sie für ein exklusives Projekt engagieren, Elena. Drei Monate im Castellano-Museum."</p>
+                    <p>Schumann räusperte sich. "Herr Castellano möchte Sie für ein exklusives Projekt engagieren, Elena. Drei Monate im Castellano-Museum."</p>
 
-                    <p>Elena runzelte die Stirn. „Drei Monate? Das ist eine lange Zeit, um von hier weg zu sein."</p>
+                    <p>Elena runzelte die Stirn. "Drei Monate? Das ist eine lange Zeit, um von hier weg zu sein."</p>
 
-                    <p>„Das Museum würde Ihnen einen bezahlten Sonderurlaub gewähren", erklärte Schumann hastig. „Herr Castellano hat ein äußerst großzügiges Angebot für die Institution gemacht, im Gegenzug für Ihre Dienste."</p>
+                    <p>"Das Museum würde Ihnen einen bezahlten Sonderurlaub gewähren", erklärte Schumann hastig. "Herr Castellano hat ein äußerst großzügiges Angebot für die Institution gemacht, im Gegenzug für Ihre Dienste."</p>
 
                     <p>Sie verstand sofort. Das Museum brauchte Geld, und Castellano war bereit, viel zu zahlen. Schumann erwartete von ihr, dass sie zustimmte -- nicht als Bitte, sondern als kaum verhüllte Anweisung.</p>
 
-                    <p>„Ich habe bereits mehrere Projekte in Arbeit", wandte sie ein. „Die Diana, den Tizian-Zyklus, die Vorbereitung für die Herbstausstellung."</p>
+                    <p>"Ich habe bereits mehrere Projekte in Arbeit", wandte sie ein. "Die Diana, den Tizian-Zyklus, die Vorbereitung für die Herbstausstellung."</p>
 
-                    <p>„All das kann warten oder von Ihren Kollegen übernommen werden", unterbrach Schumann sie mit einem falschen Lächeln. „Diese Gelegenheit sollten wir nicht ausschlagen."</p>
+                    <p>"All das kann warten oder von Ihren Kollegen übernommen werden", unterbrach Schumann sie mit einem falschen Lächeln. "Diese Gelegenheit sollten wir nicht ausschlagen."</p>
 
-                    <p>Elena wusste, wann eine Schlacht verloren war. Der Direktor hatte bereits entschieden. Sie wandte sich wieder an Castellano. „Wo genau befindet sich Ihr Museum, Herr Castellano?"</p>
+                    <p>Elena wusste, wann eine Schlacht verloren war. Der Direktor hatte bereits entschieden. Sie wandte sich wieder an Castellano.</p>
 
-                    <p>„An der Küste Norditaliens, etwa eine Stunde von Genua entfernt", antwortete er. „Eine ruhige Lage, ideal für konzentrierte Arbeit. Sie würden im Museum selbst wohnen -- es gibt einen Gästeflügel mit komfortablen Appartements für Spezialisten wie Sie."</p>
+                    <p>"Wo genau befindet sich Ihr Museum, Herr Castellano?"</p>
+
+                    <p>"An der Küste Norditaliens, etwa eine Stunde von Genua entfernt", antwortete er. "Eine ruhige Lage, ideal für konzentrierte Arbeit. Sie würden im Museum selbst wohnen -- es gibt einen Gästeflügel mit komfortablen Appartements für Spezialisten wie Sie."</p>
 
                     <p>Im Museum wohnen. Elena unterdrückte ein Stirnrunzeln. Sie schätzte die Trennung zwischen ihrer Arbeit und ihrem privaten Raum. Die Vorstellung, vierundzwanzig Stunden am Tag von fremden Kunstwerken umgeben zu sein, war gleichzeitig verlockend und beunruhigend.</p>
 
-                    <p>„Warum ich?", fragte sie unvermittelt. „Es gibt viele qualifizierte Restauratoren, auch solche mit mehr Erfahrung im Umgang mit Fresken."</p>
+                    <p>"Warum ich?", fragte sie unvermittelt. "Es gibt viele qualifizierte Restauratoren, auch solche mit mehr Erfahrung im Umgang mit Fresken."</p>
 
-                    <p>Castellano betrachtete sie mit einem Blick, der gleichzeitig durchdringend und undurchschaubar war. „Wie ich bereits sagte, Frau Winters -- Ihre Fähigkeit, das Verborgene zu enthüllen, ohne es zu zerstören, ist selten. Meine Sammlung... sie benötigt einen besonderen Zugang."</p>
+                    <p>Castellano betrachtete sie mit einem Blick, der gleichzeitig durchdringend und undurchschaubar war. "Wie ich bereits sagte, Frau Winters -- Ihre Fähigkeit, das Verborgene zu enthüllen, ohne es zu zerstören, ist selten. Meine Sammlung... sie benötigt einen besonderen Zugang."</p>
 
                     <p>Etwas in seinem Ton ließ Elena aufhorchen. Da war mehr als nur professionelles Interesse. Eine persönliche Note, fast eine Dringlichkeit, die hinter seiner kontrollierten Fassade durchschimmerte.</p>
 
-                    <p>„Ich verstehe, dass Sie Zeit zum Nachdenken brauchen", fuhr Castellano fort und zog eine schlanke Ledermappe aus seiner Aktentasche. „Hier sind die Details des Projekts, Informationen zum Museum und zu Ihrer Unterkunft. Sowie die finanziellen Bedingungen."</p>
+                    <p>"Ich verstehe, dass Sie Zeit zum Nachdenken brauchen", fuhr Castellano fort und zog eine schlanke Ledermappe aus seiner Aktentasche. "Hier sind die Details des Projekts, Informationen zum Museum und zu Ihrer Unterkunft. Sowie die finanziellen Bedingungen."</p>
 
                     <p>Er reichte ihr die Mappe. Elena nahm sie entgegen und öffnete sie kurz. Ihr Blick fiel auf die Zahl am Ende des Vertragsentwurfs -- ein Honorar, das ihr fast den Atem raubte. Es war mehr, als sie in einem ganzen Jahr im Museum verdiente.</p>
 
-                    <p>„Das ist sehr großzügig", sagte sie, bemüht, ihre Überraschung zu verbergen.</p>
+                    <p>"Das ist sehr großzügig", sagte sie, bemüht, ihre Überraschung zu verbergen.</p>
 
-                    <p>„Kunst hat ihren Preis, Frau Winters. Expertise ebenso." Castellano erhob sich. „Ich bleibe noch zwei Tage in Berlin. Ich hoffe, bis dahin von Ihnen zu hören."</p>
+                    <p>"Kunst hat ihren Preis, Frau Winters. Expertise ebenso." Castellano erhob sich. "Ich bleibe noch zwei Tage in Berlin. Ich hoffe, bis dahin von Ihnen zu hören."</p>
 
-                    <p>Schumann sprang ebenfalls auf, eifrig wie ein Schuljunge. „Natürlich wird sie zusagen, nicht wahr, Elena? Eine solche Chance..."</p>
+                    <p>Schumann sprang ebenfalls auf, eifrig wie ein Schuljunge. "Natürlich wird sie zusagen, nicht wahr, Elena? Eine solche Chance..."</p>
 
                     <p>Elena stand langsamer auf, ihre Gedanken bereits bei den logistischen Herausforderungen, die ein dreimonatiger Aufenthalt im Ausland mit sich bringen würde. Ihre Wohnung, ihre Verpflichtungen hier, die laufenden Projekte.</p>
 
-                    <p>„Ich werde es mir ansehen und Ihnen so bald wie möglich Bescheid geben", sagte sie schließlich.</p>
+                    <p>"Ich werde es mir ansehen und Ihnen so bald wie möglich Bescheid geben", sagte sie schließlich.</p>
 
-                    <p>Castellano nickte, als hätte er nichts anderes erwartet. „Ausgezeichnet. Direktor Schumann hat meine Kontaktdaten." Er reichte ihr noch einmal die Hand. „Ich freue mich auf unsere Zusammenarbeit, Frau Winters."</p>
+                    <p>Castellano nickte, als hätte er nichts anderes erwartet. "Ausgezeichnet. Direktor Schumann hat meine Kontaktdaten." Er reichte ihr noch einmal die Hand. "Ich freue mich auf unsere Zusammenarbeit, Frau Winters."</p>
 
                     <p>Als seine Hand die ihre berührte, hatte Elena einen flüchtigen, irrationalen Gedanken: Diese Hand kannte Geheimnisse -- Geheimnisse, die älter und tiefer waren als die Kunstwerke, die sie restaurieren sollte.</p>
 
@@ -339,27 +420,29 @@
 
                     <p>Zwischen den Seiten fiel ein kleineres Foto heraus. Elena hob es auf und betrachtete es stirnrunzelnd. Es zeigte einen abgesperrten Bereich des Museums -- einen Korridor mit einer schweren, verschlossenen Tür am Ende. Die Tür war mit kunstvollen Schnitzereien verziert, Motive, die sie nicht sofort einordnen konnte. Warum war ein Foto von einer verschlossenen Tür in der Mappe?</p>
 
-                    <p>„Ein beeindruckendes Angebot, nicht wahr?"</p>
+                    <p>"Ein beeindruckendes Angebot, nicht wahr?"</p>
 
                     <p>Elena zuckte zusammen. Schumann war zurückgekehrt und stand nun im Türrahmen.</p>
 
-                    <p>„Ja, das ist es", antwortete sie und steckte das Foto schnell wieder zwischen die anderen Unterlagen.</p>
+                    <p>"Ja, das ist es", antwortete sie und steckte das Foto schnell wieder zwischen die anderen Unterlagen.</p>
 
-                    <p>„Sie werden natürlich annehmen." Es war keine Frage.</p>
+                    <p>"Sie werden natürlich annehmen." Es war keine Frage.</p>
 
-                    <p>„Ich muss es mir noch überlegen, Herr Direktor. Es gibt viele Faktoren zu berücksichtigen."</p>
+                    <p>"Ich muss es mir noch überlegen, Herr Direktor. Es gibt viele Faktoren zu berücksichtigen."</p>
 
-                    <p>Schumann trat näher, seine jovialen Manieren vom Treffen waren einer ernsteren Miene gewichen. „Elena, lassen Sie mich offen sein. Die finanzielle Situation des Museums ist angespannt. Castellanos Angebot -- die Spende, die er für Ihre Dienste leistet -- würde uns helfen, die nächsten zwei Quartale zu überbrücken."</p>
+                    <p>Schumann trat näher, seine jovialen Manieren vom Treffen waren einer ernsteren Miene gewichen. "Elena, lassen Sie mich offen sein. Die finanzielle Situation des Museums ist angespannt. Castellanos Angebot -- die Spende, die er für Ihre Dienste leistet -- würde uns helfen, die nächsten zwei Quartale zu überbrücken."</p>
 
-                    <p>Elena seufzte innerlich. Da war es also: institutioneller Druck. „Und wenn ich ablehne?"</p>
+                    <p>Elena seufzte innerlich. Da war es also: institutioneller Druck.</p>
 
-                    <p>„Dann müssten wir über Budgetkürzungen nachdenken. Möglicherweise auch in Ihrer Abteilung." Seine Stimme war sanft, aber die Drohung unmissverständlich.</p>
+                    <p>"Und wenn ich ablehne?"</p>
+
+                    <p>"Dann müssten wir über Budgetkürzungen nachdenken. Möglicherweise auch in Ihrer Abteilung." Seine Stimme war sanft, aber die Drohung unmissverständlich.</p>
 
                     <p>Elena nickte langsam. Sie war keine Politikerin, keine Kämpferin in den administrativen Schlachten des Museums. Ihre Welt waren Farben und Formen, chemische Reaktionen und historische Techniken -- nicht Budgets und Verhandlungen.</p>
 
-                    <p>„Ich verstehe", sagte sie knapp.</p>
+                    <p>"Ich verstehe", sagte sie knapp.</p>
 
-                    <p>„Ausgezeichnet!" Schumann klatschte in die Hände, wieder der joviale Direktor. „Ich wusste, dass Sie vernünftig sein würden. Informieren Sie mich, sobald Sie mit Castellano gesprochen haben, ja?"</p>
+                    <p>"Ausgezeichnet!" Schumann klatschte in die Hände, wieder der joviale Direktor. "Ich wusste, dass Sie vernünftig sein würden. Informieren Sie mich, sobald Sie mit Castellano gesprochen haben, ja?"</p>
 
                     <p>Er verließ das Büro, ohne ihre Antwort abzuwarten.</p>
 
@@ -371,7 +454,7 @@
 
                     <p>In ihrem Atelier angekommen, legte Elena die Mappe auf ihren Schreibtisch und kehrte zu Diana zurück, deren Gesicht noch immer geduldig auf ihre Befreiung von Jahrhunderten falscher Übermalungen wartete.</p>
 
-                    <p>„Was würdest du tun?", murmelte sie, während sie ihre Handschuhe wieder anzog. Die Göttin der Jagd schwieg, ihre Augen halb verdeckt unter Schichten fremder Pinselstriche.</p>
+                    <p>"Was würdest du tun?", murmelte sie, während sie ihre Handschuhe wieder anzog. Die Göttin der Jagd schwieg, ihre Augen halb verdeckt unter Schichten fremder Pinselstriche.</p>
 
                     <p>Elena nahm ihr Skalpell wieder auf und begann, vorsichtig um das Auge der Göttin herum zu arbeiten. Schicht um Schicht legte sie frei, enthüllte das Original darunter. So wie sie es immer tat -- methodisch, geduldig, kontrolliert.</p>
 
@@ -379,66 +462,59 @@
 
                     <p>Als sie am Abend ihr Atelier verließ, hatte sie ihre Entscheidung bereits getroffen. Sie nahm ihr Handy heraus und wählte die Nummer, die Castellano ihr hinterlassen hatte.</p>
 
-                    <p>„Herr Castellano", sagte sie, als er antwortete. „Hier ist Elena Winters. Ich nehme Ihr Angebot an."</p>
+                    <p>"Herr Castellano", sagte sie, als er antwortete. "Hier ist Elena Winters. Ich nehme Ihr Angebot an."</p>
 
-                    <p>Eine kurze Pause folgte. „Das freut mich zu hören, Frau Winters." Seine Stimme klang warm, aber nicht überrascht, als hätte er ihre Entscheidung bereits erwartet. „Ich lasse alles für Ihre Ankunft vorbereiten."</p>
+                    <p>Eine kurze Pause folgte. "Das freut mich zu hören, Frau Winters." Seine Stimme klang warm, aber nicht überrascht, als hätte er ihre Entscheidung bereits erwartet. "Ich lasse alles für Ihre Ankunft vorbereiten."</p>
 
-                    <p>„Ich habe allerdings einige Bedingungen", fügte Elena hinzu. Ihre Entscheidung mochte unter Druck entstanden sein, aber sie würde zumindest ihre eigenen Regeln festlegen.</p>
+                    <p>"Ich habe allerdings einige Bedingungen", fügte Elena hinzu. Ihre Entscheidung mochte unter Druck entstanden sein, aber sie würde zumindest ihre eigenen Regeln festlegen.</p>
 
-                    <p>„Natürlich. Ich höre."</p>
+                    <p>"Natürlich. Ich höre."</p>
 
-                    <p>„Ich benötige vollständige Autonomie in meiner Arbeit. Kein Einmischen in meine Methoden oder meinen Zeitplan."</p>
+                    <p>"Ich benötige vollständige Autonomie in meiner Arbeit. Kein Einmischen in meine Methoden oder meinen Zeitplan."</p>
 
-                    <p>„Selbstverständlich."</p>
+                    <p>"Selbstverständlich."</p>
 
-                    <p>„Zweitens möchte ich umfassenden Zugang zu allen Informationen über die zu restaurierenden Werke -- Herkunft, Vorbesitzer, frühere Restaurierungsversuche, alles."</p>
+                    <p>"Zweitens möchte ich umfassenden Zugang zu allen Informationen über die zu restaurierenden Werke -- Herkunft, Vorbesitzer, frühere Restaurierungsversuche, alles."</p>
 
-                    <p>Eine winzige Pause entstand, kaum wahrnehmbar, aber Elena bemerkte sie dennoch. „Das wird arrangiert", sagte Castellano schließlich.</p>
+                    <p>Eine winzige Pause entstand, kaum wahrnehmbar, aber Elena bemerkte sie dennoch. "Das wird arrangiert", sagte Castellano schließlich.</p>
 
-                    <p>„Und drittens behalte ich mir das Recht vor, das Projekt jederzeit zu beenden, falls ich feststelle, dass die Arbeiten nicht meinen ethischen oder professionellen Standards entsprechen."</p>
+                    <p>"Und drittens behalte ich mir das Recht vor, das Projekt jederzeit zu beenden, falls ich feststelle, dass die Arbeiten nicht meinen ethischen oder professionellen Standards entsprechen."</p>
 
-                    <p>Diesmal war die Pause länger. „Eine interessante Bedingung, Frau Winters. Darf ich fragen, welche Bedenken Sie haben?"</p>
+                    <p>Diesmal war die Pause länger. "Eine interessante Bedingung, Frau Winters. Darf ich fragen, welche Bedenken Sie haben?"</p>
 
-                    <p>Elena überlegte kurz. Sie wollte nicht unhöflich erscheinen, aber etwas an der ganzen Situation ließ sie vorsichtig sein. „Keine spezifischen Bedenken. Nur professionelle Sorgfalt. Ich bevorzuge klare Vereinbarungen von Anfang an."</p>
+                    <p>Elena überlegte kurz. Sie wollte nicht unhöflich erscheinen, aber etwas an der ganzen Situation ließ sie vorsichtig sein. "Keine spezifischen Bedenken. Nur professionelle Sorgfalt. Ich bevorzuge klare Vereinbarungen von Anfang an."</p>
 
-                    <p>„Ich respektiere das. Ihre Bedingungen sind akzeptiert."</p>
+                    <p>"Ich respektiere das. Ihre Bedingungen sind akzeptiert."</p>
 
                     <p>Sie besprachen die praktischen Details -- Reisedaten, notwendige Ausrüstung, Versicherungsfragen. Elena notierte alles in ihrem präzisen, methodischen Stil.</p>
 
-                    <p>„Ich erwarte Sie dann in einer Woche", schloss Castellano. „Meine Assistentin wird Ihnen die Reiseunterlagen zukommen lassen."</p>
+                    <p>"Ich erwarte Sie dann in einer Woche", schloss Castellano. "Meine Assistentin wird Ihnen die Reiseunterlagen zukommen lassen."</p>
 
-                    <p>„Bis dahin, Herr Castellano."</p>
+                    <p>"Bis dahin, Herr Castellano."</p>
 
-                    <p>„Auf bald, Frau Winters. Und bereiten Sie sich vor. Meine Sammlung wird Sie überraschen."</p>
+                    <p>"Auf bald, Frau Winters. Und bereiten Sie sich vor -- meine Sammlung wird Sie überraschen."</p>
 
                     <p>Die Verbindung wurde getrennt, und Elena blieb mit dem seltsamen Gefühl zurück, dass sie gerade einen Vertrag unterzeichnet hatte, dessen Kleingedrucktes sie noch nicht kannte.</p>
                 </div>
-
-                <div class="amazon-section">
-                    <h3>📖 Das komplette Buch lesen</h3>
-                    <p>Entdecke die vollständige Geschichte von Elena und Marcus</p>
-                    <a href="https://amazon.de/dp/B0F1YC3J79" target="_blank" class="btn-amazon">🛒 Bei Amazon kaufen</a>
-                </div>
             </div>
 
-            <!-- ENGLISCHE VERSION -->
+            <!-- Englische Version -->
             <div id="en-content" class="language-content hidden">
-                <div class="book-title">Volume 1: Behind Closed Doors</div>
                 <div class="chapter-title">Chapter 1: The Offer</div>
-                <div class="story-text">
-                    <p>The pigment crumbled under Elena's careful movements. Tiny particles of color, once bright red, now faded to a dull brown, trickled onto the white cloth she had spread beneath the painting. Over two hundred years ago, an artist had mixed this hue with mercuric sulfide and organic binders, unaware that his creation would one day lie beneath Elena's microscope and scalpel.</p>
+                <div class="chapter-content" id="en-textContent">
+                    <p>The pigment crumbled under Elena's careful movements. Tiny color particles, once bright red, now faded to a dull brown, trickled onto the white cloth she had spread beneath the painting. Over two hundred years ago, an artist had mixed this hue with mercury sulfide and organic binders, never knowing that his creation would one day lie under Elena's microscope and scalpel.</p>
 
-                    <p>"Centuries," she murmured, as she uncovered the next layer with practiced fingers. "And yet you tell me your secrets."</p>
+                    <p>"Centuries," she murmured as her practiced fingers exposed the next layer. "And yet you still reveal your secrets to me."</p>
 
-                    <p>Elena Winters worked in the spacious restoration studio of the Friedrich Museum in Berlin, surrounded by specialized instruments, chemicals, and reference works. The high windows let in steady northern light—the ideal light for her precise work. The late Baroque painting, a depiction of the goddess Diana hunting, had been her project for three weeks. It was a challenge, but that was precisely what made the work so satisfying.</p>
+                    <p>Elena Winters worked in the spacious restoration studio of the Friedrich Museum in Berlin, surrounded by specialized instruments, chemicals, and reference works. High windows let in steady northern light -- the ideal light for her precise work. The late Baroque painting, a depiction of the goddess Diana hunting, had been her project for three weeks. It was challenging, but that was exactly what made the work so satisfying for her.</p>
 
-                    <p>Elena's cell phone vibrated on the worktable. She ignored it. The area around Diana's right eye needed her full concentration -- too many layers of overpainted material, too much varnish, applied by well-meaning but ignorant restorers of past centuries. Her task was to penetrate through all these layers to the original without damaging it.</p>
+                    <p>Elena's phone vibrated on the work table. She ignored it. The area around Diana's right eye required her full concentration -- too many painted-over layers, too much varnish applied by well-meaning but inexperienced restorers of past centuries. Her task was to penetrate through all these layers to reach the original without damaging it.</p>
 
-                    <p>The phone vibrated again. Elena sighed, put down her scalpel, and removed her latex gloves. It was Director Schumann, as the display revealed. The museum director rarely called her directly; he usually communicated through his assistant or email.</p>
+                    <p>The phone vibrated again. Elena sighed, set aside her scalpel, and stripped off her latex gloves. It was Director Schumann, as the display revealed. The museum director rarely called her directly; normally he communicated through his assistant or email.</p>
 
-                    <p>"Winters," she answered tersely.</p>
+                    <p>"Winters," she answered curtly.</p>
 
-                    <p>"Elena, good to reach you." The director's voice sounded unusually enthusiastic. "Could you be in my office in half an hour? I have someone here who would like to meet you."</p>
+                    <p>"Elena, good that I reached you!" The director's voice sounded unusually enthusiastic. "Could you be in my office in half an hour? I have someone here who would like to meet you."</p>
 
                     <p>She looked at the half-restored painting. "I'm in the middle of working on the Diana, Mr. Director."</p>
 
@@ -446,51 +522,57 @@
 
                     <p>Elena suppressed a sigh. In her profession, she had learned that time was relative. For her, minutes sometimes meant the difference between preserved and destroyed history. For administrators like Schumann, appointments and networking conversations were more important.</p>
 
-                    <p>"All right, thirty minutes."</p>
+                    <p>"All right. Thirty minutes."</p>
 
-                    <p>She hung up and began methodically securing her workspace. The painting was carefully covered, instruments cleaned, and chemicals sealed. Elena removed her white lab coat and examined her reflection in the window pane. Her reddish-brown hair was bound in a strict bun, her clothing -- simple black pants and a gray silk blouse -- was practical and understated. The only extravagance she allowed herself was an antique silver filigree brooch -- an heirloom from her grandmother and a subtle nod to her connection with the past.</p>
+                    <p>She hung up and began methodically securing her workspace. The painting was carefully covered, the instruments cleaned, and the chemicals locked away. Elena removed her white lab coat and examined her reflection in the window pane. Her reddish-brown hair was bound in a strict knot, her clothing -- simple black pants and a gray silk blouse -- was practical and inconspicuous. The only extravagance she allowed herself was an antique brooch of silver filigree -- an heirloom from her grandmother and a subtle hint of her connection to the past.</p>
 
-                    <p>On her way to the director's office, Elena passed through the museum's public galleries. Tourists and art lovers strolled among the masterpieces, taking selfies in front of paintings or listening attentively to museum guides' explanations. All these people saw only the polished surface -- the completed restoration process, the refined presentation. The painstaking work that she and her colleagues performed behind the scenes remained invisible. That was exactly how Elena wanted it. She preferred working in the background, immersing herself in the intimacy of artworks, learning their secrets. She gladly left the spotlight moments to others.</p>
+                    <p>On her way to the director's office, Elena passed through the museum's public galleries. Tourists and art lovers strolled among the masterpieces, taking selfies in front of paintings or listening attentively to the explanations of museum guides. All these people saw only the polished surface -- the completed restoration process, the polished presentation. The painstaking work that she and her colleagues performed in secret remained invisible. That was exactly how Elena wanted it. She preferred working in the background, immersing herself in the intimacy of artworks, learning their secrets. She gladly left the spotlight moments to others.</p>
 
-                    <p>Schumann's office was located in the museum's historic wing, a high-ceilinged room paneled in dark wood with a view of the museum park. When Elena entered after a brief knock, the director hastily rose from his desk. "Ms. Winters! Come in, come in."</p>
+                    <p>Schumann's office was located in the historic wing of the museum, a high room paneled with dark wood overlooking the museum park. When Elena entered after a brief knock, the director hastily rose from his desk.</p>
 
-                    <p>Schumann was a corpulent man with thinning hair and a preference for expensive, tailored suits. Unlike the stereotypical absent-minded museum director, he was a sharp administrator and brilliant fundraiser -- qualities the museum desperately needed to survive in times of tight public budgets.</p>
+                    <p>"Mrs. Winters! Come in, come in!"</p>
 
-                    <p>A second man stood at the window, his back turned to her. He slowly turned around as Elena entered the room -- tall, slim, in a perfectly fitted dark gray suit that even put Schumann's wardrobe to shame. Elena estimated him to be in his mid to late thirties. His face was sharply cut, with high cheekbones and a straight nose that reminded her of classical sculptures. His hair, deep black and slightly grayed at the temples, was short and precisely cut. But it was his eyes that captured Elena's attention -- dark, penetrating, and with an intensity that involuntarily reminded her of portraits by old Renaissance masters.</p>
+                    <p>Schumann was a corpulent man with thinning hair and a preference for expensive, tailored suits. Unlike the clichéd absent-minded museum director, he was a sharp administrator and brilliant fundraiser -- qualities the museum desperately needed to survive in times of tight public coffers.</p>
 
-                    <p>"Ms. Winters," Schumann began, his voice a shade too enthusiastic, "may I introduce: Marcus Castellano."</p>
+                    <p>A second man stood at the window, his back to her. He turned slowly as Elena entered the room: tall, slender, in a perfectly fitting dark gray suit that even put Schumann's wardrobe in the shade. Elena estimated him to be in his mid to late thirties. His face was sharply cut, with high cheekbones and a straight nose reminiscent of classical sculptures. His hair, deep black and slightly grayed at the temples, was short and precisely cut. But it was his eyes that drew Elena's attention -- dark, penetrating, and with an intensity that involuntarily reminded her of portraits by old Renaissance masters.</p>
 
-                    <p>The man stepped forward and extended his hand to Elena. His handshake was firm and dry, his skin cool. "It is a pleasure to meet you, Ms. Winters," he said with a voice that sounded surprisingly warm, in contrast to his cool appearance. A slight accent could be heard -- Mediterranean, perhaps Italian or Spanish.</p>
+                    <p>"Mrs. Winters," Schumann began, his voice a shade too enthusiastic, "may I introduce: Marcus Castellano."</p>
+
+                    <p>The man stepped forward and extended his hand to Elena. His handshake was firm and dry, his skin cool.</p>
+
+                    <p>"It is a pleasure to meet you, Mrs. Winters," he said with a voice that sounded surprisingly warm, in contrast to his cool appearance. A slight accent was audible -- Mediterranean, perhaps Italian or Spanish.</p>
 
                     <p>"Mr. Castellano is the owner of the Castellano Private Museum," Schumann explained. "One of the most significant private art collections in Europe."</p>
 
-                    <p>Elena nodded briefly. The name Castellano was familiar to her, albeit only marginally. An old European family, art collectors for generations, their private museum legendary but notoriously difficult to access for the public.</p>
+                    <p>Elena nodded briefly. The Castellano name was familiar to her, though only marginally. An old European family, art collectors for generations, their private museum legendary but notoriously difficult for the public to access.</p>
 
-                    <p>"Please, let's sit," Schumann invited them, gesturing to the seating area in the corner of the office. Elena took a seat in one of the leather armchairs, Castellano across from her. Schumann positioned himself in a third chair, slightly apart, as if he wanted to deliberately observe the interaction between his guests.</p>
+                    <p>"Please, let's sit," Schumann invited her, gesturing to the seating area in the corner of the office. Elena took a seat on one of the leather chairs, Castellano across from her. Schumann positioned himself on a third chair, slightly apart, as if he wanted to deliberately observe the interaction between his guests.</p>
 
                     <p>"Mr. Castellano has a fascinating offer for you," the director began.</p>
 
-                    <p>Castellano leaned forward slightly. "I have followed your work on the collection of Flemish masters, Ms. Winters. Particularly your restoration of the lost details in Van Dyck's 'Lady with an Ermine' was remarkable."</p>
+                    <p>Castellano leaned forward slightly. "I have followed your work on the collection of Flemish masters, Mrs. Winters. Particularly your restoration of the lost details in Van Dyck's 'Lady with an Ermine' was remarkable."</p>
 
-                    <p>Elena raised an eyebrow in surprise. The Van Dyck restoration had been a complex project she had completed two years ago. It had attracted some attention in professional circles, but she wouldn't have expected someone outside those circles to have taken notice.</p>
+                    <p>Elena raised an eyebrow in surprise. The Van Dyck restoration had been a complex project that she had completed two years ago. It had attracted some attention in professional circles, but she wouldn't have expected anyone outside these circles to have taken notice.</p>
 
                     <p>"Thank you," she replied neutrally. "It was a challenging project."</p>
 
-                    <p>"It was not just challenging. You brought back something that was thought to be lost," Castellano said. His eyes rested steadily on her, as if searching for something in her face. "This ability to reveal hidden layers without destroying the essential -- that is a rare gift."</p>
+                    <p>"It wasn't just challenging. You brought back something that was thought to be lost," said Castellano. His eyes rested steadily on her, as if searching for something in her face. "This ability to reveal hidden layers without destroying what is essential -- that is a rare gift."</p>
 
-                    <p>Elena felt a slight discomfort. She wasn't used to being observed so directly, much less being praised so explicitly. Her work spoke for itself; she didn't need verbal accolades.</p>
+                    <p>Elena felt a slight unease. She wasn't used to being observed so directly, much less being praised so explicitly. Her work spoke for itself; she didn't need verbal laurels.</p>
 
                     <p>"What is this about, Mr. Castellano?"</p>
 
-                    <p>A fleeting smile crossed his face, as if he had expected exactly this direct reaction. "My private museum houses an extensive collection that has been in my family for generations," he began. "The building itself is a historic jewel -- an early 19th-century city palace with elements from various eras. In recent years, I have had it comprehensively renovated, but..." He paused briefly. "There are areas that require special expertise."</p>
+                    <p>A fleeting smile crossed his face, as if he had expected exactly this direct reaction.</p>
+
+                    <p>"My private museum houses an extensive collection that has been in my family for generations," he began. "The building itself is a historic jewel -- an early 19th-century city palace with elements from various eras. In recent years, I have had it comprehensively renovated, but there are areas that require special expertise."</p>
 
                     <p>"What kind of areas?" Elena asked.</p>
 
-                    <p>"Among other things, a fresco cycle from the late 18th century located in the main hall. It is in a worrying condition -- partially overpainted, partially damaged by previous improper restoration attempts."</p>
+                    <p>"Among other things, a fresco cycle from the late 18th century located in the main hall. It is in a worrying condition -- partially overpainted, partially damaged by earlier improper restoration attempts."</p>
 
-                    <p>Elena nodded slowly. Frescoes were a particular challenge -- the connection between pigment and plaster made them more susceptible to environmental influences than canvas paintings.</p>
+                    <p>Elena nodded slowly. Frescoes were a special challenge -- the connection of pigment and plaster made them more susceptible to environmental influences than canvas paintings.</p>
 
-                    <p>"Additionally," Castellano continued, "there is a collection of paintings and sculptures that also need attention. Some have never been properly restored, others have been treated by less talented hands than yours."</p>
+                    <p>"Furthermore," Castellano continued, "there is a collection of paintings and sculptures that also need attention. Some have never been properly restored, others have been treated by less talented hands than yours."</p>
 
                     <p>Schumann cleared his throat. "Mr. Castellano would like to engage you for an exclusive project, Elena. Three months at the Castellano Museum."</p>
 
@@ -498,71 +580,75 @@
 
                     <p>"The museum would grant you paid special leave," Schumann explained hastily. "Mr. Castellano has made an extremely generous offer to the institution in exchange for your services."</p>
 
-                    <p>She understood immediately. The museum needed money, and Castellano was willing to pay a lot. Schumann expected her to agree -- not as a request, but as a barely veiled instruction.</p>
+                    <p>She understood immediately. The museum needed money, and Castellano was willing to pay well. Schumann expected her to agree -- not as a request, but as a barely veiled instruction.</p>
 
                     <p>"I already have several projects in progress," she objected. "The Diana, the Titian cycle, preparation for the autumn exhibition."</p>
 
                     <p>"All of that can wait or be taken over by your colleagues," Schumann interrupted her with a false smile. "We shouldn't pass up this opportunity."</p>
 
-                    <p>Elena knew when a battle was lost. The director had already decided. She turned back to Castellano. "Where exactly is your museum located, Mr. Castellano?"</p>
+                    <p>Elena knew when a battle was lost. The director had already decided. She turned back to Castellano.</p>
 
-                    <p>"On the northern Italian coast, about an hour from Genoa," he replied. "A quiet location, ideal for concentrated work. You would live in the museum itself -- there is a guest wing with comfortable apartments for specialists like you."</p>
+                    <p>"Where exactly is your museum located, Mr. Castellano?"</p>
 
-                    <p>Living in the museum. Elena suppressed a frown. She valued the separation between her work and her private space. The idea of being surrounded by foreign artworks twenty-four hours a day was both tempting and disturbing.</p>
+                    <p>"On the coast of Northern Italy, about an hour from Genoa," he replied. "A quiet location, ideal for concentrated work. You would live in the museum itself -- there is a guest wing with comfortable apartments for specialists like you."</p>
 
-                    <p>"Why me?" she asked suddenly. "There are many qualified restorers, including those with more experience dealing with frescoes."</p>
+                    <p>Living in the museum. Elena suppressed a frown. She valued the separation between her work and her private space. The idea of being surrounded by foreign artworks twenty-four hours a day was both enticing and disturbing.</p>
 
-                    <p>Castellano regarded her with a look that was both penetrating and inscrutable. "As I said, Ms. Winters -- your ability to reveal the hidden without destroying it is rare. My collection... it requires a special approach."</p>
+                    <p>"Why me?" she asked bluntly. "There are many qualified restorers, including those with more experience dealing with frescoes."</p>
+
+                    <p>Castellano regarded her with a look that was both penetrating and inscrutable. "As I said, Mrs. Winters -- your ability to reveal the hidden without destroying it is rare. My collection... it requires a special approach."</p>
 
                     <p>Something in his tone made Elena prick up her ears. There was more than just professional interest. A personal note, almost an urgency that shimmered through his controlled facade.</p>
 
-                    <p>"I understand you need time to think," Castellano continued, pulling a slim leather folder from his briefcase. "Here are the project details, information about the museum and your accommodation. As well as the financial terms."</p>
+                    <p>"I understand that you need time to think," Castellano continued, pulling a slim leather folder from his briefcase. "Here are the details of the project, information about the museum and your accommodation. As well as the financial conditions."</p>
 
-                    <p>He handed her the folder. Elena took it and opened it briefly. Her gaze fell on the figure at the end of the contract draft -- a fee that almost took her breath away. It was more than she earned in an entire year at the museum.</p>
+                    <p>He handed her the folder. Elena took it and opened it briefly. Her gaze fell on the number at the end of the contract draft -- a fee that almost took her breath away. It was more than she earned in a whole year at the museum.</p>
 
-                    <p>"That's very generous," she said, trying to hide her surprise.</p>
+                    <p>"That is very generous," she said, trying to hide her surprise.</p>
 
-                    <p>"Art has its price, Ms. Winters. Expertise as well." Castellano stood up. "I'm staying in Berlin for two more days. I hope to hear from you by then."</p>
+                    <p>"Art has its price, Mrs. Winters. Expertise as well." Castellano stood up. "I'm staying in Berlin for two more days. I hope to hear from you by then."</p>
 
                     <p>Schumann also jumped up, eager as a schoolboy. "Of course she'll agree, won't you, Elena? Such an opportunity..."</p>
 
-                    <p>Elena stood more slowly, her thoughts already on the logistical challenges that a three-month stay abroad would bring. Her apartment, her commitments here, the ongoing projects.</p>
+                    <p>Elena stood up more slowly, her thoughts already on the logistical challenges that a three-month stay abroad would bring. Her apartment, her commitments here, the ongoing projects.</p>
 
                     <p>"I'll look at it and let you know as soon as possible," she said finally.</p>
 
-                    <p>Castellano nodded as if he had expected nothing else. "Excellent. Director Schumann has my contact details." He shook her hand once more. "I look forward to our collaboration, Ms. Winters."</p>
+                    <p>Castellano nodded as if he had expected nothing else. "Excellent. Director Schumann has my contact details." He extended his hand to her again. "I look forward to our collaboration, Mrs. Winters."</p>
 
                     <p>As his hand touched hers, Elena had a fleeting, irrational thought: This hand knew secrets -- secrets that were older and deeper than the artworks she was supposed to restore.</p>
 
-                    <p>Nonsense, she scolded herself. Too many hours under the microscope, too much solitude in the quiet studio.</p>
+                    <p>Nonsense, she scolded herself. Too many hours under the microscope, too much loneliness in the quiet studio.</p>
 
-                    <p>Castellano said goodbye with a slight bow and left the office, followed by an obsequious Schumann who wanted to escort him to the exit.</p>
+                    <p>Castellano said goodbye with a slight bow and left the office, followed by an obsequious Schumann who wanted to accompany him to the exit.</p>
 
                     <p>Elena remained alone, the leather folder in her hand. She went to the window and looked out at the museum park, where the first leaves of autumn were beginning to fall. Three months in Italy, in a private museum, surrounded by unknown artworks.</p>
 
-                    <p>The professional curiosity in her was aroused, despite her reservations. New challenges, undiscovered masterpieces, the opportunity to work with techniques she had only known theoretically -- all of that was tempting. On the other hand, there was something about Marcus Castellano that she couldn't categorize. An intensity that went beyond the usual interest of a collector. As if he wasn't just seeking her professional skills, but something else, something more personal.</p>
+                    <p>The professional curiosity in her was aroused, despite her reservations. New challenges, undiscovered masterpieces, the possibility of working with techniques she had only known theoretically -- all of that was tempting. On the other hand, there was something about Marcus Castellano that she couldn't categorize. An intensity that went beyond the usual interest of a collector. As if he was seeking not only her professional skills, but something else, something more personal.</p>
 
-                    <p>She opened the folder again and leafed through the documents. Glossy photos showed an impressive building, half palace, half fortress, on a cliff overlooking the Mediterranean. More images showed interior rooms -- high ceilings, artfully decorated walls, imposing staircases and galleries full of art treasures. And then the fresco Castellano had spoken of -- a mythological scene, partially faded, partially obviously damaged, but even in this condition of breathtaking beauty and complexity.</p>
+                    <p>She opened the folder again and leafed through the documents. Glossy photos showed an impressive building, half palace, half fortress, on a cliff overlooking the Mediterranean. More pictures showed interior rooms -- high ceilings, artfully decorated walls, imposing staircases and galleries full of art treasures. And then the fresco Castellano had spoken about -- a mythological scene, partially faded, partially obviously damaged, but even in this condition of breathtaking beauty and complexity.</p>
 
-                    <p>A smaller photo fell out from between the pages. Elena picked it up and examined it with a frown. It showed a cordoned-off area of the museum -- a corridor with a heavy, locked door at the end. The door was decorated with elaborate carvings, motifs she couldn't immediately identify. Why was a photo of a locked door in the folder?</p>
+                    <p>A smaller photo fell out from between the pages. Elena picked it up and examined it with a frown. It showed a cordoned-off area of the museum -- a corridor with a heavy, locked door at the end. The door was decorated with elaborate carvings, motifs that she couldn't immediately identify. Why was a photo of a locked door in the folder?</p>
 
                     <p>"An impressive offer, isn't it?"</p>
 
-                    <p>Elena startled. Schumann had returned and now stood in the doorway.</p>
+                    <p>Elena started. Schumann had returned and now stood in the doorframe.</p>
 
-                    <p>"Yes, it is," she replied, quickly putting the photo back among the other documents.</p>
+                    <p>"Yes, it is," she replied, quickly tucking the photo back among the other documents.</p>
 
                     <p>"You will of course accept." It wasn't a question.</p>
 
-                    <p>"I need to think about it, Mr. Director. There are many factors to consider."</p>
+                    <p>"I still need to think about it, Mr. Director. There are many factors to consider."</p>
 
-                    <p>Schumann stepped closer, his jovial manner from the meeting had given way to a more serious expression. "Elena, let me be frank. The museum's financial situation is tight. Castellano's offer -- the donation he's making for your services -- would help us bridge the next two quarters."</p>
+                    <p>Schumann stepped closer, his jovial manner from the meeting had given way to a more serious expression. "Elena, let me be frank. The museum's financial situation is tight. Castellano's offer -- the donation he makes for your services -- would help us bridge the next two quarters."</p>
 
-                    <p>Elena sighed inwardly. There it was: institutional pressure. "And if I refuse?"</p>
+                    <p>Elena sighed inwardly. There it was: institutional pressure.</p>
 
-                    <p>"Then we would have to consider budget cuts. Possibly in your department as well." His voice was gentle, but the threat unmistakable.</p>
+                    <p>"And if I refuse?"</p>
 
-                    <p>Elena nodded slowly. She wasn't a politician, not a fighter in the museum's administrative battles. Her world was colors and forms, chemical reactions and historical techniques -- not budgets and negotiations.</p>
+                    <p>"Then we would have to think about budget cuts. Possibly in your department too." His voice was gentle, but the threat unmistakable.</p>
+
+                    <p>Elena nodded slowly. She wasn't a politician, not a fighter in the administrative battles of the museum. Her world was colors and forms, chemical reactions and historical techniques -- not budgets and negotiations.</p>
 
                     <p>"I understand," she said curtly.</p>
 
@@ -570,7 +656,7 @@
 
                     <p>He left the office without waiting for her answer.</p>
 
-                    <p>Elena gathered the documents and slowly walked the long corridor back to her studio. Along the way, she opened the folder again and pulled out the photo with the locked door. Why was it here? An oversight or a message?</p>
+                    <p>Elena gathered the documents together and slowly walked the long corridor back to her studio. On the way, she opened the folder again and pulled out the photo with the locked door. Why was it here? An oversight or a message?</p>
 
                     <p>She shook her head at her own thoughts. Too many old novels read, too many stories about mysterious art collectors heard. This was a professional offer, nothing more.</p>
 
@@ -580,164 +666,165 @@
 
                     <p>"What would you do?" she murmured as she put her gloves back on. The goddess of the hunt remained silent, her eyes half-hidden under layers of foreign brushstrokes.</p>
 
-                    <p>Elena picked up her scalpel again and began carefully working around the goddess's eye. Layer by layer she revealed, uncovering the original beneath. As she always did -- methodically, patiently, controlled.</p>
+                    <p>Elena picked up her scalpel again and began carefully working around the goddess's eye. Layer by layer she exposed, revealing the original beneath. As she always did -- methodically, patiently, controlled.</p>
 
-                    <p>But her thoughts were already elsewhere. At a museum on an Italian cliff. At an enigmatic art collector with penetrating eyes. And at a locked door that seemed to be waiting for something that had long been forgotten.</p>
+                    <p>But her thoughts were already elsewhere. At a museum on an Italian cliff. With an enigmatic art collector with penetrating eyes. And at a locked door that seemed to be waiting for something that had long been forgotten.</p>
 
                     <p>When she left her studio that evening, she had already made her decision. She took out her phone and dialed the number Castellano had left her.</p>
 
                     <p>"Mr. Castellano," she said when he answered. "This is Elena Winters. I accept your offer."</p>
 
-                    <p>A brief pause followed. "I'm pleased to hear that, Ms. Winters." His voice sounded warm but not surprised, as if he had already expected her decision. "I'll have everything prepared for your arrival."</p>
+                    <p>A brief pause followed. "I'm pleased to hear that, Mrs. Winters." His voice sounded warm, but not surprised, as if he had already expected her decision. "I'll have everything prepared for your arrival."</p>
 
                     <p>"However, I have some conditions," Elena added. Her decision might have been made under pressure, but she would at least set her own rules.</p>
 
                     <p>"Of course. I'm listening."</p>
 
-                    <p>"I need complete autonomy in my work. No interference with my methods or schedule."</p>
+                    <p>"I need complete autonomy in my work. No interference with my methods or my schedule."</p>
 
-                    <p>"Naturally."</p>
+                    <p>"Of course."</p>
 
-                    <p>"Second, I want comprehensive access to all information about the works to be restored -- provenance, previous owners, earlier restoration attempts, everything."</p>
+                    <p>"Second, I want comprehensive access to all information about the works to be restored -- origin, previous owners, earlier restoration attempts, everything."</p>
 
-                    <p>A tiny pause occurred, barely perceptible, but Elena noticed it nonetheless. "That will be arranged," Castellano said finally.</p>
+                    <p>A tiny pause arose, barely perceptible, but Elena noticed it nonetheless. "That will be arranged," Castellano said finally.</p>
 
-                    <p>"And third, I reserve the right to end the project at any time if I find that the work doesn't meet my ethical or professional standards."</p>
+                    <p>"And third, I reserve the right to terminate the project at any time if I find that the work does not meet my ethical or professional standards."</p>
 
-                    <p>This time the pause was longer. "An interesting condition, Ms. Winters. May I ask what concerns you have?"</p>
+                    <p>This time the pause was longer. "An interesting condition, Mrs. Winters. May I ask what concerns you have?"</p>
 
                     <p>Elena considered briefly. She didn't want to appear rude, but something about the whole situation made her cautious. "No specific concerns. Just professional care. I prefer clear agreements from the beginning."</p>
 
                     <p>"I respect that. Your conditions are accepted."</p>
 
-                    <p>They discussed the practical details -- travel dates, necessary equipment, insurance matters. Elena noted everything in her precise, methodical style.</p>
+                    <p>They discussed the practical details -- travel dates, necessary equipment, insurance questions. Elena noted everything in her precise, methodical style.</p>
 
                     <p>"I expect you then in a week," Castellano concluded. "My assistant will send you the travel documents."</p>
 
                     <p>"Until then, Mr. Castellano."</p>
 
-                    <p>"See you soon, Ms. Winters. And prepare yourself. My collection will surprise you."</p>
+                    <p>"See you soon, Mrs. Winters. And prepare yourself -- my collection will surprise you."</p>
 
                     <p>The connection was severed, and Elena was left with the strange feeling that she had just signed a contract whose fine print she didn't yet know.</p>
                 </div>
-
-                <div class="amazon-section">
-                    <h3>📖 Read the complete book</h3>
-                    <p>Discover the full story of Elena and Marcus</p>
-                    <a href="https://amazon.de/dp/B0F311L2ZQ" target="_blank" class="btn-amazon">🛒 Buy on Amazon</a>
-                </div>
             </div>
 
-            <!-- SPANISCHE VERSION -->
+            <!-- Spanische Version -->
             <div id="es-content" class="language-content hidden">
-                <div class="book-title">Volumen 1: Tras Puertas Cerradas</div>
                 <div class="chapter-title">Capítulo 1: La Oferta</div>
-                <div class="story-text">
-                    <p>El pigmento se desmoronó bajo los cuidadosos movimientos de Elena. Diminutas partículas de color, antes rojo brillante, ahora desvanecidas en un marrón apagado, se deslizaron sobre la tela blanca que había extendido debajo de la pintura. Hacía más de doscientos años, un artista había mezclado este tono con sulfuro de mercurio y aglutinantes orgánicos, sin saber que su creación algún día yacería bajo el microscopio y el bisturí de Elena.</p>
+                <div class="chapter-content" id="es-textContent">
+                    <p>El pigmento se desmoronaba bajo los movimientos cuidadosos de Elena. Pequeñas partículas de color, una vez rojo brillante, ahora desvanecidas a un marrón opaco, goteaban sobre el paño blanco que había extendido debajo de la pintura. Hace más de doscientos años, un artista había mezclado este tono con sulfuro de mercurio y aglutinantes orgánicos, sin saber que su creación algún día estaría bajo el microscopio y el escalpelo de Elena.</p>
 
-                    <p>«Siglos», murmuró, mientras descubría la siguiente capa con dedos expertos. «Y aun así me revelas tus secretos».</p>
+                    <p>"Siglos", murmuró mientras sus dedos experimentados exponían la siguiente capa. "Y aún así me revelas tus secretos."</p>
 
-                    <p>Elena Winters trabajaba en el espacioso estudio de restauración del Museo Friedrich de Berlín, rodeada de instrumentos especializados, productos químicos y obras de referencia. Los altos ventanales dejaban entrar una luz constante del norte, la luz ideal para su preciso trabajo. La pintura del Barroco tardío, una representación de la diosa Diana cazando, había sido su proyecto durante tres semanas. Era un desafío, pero eso era precisamente lo que hacía que el trabajo fuera tan satisfactorio.</p>
+                    <p>Elena Winters trabajaba en el espacioso estudio de restauración del Museo Friedrich en Berlín, rodeada de instrumentos especializados, químicos y obras de referencia. Las ventanas altas dejaban entrar una luz norteña constante -- la luz ideal para su trabajo preciso. La pintura barroca tardía, una representación de la diosa Diana cazando, había sido su proyecto durante tres semanas. Era desafiante, pero eso era exactamente lo que hacía el trabajo tan satisfactorio para ella.</p>
 
-                    <p>El móvil de Elena vibró sobre la mesa de trabajo. Lo ignoró. La zona alrededor del ojo derecho de Diana requería toda su concentración: demasiadas capas de pintura, demasiado barniz, aplicado por restauradores bienintencionados pero ignorantes de siglos pasados. Su tarea consistía en penetrar a través de todas esas capas hasta llegar al original sin dañarlo.</p>
+                    <p>El teléfono de Elena vibró sobre la mesa de trabajo. Lo ignoró. El área alrededor del ojo derecho de Diana requería toda su concentración -- demasiadas capas sobrepintadas, demasiado barniz aplicado por restauradores bien intencionados pero inexpertos de siglos pasados. Su tarea era penetrar a través de todas estas capas para llegar al original sin dañarlo.</p>
 
-                    <p>El teléfono volvió a vibrar. Elena suspiró, dejó el bisturí y se quitó los guantes de látex. Era el director Schumann, como revelaba la pantalla. El director del museo rara vez la llamaba directamente; solía comunicarse a través de su asistente o por correo electrónico.</p>
+                    <p>El teléfono vibró de nuevo. Elena suspiró, dejó a un lado su escalpelo y se quitó los guantes de látex. Era el Director Schumann, como revelaba la pantalla. El director del museo rara vez la llamaba directamente; normalmente se comunicaba a través de su asistente o por correo electrónico.</p>
 
-                    <p>"Winters", respondió secamente.</p>
+                    <p>"Winters", respondió brevemente.</p>
 
-                    <p>"Elena, me alegro de contactarla". La voz del director sonaba inusualmente entusiasta. "¿Podría estar en mi oficina en media hora? Tengo a alguien aquí que quiere conocerla".</p>
+                    <p>"¡Elena, qué bueno que te alcancé!" La voz del director sonaba inusualmente entusiasta. "¿Podrías estar en mi oficina en media hora? Tengo a alguien aquí que le gustaría conocerte."</p>
 
-                    <p>Miró la pintura a medio restaurar. "Estoy trabajando en la Diana, señor director".</p>
+                    <p>Miró la pintura medio restaurada. "Estoy en medio del trabajo en la Diana, Sr. Director."</p>
 
                     <p>"Eso puede esperar. Esta oportunidad no."</p>
 
-                    <p>Elena reprimió un suspiro. En su profesión, había aprendido que el tiempo era relativo. Para ella, los minutos a veces marcaban la diferencia entre la historia preservada y la destruida. Para administradores como Schumann, las citas y las conversaciones para establecer contactos eran más importantes.</p>
+                    <p>Elena reprimió un suspiro. En su profesión, había aprendido que el tiempo era relativo. Para ella, los minutos a veces significaban la diferencia entre la historia preservada y destruida. Para los administradores como Schumann, las citas y las conversaciones de networking eran más importantes.</p>
 
-                    <p>"Muy bien, treinta minutos".</p>
+                    <p>"Está bien. Treinta minutos."</p>
 
-                    <p>Colgó y comenzó a asegurar metódicamente su espacio de trabajo. La pintura fue cuidadosamente cubierta, los instrumentos limpiados y los químicos sellados. Elena se quitó su bata blanca de laboratorio y examinó su reflejo en el cristal de la ventana. Su cabello castaño rojizo estaba recogido en un moño estricto, su ropa -- pantalones negros simples y una blusa de seda gris -- era práctica y discreta. La única extravagancia que se permitía era un broche antiguo de filigrana de plata -- una reliquia de su abuela y un guiño sutil a su conexión con el pasado.</p>
+                    <p>Colgó y comenzó metódicamente a asegurar su espacio de trabajo. La pintura fue cuidadosamente cubierta, los instrumentos limpiados y los químicos guardados bajo llave. Elena se quitó su bata blanca de laboratorio y examinó su reflejo en el cristal de la ventana. Su cabello castaño rojizo estaba atado en un moño estricto, su ropa -- pantalones negros simples y una blusa de seda gris -- era práctica y discreta. La única extravagancia que se permitía era un broche antiguo de filigrana de plata -- una reliquia de su abuela y una pista sutil de su conexión con el pasado.</p>
 
-                    <p>De camino a la oficina del director, Elena pasó por las galerías públicas del museo. Turistas y amantes del arte paseaban entre las obras maestras, tomándose selfies frente a pinturas o escuchando atentamente las explicaciones de los guías del museo. Todas estas personas veían solo la superficie pulida -- el proceso de restauración completado, la presentación refinada. El trabajo meticuloso que ella y sus colegas realizaban tras bambalinas permanecía invisible. Así era exactamente como Elena lo quería. Prefería trabajar en segundo plano, sumergiéndose en la intimidad de las obras de arte, aprendiendo sus secretos. Gustosamente dejaba los momentos de protagonismo a otros.</p>
+                    <p>En su camino a la oficina del director, Elena pasó por las galerías públicas del museo. Turistas y amantes del arte paseaban entre las obras maestras, tomándose selfies frente a las pinturas o escuchando atentamente las explicaciones de los guías del museo. Todas estas personas veían solo la superficie pulida -- el proceso de restauración completado, la presentación pulida. El trabajo minucioso que ella y sus colegas realizaban en secreto permanecía invisible. Así era exactamente como Elena lo quería. Prefería trabajar en segundo plano, sumergiéndose en la intimidad de las obras de arte, aprendiendo sus secretos. Dejaba gustosamente los momentos de protagonismo a otros.</p>
 
-                    <p>La oficina de Schumann estaba ubicada en el ala histórica del museo, una sala de techos altos con paneles de madera oscura y vista al parque del museo. Cuando Elena entró después de un breve golpe, el director se levantó apresuradamente de su escritorio. "¡Señora Winters! Entre, entre".</p>
+                    <p>La oficina de Schumann estaba ubicada en el ala histórica del museo, una habitación alta con paneles de madera oscura con vista al parque del museo. Cuando Elena entró después de llamar brevemente, el director se levantó apresuradamente de su escritorio.</p>
 
-                    <p>Schumann era un hombre corpulento con cabello ralo y predilección por trajes caros hechos a medida. A diferencia del estereotipo del director de museo distraído, era un administrador perspicaz y brillante recaudador de fondos -- cualidades que el museo necesitaba desesperadamente para sobrevivir en tiempos de presupuestos públicos ajustados.</p>
+                    <p>"¡Sra. Winters! ¡Entre, entre!"</p>
 
-                    <p>Un segundo hombre estaba junto a la ventana, de espaldas a ella. Se volvió lentamente cuando Elena entró en la habitación -- alto, delgado, con un traje gris oscuro perfectamente ajustado que incluso opacaba el guardarropa de Schumann. Elena calculó que tendría entre treinta y cinco y cuarenta años. Su rostro tenía rasgos marcados, con pómulos altos y una nariz recta que le recordaba a las esculturas clásicas. Su cabello, negro profundo y ligeramente encanecido en las sienes, era corto y precisamente cortado. Pero fueron sus ojos los que capturaron la atención de Elena -- oscuros, penetrantes, y con una intensidad que involuntariamente le recordó a los retratos de los viejos maestros del Renacimiento.</p>
+                    <p>Schumann era un hombre corpulento con cabello ralo y una preferencia por trajes caros y hechos a medida. A diferencia del cliché del director de museo distraído, era un administrador agudo y un brillante recaudador de fondos -- cualidades que el museo necesitaba desesperadamente para sobrevivir en tiempos de arcas públicas ajustadas.</p>
 
-                    <p>"Señora Winters", comenzó Schumann, su voz un tono demasiado entusiasta, "permítame presentarle: Marcus Castellano".</p>
+                    <p>Un segundo hombre estaba parado en la ventana, de espaldas a ella. Se volvió lentamente cuando Elena entró en la habitación: alto, delgado, en un traje gris oscuro perfectamente ajustado que incluso opacaba el guardarropa de Schumann. Elena calculó que tenía entre treinta y cinco y cuarenta años. Su rostro estaba cortado de manera marcada, con pómulos altos y una nariz recta que recordaba a las esculturas clásicas. Su cabello, negro profundo y ligeramente gris en las sienes, era corto y cortado con precisión. Pero fueron sus ojos los que atrajeron la atención de Elena -- oscuros, penetrantes y con una intensidad que involuntariamente le recordó los retratos de los viejos maestros del Renacimiento.</p>
 
-                    <p>El hombre se acercó y extendió su mano hacia Elena. Su apretón era firme y seco, su piel fría. "Es un placer conocerla, señora Winters", dijo con una voz que sonaba sorprendentemente cálida, en contraste con su apariencia fría. Se podía escuchar un ligero acento -- mediterráneo, quizás italiano o español.</p>
+                    <p>"Sra. Winters", comenzó Schumann, su voz un tono demasiado entusiasta, "permítame presentar: Marcus Castellano."</p>
 
-                    <p>"El señor Castellano es el propietario del Museo Privado Castellano", explicó Schumann. "Una de las colecciones de arte privadas más significativas de Europa".</p>
+                    <p>El hombre se acercó y extendió su mano a Elena. Su apretón de manos era firme y seco, su piel fría.</p>
 
-                    <p>Elena asintió brevemente. El nombre Castellano le era familiar, aunque solo marginalmente. Una familia europea antigua, coleccionistas de arte por generaciones, su museo privado legendario pero notoriamente difícil de acceder para el público.</p>
+                    <p>"Es un placer conocerla, Sra. Winters", dijo con una voz que sonaba sorprendentemente cálida, en contraste con su apariencia fría. Se podía escuchar un ligero acento -- mediterráneo, tal vez italiano o español.</p>
 
-                    <p>"Por favor, sentémonos", los invitó Schumann, señalando el área de asientos en la esquina de la oficina. Elena tomó asiento en uno de los sillones de cuero, Castellano frente a ella. Schumann se posicionó en una tercera silla, ligeramente apartado, como si quisiera observar deliberadamente la interacción entre sus invitados.</p>
+                    <p>"El Sr. Castellano es el propietario del Museo Privado Castellano", explicó Schumann. "Una de las colecciones de arte privadas más significativas de Europa."</p>
 
-                    <p>"El señor Castellano tiene una oferta fascinante para usted", comenzó el director.</p>
+                    <p>Elena asintió brevemente. El nombre Castellano le era familiar, aunque solo marginalmente. Una familia europea antigua, coleccionistas de arte durante generaciones, su museo privado legendario pero notoriamente difícil de acceder para el público.</p>
 
-                    <p>Castellano se inclinó ligeramente hacia adelante. "He seguido su trabajo en la colección de maestros flamencos, señora Winters. Particularmente su restauración de los detalles perdidos en la 'Dama con Armiño' de Van Dyck fue notable".</p>
+                    <p>"Por favor, sentémonos", los invitó Schumann, señalando el área de asientos en la esquina de la oficina. Elena tomó asiento en una de las sillas de cuero, Castellano frente a ella. Schumann se posicionó en una tercera silla, ligeramente apartado, como si quisiera observar deliberadamente la interacción entre sus invitados.</p>
 
-                    <p>Elena levantó una ceja con sorpresa. La restauración de Van Dyck había sido un proyecto complejo que había completado hace dos años. Había atraído cierta atención en círculos profesionales, pero no habría esperado que alguien fuera de esos círculos lo hubiera notado.</p>
+                    <p>"El Sr. Castellano tiene una oferta fascinante para usted", comenzó el director.</p>
 
-                    <p>"Gracias", respondió neutralmente. "Fue un proyecto desafiante".</p>
+                    <p>Castellano se inclinó ligeramente hacia adelante. "He seguido su trabajo en la colección de maestros flamencos, Sra. Winters. Particularmente su restauración de los detalles perdidos en 'Dama con armiño' de Van Dyck fue notable."</p>
 
-                    <p>"No solo fue desafiante. Usted recuperó algo que se creía perdido", dijo Castellano. Sus ojos se mantuvieron fijos en ella, como si buscara algo en su rostro. "Esta habilidad de revelar capas ocultas sin destruir lo esencial -- eso es un don raro".</p>
+                    <p>Elena levantó una ceja con sorpresa. La restauración de Van Dyck había sido un proyecto complejo que había completado hace dos años. Había atraído cierta atención en círculos profesionales, pero no habría esperado que alguien fuera de estos círculos hubiera tomado nota.</p>
 
-                    <p>Elena sintió una ligera incomodidad. No estaba acostumbrada a ser observada tan directamente, mucho menos a ser elogiada tan explícitamente. Su trabajo hablaba por sí mismo; no necesitaba reconocimientos verbales.</p>
+                    <p>"Gracias", respondió neutralmente. "Fue un proyecto desafiante."</p>
 
-                    <p>"¿De qué se trata esto, señor Castellano?"</p>
+                    <p>"No solo fue desafiante. Usted devolvió algo que se pensaba que estaba perdido", dijo Castellano. Sus ojos permanecían fijos en ella, como si buscara algo en su rostro. "Esta habilidad para revelar capas ocultas sin destruir lo esencial -- eso es un don raro."</p>
 
-                    <p>Una sonrisa fugaz cruzó su rostro, como si hubiera esperado exactamente esta reacción directa. "Mi museo privado alberga una extensa colección que ha estado en mi familia por generaciones", comenzó. "El edificio en sí es una joya histórica -- un palacio urbano de principios del siglo XIX con elementos de varias épocas. En los últimos años lo he renovado exhaustivamente, pero..." Hizo una breve pausa. "Hay áreas que requieren experiencia especializada".</p>
+                    <p>Elena sintió una ligera inquietud. No estaba acostumbrada a ser observada tan directamente, mucho menos a ser elogiada tan explícitamente. Su trabajo hablaba por sí mismo; no necesitaba laureles verbales.</p>
+
+                    <p>"¿De qué se trata, Sr. Castellano?"</p>
+
+                    <p>Una sonrisa fugaz cruzó su rostro, como si hubiera esperado exactamente esta reacción directa.</p>
+
+                    <p>"Mi museo privado alberga una extensa colección que ha estado en mi familia durante generaciones", comenzó. "El edificio en sí es una joya histórica -- un palacio urbano de principios del siglo XIX con elementos de varias épocas. En los últimos años, lo he hecho renovar de manera integral, pero hay áreas que requieren experiencia especial."</p>
 
                     <p>"¿Qué tipo de áreas?", preguntó Elena.</p>
 
-                    <p>"Entre otras cosas, un ciclo de frescos del siglo XVIII tardío ubicado en el salón principal. Está en condiciones preocupantes -- parcialmente repintado, parcialmente dañado por intentos de restauración previos inadecuados".</p>
+                    <p>"Entre otras cosas, un ciclo de frescos del siglo XVIII tardío ubicado en el salón principal. Está en una condición preocupante -- parcialmente sobrepintado, parcialmente dañado por intentos de restauración anteriores inadecuados."</p>
 
-                    <p>Elena asintió lentamente. Los frescos eran un desafío particular -- la conexión entre pigmento y yeso los hacía más susceptibles a las influencias ambientales que las pinturas sobre lienzo.</p>
+                    <p>Elena asintió lentamente. Los frescos eran un desafío especial -- la conexión del pigmento y el yeso los hacía más susceptibles a las influencias ambientales que las pinturas sobre lienzo.</p>
 
-                    <p>"Además", continuó Castellano, "hay una colección de pinturas y esculturas que también necesitan atención. Algunas nunca han sido restauradas adecuadamente, otras han sido tratadas por manos menos talentosas que las suyas".</p>
+                    <p>"Además", continuó Castellano, "hay una colección de pinturas y esculturas que también necesitan atención. Algunas nunca han sido restauradas adecuadamente, otras han sido tratadas por manos menos talentosas que las suyas."</p>
 
-                    <p>Schumann se aclaró la garganta. "El señor Castellano quisiera contratarla para un proyecto exclusivo, Elena. Tres meses en el Museo Castellano".</p>
+                    <p>Schumann se aclaró la garganta. "El Sr. Castellano quisiera contratarla para un proyecto exclusivo, Elena. Tres meses en el Museo Castellano."</p>
 
-                    <p>Elena frunció el ceño. "¿Tres meses? Es mucho tiempo estar lejos de aquí".</p>
+                    <p>Elena frunció el ceño. "¿Tres meses? Eso es mucho tiempo para estar lejos de aquí."</p>
 
-                    <p>"El museo le otorgaría una licencia especial pagada", explicó Schumann apresuradamente. "El señor Castellano ha hecho una oferta extremadamente generosa a la institución a cambio de sus servicios".</p>
+                    <p>"El museo le concedería una licencia especial pagada", explicó Schumann apresuradamente. "El Sr. Castellano ha hecho una oferta extremadamente generosa a la institución a cambio de sus servicios."</p>
 
-                    <p>Ella entendió inmediatamente. El museo necesitaba dinero, y Castellano estaba dispuesto a pagar mucho. Schumann esperaba que ella aceptara -- no como una petición, sino como una instrucción apenas velada.</p>
+                    <p>Entendió inmediatamente. El museo necesitaba dinero, y Castellano estaba dispuesto a pagar bien. Schumann esperaba que ella aceptara -- no como una petición, sino como una instrucción apenas velada.</p>
 
-                    <p>"Ya tengo varios proyectos en progreso", objetó. "La Diana, el ciclo de Tiziano, la preparación para la exposición de otoño".</p>
+                    <p>"Ya tengo varios proyectos en progreso", objetó. "La Diana, el ciclo de Tiziano, la preparación para la exposición de otoño."</p>
 
-                    <p>"Todo eso puede esperar o ser asumido por sus colegas", la interrumpió Schumann con una sonrisa falsa. "No deberíamos dejar pasar esta oportunidad".</p>
+                    <p>"Todo eso puede esperar o ser tomado por sus colegas", la interrumpió Schumann con una sonrisa falsa. "No deberíamos desaprovechar esta oportunidad."</p>
 
-                    <p>Elena sabía cuándo una batalla estaba perdida. El director ya había decidido. Se volvió hacia Castellano. "¿Dónde está ubicado exactamente su museo, señor Castellano?"</p>
+                    <p>Elena sabía cuándo una batalla estaba perdida. El director ya había decidido. Se volvió hacia Castellano.</p>
 
-                    <p>"En la costa del norte de Italia, aproximadamente a una hora de Génova", respondió. "Una ubicación tranquila, ideal para trabajo concentrado. Viviría en el museo mismo -- hay un ala de huéspedes con apartamentos cómodos para especialistas como usted".</p>
+                    <p>"¿Dónde está ubicado exactamente su museo, Sr. Castellano?"</p>
 
-                    <p>Vivir en el museo. Elena reprimió un gesto de preocupación. Valoraba la separación entre su trabajo y su espacio privado. La idea de estar rodeada de obras de arte extrañas las veinticuatro horas del día era tanto tentadora como perturbadora.</p>
+                    <p>"En la costa del norte de Italia, aproximadamente a una hora de Génova", respondió. "Una ubicación tranquila, ideal para el trabajo concentrado. Viviría en el museo mismo -- hay un ala de huéspedes con apartamentos cómodos para especialistas como usted."</p>
 
-                    <p>"¿Por qué yo?", preguntó súbitamente. "Hay muchos restauradores calificados, incluyendo aquellos con más experiencia tratando frescos".</p>
+                    <p>Vivir en el museo. Elena reprimió una mueca. Valoraba la separación entre su trabajo y su espacio privado. La idea de estar rodeada de obras de arte extrañas las veinticuatro horas del día era a la vez tentadora y perturbadora.</p>
 
-                    <p>Castellano la observó con una mirada que era tanto penetrante como inescrutable. "Como dije, señora Winters -- su habilidad para revelar lo oculto sin destruirlo es rara. Mi colección... requiere un enfoque especial".</p>
+                    <p>"¿Por qué yo?", preguntó directamente. "Hay muchos restauradores calificados, incluidos aquellos con más experiencia tratando con frescos."</p>
 
-                    <p>Algo en su tono hizo que Elena aguzara el oído. Había más que solo interés profesional. Una nota personal, casi una urgencia que se filtraba a través de su fachada controlada.</p>
+                    <p>Castellano la observó con una mirada que era a la vez penetrante e inescrutable. "Como dije, Sra. Winters -- su habilidad para revelar lo oculto sin destruirlo es rara. Mi colección... requiere un enfoque especial."</p>
 
-                    <p>"Entiendo que necesita tiempo para pensar", continuó Castellano, sacando una carpeta de cuero delgada de su maletín. "Aquí están los detalles del proyecto, información sobre el museo y su alojamiento. Así como los términos financieros".</p>
+                    <p>Algo en su tono hizo que Elena aguzara los oídos. Había más que solo interés profesional. Una nota personal, casi una urgencia que brillaba a través de su fachada controlada.</p>
 
-                    <p>Le entregó la carpeta. Elena la tomó y la abrió brevemente. Su mirada se posó en la cifra al final del borrador del contrato -- un honorario que casi le quitó el aliento. Era más de lo que ganaba en un año entero en el museo.</p>
+                    <p>"Entiendo que necesita tiempo para pensar", continuó Castellano, sacando una carpeta de cuero delgada de su maletín. "Aquí están los detalles del proyecto, información sobre el museo y su alojamiento. Así como las condiciones financieras."</p>
+
+                    <p>Le entregó la carpeta. Elena la tomó y la abrió brevemente. Su mirada cayó sobre el número al final del borrador del contrato -- un honorario que casi le quitó el aliento. Era más de lo que ganaba en un año completo en el museo.</p>
 
                     <p>"Eso es muy generoso", dijo, tratando de ocultar su sorpresa.</p>
 
-                    <p>"El arte tiene su precio, señora Winters. La experiencia también". Castellano se levantó. "Me quedo en Berlín dos días más. Espero saber de usted para entonces".</p>
+                    <p>"El arte tiene su precio, Sra. Winters. La experiencia también." Castellano se levantó. "Me quedo en Berlín dos días más. Espero tener noticias suyas para entonces."</p>
 
-                    <p>Schumann también se levantó de un salto, ansioso como un colegial. "Por supuesto que aceptará, ¿verdad, Elena? Una oportunidad así..."</p>
+                    <p>Schumann también saltó, ansioso como un colegial. "Por supuesto que aceptará, ¿verdad, Elena? Una oportunidad así..."</p>
 
-                    <p>Elena se levantó más lentamente, sus pensamientos ya en los desafíos logísticos que una estancia de tres meses en el extranjero traería. Su apartamento, sus compromisos aquí, los proyectos en curso.</p>
+                    <p>Elena se levantó más lentamente, sus pensamientos ya en los desafíos logísticos que traería una estancia de tres meses en el extranjero. Su apartamento, sus compromisos aquí, los proyectos en curso.</p>
 
-                    <p>"Lo examinaré y le haré saber tan pronto como sea posible", dijo finalmente.</p>
+                    <p>"Lo revisaré y le haré saber tan pronto como sea posible", dijo finalmente.</p>
 
-                    <p>Castellano asintió como si no hubiera esperado otra cosa. "Excelente. El director Schumann tiene mis datos de contacto". Le estrechó la mano una vez más. "Espero con interés nuestra colaboración, señora Winters".</p>
+                    <p>Castellano asintió como si no hubiera esperado nada más. "Excelente. El Director Schumann tiene mis datos de contacto." Le extendió la mano nuevamente. "Espero con interés nuestra colaboración, Sra. Winters."</p>
 
                     <p>Cuando su mano tocó la de ella, Elena tuvo un pensamiento fugaz e irracional: Esta mano conocía secretos -- secretos que eran más antiguos y profundos que las obras de arte que se suponía que debía restaurar.</p>
 
@@ -745,115 +832,243 @@
 
                     <p>Castellano se despidió con una ligera reverencia y salió de la oficina, seguido por un obsequioso Schumann que quería acompañarlo hasta la salida.</p>
 
-                    <p>Elena se quedó sola, la carpeta de cuero en su mano. Fue a la ventana y miró hacia el parque del museo, donde las primeras hojas del otoño comenzaban a caer. Tres meses en Italia, en un museo privado, rodeada de obras de arte desconocidas.</p>
+                    <p>Elena se quedó sola, la carpeta de cuero en su mano. Fue hacia la ventana y miró hacia el parque del museo, donde las primeras hojas del otoño comenzaban a caer. Tres meses en Italia, en un museo privado, rodeada de obras de arte desconocidas.</p>
 
-                    <p>La curiosidad profesional en ella se despertó, a pesar de sus reservas. Nuevos desafíos, obras maestras sin descubrir, la oportunidad de trabajar con técnicas que solo conocía teóricamente -- todo eso era tentador. Por otro lado, había algo sobre Marcus Castellano que no podía categorizar. Una intensidad que iba más allá del interés usual de un coleccionista. Como si no estuviera buscando solo sus habilidades profesionales, sino algo más, algo más personal.</p>
+                    <p>La curiosidad profesional en ella se despertó, a pesar de sus reservas. Nuevos desafíos, obras maestras no descubiertas, la posibilidad de trabajar con técnicas que solo había conocido teóricamente -- todo eso era tentador. Por otro lado, había algo sobre Marcus Castellano que no podía categorizar. Una intensidad que iba más allá del interés usual de un coleccionista. Como si no solo buscara sus habilidades profesionales, sino algo más, algo más personal.</p>
 
-                    <p>Abrió la carpeta nuevamente y hojeó los documentos. Fotos brillantes mostraban un edificio impresionante, mitad palacio, mitad fortaleza, en un acantilado con vista al Mediterráneo. Más imágenes mostraban habitaciones interiores -- techos altos, paredes artísticamente decoradas, escaleras imponentes y galerías llenas de tesoros artísticos. Y luego el fresco del que Castellano había hablado -- una escena mitológica, parcialmente desvanecida, parcialmente obviamente dañada, pero incluso en esta condición de belleza y complejidad impresionantes.</p>
+                    <p>Abrió la carpeta de nuevo y hojeó los documentos. Las fotos brillantes mostraban un edificio impresionante, mitad palacio, mitad fortaleza, en un acantilado con vista al Mediterráneo. Más imágenes mostraban habitaciones interiores -- techos altos, paredes artísticamente decoradas, escaleras imponentes y galerías llenas de tesoros artísticos. Y luego el fresco del que Castellano había hablado -- una escena mitológica, parcialmente desvanecida, parcialmente obviamente dañada, pero incluso en esta condición de belleza y complejidad impresionantes.</p>
 
-                    <p>Una foto más pequeña se cayó de entre las páginas. Elena la recogió y la examinó frunciendo el ceño. Mostraba un área acordonada del museo -- un pasillo con una puerta pesada y cerrada al final. La puerta estaba decorada con tallas elaboradas, motivos que no pudo identificar inmediatamente. ¿Por qué había una foto de una puerta cerrada en la carpeta?</p>
+                    <p>Una foto más pequeña se cayó de entre las páginas. Elena la recogió y la examinó frunciendo el ceño. Mostraba un área acordonada del museo -- un corredor con una puerta pesada y cerrada al final. La puerta estaba decorada con tallas elaboradas, motivos que no pudo identificar inmediatamente. ¿Por qué había una foto de una puerta cerrada en la carpeta?</p>
 
                     <p>"Una oferta impresionante, ¿no es así?"</p>
 
-                    <p>Elena se sobresaltó. Schumann había regresado y ahora estaba en el umbral.</p>
+                    <p>Elena se sobresaltó. Schumann había regresado y ahora estaba parado en el marco de la puerta.</p>
 
-                    <p>"Sí, lo es", respondió, guardando rápidamente la foto entre los otros documentos.</p>
+                    <p>"Sí, lo es", respondió, metiendo rápidamente la foto de vuelta entre los otros documentos.</p>
 
-                    <p>"Por supuesto que aceptará". No era una pregunta.</p>
+                    <p>"Por supuesto que aceptará." No era una pregunta.</p>
 
-                    <p>"Necesito pensarlo, señor director. Hay muchos factores a considerar".</p>
+                    <p>"Todavía necesito pensarlo, Sr. Director. Hay muchos factores a considerar."</p>
 
-                    <p>Schumann se acercó, sus modales joviales de la reunión habían dado paso a una expresión más seria. "Elena, permítame ser franco. La situación financiera del museo está tensa. La oferta de Castellano -- la donación que está haciendo por sus servicios -- nos ayudaría a superar los próximos dos trimestres".</p>
+                    <p>Schumann se acercó, sus modales joviales de la reunión habían dado paso a una expresión más seria. "Elena, permíteme ser franco. La situación financiera del museo está tensa. La oferta de Castellano -- la donación que hace por sus servicios -- nos ayudaría a pasar los próximos dos trimestres."</p>
 
-                    <p>Elena suspiró interiormente. Ahí estaba: presión institucional. "¿Y si rechazo?"</p>
+                    <p>Elena suspiró internamente. Ahí estaba: presión institucional.</p>
 
-                    <p>"Entonces tendríamos que considerar recortes presupuestarios. Posiblemente también en su departamento". Su voz era suave, pero la amenaza inequívoca.</p>
+                    <p>"¿Y si me niego?"</p>
+
+                    <p>"Entonces tendríamos que pensar en recortes presupuestarios. Posiblemente también en su departamento." Su voz era gentil, pero la amenaza inconfundible.</p>
 
                     <p>Elena asintió lentamente. No era una política, no una luchadora en las batallas administrativas del museo. Su mundo eran colores y formas, reacciones químicas y técnicas históricas -- no presupuestos y negociaciones.</p>
 
                     <p>"Entiendo", dijo brevemente.</p>
 
-                    <p>"¡Excelente!" Schumann aplaudió, nuevamente el director jovial. "Sabía que sería razonable. Infórmeme tan pronto como haya hablado con Castellano, ¿sí?"</p>
+                    <p>"¡Excelente!" Schumann aplaudió, de nuevo el director jovial. "Sabía que serías razonable. Déjame saber tan pronto como hayas hablado con Castellano, ¿sí?"</p>
 
                     <p>Salió de la oficina sin esperar su respuesta.</p>
 
-                    <p>Elena recogió los documentos y caminó lentamente por el largo pasillo de regreso a su estudio. En el camino, abrió la carpeta nuevamente y sacó la foto con la puerta cerrada. ¿Por qué estaba aquí? ¿Un descuido o un mensaje?</p>
+                    <p>Elena reunió los documentos y caminó lentamente por el largo corredor de vuelta a su estudio. En el camino, abrió la carpeta de nuevo y sacó la foto con la puerta cerrada. ¿Por qué estaba aquí? ¿Un descuido o un mensaje?</p>
 
-                    <p>Sacudió la cabeza ante sus propios pensamientos. Demasiadas novelas antiguas leídas, demasiadas historias sobre coleccionistas de arte misteriosos escuchadas. Esto era una oferta profesional, nada más.</p>
+                    <p>Sacudió la cabeza ante sus propios pensamientos. Demasiadas novelas antiguas leídas, demasiadas historias sobre coleccionistas de arte misteriosos escuchadas. Esta era una oferta profesional, nada más.</p>
 
-                    <p>Y sin embargo... los ojos de Marcus Castellano habían visto algo cuando la miraron. Algo que iba más allá de sus habilidades profesionales.</p>
+                    <p>Y sin embargo... los ojos de Marcus Castellano habían visto algo cuando la miró. Algo que iba más allá de sus habilidades profesionales.</p>
 
-                    <p>Al llegar a su estudio, Elena puso la carpeta en su escritorio y regresó a Diana, cuyo rostro aún esperaba pacientemente la liberación de siglos de falsas sobrepinturas.</p>
+                    <p>Al llegar a su estudio, Elena puso la carpeta en su escritorio y regresó a Diana, cuyo rostro aún esperaba pacientemente la liberación de siglos de sobrepinturas falsas.</p>
 
-                    <p>"¿Qué harías tú?", murmuró mientras se ponía los guantes nuevamente. La diosa de la caza permaneció en silencio, sus ojos medio ocultos bajo capas de pinceladas extrañas.</p>
+                    <p>"¿Qué harías tú?", murmuró mientras se ponía los guantes de nuevo. La diosa de la caza permaneció en silencio, sus ojos medio ocultos bajo capas de pinceladas extrañas.</p>
 
-                    <p>Elena tomó su bisturí nuevamente y comenzó a trabajar cuidadosamente alrededor del ojo de la diosa. Capa por capa reveló, descubriendo el original debajo. Como siempre lo hacía -- metódicamente, pacientemente, controladamente.</p>
+                    <p>Elena tomó su escalpelo de nuevo y comenzó a trabajar cuidadosamente alrededor del ojo de la diosa. Capa por capa expuso, revelando el original debajo. Como siempre lo hacía -- metódicamente, pacientemente, controlada.</p>
 
-                    <p>Pero sus pensamientos ya estaban en otra parte. En un museo en un acantilado italiano. En un enigmático coleccionista de arte con ojos penetrantes. Y en una puerta cerrada que parecía estar esperando algo que había sido olvidado durante mucho tiempo.</p>
+                    <p>Pero sus pensamientos ya estaban en otro lugar. En un museo en un acantilado italiano. Con un coleccionista de arte enigmático con ojos penetrantes. Y en una puerta cerrada que parecía estar esperando algo que había sido olvidado hace mucho tiempo.</p>
 
                     <p>Cuando salió de su estudio esa noche, ya había tomado su decisión. Sacó su teléfono y marcó el número que Castellano le había dejado.</p>
 
-                    <p>"Señor Castellano", dijo cuando él respondió. "Soy Elena Winters. Acepto su oferta".</p>
+                    <p>"Sr. Castellano", dijo cuando contestó. "Habla Elena Winters. Acepto su oferta."</p>
 
-                    <p>Siguió una breve pausa. "Me complace escuchar eso, señora Winters". Su voz sonaba cálida pero no sorprendida, como si ya hubiera esperado su decisión. "Haré que todo esté preparado para su llegada".</p>
+                    <p>Siguió una breve pausa. "Me complace escuchar eso, Sra. Winters." Su voz sonaba cálida, pero no sorprendida, como si ya hubiera esperado su decisión. "Haré que todo esté preparado para su llegada."</p>
 
                     <p>"Sin embargo, tengo algunas condiciones", añadió Elena. Su decisión podría haber sido tomada bajo presión, pero al menos establecería sus propias reglas.</p>
 
-                    <p>"Por supuesto. La escucho".</p>
+                    <p>"Por supuesto. Escucho."</p>
 
-                    <p>"Necesito autonomía completa en mi trabajo. No interferencia con mis métodos o horario".</p>
+                    <p>"Necesito autonomía completa en mi trabajo. No interferencia con mis métodos o mi horario."</p>
 
-                    <p>"Naturalmente".</p>
+                    <p>"Por supuesto."</p>
 
-                    <p>"Segundo, quiero acceso completo a toda la información sobre las obras a restaurar -- procedencia, propietarios anteriores, intentos de restauración previos, todo".</p>
+                    <p>"Segundo, quiero acceso integral a toda la información sobre las obras a restaurar -- origen, propietarios anteriores, intentos de restauración anteriores, todo."</p>
 
-                    <p>Ocurrió una pequeña pausa, apenas perceptible, pero Elena la notó de todos modos. "Eso se arreglará", dijo Castellano finalmente.</p>
+                    <p>Surgió una pausa diminuta, apenas perceptible, pero Elena la notó no obstante. "Eso será arreglado", dijo Castellano finalmente.</p>
 
-                    <p>"Y tercero, me reservo el derecho de terminar el proyecto en cualquier momento si encuentro que el trabajo no cumple con mis estándares éticos o profesionales".</p>
+                    <p>"Y tercero, me reservo el derecho de terminar el proyecto en cualquier momento si encuentro que el trabajo no cumple con mis estándares éticos o profesionales."</p>
 
-                    <p>Esta vez la pausa fue más larga. "Una condición interesante, señora Winters. ¿Puedo preguntar qué preocupaciones tiene?"</p>
+                    <p>Esta vez la pausa fue más larga. "Una condición interesante, Sra. Winters. ¿Puedo preguntar qué preocupaciones tiene?"</p>
 
-                    <p>Elena consideró brevemente. No quería parecer grosera, pero algo sobre toda la situación la hacía cautelosa. "No hay preocupaciones específicas. Solo cuidado profesional. Prefiero acuerdos claros desde el principio".</p>
+                    <p>Elena consideró brevemente. No quería parecer grosera, pero algo sobre toda la situación la hacía cautelosa. "No hay preocupaciones específicas. Solo cuidado profesional. Prefiero acuerdos claros desde el principio."</p>
 
-                    <p>"Lo respeto. Sus condiciones son aceptadas".</p>
+                    <p>"Respeto eso. Sus condiciones son aceptadas."</p>
 
-                    <p>Discutieron los detalles prácticos -- fechas de viaje, equipo necesario, asuntos de seguro. Elena anotó todo en su estilo preciso y metódico.</p>
+                    <p>Discutieron los detalles prácticos -- fechas de viaje, equipo necesario, cuestiones de seguro. Elena anotó todo en su estilo preciso y metódico.</p>
 
-                    <p>"La espero entonces en una semana", concluyó Castellano. "Mi asistente le enviará los documentos de viaje".</p>
+                    <p>"La espero entonces en una semana", concluyó Castellano. "Mi asistente le enviará los documentos de viaje."</p>
 
-                    <p>"Hasta entonces, señor Castellano".</p>
+                    <p>"Hasta entonces, Sr. Castellano."</p>
 
-                    <p>"Hasta pronto, señora Winters. Y prepárese. Mi colección la sorprenderá".</p>
+                    <p>"Hasta pronto, Sra. Winters. Y prepárese -- mi colección la sorprenderá."</p>
 
                     <p>La conexión se cortó, y Elena se quedó con la extraña sensación de que acababa de firmar un contrato cuya letra pequeña aún no conocía.</p>
-                </div>
-
-                <div class="amazon-section">
-                    <h3>📖 Lee el libro completo</h3>
-                    <p>Descubre la historia completa de Elena y Marcus</p>
-                    <a href="https://amazon.de/dp/B0F37NJD39" target="_blank" class="btn-amazon">🛒 Comprar en Amazon</a>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
+        let currentSpeech = null;
+        let currentLanguage = 'de';
+        let currentWordIndex = 0;
+        let allWords = [];
+        let isReading = false;
+        let lastHighlightedWord = null;
+
+        // Initialisiere beim Seitenstart
+        function initializeContent() {
+            processTextContent();
+        }
+
+        function processTextContent() {
+            const textContent = document.querySelector(`#${currentLanguage}-textContent`);
+            if (textContent && !textContent.querySelector('.word')) {
+                const paragraphs = textContent.querySelectorAll('p');
+                let wordCounter = 0;
+                allWords = [];
+
+                paragraphs.forEach((paragraph) => {
+                    const paragraphText = paragraph.textContent;
+                    const paragraphWords = paragraphText.split(/\s+/).filter(word => word.length > 0);
+
+                    let paragraphHTML = '';
+                    paragraphWords.forEach((word) => {
+                        paragraphHTML += `<span class="word" data-word-index="${wordCounter}" onclick="startFromWord(${wordCounter})">${word}</span> `;
+                        allWords.push(word);
+                        wordCounter++;
+                    });
+
+                    paragraph.innerHTML = paragraphHTML;
+                });
+            }
+        }
+
         function switchLanguage(lang) {
-            // Hide all language content
+            // Stoppe aktuelles Vorlesen
+            stopReading();
+
+            // Verstecke alle Sprachen
             document.querySelectorAll('.language-content').forEach(content => {
                 content.classList.add('hidden');
             });
-            
-            // Show selected language
+
+            // Zeige ausgewählte Sprache
             document.getElementById(lang + '-content').classList.remove('hidden');
-            
-            // Update button states
+
+            // Update Sprachbuttons
             document.querySelectorAll('.btn-lang').forEach(btn => {
                 btn.classList.remove('active');
             });
-            
+
             event.target.classList.add('active');
+
+            currentLanguage = lang;
+            currentWordIndex = 0;
+            clearHighlight();
+            processTextContent();
         }
+
+        function startReading() {
+            currentWordIndex = 0;
+            clearHighlight();
+            continueReading();
+        }
+
+        function continueReading() {
+            if (currentSpeech) {
+                currentSpeech.cancel();
+            }
+
+            if (allWords.length > 0) {
+                // Text ab der aktuellen Position
+                const remainingText = allWords.slice(currentWordIndex).join(' ');
+
+                currentSpeech = new SpeechSynthesisUtterance(remainingText);
+                currentSpeech.rate = 0.9;
+                
+                if (currentLanguage === 'de') {
+                    currentSpeech.lang = 'de-DE';
+                } else if (currentLanguage === 'en') {
+                    currentSpeech.lang = 'en-US';
+                } else if (currentLanguage === 'es') {
+                    currentSpeech.lang = 'es-ES';
+                }
+
+                let wordCount = currentWordIndex;
+
+                currentSpeech.onboundary = function(event) {
+                    if (event.name === 'word') {
+                        highlightCurrentWord(wordCount);
+                        wordCount++;
+                        currentWordIndex = wordCount;
+                    }
+                };
+
+                currentSpeech.onend = function() {
+                    isReading = false;
+                };
+
+                isReading = true;
+                speechSynthesis.speak(currentSpeech);
+            }
+        }
+
+        function startFromWord(wordIndex) {
+            currentWordIndex = wordIndex;
+            clearHighlight();
+            continueReading();
+        }
+
+        function highlightCurrentWord(wordIndex) {
+            // Entferne vorherige Highlights
+            if (lastHighlightedWord) {
+                lastHighlightedWord.classList.remove('word-highlight');
+            }
+
+            // Highlights das entsprechende Wort
+            const wordSpan = document.querySelector(`[data-word-index="${wordIndex}"]`);
+            if (wordSpan) {
+                wordSpan.classList.add('word-highlight');
+                lastHighlightedWord = wordSpan;
+            }
+        }
+
+        function clearHighlight() {
+            document.querySelectorAll('.word-highlight').forEach(el => {
+                el.classList.remove('word-highlight');
+            });
+            lastHighlightedWord = null;
+        }
+
+        function stopReading() {
+            if (currentSpeech) {
+                speechSynthesis.cancel();
+                currentSpeech = null;
+                isReading = false;
+            }
+
+            // Zurück zum Anfang + alle Markierungen löschen
+            currentWordIndex = 0;
+            clearHighlight();
+        }
+
+        // Initialisierung beim Seitenstart
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeContent();
+        });
     </script>
 </body>
 </html>
