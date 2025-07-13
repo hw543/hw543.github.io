@@ -924,21 +924,27 @@
         let currentSpeech = null;
         let currentLanguage = 'de';
         let currentWordIndex = 0;
-        let allWords = [];
+        let allLanguageWords = {
+            'de': [],
+            'en': [],
+            'es': []
+        };
         let isReading = false;
         let lastHighlightedWord = null;
 
-        // Initialisiere beim Seitenstart
-        function initializeContent() {
-            processTextContent();
+        // Initialisiere ALLE Sprachen beim Seitenstart
+        function initializeAllLanguages() {
+            ['de', 'en', 'es'].forEach(lang => {
+                processLanguageContent(lang);
+            });
         }
 
-        function processTextContent() {
-            const textContent = document.querySelector(`#${currentLanguage}-textContent`);
+        function processLanguageContent(lang) {
+            const textContent = document.querySelector(`#${lang}-textContent`);
             if (textContent && !textContent.querySelector('.word')) {
                 const paragraphs = textContent.querySelectorAll('p');
                 let wordCounter = 0;
-                allWords = [];
+                allLanguageWords[lang] = [];
 
                 paragraphs.forEach((paragraph) => {
                     const paragraphText = paragraph.textContent;
@@ -946,8 +952,8 @@
 
                     let paragraphHTML = '';
                     paragraphWords.forEach((word) => {
-                        paragraphHTML += `<span class="word" data-word-index="${wordCounter}" onclick="startFromWord(${wordCounter})">${word}</span> `;
-                        allWords.push(word);
+                        paragraphHTML += `<span class="word" data-word-index="${wordCounter}" data-lang="${lang}" onclick="startFromWord(${wordCounter})">${word}</span> `;
+                        allLanguageWords[lang].push(word);
                         wordCounter++;
                     });
 
@@ -978,7 +984,6 @@
             currentLanguage = lang;
             currentWordIndex = 0;
             clearHighlight();
-            processTextContent();
         }
 
         function startReading() {
@@ -992,9 +997,10 @@
                 currentSpeech.cancel();
             }
 
-            if (allWords.length > 0) {
+            const currentWords = allLanguageWords[currentLanguage];
+            if (currentWords && currentWords.length > 0) {
                 // Text ab der aktuellen Position
-                const remainingText = allWords.slice(currentWordIndex).join(' ');
+                const remainingText = currentWords.slice(currentWordIndex).join(' ');
 
                 currentSpeech = new SpeechSynthesisUtterance(remainingText);
                 currentSpeech.rate = 0.9;
@@ -1038,8 +1044,8 @@
                 lastHighlightedWord.classList.remove('word-highlight');
             }
 
-            // Highlights das entsprechende Wort
-            const wordSpan = document.querySelector(`[data-word-index="${wordIndex}"]`);
+            // Highlights das entsprechende Wort in der aktuellen Sprache
+            const wordSpan = document.querySelector(`#${currentLanguage}-textContent [data-word-index="${wordIndex}"]`);
             if (wordSpan) {
                 wordSpan.classList.add('word-highlight');
                 lastHighlightedWord = wordSpan;
@@ -1065,9 +1071,9 @@
             clearHighlight();
         }
 
-        // Initialisierung beim Seitenstart
+        // Initialisierung beim Seitenstart - ALLE SPRACHEN
         document.addEventListener('DOMContentLoaded', function() {
-            initializeContent();
+            initializeAllLanguages();
         });
     </script>
 </body>
