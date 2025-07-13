@@ -141,6 +141,31 @@
             display: block;
         }
 
+        .css-book-cover {
+            width: 150px;
+            height: 200px;
+            background: linear-gradient(135deg, #000000, #8B0000, #FF4500);
+            border-radius: 10px;
+            margin: 0 auto 20px auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.1em;
+            text-align: center;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .css-book-cover::before {
+            content: '🔥';
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
         .book-title {
             font-size: 1.4em;
             color: #8B0000;
@@ -235,7 +260,7 @@
 
         <div class="content">
             <div class="chambers-container">
-                <!-- Linke Kammer: Thriller-Serien -->
+                <!-- Linke Kammer: Thriller-Serien - IN VORBEREITUNG -->
                 <div class="chamber">
                     <div class="chamber-header">
                         <div class="chamber-icon">🔥 Thriller-Serien</div>
@@ -247,19 +272,21 @@
                     </div>
 
                     <div class="book-showcase">
-                        <img src="flammendesverrats.jpg" alt="Flammen des Verrats" class="book-cover">
-                        <div class="book-title">🔥 Die Flammen-Serie</div>
-                        <div class="book-subtitle">Gefährliche Obsession</div>
-                        <a href="lese-vorlese-thriller.html" class="read-button">📖 Lesen & Vorlesen</a>
+                        <div style="width: 150px; height: 200px; background: linear-gradient(135deg, #666, #999); border-radius: 10px; margin: 0 auto 20px auto; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.1em; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.3);">
+                            Thriller-Serien<br>in Vorbereitung
+                        </div>
+                        <div class="book-title">🔥 Spannende Serien</div>
+                        <div class="book-subtitle">Mehrteilige Thriller</div>
+                        <button class="read-button" style="opacity: 0.6; cursor: not-allowed;">📝 In Vorbereitung</button>
                     </div>
 
                     <div class="discover-text">
                         <strong>Serie entdecken</strong><br>
-                        Erscheine demnächst mit der ersten packenden Serie!
+                        Erscheinen demnächst mit packenden mehrteiligen Thriller-Geschichten!
                     </div>
                 </div>
 
-                <!-- Rechte Kammer: Einzelne Thriller -->
+                <!-- Rechte Kammer: Einzelne Thriller - FLAMMEN DES VERRATS -->
                 <div class="chamber">
                     <div class="chamber-header">
                         <div class="chamber-icon">📚 Einzelne Thriller</div>
@@ -271,17 +298,17 @@
                     </div>
 
                     <div class="book-showcase">
-                        <div style="width: 150px; height: 200px; background: linear-gradient(135deg, #8B0000, #FF4500); border-radius: 10px; margin: 0 auto 20px auto; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2em; text-align: center;">
-                            Neue Thriller<br>in Vorbereitung
+                        <div class="css-book-cover">
+                            Flammen<br>des<br>Verrats
                         </div>
-                        <div class="book-title">🎭 Psycho-Thriller</div>
-                        <div class="book-subtitle">Mind Games</div>
-                        <button class="read-button" style="opacity: 0.6; cursor: not-allowed;">📝 In Vorbereitung</button>
+                        <div class="book-title">🔥 Flammen des Verrats</div>
+                        <div class="book-subtitle">Ein Feuerwehrmann mit dunklen Geheimnissen</div>
+                        <a href="lese-vorlese-thriller.html" class="read-button">📖 Lesen & Vorlesen</a>
                     </div>
 
                     <div class="discover-text">
                         <strong>Bücher entdecken</strong><br>
-                        Weitere packende Standalone-Thriller - Deutsch & Englisch - Lesen & Vorlesen System
+                        Packende Standalone-Thriller - Deutsch & Englisch - Lesen & Vorlesen System
                     </div>
                 </div>
             </div>
