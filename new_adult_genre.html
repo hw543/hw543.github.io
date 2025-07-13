@@ -54,7 +54,7 @@
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 20px;
             position: relative;
@@ -196,7 +196,15 @@
             margin: 0 auto;
         }
 
-        .series-container {
+        /* 2-Kammern-System */
+        .categories-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .category-section {
             background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.8) 100%);
             border-radius: 25px;
             padding: 40px;
@@ -204,170 +212,122 @@
             backdrop-filter: blur(15px);
             border: 1px solid rgba(255,255,255,0.3);
             position: relative;
-        }
-
-        .series-header {
-            text-align: center;
-            margin-bottom: 35px;
-        }
-
-        .series-title {
-            font-size: 2.8rem;
-            background: linear-gradient(135deg, #2D1B69 0%, #11998e 50%, #FFD700 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 15px;
-            font-weight: 600;
-        }
-
-        .series-description {
-            font-size: 1.15rem;
-            color: #5a6c7d;
-            line-height: 1.7;
-            max-width: 600px;
-            margin: 0 auto;
-            font-style: italic;
-        }
-
-        .books-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            margin-top: 35px;
-        }
-
-        .book-card {
-            background: linear-gradient(135deg, #f8faff 0%, #e8f4f8 100%);
-            border-radius: 20px;
-            padding: 30px;
-            transition: all 0.4s ease;
-            border: 2px solid transparent;
-            position: relative;
+            transition: all 0.3s ease;
             overflow: hidden;
         }
 
-        .book-card::before {
+        .category-section::before {
             content: "";
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(45, 27, 105, 0.05) 0%, rgba(17, 153, 142, 0.05) 50%, rgba(255, 215, 0, 0.05) 100%);
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,215,0,0.05), transparent);
+            animation: shimmer 4s infinite;
             opacity: 0;
             transition: opacity 0.3s ease;
         }
 
-        .book-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
-            border-color: rgba(255, 215, 0, 0.3);
-        }
-
-        .book-card:hover::before {
+        .category-section:hover::before {
             opacity: 1;
         }
 
-        .book-number {
-            font-size: 0.9rem;
-            color: #11998e;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 10px;
+        .category-section:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+        }
+
+        .category-header {
+            text-align: center;
+            margin-bottom: 30px;
             position: relative;
             z-index: 2;
         }
 
-        .book-title {
-            font-size: 1.6rem;
+        .category-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .serien-icon {
+            background: linear-gradient(135deg, #2D1B69, #11998e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .buecher-icon {
+            background: linear-gradient(135deg, #11998e, #FFD700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .category-title {
+            font-size: 2.2rem;
             color: #2D1B69;
-            margin-bottom: 8px;
+            margin-bottom: 15px;
             font-weight: 600;
             position: relative;
             z-index: 2;
         }
 
-        .book-subtitle {
-            color: #11998e;
-            font-size: 1rem;
-            margin-bottom: 20px;
-            font-style: italic;
-            position: relative;
-            z-index: 2;
-        }
-
-        .book-description {
-            font-size: 0.95rem;
-            color: #6b7280;
+        .category-description {
+            font-size: 1.1rem;
+            color: #5a6c7d;
             line-height: 1.6;
             margin-bottom: 25px;
             position: relative;
             z-index: 2;
         }
 
-        .book-meta {
+        .category-preview {
+            background: rgba(255,255,255,0.7);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .preview-item {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .language-flags {
-            display: flex;
-            gap: 8px;
-        }
-
-        .flag {
-            font-size: 1.2rem;
-            padding: 4px 8px;
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-
-        .status-badge {
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .status-available {
-            background: linear-gradient(135deg, #10b981, #059669);
-            color: white;
-            box-shadow: 0 3px 10px rgba(16, 185, 129, 0.3);
-        }
-
-        .book-buttons {
-            display: flex;
-            gap: 12px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .btn {
-            padding: 12px 24px;
-            border: none;
-            border-radius: 25px;
+            margin-bottom: 12px;
             font-size: 0.95rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            color: #4a5568;
+        }
+
+        .preview-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .preview-item::before {
+            content: "✨";
+            margin-right: 10px;
+            font-size: 0.8rem;
+        }
+
+        .category-button {
+            width: 100%;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #2D1B69 0%, #11998e 50%, #FFD700 100%);
+            color: white;
             text-decoration: none;
-            display: inline-block;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: 600;
             text-align: center;
-            min-width: 100px;
+            display: block;
+            transition: all 0.3s ease;
             position: relative;
+            z-index: 2;
             overflow: hidden;
         }
 
-        .btn::before {
+        .category-button::before {
             content: "";
             position: absolute;
             top: 0;
@@ -378,26 +338,23 @@
             transition: left 0.5s;
         }
 
-        .btn:hover::before {
+        .category-button:hover::before {
             left: 100%;
         }
 
-        .btn-read {
-            background: linear-gradient(135deg, #4285f4, #1976d2);
-            color: white;
-            box-shadow: 0 5px 15px rgba(66, 133, 244, 0.3);
-        }
-
-        .btn-read:hover {
+        .category-button:hover {
             transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(66, 133, 244, 0.4);
+            box-shadow: 0 10px 25px rgba(45, 27, 105, 0.3);
         }
 
-        .btn-amazon {
-            background: linear-gradient(135deg, #9ca3af, #6b7280);
-            color: white;
-            cursor: not-allowed;
-            opacity: 0.7;
+        .future-note {
+            text-align: center;
+            font-style: italic;
+            color: #11998e;
+            font-size: 0.9rem;
+            margin-top: 15px;
+            position: relative;
+            z-index: 2;
         }
 
         .inspiration-quote {
@@ -448,6 +405,13 @@
             line-height: 1.6;
         }
 
+        @media (max-width: 968px) {
+            .categories-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+
         @media (max-width: 768px) {
             .header h1 {
                 font-size: 2.8rem;
@@ -458,29 +422,12 @@
                 font-size: 1.5rem;
             }
             
-            .books-grid {
-                grid-template-columns: 1fr;
-                gap: 25px;
-            }
-            
-            .book-card {
-                padding: 25px;
-            }
-            
             .container {
                 padding: 15px;
             }
             
-            .intro-section, .series-container {
+            .intro-section, .category-section {
                 padding: 25px;
-            }
-            
-            .book-buttons {
-                flex-direction: column;
-            }
-            
-            .btn {
-                width: 100%;
             }
         }
     </style>
@@ -510,64 +457,54 @@
         <div class="intro-section">
             <h2>Willkommen im New Adult Universum</h2>
             <p class="intro-text">
-                Entdecke emotionale Geschichten über junge Erwachsene, die ihren Weg zwischen Studium, ersten großen Lieben und der Suche nach der eigenen Identität finden. Hier erwachen Träume zum Leben, werden erste wichtige Entscheidungen getroffen und die Weichen für die Zukunft gestellt. Authentische Charaktere, intensive Gefühle und die aufregenden Herausforderungen des Erwachsenwerdens stehen im Mittelpunkt dieser inspirierenden Romane.
+                Entdecke emotionale Geschichten über junge Erwachsene, die ihren Weg zwischen Studium, ersten großen Lieben und der Suche nach der eigenen Identität finden. Hier erwachen Träume zum Leben, werden erste wichtige Entscheidungen getroffen und die Weichen für die Zukunft gestellt.
             </p>
         </div>
 
-        <div class="series-container">
-            <div class="series-header">
-                <h2 class="series-title">Serie 1: Zwischen Herz und Verstand</h2>
-                <p class="series-description">
-                    Lena Winter, Literaturstudentin mit einer Leidenschaft für Bücher, entdeckt durch geheimnisvolle Notizen in Bibliotheksbüchern eine unerwartete Verbindung. Eine Geschichte über die Macht der Worte, verborgene Gefühle und die mutigen Schritte ins Erwachsenenleben.
-                </p>
+        <!-- 2-Kammern-System -->
+        <div class="categories-grid">
+            <!-- LINKS: New Adult Serien -->
+            <div class="category-section">
+                <div class="category-header">
+                    <span class="category-icon serien-icon">📚</span>
+                    <h2 class="category-title">New Adult Serien</h2>
+                    <p class="category-description">
+                        Mehrteilige Geschichten mit durchgehenden Charakteren und zusammenhängenden Handlungssträngen.
+                    </p>
+                </div>
+
+                <div class="category-preview">
+                    <div class="preview-item">🌟 Serie: "Zwischen Herz und Verstand"</div>
+                    <div class="preview-item">📖 2 Bände verfügbar</div>
+                    <div class="preview-item">🌅 Emotionale Entwicklungsgeschichte</div>
+                    <div class="preview-item">💝 Lena's Reise ins Erwachsenenleben</div>
+                </div>
+
+                <a href="serien_new_adult.html" class="category-button">📚 Serien entdecken</a>
+                
+                <p class="future-note">Weitere Serien in Vorbereitung</p>
             </div>
 
-            <div class="books-grid">
-                <!-- Band 1 -->
-                <div class="book-card">
-                    <div class="book-number">Band 1</div>
-                    <h3 class="book-title">Verborgene Gefühle</h3>
-                    <p class="book-subtitle">Die Nachricht, die alles veränderte</p>
-                    <p class="book-description">
-                        Die Bibliothek war Lenas Zufluchtsort - bis sie geheimnisvolle Notizen zwischen den Buchseiten entdeckt. Eine emotionale Reise über erste Liebe, Mut zur Veränderung und die Kraft, die eigenen Träume zu verfolgen.
+            <!-- RECHTS: Einzelne New Adult Bücher -->
+            <div class="category-section">
+                <div class="category-header">
+                    <span class="category-icon buecher-icon">📖</span>
+                    <h2 class="category-title">Einzelne New Adult Bücher</h2>
+                    <p class="category-description">
+                        Standalone Geschichten mit abgeschlossenen Handlungen und eigenständigen Charakteren.
                     </p>
-                    
-                    <div class="book-meta">
-                        <div class="language-flags">
-                            <span class="flag">🇩🇪</span>
-                            <span class="flag">🇬🇧</span>
-                        </div>
-                        <span class="status-badge status-available">Verfügbar</span>
-                    </div>
-                    
-                    <div class="book-buttons">
-                        <a href="lese-vorlese-new-adult.html" class="btn btn-read">📖 Lesen & Vorlesen</a>
-                        <button class="btn btn-amazon" disabled>🛒 In Vorbereitung</button>
-                    </div>
                 </div>
 
-                <!-- Band 2 -->
-                <div class="book-card">
-                    <div class="book-number">Band 2</div>
-                    <h3 class="book-title">Enthüllte Wahrheiten</h3>
-                    <p class="book-subtitle">Nähe, die flieht</p>
-                    <p class="book-description">
-                        Lena erwacht mit dem Gefühl, dass etwas fehlt. Während sie die Geheimnisse ihrer neuen Verbindung entschlüsselt, muss sie lernen, dass wahre Nähe Mut erfordert und manchmal die größten Wahrheiten in der Stille gefunden werden.
-                    </p>
-                    
-                    <div class="book-meta">
-                        <div class="language-flags">
-                            <span class="flag">🇩🇪</span>
-                            <span class="flag">🇬🇧</span>
-                        </div>
-                        <span class="status-badge status-available">Verfügbar</span>
-                    </div>
-                    
-                    <div class="book-buttons">
-                        <a href="lese-vorlese-new-adult.html" class="btn btn-read">📖 Lesen & Vorlesen</a>
-                        <button class="btn btn-amazon" disabled>🛒 In Vorbereitung</button>
-                    </div>
+                <div class="category-preview">
+                    <div class="preview-item">✨ Inspirierende Einzelgeschichten</div>
+                    <div class="preview-item">🎯 Abgeschlossene Handlungen</div>
+                    <div class="preview-item">🌟 Verschiedene Perspektiven</div>
+                    <div class="preview-item">💫 Vielfältige Charaktere</div>
                 </div>
+
+                <a href="einzelne_new_adult_buecher.html" class="category-button">📖 Bücher entdecken</a>
+                
+                <p class="future-note">Erste Bücher erscheinen bald</p>
             </div>
         </div>
 
