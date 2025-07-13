@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Romantik Fiktion - Helmut Wegners Wortwelten</title>
+    <title>💕 Romantik Fiktion - Helmut Wegners Wortwelten</title>
     <style>
         * {
             margin: 0;
@@ -13,41 +13,48 @@
 
         body {
             font-family: 'Georgia', serif;
+            line-height: 1.8;
+            color: #2c1810;
             background: linear-gradient(135deg, #FFE5E5 0%, #FFB6C1 25%, #FF69B4 50%, #FFC0CB 75%, #FFCCCB 100%);
             min-height: 100vh;
             padding: 20px;
-            color: #8B1538;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
+            background: #FFF8F0;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            overflow: hidden;
         }
 
         .header {
             background: linear-gradient(135deg, #C2185B, #E91E63);
-            color: white;
+            color: #FFF8F0;
             padding: 30px;
-            border-radius: 20px;
             text-align: center;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(199, 21, 133, 0.3);
             position: relative;
         }
 
-        .back-button {
+        .back-button-header {
             position: absolute;
             top: 15px;
             left: 15px;
+        }
+
+        .back-button {
             background: rgba(255, 255, 255, 0.2);
             color: white;
             padding: 8px 16px;
             border: 2px solid rgba(255, 255, 255, 0.3);
             border-radius: 20px;
-            text-decoration: none;
             font-size: 0.9em;
-            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
             transition: all 0.3s ease;
+            font-weight: bold;
         }
 
         .back-button:hover {
@@ -56,15 +63,19 @@
         }
 
         .header h1 {
-            font-size: 2.8em;
+            font-size: 2.5em;
             margin-bottom: 10px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
         .header p {
-            font-size: 1.3em;
+            font-size: 1.2em;
             opacity: 0.9;
             font-style: italic;
+        }
+
+        .content {
+            padding: 40px;
         }
 
         .chambers-container {
@@ -75,130 +86,113 @@
         }
 
         .chamber {
-            background: linear-gradient(135deg, #FFF0F5 0%, #FFE4E6 100%);
-            border-radius: 20px;
+            background: linear-gradient(135deg, #FFF0F5, #FFE4E6);
+            border-radius: 15px;
             padding: 30px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            border: 2px solid #FF69B4;
-            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
         }
 
         .chamber:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(255, 105, 180, 0.2);
-            border-color: #FF1493;
         }
 
-        .chamber-verlangen {
-            border-color: #FF69B4;
+        .chamber-header {
+            text-align: center;
+            margin-bottom: 25px;
         }
 
-        .chamber-kammern {
-            border-color: #C2185B;
+        .chamber-icon {
+            background: linear-gradient(135deg, #C2185B, #E91E63);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 1.3em;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 15px;
         }
 
         .chamber-title {
             font-size: 1.8em;
-            font-weight: bold;
+            color: #C2185B;
             margin-bottom: 15px;
-            text-align: center;
-            padding: 15px;
-            border-radius: 15px;
-            color: white;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-
-        .chamber-verlangen .chamber-title {
-            background: linear-gradient(135deg, #FF69B4, #FF1493);
-        }
-
-        .chamber-kammern .chamber-title {
-            background: linear-gradient(135deg, #C2185B, #8B1538);
         }
 
         .chamber-description {
-            font-size: 1.1em;
+            font-size: 1.2em;
+            color: #444;
             line-height: 1.6;
-            margin-bottom: 20px;
-            text-align: center;
-            color: #8B1538;
-        }
-
-        .chamber-content {
+            margin-bottom: 25px;
             text-align: center;
         }
 
-        .serie-preview {
-            background: linear-gradient(135deg, #FFE4E6, #FFF0F5);
-            padding: 20px;
-            border-radius: 15px;
-            margin-bottom: 20px;
-            border: 2px solid #FF69B4;
+        .book-showcase {
+            text-align: center;
+            margin: 25px 0;
         }
 
-        .serie-preview h3 {
-            color: #C2185B;
-            font-size: 1.4em;
+        .css-book-cover {
+            width: 150px;
+            height: 200px;
+            background: linear-gradient(135deg, #FF69B4, #C2185B, #8B1538);
+            border-radius: 10px;
+            margin: 0 auto 20px auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.1em;
+            text-align: center;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .css-book-cover::before {
+            content: '💕';
+            font-size: 2em;
             margin-bottom: 10px;
         }
 
-        .serie-preview p {
-            color: #8B1538;
-            font-size: 1.1em;
-            margin-bottom: 15px;
+        .book-title {
+            font-size: 1.4em;
+            color: #C2185B;
+            font-weight: bold;
+            margin-bottom: 10px;
         }
 
-        .serie-stats {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
+        .book-subtitle {
+            font-size: 1.1em;
+            color: #666;
+            font-style: italic;
             margin-bottom: 20px;
         }
 
-        .stat-item {
-            text-align: center;
-            background: white;
-            padding: 10px 15px;
-            border-radius: 10px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-        }
-
-        .stat-number {
-            font-size: 1.3em;
-            font-weight: bold;
-            color: #C2185B;
-            margin-bottom: 5px;
-        }
-
-        .stat-label {
-            font-size: 0.9em;
-            color: #8B1538;
-        }
-
-        .chamber-button {
-            background: linear-gradient(135deg, #FF69B4, #C2185B);
+        .read-button {
+            background: linear-gradient(135deg, #C2185B, #E91E63);
             color: white;
-            padding: 15px 30px;
+            padding: 12px 30px;
             border: none;
             border-radius: 25px;
-            font-size: 1.2em;
+            font-size: 1.1em;
             font-weight: bold;
             cursor: pointer;
             text-decoration: none;
             display: inline-block;
             transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.3);
         }
 
-        .chamber-button:hover {
+        .read-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(255, 105, 180, 0.4);
+            box-shadow: 0 5px 15px rgba(194, 24, 91, 0.4);
         }
 
-        .info-text {
-            font-size: 0.9em;
-            color: #8B1538;
-            margin-top: 10px;
+        .discover-text {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 1.3em;
+            color: #666;
             font-style: italic;
         }
 
@@ -207,29 +201,24 @@
                 grid-template-columns: 1fr;
                 gap: 20px;
             }
-            
-            .header h1 {
-                font-size: 2.2em;
-            }
-            
+
             .chamber {
-                padding: 20px;
+                padding: 25px;
             }
-            
-            .chamber-title {
-                font-size: 1.5em;
+
+            .header h1 {
+                font-size: 2em;
             }
-            
-            .serie-stats {
-                flex-direction: column;
-                gap: 10px;
-            }
-            
-            .back-button {
+
+            .back-button-header {
                 position: relative;
                 top: 0;
                 left: 0;
                 margin-bottom: 15px;
+            }
+
+            .content {
+                padding: 25px;
             }
         }
     </style>
@@ -237,76 +226,65 @@
 <body>
     <div class="container">
         <div class="header">
-            <a href="index.html" class="back-button">← Zurück zur Startseite</a>
+            <div class="back-button-header">
+                <a href="index.html" class="back-button">← Zurück zur Startseite</a>
+            </div>
             <h1>💕 Romantik Fiktion</h1>
-            <p>Fesselnde Serien voller Leidenschaft und Geheimnisse<br>Emotionale Reisen durch die Welt der Liebe</p>
+            <p>Fesselnde Liebesgeschichten voller Leidenschaft und Geheimnisse</p>
         </div>
 
-        <div class="chambers-container">
-            <!-- Kammer 1: Verlangen der Herzen -->
-            <div class="chamber chamber-verlangen">
-                <div class="chamber-title">💖 Verlangen der Herzen</div>
-                <div class="chamber-description">
-                    Eine emotionale Reise durch die Höhen und Tiefen der Liebe in den malerischen Adelaide Hills.
-                </div>
-                
-                <div class="chamber-content">
-                    <div class="serie-preview">
-                        <h3>Clara & Alex - Adelaide Hills Serie</h3>
-                        <p>Eine emotionale Reise durch die Höhen und Tiefen der Liebe. Clara und Alex entdecken in den malerischen Adelaide Hills zueinander und durchleben gemeinsam die schönsten und schwierigsten Momente ihrer Beziehung.</p>
-                        
-                        <div class="serie-stats">
-                            <div class="stat-item">
-                                <div class="stat-number">4</div>
-                                <div class="stat-label">Bände</div>
-                            </div>
-                            <div class="stat-item">
-                                <div class="stat-number">🇩🇪🇬🇧</div>
-                                <div class="stat-label">Sprachen</div>
-                            </div>
+        <div class="content">
+            <div class="chambers-container">
+                <!-- Linke Kammer: Romantik-Serien -->
+                <div class="chamber">
+                    <div class="chamber-header">
+                        <div class="chamber-icon">💕 Romantik-Serien</div>
+                        <div class="chamber-title">Mehrteilige Liebesgeschichten</div>
+                        <div class="chamber-description">
+                            Emotionale Reisen durch die Höhen und Tiefen der Liebe 
+                            mit durchgehenden Charakteren und zusammenhängenden Handlungen.
                         </div>
-                        
-                        <p><strong>Band 1:</strong> Unter dem Sternenhimmel - Deutsch & Englisch<br>
-                        <strong>Band 2:</strong> Im Netz der Liebe - Deutsch & Englisch<br>
-                        <strong>Band 3:</strong> Ankommen im neuen Leben - Deutsch & Englisch<br>
-                        <strong>Band 4:</strong> Gemeinsam in die Zukunft - Deutsch & Englisch</p>
                     </div>
-                    
-                    <a href="verlangen-der-herzen.html" class="chamber-button">💕 Serie entdecken</a>
-                    <div class="info-text">4 Bände - Deutsch & Englisch - Lesen & Vorlesen System</div>
-                </div>
-            </div>
 
-            <!-- Kammer 2: Die verborgenen Kammern -->
-            <div class="chamber chamber-kammern">
-                <div class="chamber-title">🌹 Die verborgenen Kammern</div>
-                <div class="chamber-description">
-                    In den Schatten alter Gemäuer verbergen sich die tiefsten Geheimnisse des Herzens und verbotene Leidenschaft.
-                </div>
-                
-                <div class="chamber-content">
-                    <div class="serie-preview">
-                        <h3>Geheimnisvolle Romanzen</h3>
-                        <p>In den Schatten alter Gemäuer verbergen sich nicht nur architektonische Schätze, sondern auch die tiefsten Geheimnisse des Herzens. Elena entdeckt eine verborgene Welt voller Leidenschaft und Geheimnisse.</p>
-                        
-                        <div class="serie-stats">
-                            <div class="stat-item">
-                                <div class="stat-number">3</div>
-                                <div class="stat-label">Bände</div>
-                            </div>
-                            <div class="stat-item">
-                                <div class="stat-number">🇩🇪🇬🇧🇪🇸</div>
-                                <div class="stat-label">Sprachen</div>
-                            </div>
+                    <div class="book-showcase">
+                        <div class="css-book-cover">
+                            Romantik<br>Serien
                         </div>
-                        
-                        <p><strong>Band 1:</strong> Hinter verschlossenen Türen - Deutsch & Englisch & Spanisch<br>
-                        <strong>Band 2:</strong> Die Kunst der Hingabe - Deutsch & Englisch<br>
-                        <strong>Band 3:</strong> Die Tiefe der Begierde - Deutsch & Englisch</p>
+                        <div class="book-title">💖 Zwei fesselnde Serien</div>
+                        <div class="book-subtitle">Verlangen der Herzen & Die verborgenen Kammern</div>
+                        <a href="romantik-serien.html" class="read-button">📖 Serien entdecken</a>
                     </div>
-                    
-                    <a href="die-verborgenen-kammern.html" class="chamber-button">🌹 Serie entdecken</a>
-                    <div class="info-text">3 Bände - Deutsch & Englisch & Spanisch - Lesen & Vorlesen System</div>
+
+                    <div class="discover-text">
+                        <strong>Serien entdecken</strong><br>
+                        Zwei emotionale Serien - "Verlangen der Herzen" (4 Bände) + "Die verborgenen Kammern" (3 Bände)
+                    </div>
+                </div>
+
+                <!-- Rechte Kammer: Einzelne Romantik-Bücher -->
+                <div class="chamber">
+                    <div class="chamber-header">
+                        <div class="chamber-icon">📚 Einzelne Romantik-Bücher</div>
+                        <div class="chamber-title">Standalone Liebesromane</div>
+                        <div class="chamber-description">
+                            Eigenständige Romantik-Geschichten mit abgeschlossenen Handlungen 
+                            und eigenständigen Charakteren.
+                        </div>
+                    </div>
+
+                    <div class="book-showcase">
+                        <div style="width: 150px; height: 200px; background: linear-gradient(135deg, #FFB6C1, #FF69B4); border-radius: 10px; margin: 0 auto 20px auto; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.1em; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.3);">
+                            Romantik-Bücher<br>in Vorbereitung
+                        </div>
+                        <div class="book-title">💖 Einzelne Liebesromane</div>
+                        <div class="book-subtitle">Standalone Geschichten</div>
+                        <button class="read-button" style="opacity: 0.6; cursor: not-allowed;">📝 In Vorbereitung</button>
+                    </div>
+
+                    <div class="discover-text">
+                        <strong>Bücher entdecken</strong><br>
+                        Eigenständige Romantik-Bücher - Deutsch & Englisch - Lesen & Vorlesen System
+                    </div>
                 </div>
             </div>
         </div>
