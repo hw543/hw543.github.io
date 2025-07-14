@@ -1,4 +1,4 @@
-**🔧 HIER DIE KOMPLETTE KORRIGIERTE TRILLER.HTML:**
+**🔧 HIER TRILLER.HTML MIT JPG-COVER:**
 
 ```html
 <!DOCTYPE html>
@@ -144,31 +144,6 @@
             display: block;
         }
 
-        .css-book-cover {
-            width: 150px;
-            height: 200px;
-            background: linear-gradient(135deg, #000000, #8B0000, #FF4500);
-            border-radius: 10px;
-            margin: 0 auto 20px auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.1em;
-            text-align: center;
-            font-weight: bold;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .css-book-cover::before {
-            content: '🔥';
-            font-size: 2em;
-            margin-bottom: 10px;
-        }
-
         .book-title {
             font-size: 1.4em;
             color: #8B0000;
@@ -301,9 +276,7 @@
                     </div>
 
                     <div class="book-showcase">
-                        <div class="css-book-cover">
-                            Flammen<br>des<br>Verrats
-                        </div>
+                        <img src="flammenvomverrat.jpg" alt="Flammen des Verrats" class="book-cover">
                         <div class="book-title">🔥 Flammen des Verrats</div>
                         <div class="book-subtitle">Ein Feuerwehrmann mit dunklen Geheimnissen</div>
                         <a href="lese-vorlese-triller.html" class="read-button">📖 Lesen & Vorlesen</a>
@@ -339,7 +312,4 @@
 </html>
 ```
 
-**🔧 EINZIGE ÄNDERUNG:**
-**Zeile 297:** `<a href="lese-vorlese-triller.html" class="read-button">📖 Lesen & Vorlesen</a>`
-
-**FERTIG! JETZT FUNKTIONIERT ALLES!** 🚀
+**✅ JPG EINGEFÜGT:** `<img src="flammenvomverrat.jpg" alt="Flammen des Verrats" class="book-cover">`
