@@ -1,1 +1,336 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔥 Thriller - Helmut Wegners Wortwelten</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.8;
+            color: #2c1810;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 50%, #1a1a1a 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #FFF8F0;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #8B0000, #FF4500);
+            color: #FFF8F0;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .back-button-header {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+        }
+
+        .back-button {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 8px 16px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            font-size: 0.9em;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .chambers-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .chamber {
+            background: linear-gradient(135deg, #FFF8F0, #FFE5E5);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .chamber:hover {
+            transform: translateY(-5px);
+        }
+
+        .chamber-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .chamber-icon {
+            background: linear-gradient(135deg, #8B0000, #FF4500);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 1.3em;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .chamber-title {
+            font-size: 1.8em;
+            color: #8B0000;
+            margin-bottom: 15px;
+        }
+
+        .chamber-description {
+            font-size: 1.2em;
+            color: #444;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .book-showcase {
+            text-align: center;
+            margin: 25px 0;
+        }
+
+        .book-cover {
+            width: 150px;
+            height: 200px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            margin: 0 auto 20px auto;
+            display: block;
+        }
+
+        .css-book-cover {
+            width: 150px;
+            height: 200px;
+            background: linear-gradient(135deg, #000000, #8B0000, #FF4500);
+            border-radius: 10px;
+            margin: 0 auto 20px auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.1em;
+            text-align: center;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .css-book-cover::before {
+            content: '🔥';
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .book-title {
+            font-size: 1.4em;
+            color: #8B0000;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .book-subtitle {
+            font-size: 1.1em;
+            color: #666;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        .read-button {
+            background: linear-gradient(135deg, #8B0000, #FF4500);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .read-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(139, 0, 0, 0.4);
+        }
+
+        .discover-text {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 1.3em;
+            color: #666;
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .chambers-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .chamber {
+                padding: 25px;
+            }
+
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .back-button-header {
+                position: relative;
+                top: 0;
+                left: 0;
+                margin-bottom: 15px;
+            }
+
+            .content {
+                padding: 25px;
+            }
+        }
+
+        .flame-animation {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #FF4500;
+            border-radius: 50%;
+            animation: flame 3s infinite ease-in-out;
+        }
+
+        @keyframes flame {
+            0%, 100% { opacity: 0; transform: translateY(0px) scale(1); }
+            50% { opacity: 1; transform: translateY(-20px) scale(1.5); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="back-button-header">
+                <a href="index.html" class="back-button">← Zurück zur Startseite</a>
+            </div>
+            <h1>🔥 Thriller</h1>
+            <p>Spannung, Gefahr und dunkle Geheimnisse - Geschichten, die den Atem rauben</p>
+        </div>
+
+        <div class="content">
+            <div class="chambers-container">
+                <!-- Linke Kammer: Thriller-Serien - IN VORBEREITUNG -->
+                <div class="chamber">
+                    <div class="chamber-header">
+                        <div class="chamber-icon">🔥 Thriller-Serien</div>
+                        <div class="chamber-title">Mehrteilige Spannungsromane</div>
+                        <div class="chamber-description">
+                            Intensive Thriller-Geschichten mit durchgehenden Charakteren 
+                            und zusammenhängenden Handlungssträngen voller Spannung.
+                        </div>
+                    </div>
+
+                    <div class="book-showcase">
+                        <div style="width: 150px; height: 200px; background: linear-gradient(135deg, #666, #999); border-radius: 10px; margin: 0 auto 20px auto; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.1em; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.3);">
+                            Thriller-Serien<br>in Vorbereitung
+                        </div>
+                        <div class="book-title">🔥 Spannende Serien</div>
+                        <div class="book-subtitle">Mehrteilige Thriller</div>
+                        <button class="read-button" style="opacity: 0.6; cursor: not-allowed;">📝 In Vorbereitung</button>
+                    </div>
+
+                    <div class="discover-text">
+                        <strong>Serie entdecken</strong><br>
+                        Erscheinen demnächst mit packenden mehrteiligen Thriller-Geschichten!
+                    </div>
+                </div>
+
+                <!-- Rechte Kammer: Einzelne Thriller - FLAMMEN DES VERRATS -->
+                <div class="chamber">
+                    <div class="chamber-header">
+                        <div class="chamber-icon">📚 Einzelne Thriller</div>
+                        <div class="chamber-title">Standalone Spannungsromane</div>
+                        <div class="chamber-description">
+                            Eigenständige Thriller-Geschichten mit abgeschlossenen Handlungen 
+                            und eigenständigen Charakteren.
+                        </div>
+                    </div>
+
+                    <div class="book-showcase">
+                        <div class="css-book-cover">
+                            Flammen<br>des<br>Verrats
+                        </div>
+                        <div class="book-title">🔥 Flammen des Verrats</div>
+                        <div class="book-subtitle">Ein Feuerwehrmann mit dunklen Geheimnissen</div>
+                        <a href="lese-vorlese-thriller.html" class="read-button">📖 Lesen & Vorlesen</a>
+                    </div>
+
+                    <div class="discover-text">
+                        <strong>Bücher entdecken</strong><br>
+                        Packende Standalone-Thriller - Deutsch & Englisch - Lesen & Vorlesen System
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Flame animation effects
+        function createFlameEffect() {
+            const flames = document.createElement('div');
+            flames.className = 'flame-animation';
+            flames.style.left = Math.random() * 100 + '%';
+            flames.style.animationDelay = Math.random() * 2 + 's';
+            document.querySelector('.header').appendChild(flames);
+            
+            setTimeout(() => {
+                flames.remove();
+            }, 3000);
+        }
+
+        // Create flame effects periodically
+        setInterval(createFlameEffect, 800);
+    </script>
+</body>
+</html>
