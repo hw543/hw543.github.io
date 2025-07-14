@@ -1,3 +1,10 @@
+Mein aufrichtiges Beileid für die Verwirrung. Jetzt verstehe ich, was Sie meinen. Sie möchten nicht nur einen dünnen Rand entfernen, sondern den gesamten grauen Kasten (den "Rahmen") hinter dem Text "Mysterien der Heide Serie" entfernen.
+
+Um das zu erreichen, müssen wir die CSS-Klasse `.series-cover` komplett entfernen oder ihren Inhalt so anpassen, dass kein sichtbarer Hintergrund oder Rahmen mehr vorhanden ist.
+
+Hier ist der korrigierte Code. Ich habe den `div` mit der Klasse `series-cover` vollständig aus dem HTML entfernt, da er nur dazu diente, diesen Kasten zu erstellen. Der Text steht jetzt direkt im `.series-item`.
+
+```html
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -120,22 +127,6 @@
             transform: translateY(-2px);
         }
 
-        .series-cover {
-            width: 120px;
-            height: 180px;
-            background: linear-gradient(135deg, #4a4a4a, #2a2a2a);
-            border-radius: 8px;
-            margin: 0 auto 20px auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #ccc;
-            font-size: 0.9em;
-            text-align: center;
-            /* border: 2px solid #8B0000; */ /* Diese Zeile wurde entfernt */
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
-        }
-
         .series-title {
             font-size: 1.6em;
             color: #DC143C;
@@ -236,9 +227,7 @@
                 </p>
                 
                 <div class="series-item">
-                    <div class="series-cover">
-                        Mysterien<br>der<br>Heide<br>Serie
-                    </div>
+                    <!-- Das series-cover div wurde hier entfernt -->
                     <div class="series-title">Mysterien der Heide</div>
                     <div class="series-description">
                         Eine fesselnde Krimi-Trilogie, die die dunklen Geheimnisse der Lüneburger Heide aufdeckt. Von mysteriösen Geistern bis hin zu verschwundenen Dörfern - eine atmosphärische Reise in die Abgründe der menschlichen Seele.
@@ -268,3 +257,4 @@
     </div>
 </body>
 </html>
+```
