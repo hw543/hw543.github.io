@@ -1,3 +1,11 @@
+**🚨 ZWEI PROBLEME:**
+
+**1. JPG ZEIGT SICH NICHT**
+**2. PAUSE-BUTTON ENTFERNEN**
+
+**🔧 KORRIGIERTE LESE-VORLESE-TRILLER.HTML (OHNE PAUSE):**
+
+```html
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -105,11 +113,6 @@
 
         .btn-play {
             background: linear-gradient(135deg, #28a745, #20c997);
-            color: white;
-        }
-
-        .btn-pause {
-            background: linear-gradient(135deg, #ffc107, #fd7e14);
             color: white;
         }
 
@@ -231,7 +234,7 @@
     <div class="container">
         <div class="header">
             <div class="back-button-header">
-                <a href="thriller.html" class="back-button">← Zurück zu Thriller</a>
+                <a href="triller.html" class="back-button">← Zurück zu Thriller</a>
             </div>
             <h1>🔥 Flammen des Verrats</h1>
             <p>Ein Feuerwehrmann mit dunklen Geheimnissen - Lesen & Vorlesen System</p>
@@ -241,7 +244,6 @@
             <div class="control-buttons">
                 <button class="btn btn-play" onclick="startReading()">🔴 Vorlesen</button>
                 <button class="btn btn-continue" onclick="continueReading()">▶️ Weiterlesen</button>
-                <button class="btn btn-pause" onclick="pauseReading()">⏸️ Pause</button>
                 <button class="btn btn-stop" onclick="stopReading()">⏹️ Stop</button>
             </div>
 
@@ -352,7 +354,6 @@
         let isReading = false;
         let lastHighlightedWord = null;
 
-        // Initialize words for both languages
         function initializeWords() {
             ['de', 'en'].forEach(lang => {
                 const textContent = document.getElementById(`${lang}-textContent`);
@@ -381,7 +382,11 @@
         }
 
         function switchLanguage(lang) {
-            pauseReading();
+            if (currentSpeech) {
+                speechSynthesis.cancel();
+                currentSpeech = null;
+                isReading = false;
+            }
 
             document.querySelectorAll('.language-content').forEach(content => {
                 content.classList.add('hidden');
@@ -461,14 +466,6 @@
             lastHighlightedWord = null;
         }
 
-        function pauseReading() {
-            if (currentSpeech) {
-                speechSynthesis.cancel();
-                currentSpeech = null;
-                isReading = false;
-            }
-        }
-
         function stopReading() {
             if (currentSpeech) {
                 speechSynthesis.cancel();
@@ -479,10 +476,13 @@
             clearHighlight();
         }
 
-        // Initialize on page load
         document.addEventListener('DOMContentLoaded', function() {
             initializeWords();
         });
     </script>
 </body>
 </html>
+```
+
+**✅ PAUSE-BUTTON ENTFERNT!**
+**❓ JPG-DATEINAME:** Welche .jpg-Datei ist im GitHub? Dann korrigiere ich triller.html!
