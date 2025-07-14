@@ -5,341 +5,279 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>New Adult - Helmut Wegners Wortwelten</title>
     <style>
+        /* Styles von der Index-Seite übernommen, um ein einheitliches Design zu gewährleisten */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
             font-family: 'Georgia', serif;
-            background: linear-gradient(135deg, #2D1B69 0%, #11998e 30%, #38ef7d 70%, #FFD700 100%);
-            background-attachment: fixed;
-            min-height: 100vh;
-            color: #f5f5f5;
             line-height: 1.6;
-            padding: 20px;
+            color: white;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
         }
-
         .container {
             max-width: 1200px;
             margin: 0 auto;
+            padding: 0 20px;
         }
-
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
-            padding: 40px 20px;
-            background: rgba(0, 0, 0, 0.7);
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            position: relative;
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
-
-        .back-button {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            background: rgba(45, 27, 105, 0.8);
-            color: white;
-            padding: 10px 20px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 25px;
-            text-decoration: none;
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.8rem;
             font-weight: bold;
+            color: #2c3e50;
+            text-decoration: none;
+        }
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        .nav-link {
+            color: #2c3e50;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
             transition: all 0.3s ease;
-            font-size: 0.9em;
+        }
+        .nav-link:hover {
+            background: #f8f9fa;
+            color: #667eea;
         }
 
-        .back-button:hover {
-            background: rgba(45, 27, 105, 1);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        /* Hauptinhaltsbereich der New-Adult-Seite */
+        .main-content {
+            padding: 4rem 0;
+            text-align: center;
+        }
+        .genre-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 2rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            color: #FFC107;
         }
 
-        .header h1 {
-            font-size: 3em;
-            margin-bottom: 20px;
-            color: #38ef7d;
-            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
-        }
-
-        .header p {
-            font-size: 1.3em;
-            color: #f0f0f0;
-            font-style: italic;
-        }
-
+        /* Sektionen für Serien und Einzelbände */
         .content-sections {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 40px;
+            gap: 3rem;
             margin-top: 40px;
         }
-
         .section {
-            background: rgba(0, 0, 0, 0.8);
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
-            border: 2px solid rgba(45, 27, 105, 0.3);
-            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            transition: transform 0.3s ease;
         }
-
         .section:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8);
-            border-color: rgba(56, 239, 125, 0.6);
         }
-
         .section h2 {
-            font-size: 2.2em;
-            color: #38ef7d;
-            margin-bottom: 20px;
+            font-size: 1.8rem;
+            color: #FFC107;
+            margin-bottom: 1.5rem;
             text-align: center;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
         }
-
         .section-description {
-            font-size: 1.1em;
-            margin-bottom: 30px;
+            font-size: 1rem;
+            color: #f8f9fa;
+            opacity: 0.9;
+            margin-bottom: 2rem;
             text-align: center;
-            color: #d0d0d0;
-            line-height: 1.6;
         }
 
-        .series-item {
-            background: rgba(45, 27, 105, 0.3);
-            border-radius: 10px;
-            padding: 25px;
-            margin-bottom: 20px;
-            border: 1px solid rgba(56, 239, 125, 0.4);
+        /* Elemente für Serien und Bücher */
+        .item-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
             transition: all 0.3s ease;
         }
-
-        .series-item:hover {
-            background: rgba(45, 27, 105, 0.5);
+        .item-card:hover {
+            background: rgba(255, 255, 255, 0.2);
             transform: translateY(-2px);
         }
-
-        .series-title {
-            font-size: 1.6em;
-            color: #38ef7d;
-            margin-bottom: 10px;
-            text-align: center;
-            font-weight: bold;
-        }
-
-        .series-description {
-            font-size: 1em;
-            color: #d0d0d0;
-            margin-bottom: 20px;
-            text-align: center;
-            line-height: 1.5;
-        }
-
-        .series-stats {
-            font-size: 0.9em;
-            color: #b0b0b0;
-            text-align: center;
-            margin-bottom: 20px;
-            font-style: italic;
-        }
-
-        .discover-button {
-            display: block;
-            background: linear-gradient(135deg, #2D1B69, #11998e);
+        .item-title {
+            font-size: 1.4rem;
             color: white;
-            padding: 15px 30px;
-            border: none;
-            border-radius: 25px;
-            font-size: 1.1em;
             font-weight: bold;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+        .item-description {
+            font-size: 0.9rem;
+            color: #f0f0f0;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .item-link {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
             text-decoration: none;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin: 0 auto;
-            min-width: 200px;
-        }
-
-        .discover-button:hover {
-            background: linear-gradient(135deg, #11998e, #38ef7d);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(56, 239, 125, 0.4);
-        }
-
-        .book-item {
-            background: rgba(45, 27, 105, 0.3);
-            border-radius: 10px;
-            padding: 25px;
-            margin-bottom: 20px;
-            border: 1px solid rgba(56, 239, 125, 0.4);
-            transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .book-item:hover {
-            background: rgba(45, 27, 105, 0.5);
-            transform: translateY(-2px);
-        }
-
-        .book-cover {
-            width: 150px;
-            height: 220px;
-            object-fit: cover;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-            border: 2px solid rgba(56, 239, 125, 0.6);
-        }
-
-        .book-title {
-            font-size: 1.4em;
-            color: #38ef7d;
-            margin-bottom: 10px;
-            text-align: center;
             font-weight: bold;
+            transition: background 0.3s ease;
         }
-
-        .book-description {
-            font-size: 1em;
-            color: #d0d0d0;
-            margin-bottom: 15px;
-            text-align: center;
-            line-height: 1.5;
-        }
-
-        .book-stats {
-            font-size: 0.9em;
-            color: #b0b0b0;
-            text-align: center;
-            margin-bottom: 15px;
-            font-style: italic;
+        .item-link:hover {
+            background: #764ba2;
         }
 
         .books-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 20px;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .book-cover {
+            width: 100%;
+            max-width: 150px;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            margin-bottom: 1rem;
+        }
+        .book-item {
+            text-align: center;
         }
 
+        /* Footer */
+        footer {
+            background: rgba(44, 62, 80, 0.9);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+
+        /* Mobile Responsiveness */
         @media (max-width: 768px) {
             .content-sections {
                 grid-template-columns: 1fr;
-                gap: 30px;
+                gap: 2rem;
             }
-            
-            .header h1 {
-                font-size: 2.2em;
-            }
-            
-            .section h2 {
-                font-size: 1.8em;
-            }
-            
-            .back-button {
-                position: relative;
-                top: 0;
-                left: 0;
-                margin-bottom: 20px;
-                display: inline-block;
-            }
-
             .books-grid {
                 grid-template-columns: 1fr;
+            }
+            .section {
+                padding: 2rem 1rem;
+            }
+            .genre-title {
+                font-size: 2rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <a href="index.html" class="back-button">← Zurück zur Startseite</a>
-            <h1>New Adult</h1>
-            <p>Emotionale Reisen ins Erwachsenenleben</p>
-        </div>
-
-        <div class="content-sections">
-            <!-- New Adult Serien Bereich -->
-            <div class="section">
-                <h2>New Adult Serien</h2>
-                <p class="section-description">
-                    Mehrteilige Geschichten über junge Erwachsene, die ihren Platz im Leben finden und tiefe Beziehungen aufbauen.
-                </p>
-                
-                <div class="series-item">
-                    <div class="series-title">Verlangen der Herzen</div>
-                    <div class="series-description">
-                        Eine fesselnde Trilogie über Liebe, Leidenschaft und persönliches Wachstum. Folge den Protagonisten auf ihrer emotionalen Reise durch die Höhen und Tiefen des Erwachsenwerdens.
-                    </div>
-                    <div class="series-stats">
-                        3 Bände • Deutsch & Englisch • Lesen & Vorlesen-System
-                    </div>
-                    <a href="verlangen-der-herzen.html" class="discover-button">Serie entdecken</a>
-                </div>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">Helmut Wegners Wortwelten</a>
+                <nav>
+                    <ul class="nav-menu">
+                        <li><a href="impressum.html" class="nav-link">Kontakt</a></li>
+                    </ul>
+                </nav>
             </div>
+        </div>
+    </header>
 
-            <!-- Einzelne New Adult Bücher Bereich -->
-            <div class="section">
-                <h2>Einzelne New Adult Bücher</h2>
-                <p class="section-description">
-                    Standalone Romane über junge Erwachsene, die bedeutsame Lebenserfahrungen machen und persönliche Herausforderungen meistern.
-                </p>
-                
-                <div class="books-grid">
-                    <div class="book-item">
-                        <img src="die-tiefe-der-begierde.jpg" alt="Die Tiefe der Begierde Cover" class="book-cover">
-                        <div class="book-title">Die Tiefe der Begierde</div>
-                        <div class="book-description">
-                            Eine intensive Geschichte über Selbstfindung und die Erkundung tiefer Gefühle in einer komplexen Beziehung.
-                        </div>
-                        <div class="book-stats">
-                            Deutsch & Englisch • Lesen & Vorlesen-System
-                        </div>
-                        <a href="lese-vorlese-new-adult.html#band1" class="discover-button">Lesen</a>
-                    </div>
+    <main class="main-content">
+        <div class="container">
+            <h1 class="genre-title">💫 New Adult</h1>
+            <p class="section-description">
+                Willkommen in einer Welt voller emotionaler und fesselnder Geschichten, die die Höhen und Tiefen des Erwachsenwerdens erkunden.
+            </p>
+
+            <div class="content-sections">
+                <div class="section">
+                    <h2>Serien</h2>
                     
-                    <div class="book-item">
-                        <img src="die-kunst-der-hingabe.jpg" alt="Die Kunst der Hingabe Cover" class="book-cover">
-                        <div class="book-title">Die Kunst der Hingabe</div>
-                        <div class="book-description">
-                            Ein emotionaler Roman über Vertrauen, Hingabe und die Kunst, sich auf eine tiefe Verbindung einzulassen.
-                        </div>
-                        <div class="book-stats">
-                            Deutsch & Englisch • Lesen & Vorlesen-System
-                        </div>
-                        <a href="lese-vorlese-new-adult.html#band2" class="discover-button">Lesen</a>
+                    <div class="item-card">
+                        <h3 class="item-title">Verlangen der Herzen</h3>
+                        <p class="item-description">
+                            Eine fesselnde Trilogie über Liebe, Leidenschaft und persönliches Wachstum. Folge den Protagonisten auf ihrer emotionalen Reise durch die Höhen und Tiefen des Erwachsenwerdens.
+                        </p>
+                        <a href="verlangen-der-herzen.html" class="item-link">Serie entdecken</a>
                     </div>
+                </div>
+
+                <div class="section">
+                    <h2>Einzelbände</h2>
                     
-                    <div class="book-item">
-                        <img src="hinter-verschlossenen-tueren.jpg" alt="Hinter verschlossenen Türen Cover" class="book-cover">
-                        <div class="book-title">Hinter verschlossenen Türen</div>
-                        <div class="book-description">
-                            Eine packende Geschichte über verborgene Geheimnisse und die Herausforderungen, sich seinen inneren Dämonen zu stellen.
+                    <div class="books-grid">
+                        <div class="book-item">
+                            <img src="die-tiefe-der-begierde.jpg" alt="Die Tiefe der Begierde Cover" class="book-cover">
+                            <h3 class="item-title">Die Tiefe der Begierde</h3>
+                            <p class="item-description">
+                                Eine intensive Geschichte über Selbstfindung und die Erkundung tiefer Gefühle in einer komplexen Beziehung.
+                            </p>
+                            <a href="lese-vorlese-new-adult.html#band1" class="item-link">Lesen</a>
                         </div>
-                        <div class="book-stats">
-                            Deutsch & Englisch • Lesen & Vorlesen-System
+                        
+                        <div class="book-item">
+                            <img src="die-kunst-der-hingabe.jpg" alt="Die Kunst der Hingabe Cover" class="book-cover">
+                            <h3 class="item-title">Die Kunst der Hingabe</h3>
+                            <p class="item-description">
+                                Ein emotionaler Roman über Vertrauen, Hingabe und die Kunst, sich auf eine tiefe Verbindung einzulassen.
+                            </p>
+                            <a href="lese-vorlese-new-adult.html#band2" class="item-link">Lesen</a>
                         </div>
-                        <a href="lese-vorlese-new-adult.html#band1" class="discover-button">Lesen</a>
-                    </div>
-                    
-                    <div class="book-item">
-                        <img src="verborgene-gefuehle.jpg" alt="Verborgene Gefühle Cover" class="book-cover">
-                        <div class="book-title">Verborgene Gefühle</div>
-                        <div class="book-description">
-                            Ein berührender Roman über unausgesprochene Gefühle und den Mut, sein wahres Ich zu zeigen.
+
+                        <div class="book-item">
+                            <img src="hinter-verschlossenen-tueren.jpg" alt="Hinter verschlossenen Türen Cover" class="book-cover">
+                            <h3 class="item-title">Hinter verschlossenen Türen</h3>
+                            <p class="item-description">
+                                Eine packende Geschichte über verborgene Geheimnisse und die Herausforderungen, sich seinen inneren Dämonen zu stellen.
+                            </p>
+                            <a href="lese-vorlese-new-adult.html#band1" class="item-link">Lesen</a>
                         </div>
-                        <div class="book-stats">
-                            Deutsch & Englisch • Lesen & Vorlesen-System
+
+                        <div class="book-item">
+                            <img src="verborgene-gefuehle.jpg" alt="Verborgene Gefühle Cover" class="book-cover">
+                            <h3 class="item-title">Verborgene Gefühle</h3>
+                            <p class="item-description">
+                                Ein berührender Roman über unausgesprochene Gefühle und den Mut, sein wahres Ich zu zeigen.
+                            </p>
+                            <a href="lese-vorlese-new-adult.html#band1" class="item-link">Lesen</a>
                         </div>
-                        <a href="lese-vorlese-new-adult.html#band1" class="discover-button">Lesen</a>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Helmut Wegner - Helmut Wegners Wortwelten. Geschichten mit Tiefe, Herz und Haltung.</p>
+        </div>
+    </footer>
+
 </body>
 </html>
