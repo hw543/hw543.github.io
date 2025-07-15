@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zwischen Herz und Verstand - Lesen & Vorlesen - Versuchsreihe - Helmut Wegners Wortwelten</title>
+    <title>Zwischen Herz und Verstand - Lesen & Vorlesen - Helmut Wegners Wortwelten</title>
     <style>
         * {
             margin: 0;
@@ -119,18 +119,13 @@
             color: white;
         }
 
-        .btn-pause {
-            background: linear-gradient(135deg, #ffc107, #fd7e14);
+        .btn-continue {
+            background: linear-gradient(135deg, #17a2b8, #6f42c1);
             color: white;
         }
 
         .btn-stop {
             background: linear-gradient(135deg, #dc3545, #e83e8c);
-            color: white;
-        }
-
-        .btn-continue {
-            background: linear-gradient(135deg, #17a2b8, #6f42c1);
             color: white;
         }
 
@@ -247,13 +242,11 @@
             </div>
             <h1>Zwischen Herz und Verstand</h1>
             <p>Lesen & Vorlesen-System - Lassen Sie sich in die emotionalen Geheimnisse der New Adult Welt entführen</p>
-            <div class="versuchsreihe-badge">VERSUCHSREIHE</div>
         </div>
         <div class="controls">
             <div class="control-buttons">
                 <button class="btn btn-play" onclick="startReading()">🔴 Vorlesen</button>
                 <button class="btn btn-continue" onclick="continueReading()">▶️ Weiterlesen</button>
-                <button class="btn btn-pause" onclick="pauseReading()">⏸️ Pause</button>
                 <button class="btn btn-stop" onclick="stopReading()">⏹️ Stop</button>
             </div>
             <div class="language-navigation">
@@ -267,9 +260,7 @@
             </div>
         </div>
         <div class="content">
-            <!-- DEUTSCHE VERSIONEN -->
             <div id="de-content" class="language-content">
-                <!-- Band 1: Verborgene Gefühle (Deutsch) -->
                 <div id="de-band1" class="band-content">
                     <div class="book-title">Band 1: Verborgene Gefühle</div>
                     <div class="chapter-title">Kapitel 1: Die Nachricht, die alles veränderte</div>
@@ -283,7 +274,6 @@
                         <p>Während sie das Café verließen, fragte sich Lena, worauf sie sich da eingelassen hatte. Ein Teil von ihr war aufgeregt, ein anderer Teil zu Tode erschrocken. Aber unter all dem lag eine seltsame Gewissheit: Die Notiz in "Effi Briest" hatte etwas in Bewegung gesetzt, einen Stein ins Rollen gebracht, der nicht mehr aufzuhalten war. Wohin dieser Weg sie führen würde, wusste sie nicht. Aber zum ersten Mal seit langem war sie bereit, es herauszufinden.</p>
                     </div>
                 </div>
-                <!-- Band 2: Enthüllte Wahrheiten (Deutsch) -->
                 <div id="de-band2" class="band-content hidden">
                     <div class="book-title">Band 2: Enthüllte Wahrheiten</div>
                     <div class="chapter-title">Kapitel 1: Nähe, die flieht</div>
@@ -298,7 +288,6 @@
                         <p>Julian bewegte sich im Bett, seine Augen öffneten sich langsam. Er lächelte, als er sie am Fenster sah. "Guten Morgen, Schöne. Schon so früh wach?" Seine Stimme war heiser vom Schlaf, warm und vertraut. Aber heute klang sie anders in ihren Ohren. Heute hörte sie die Geheimnisse, die zwischen den Worten lagen.</p>
                     </div>
                 </div>
-                <!-- Band 3: In Vorbereitung (Deutsch) -->
                 <div id="de-band3" class="band-content hidden">
                     <div class="book-title">Band 3: In Vorbereitung</div>
                     <div class="chapter-title">Bald verfügbar</div>
@@ -310,9 +299,7 @@
                     </div>
                 </div>
             </div>
-            <!-- ENGLISCHE VERSIONEN -->
             <div id="en-content" class="language-content hidden">
-                <!-- Band 1: Hidden Feelings (English) -->
                 <div id="en-band1" class="band-content">
                     <div class="book-title">Volume 1: Hidden Feelings</div>
                     <div class="chapter-title">Chapter 1: The Message That Changed Everything</div>
@@ -326,7 +313,6 @@
                         <p>As they left the café, Lena wondered what she had gotten herself into. Part of her was excited, another part scared to death. But underneath all that lay a strange certainty: The note in "Effi Briest" had set something in motion, started a stone rolling that could no longer be stopped. Where this path would lead her, she didn't know. But for the first time in a long time, she was ready to find out.</p>
                     </div>
                 </div>
-                <!-- Band 2: Revealed Truths (English) -->
                 <div id="en-band2" class="band-content hidden">
                     <div class="book-title">Volume 2: Revealed Truths</div>
                     <div class="chapter-title">Chapter 1: Closeness That Flees</div>
@@ -341,7 +327,6 @@
                         <p>Julian moved in bed, his eyes slowly opening. He smiled when he saw her at the window. "Good morning, beautiful. Already awake so early?" His voice was hoarse from sleep, warm and familiar. But today it sounded different to her ears. Today she heard the secrets that lay between the words.</p>
                     </div>
                 </div>
-                <!-- Band 3: In Preparation (English) -->
                 <div id="en-band3" class="band-content hidden">
                     <div class="book-title">Volume 3: In Preparation</div>
                     <div class="chapter-title">Coming Soon</div>
@@ -486,12 +471,6 @@
                 el.classList.remove('word-highlight');
             });
             lastHighlightedWord = null;
-        }
-
-        function pauseReading() {
-            if (currentSpeech) {
-                speechSynthesis.pause();
-            }
         }
 
         function stopReading() {
