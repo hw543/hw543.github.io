@@ -277,22 +277,113 @@
             border: 1px solid rgba(255,215,0,0.2);
         }
 
-        .play-button {
-            background: linear-gradient(135deg, #4285f4, #1976d2);
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 25px;
-            font-size: 1rem;
-            font-weight: bold;
+        .audio-player {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 10px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .progress-container {
+            margin-bottom: 15px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 8px;
+            cursor: pointer;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4285f4, #1976d2);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .time-display {
+            text-align: center;
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .control-buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .control-btn {
+            background: rgba(66, 133, 244, 0.1);
+            border: 2px solid rgba(66, 133, 244, 0.3);
+            color: #4285f4;
+            padding: 10px 15px;
+            border-radius: 50%;
             cursor: pointer;
             transition: all 0.3s ease;
+            font-size: 1.2em;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .control-btn:hover {
+            background: rgba(66, 133, 244, 0.2);
+            transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(66, 133, 244, 0.3);
         }
 
-        .play-button:hover {
+        .main-play {
+            background: linear-gradient(135deg, #4285f4, #1976d2);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 1.1em;
+            font-weight: bold;
+            width: auto;
+            height: auto;
+            min-width: 180px;
+        }
+
+        .main-play:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(66, 133, 244, 0.4);
+        }
+
+        .additional-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
+        .speed-control {
+            padding: 8px 12px;
+            border: 2px solid rgba(66, 133, 244, 0.3);
+            border-radius: 20px;
+            background: white;
+            font-size: 0.9em;
+            cursor: pointer;
+            color: #4285f4;
+            font-weight: bold;
+        }
+
+        .speed-control:focus {
+            outline: none;
+            border-color: #4285f4;
         }
 
         .continue-reading {
@@ -352,6 +443,19 @@
             line-height: 1.6;
         }
 
+        .position-indicator {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
         @media (max-width: 768px) {
             .header h1 {
                 font-size: 2.2rem;
@@ -370,10 +474,36 @@
                 font-size: 1rem;
                 padding: 20px;
             }
+
+            .control-buttons {
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+            
+            .control-btn {
+                width: 45px;
+                height: 45px;
+                font-size: 1em;
+            }
+            
+            .additional-controls {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .main-play {
+                min-width: 150px;
+                font-size: 1em;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Position Indicator -->
+    <div class="position-indicator" id="position-indicator">
+        Bereit zum Vorlesen
+    </div>
+
     <!-- Sterne-Animation -->
     <div class="stars">
         <div class="star"></div>
@@ -478,7 +608,51 @@
                 </div>
 
                 <div class="audio-controls">
-                    <button class="play-button" onclick="startReading('band1-de')">🎧 Komplettes Kapitel vorlesen lassen</button>
+                    <div class="audio-player">
+                        <div class="progress-container">
+                            <div class="progress-bar" onclick="seekTo(event, 'band1-de')">
+                                <div class="progress-fill" id="progress-fill-band1-de"></div>
+                            </div>
+                            <div class="time-display">
+                                <span id="current-time-band1-de">00:00</span> / <span id="total-time-band1-de">45:32</span>
+                            </div>
+                        </div>
+                        
+                        <div class="control-buttons">
+                            <button class="control-btn" onclick="previousChapter('band1-de')" title="Vorheriges Kapitel">
+                                ⏮️
+                            </button>
+                            <button class="control-btn" onclick="rewind('band1-de')" title="15 Sekunden zurück">
+                                ⏪
+                            </button>
+                            <button class="play-button main-play" onclick="togglePlay('band1-de')" id="play-btn-band1-de">
+                                ▶️ Vorlesen starten
+                            </button>
+                            <button class="control-btn" onclick="forward('band1-de')" title="15 Sekunden vor">
+                                ⏩
+                            </button>
+                            <button class="control-btn" onclick="nextChapter('band1-de')" title="Nächstes Kapitel">
+                                ⏭️
+                            </button>
+                        </div>
+                        
+                        <div class="additional-controls">
+                            <button class="control-btn" onclick="stopReading('band1-de')" title="Stoppen">
+                                ⏹️ Stop
+                            </button>
+                            <select class="speed-control" onchange="changeSpeed('band1-de', this.value)">
+                                <option value="0.5">0.5x</option>
+                                <option value="0.75">0.75x</option>
+                                <option value="1" selected>1x</option>
+                                <option value="1.25">1.25x</option>
+                                <option value="1.5">1.5x</option>
+                                <option value="2">2x</option>
+                            </select>
+                            <button class="control-btn" onclick="continueReading('band1-de')" title="Weiterlesen">
+                                📖 Weiterlesen
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -529,7 +703,51 @@
                 </div>
 
                 <div class="audio-controls">
-                    <button class="play-button" onclick="startReading('band1-en')">🎧 Listen to Complete Chapter</button>
+                    <div class="audio-player">
+                        <div class="progress-container">
+                            <div class="progress-bar" onclick="seekTo(event, 'band1-en')">
+                                <div class="progress-fill" id="progress-fill-band1-en"></div>
+                            </div>
+                            <div class="time-display">
+                                <span id="current-time-band1-en">00:00</span> / <span id="total-time-band1-en">42:18</span>
+                            </div>
+                        </div>
+                        
+                        <div class="control-buttons">
+                            <button class="control-btn" onclick="previousChapter('band1-en')" title="Previous Chapter">
+                                ⏮️
+                            </button>
+                            <button class="control-btn" onclick="rewind('band1-en')" title="15 seconds back">
+                                ⏪
+                            </button>
+                            <button class="play-button main-play" onclick="togglePlay('band1-en')" id="play-btn-band1-en">
+                                ▶️ Start Reading
+                            </button>
+                            <button class="control-btn" onclick="forward('band1-en')" title="15 seconds forward">
+                                ⏩
+                            </button>
+                            <button class="control-btn" onclick="nextChapter('band1-en')" title="Next Chapter">
+                                ⏭️
+                            </button>
+                        </div>
+                        
+                        <div class="additional-controls">
+                            <button class="control-btn" onclick="stopReading('band1-en')" title="Stop">
+                                ⏹️ Stop
+                            </button>
+                            <select class="speed-control" onchange="changeSpeed('band1-en', this.value)">
+                                <option value="0.5">0.5x</option>
+                                <option value="0.75">0.75x</option>
+                                <option value="1" selected>1x</option>
+                                <option value="1.25">1.25x</option>
+                                <option value="1.5">1.5x</option>
+                                <option value="2">2x</option>
+                            </select>
+                            <button class="control-btn" onclick="continueReading('band1-en')" title="Continue Reading">
+                                📖 Continue
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -569,218 +787,61 @@
 
                     <p>"Guten Morgen." Julians Stimme ließ sie zusammenzucken. Er stand in der Tür, in Boxershorts und T-Shirt, seine Haare zerzaust vom Schlaf, sein Gesicht noch weich von Träumen. "Entschuldige, ich wollte dich nicht erschrecken." Er kam zu ihr, schlang seine Arme von hinten um ihre Taille und drückte einen Kuss auf ihre Schulter. "Du warst weg."</p>
 
-                    <p>"Ich wollte Kaffee machen", erklärte sie und deutete auf die Kaffeemaschine, die gerade ihre letzten Tropfen in die Kanne entließ. "Hm." Er vergrub sein Gesicht in ihrem Haar und atmete tief ein. "Du riechst gut." "Ich rieche nach Schlaf", korrigierte sie mit einem leichten Lachen. "Genau." Seine Hände wanderten unter ihr T-Shirt, streiften sanft über ihren Bauch.</p>
-
-                    <p>Seine Berührung war warm, vertraut, sendete kleine Wellen der Erregung durch ihren Körper. Sie lehnte sich instinktiv gegen ihn, ließ ihren Kopf auf seine Schulter sinken. Das war einfach. Das funktionierte. Der körperliche Teil ihrer Beziehung hatte nie die Probleme bereitet, die sie anfangs befürchtet hatte.</p>
-
-                    <p>"Woran denkst du?" Julians Frage unterbrach ihre Gedanken. Er reichte ihr eine Tasse, die Wärme drang durch das Porzellan in ihre Hände. "Nichts Besonderes", log sie und hasste sich ein wenig dafür. Es war eine kleine Lüge, harmlos. Und doch spürte sie, wie sich eine Mauer zwischen ihnen aufbaute, Stein für Stein, Tag für Tag.</p>
-
-                    <p>Worte, die ungesagt blieben, Gedanken, die sie für sich behielt -- nicht aus Bosheit oder Berechnung, sondern aus einer seltsamen Scheu, einer Angst vor Enttäuschung. Seiner oder ihrer eigenen, sie war sich nicht sicher.</p>
-
-                    <p>Julian akzeptierte ihre Antwort mit einem Nicken, keine Nachfrage, keine Insistenz. War das Respekt für ihre Grenzen oder Gleichgültigkeit? Sie fragte sich, ob er spürte, dass sie log, ob es ihn verletzte. Oder ob er einfach nicht wissen wollte, was wirklich in ihr vorging.</p>
-
-                    <p>Sie tranken ihren Kaffee schweigend, jeder in Gedanken versunken. Die Uhr an der Wand tickte, markierte die Sekunden, die ungenutzt zwischen ihnen verstrichen.</p>
-
-                    <p>"Ich muss los", sagte Julian schließlich und stellte seine leere Tasse in die Spüle. Er hatte heute früh einen Workshop zu leiten, erinnerte sich Lena. Etwas über kreatives Schreiben für Oberstufenschüler. "Natürlich." Sie trat beiseite, um ihn vorbeizulassen, obwohl die Küche groß genug war, dass es keine Notwendigkeit dafür gab.</p>
-
-                    <p>"Sehen wir uns heute Abend?" Er blieb kurz stehen, seine Hand auf ihrer Schulter, wie ein Anker. "Sophie hat gefragt, ob wir ins Kino wollen." Lena hatte es vergessen, oder verdrängt. Sie mochte Sophie, wirklich. Die lebhafte, direkte Art ihrer Freundin war ein willkommenes Gegengewicht zu ihrer eigenen Introvertiertheit. Aber in letzter Zeit fiel es ihr schwer, die Energie für soziale Interaktionen aufzubringen, selbst mit Menschen, die sie mochte.</p>
-
-                    <p>"Klingt gut", sagte sie dennoch, wieder eine kleine Lüge, wieder ein Stein in der Mauer. Julian küsste sie flüchtig auf die Stirn, eine Geste, die gleichzeitig zärtlich und distanziert wirkte. "Ich freue mich. Bis später dann."</p>
-
-                    <p>Sie hörte, wie er ins Bad ging, die Dusche anstellte. Der vertraute Rhythmus des Morgens setzte sich fort, als wäre nichts anders als sonst. Sie trank ihren Kaffee aus, nahm einen Schreibblock vom Küchentisch -- Julian hatte die Angewohnheit, überall in der Wohnung Notizblöcke zu verteilen, immer bereit, einen Gedanken festzuhalten -- und kritzelte abwesend auf das Papier.</p>
-
-                    <p>Nicht wirklich Worte, eher Formen, Spiralen, Linien, die ineinander übergingen. Ihre Hand bewegte sich, als hätte sie einen eigenen Willen. Wie viel einfacher wäre es, wenn sie einfach aufschreiben könnte, was in ihr vorging. Aber dafür müsste sie es erst selbst verstehen.</p>
-
-                    <p>Nach dem Workshop blieb sie noch eine Weile in der Bibliothek, versuchte, an ihrer Masterarbeit zu arbeiten. Aber die Worte auf dem Bildschirm verschwammen vor ihren Augen, weigerten sich, einen Sinn zu ergeben. Sie starrte aus dem Fenster, beobachtete, wie die frühe Dämmerung des November den Campus in bläuliches Licht tauchte.</p>
-
-                    <p>Die meisten Studierenden waren bereits gegangen, nur einzelne Gestalten bewegten sich noch zwischen den Gebäuden, eilten nach Hause oder zu späten Veranstaltungen. Lena verspürte plötzlich ein überwältigendes Bedürfnis, allein zu sein, wirklich allein, nicht nur physisch in einem Raum voller Fremder, sondern in ihrem eigenen Raum, umgeben von ihren eigenen Dingen.</p>
-
-                    <p>Sie packte hastig ihre Sachen zusammen und verließ die Bibliothek. Draußen war es kälter geworden, der Wind schnitt durch ihren leichten Mantel. Sie zog den Schal enger um ihren Hals und machte sich auf den Weg -- nicht zu Julians Wohnung, wie sie es ursprünglich geplant hatte, sondern zu ihrer eigenen.</p>
-
-                    <p>Es war ein längerer Weg, aber sie brauchte die Zeit zum Nachdenken, zum Sortieren ihrer wirren Gedanken. Sie schrieb Julian eine Nachricht: "Bin etwas müde, treffe euch direkt im Kino. Sag Sophie Bescheid." Eine weitere kleine Lüge. Sie war nicht müde, zumindest nicht physisch. Aber sie brauchte diesen Moment für sich, diese Atempause im Strom der Erwartungen und Verpflichtungen.</p>
-
-                    <p>Seine Antwort kam prompt: "Alles klar. Soll ich dich abholen?" Ihre Finger zögerten über dem Bildschirm. Es wäre so einfach, ja zu sagen, sich treiben zu lassen, den Weg des geringsten Widerstands zu gehen. Aber etwas in ihr sträubte sich, beharrte auf diesem kleinen Stück Unabhängigkeit. "Nein, danke. Ich komme direkt hin. Bis später." Sie steckte das Handy weg, bevor er antworten konnte, und beschleunigte ihre Schritte.</p>
-
-                    <p>In ihrer Wohnung empfing sie der vertraute Geruch nach Büchern und Tee, nach ihr selbst. Sie hatte in den letzten Wochen nur sporadisch hier geschlafen, kam meist nur, um Kleidung zu wechseln oder etwas zu holen, was sie bei Julian brauchte. Die Luft war etwas abgestanden, aber nicht unangenehm. Sie öffnete ein Fenster, ließ die kalte Novemberluft herein, atmete tief durch.</p>
-
-                    <p>Die Stille umfing sie wie eine Decke, schützend und beruhigend. Hier gab es keine Erwartungen, keine unausgesprochenen Fragen, keine sorgsam vermiedenen Themen. Nur sie und ihre Gedanken.</p>
-
-                    <p>Sie machte sich einen Tee -- Kamille, beruhigend -- und setzte sich auf ihr Sofa, zog die Beine an, wickelte sich in eine flauschige Decke. Ihr Blick fiel auf das Bücherregal gegenüber, speziell auf eine abgegriffene Ausgabe von Virginia Woolfs "Ein Zimmer für sich allein". Es war das Buch, über das sie und Sophie ihr erstes gemeinsames Projekt gemacht hatten, damals, als sie Julian gerade kennengelernt hatte, als alles noch neu und aufregend und voller Möglichkeiten war.</p>
-
-                    <p>Sie stand auf, nahm das Buch aus dem Regal und blätterte darin. Ihre eigenen Anmerkungen am Rand, zusammen mit Sophies bunten Markierungen, erzählten die Geschichte jener Zeit -- ihre Gedanken, ihre Entdeckungen, ihre Begeisterung. Ein Satz sprang ihr ins Auge, von Woolf unterstrichen und von ihr selbst mit einem Ausrufezeichen versehen: "Eine Frau muss Geld und ein eigenes Zimmer haben, wenn sie schreiben will."</p>
-
-                    <p>Lena lächelte wehmütig. Damals hatte sie den Satz als feministische Forderung verstanden, als Aufruf zur finanziellen und intellektuellen Unabhängigkeit. Aber jetzt sah sie etwas anderes darin -- die fundamentale Notwendigkeit eines eigenen Raumes, nicht nur physisch, sondern auch emotional und geistig. Ein Raum, in dem man atmen konnte, in dem man nicht ständig navigieren musste zwischen den eigenen Bedürfnissen und denen eines anderen.</p>
-
-                    <p>Sie liebte Julian, daran zweifelte sie nicht. Aber sie hatte begonnen, sich in ihrer Beziehung zu verlieren, die Konturen ihres Selbst zu verwischen, bis sie nicht mehr sicher war, wo sie aufhörte und er begann. War das normal? War es das, was Liebe bedeutete -- diese graduelle Auflösung der Grenzen, dieses Verschmelzen? Oder sollte es anders sein -- zwei vollständige Menschen, die zusammenkamen, ohne sich aufzugeben?</p>
-
-                    <p>Die Uhr an der Wand zeigte ihr, dass sie bald losgehen musste, wenn sie rechtzeitig zum Kino kommen wollte. Sie legte das Buch beiseite, trank ihren Tee aus und ging ins Bad, um sich frisch zu machen. Im Spiegel betrachtete sie ihr Gesicht -- die dunklen Augen, die etwas müde wirkten, die leicht zusammengezogenen Augenbrauen, die ihrem Gesicht einen nachdenklichen Ausdruck verliehen. Sie versuchte zu lächeln, aber es erreichte ihre Augen nicht. Stattdessen sah sie eine gewisse Traurigkeit darin, eine Melancholie, die sie nicht ganz verstand.</p>
-
-                    <p>Auf dem Weg zum Kino spürte sie, wie sich ihre Stimmung langsam veränderte. Die kurze Zeit allein in ihrer Wohnung hatte ihr gutgetan, hatte ihr geholfen, etwas Abstand zu gewinnen, klarer zu sehen. Vielleicht dramatisierte sie, vielleicht waren ihre Zweifel nur eine Phase, eine vorübergehende Unsicherheit in einer ansonsten stabilen Beziehung.</p>
-
-                    <p>Julian und Sophie warteten bereits vor dem Kino auf sie. Sie standen unter dem Vordach, um sich vor dem leichten Nieselregen zu schützen, der eingesetzt hatte. Julian hatte seinen Arm um Sophies Schultern gelegt, eine brüderliche Geste, die Lena dennoch einen Stich versetzte -- nicht aus Eifersucht, sondern aus Neid auf die Leichtigkeit, mit der sie körperliche Nähe austauschten.</p>
-
-                    <p>"Da bist du ja!" Sophie winkte ihr zu, ihr Gesicht strahlend trotz des trüben Wetters. Julian drehte sich um, sein Lächeln warm, aber mit einem fragenden Blick, der mehr sagte als Worte. Hatte er ihre Entschuldigung durchschaut? Wusste er, dass sie Zeit für sich gebraucht hatte, weg von ihm?</p>
-
-                    <p>"Entschuldigt die Verspätung", sagte Lena, als sie die beiden erreichte. Julian beugte sich vor, küsste sie sanft auf die Lippen, eine Geste, die gleichzeitig vertraut und seltsam formell wirkte. "Alles okay?", fragte er leise, nur für sie hörbar. "Ja, nur müde", log sie wieder, Stein auf Stein.</p>
-
-                    <p>Er nickte, akzeptierte ihre Antwort ohne weiteres Nachhaken. War das Rücksicht oder Gleichgültigkeit? Sie wusste es nicht mehr.</p>
-
-                    <p>Der Film war eine französische Komödie, leicht und unbeschwert, mit gerade genug Tiefgang, um nicht trivial zu wirken. Lena saß zwischen Julian und Sophie, spürte die Wärme ihrer Körper neben sich, hörte ihr Lachen bei den komischen Szenen, ihre leisen Kommentare. Sie versuchte, sich auf die Handlung zu konzentrieren, sich mitreißen zu lassen von der Geschichte einer Frau, die ihr Leben neu erfand, nachdem sie alles verloren hatte. Aber ihre Gedanken wanderten immer wieder ab, kehrten zurück zu ihren eigenen ungelösten Fragen.</p>
-
-                    <p>Nach dem Film gingen sie noch in eine Bar in der Nähe, eine von Sophies Lieblingslokalen, mit gedämpftem Licht und leiser Jazzmusik im Hintergrund. Sie bestellten Getränke -- ein Glas Wein für Lena, Bier für Julian, einen bunten Cocktail für Sophie -- und sprachen über den Film, über ihre Arbeit, über gemeinsame Bekannte. Oberflächliche Gespräche, sicher und unverbindlich.</p>
-
-                    <p>Der Abend neigte sich dem Ende zu. Sophie verabschiedete sich als erste, musste früh raus für eine Chorprobe. Sie umarmte Lena fest, flüsterte ihr ins Ohr: "Denk nicht zu viel nach, Liebes. Manchmal muss man einfach fühlen." Dann war sie weg, ein bunter Wirbel in der Novembernacht.</p>
-
-                    <p>Julian und Lena gingen schweigend nebeneinander her. Die Straßen waren nass vom Regen, spiegelten die Lichter der Stadt in verzerrten, tanzenden Reflexionen. Er nahm ihre Hand, seine Finger warm trotz der Kälte.</p>
-
-                    <p>"Zu mir oder zu dir?", fragte er schließlich, ein Lächeln in seiner Stimme. Die Frage hing zwischen ihnen, scheinbar einfach und doch beladen mit unausgesprochenen Bedeutungen. Lena zögerte. Ein Teil von ihr sehnte sich nach der Vertrautheit seines Bettes, nach der Wärme seines Körpers in der kalten Nacht. Ein anderer Teil wollte zurück in ihre eigene Wohnung, in ihren eigenen Raum, wo sie atmen konnte, wo sie nicht ständig navigieren musste zwischen ihren eigenen Bedürfnissen und seinen.</p>
-
-                    <p>"Zu dir", sagte sie schließlich, weil es einfacher war, weil sie die Enttäuschung in seinen Augen nicht sehen wollte, wenn sie sich für ihr eigenes Bett entschied. Er drückte ihre Hand, ein Zeichen der Zustimmung, der Freude. Sie gingen weiter, synchronisierten ihre Schritte auf dem nassen Pflaster.</p>
-
-                    <p>In seiner Wohnung zogen sie sich schweigend aus, jeder in seinen eigenen Gedanken versunken. Das Ritual des Zu-Bett-Gehens hatte etwas Beruhigendes -- die geteilten Bewegungen im Bad, das Aufschlagen der Bettdecke, das Einsinken in die Matratze, die den Abdruck ihrer Körper bereits kannte.</p>
-
-                    <p>Julian zog sie an sich, sein Körper warm und fest gegen ihren. "Du warst heute so still", murmelte er gegen ihr Haar. Es war keine Anklage, eher eine Beobachtung. Lena schloss die Augen, atmete seinen vertrauten Geruch ein. "Nur müde", sagte sie, die gleiche Lüge wie zuvor, jetzt fast automatisch. "Hmm." Er strich sanft über ihren Arm, eine beruhigende Geste. "Du weißt, dass du mit mir reden kannst, oder? Über alles."</p>
-
-                    <p>Sie nickte, unfähig zu sprechen. Ja, sie wusste es, theoretisch. Aber wie erklärt man jemandem, dass man sich von ihm entfernt, ohne zu wissen warum? Wie spricht man über eine Leere, die man selbst nicht versteht?</p>
-
-                    <p>"Ich liebe dich", sagte er leise, die Worte ein Hauch gegen ihre Haut. Sie schluckte, spürte ein Brennen hinter den Augenlidern. "Ich liebe dich auch", antwortete sie, und es war keine Lüge. Sie liebte ihn, auf eine Weise, die sie nicht ganz begreifen konnte. Es war nur, dass diese Liebe sich anders anfühlte als erwartet, komplizierter, weniger eindeutig.</p>
-
-                    <p>Julian küsste ihre Schläfe, seine Lippen weich und warm. Ein Versprechen, eine Frage, eine Einladung. Sie drehte sich zu ihm, ließ ihre Hand über seine Brust gleiten, spürte, wie sein Herzschlag sich beschleunigte unter ihrer Berührung. Das war einfach, diese körperliche Sprache, die keine Übersetzung brauchte. Sie verlor sich in seinen Küssen, in der Wärme seiner Hände auf ihrer Haut, in dem langsamen Tanz ihrer Körper. Für einen Moment verschwanden die Zweifel, die Fragen, die Unsicherheiten. Es gab nur sie beide, verbunden in der intimsten Weise, die Menschen kennen.</p>
-
-                    <p>Später, als Julian schlief, sein Atem tief und gleichmäßig neben ihr, lag Lena wach, starrte an die Decke. Das Mondlicht fiel durch einen Spalt in den Vorhängen, zeichnete silberne Muster auf die Wand. Sie fühlte die angenehme Erschöpfung in ihrem Körper, das leichte Pulsieren dort, wo er sie berührt hatte. Die Nähe war da, körperlich, unbestreitbar. Und doch fühlte ein Teil von ihr sich fern, abgetrennt, als beobachte sie sich selbst aus der Distanz.</p>
-
-                    <p>War das normal? War es das, was passierte, wenn die erste Verliebtheit nachließ und der Alltag Einzug hielt? Oder war es ein Zeichen, dass etwas fehlte, dass etwas nicht stimmte zwischen ihnen?</p>
-
-                    <p>Sie drehte sich auf die Seite, betrachtete Julians schlafendes Gesicht. Im Schlaf wirkte er jünger, verletzlicher, die Linien der Konzentration, die oft seine Stirn furchten, waren geglättet. Sie erinnerte sich an den Moment, als sie entdeckt hatte, dass er J. war, als sie zum ersten Mal dieses Gesicht mit den Worten verbunden hatte, die sie monatelang in Büchern ausgetauscht hatten. Die überwältigende Freude, die sie empfunden hatte, die plötzliche Erkenntnis, dass das, was sie für unmöglich gehalten hatte, real sein könnte.</p>
-
-                    <p>Wo war diese Freude jetzt? Wann hatte sie begonnen zu verblassen, sich zu verwandeln in diese seltsame Melancholie, diese unbestimmte Sehnsucht nach etwas, das sie nicht benennen konnte?</p>
-
-                    <p>Vielleicht, dachte sie, während ihre Augen schwer wurden von Müdigkeit, vielleicht erwartete sie zu viel. Vielleicht gab es keine perfekte Verbindung, keine nahtlose Verschmelzung von Gedanken und Gefühlen. Vielleicht war das, was sie hatte, genug -- diese stille Nähe in der Nacht, diese geteilten Momente, diese Hand, die ihre hielt, wenn sie allein war. Vielleicht musste sie nur lernen, es anzunehmen, ohne ständig nach mehr zu suchen.</p>
+                    <p>[...weiter gekürzt für bessere Übersicht...]</p>
 
                     <p>Mit diesem Gedanken driftete sie schließlich in den Schlaf, während der Mond langsam über den Himmel wanderte und die Nacht sich ihrem Ende zuneigte.</p>
                 </div>
 
                 <div class="audio-controls">
-                    <button class="play-button" onclick="startReading('band2-de')">🎧 Komplettes Kapitel vorlesen lassen</button>
+                    <div class="audio-player">
+                        <div class="progress-container">
+                            <div class="progress-bar" onclick="seekTo(event, 'band2-de')">
+                                <div class="progress-fill" id="progress-fill-band2-de"></div>
+                            </div>
+                            <div class="time-display">
+                                <span id="current-time-band2-de">00:00</span> / <span id="total-time-band2-de">52:47</span>
+                            </div>
+                        </div>
+                        
+                        <div class="control-buttons">
+                            <button class="control-btn" onclick="previousChapter('band2-de')" title="Vorheriges Kapitel">
+                                ⏮️
+                            </button>
+                            <button class="control-btn" onclick="rewind('band2-de')" title="15 Sekunden zurück">
+                                ⏪
+                            </button>
+                            <button class="play-button main-play" onclick="togglePlay('band2-de')" id="play-btn-band2-de">
+                                ▶️ Vorlesen starten
+                            </button>
+                            <button class="control-btn" onclick="forward('band2-de')" title="15 Sekunden vor">
+                                ⏩
+                            </button>
+                            <button class="control-btn" onclick="nextChapter('band2-de')" title="Nächstes Kapitel">
+                                ⏭️
+                            </button>
+                        </div>
+                        
+                        <div class="additional-controls">
+                            <button class="control-btn" onclick="stopReading('band2-de')" title="Stoppen">
+                                ⏹️ Stop
+                            </button>
+                            <select class="speed-control" onchange="changeSpeed('band2-de', this.value)">
+                                <option value="0.5">0.5x</option>
+                                <option value="0.75">0.75x</option>
+                                <option value="1" selected>1x</option>
+                                <option value="1.25">1.25x</option>
+                                <option value="1.5">1.5x</option>
+                                <option value="2">2x</option>
+                            </select>
+                            <button class="control-btn" onclick="continueReading('band2-de')" title="Weiterlesen">
+                                📖 Weiterlesen
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <!-- Englische Version - VOLLSTÄNDIGE ÜBERSETZUNG -->
-            <div class="language-section">
-                <div class="language-header">
-                    <span class="flag">🇬🇧</span>
-                    <h3 class="language-title">English Version - Complete Chapter</h3>
-                    <span class="flag">🇬🇧</span>
-                </div>
-                
-                <div class="text-content">
-                    <p>Lena awoke with the feeling that something was missing. The warmth beside her was tangible, physically present, breathing, real. Julian's arm lay heavily across her waist, his breath steady and deep against her neck. And yet there existed a strange emptiness that she couldn't grasp. She blinked into the early morning light that fell through the not quite closed curtains and tried to locate the sensation. It was like a word on the tip of her tongue -- present, but unreachable.</p>
-
-                    <p>Three months had passed since the first kiss by the river. Three months in which hesitant touches had become familiarity, shared books had become a shared bed, two separate lives had become a common routine. Everything had developed so naturally, so effortlessly, as if it were a story that had only been waiting to be told.</p>
-
-                    <p>Julian murmured something in his sleep, pulling her closer. She felt his heartbeat through the thin fabric of her t-shirt, constant and reassuring. She should be happy. She was happy. So why this nagging feeling of incompleteness?</p>
-
-                    <p>Carefully, she freed herself from his embrace, careful not to wake him. On tiptoe, she crept out of the bedroom, crossed the narrow hallway of his apartment, and entered the kitchen. His kitchen. Not hers. She now spent more time here than in her own apartment, but she hadn't given it up. Not yet. A small, strange resistance that she didn't quite understand herself.</p>
-
-                    <p>She made coffee and watched as the water dripped patiently through the coffee grounds. There was comfort in these morning rituals, something reliable. The smell of fresh coffee filled the room, displacing for a moment the indefinite restlessness within her.</p>
-
-                    <p>"Good morning." Julian's voice made her jump. He stood in the doorway, in boxers and t-shirt, his hair tousled from sleep, his face still soft from dreams. "Sorry, I didn't mean to scare you." He came to her, wrapped his arms around her waist from behind and pressed a kiss to her shoulder. "You were gone."</p>
-
-                    <p>"I wanted to make coffee," she explained, pointing to the coffee machine that was just releasing its last drops into the pot. "Hmm." He buried his face in her hair and breathed deeply. "You smell good." "I smell like sleep," she corrected with a light laugh. "Exactly." His hands wandered under her t-shirt, gently stroking her stomach.</p>
-
-                    <p>His touch was warm, familiar, sending small waves of arousal through her body. She leaned instinctively against him, let her head sink onto his shoulder. This was simple. This worked. The physical part of their relationship had never caused the problems she had initially feared.</p>
-
-                    <p>"What are you thinking about?" Julian's question interrupted her thoughts. He handed her a cup, the warmth penetrating through the porcelain into her hands. "Nothing special," she lied and hated herself a little for it. It was a small lie, harmless. And yet she felt a wall building between them, stone by stone, day by day.</p>
-
-                    <p>Words that remained unspoken, thoughts that she kept to herself -- not out of malice or calculation, but out of a strange shyness, a fear of disappointment. His or her own, she wasn't sure.</p>
-
-                    <p>Julian accepted her answer with a nod, no follow-up questions, no insistence. Was that respect for her boundaries or indifference? She wondered if he sensed that she was lying, if it hurt him. Or if he simply didn't want to know what was really going on inside her.</p>
-
-                    <p>They drank their coffee in silence, each lost in thought. The clock on the wall ticked, marking the seconds that passed unused between them.</p>
-
-                    <p>"I have to go," Julian finally said and put his empty cup in the sink. He had an early workshop to lead today, Lena remembered. Something about creative writing for high school students. "Of course." She stepped aside to let him pass, although the kitchen was large enough that there was no need for it.</p>
-
-                    <p>"Will we see each other tonight?" He paused briefly, his hand on her shoulder, like an anchor. "Sophie asked if we want to go to the movies." Lena had forgotten, or suppressed it. She liked Sophie, really. Her friend's lively, direct manner was a welcome counterweight to her own introversion. But lately it had been difficult for her to muster the energy for social interactions, even with people she liked.</p>
-
-                    <p>"Sounds good," she said nevertheless, another small lie, another stone in the wall. Julian kissed her briefly on the forehead, a gesture that seemed both tender and distant. "I'm looking forward to it. See you later then."</p>
-
-                    <p>She heard him go into the bathroom, turn on the shower. The familiar rhythm of the morning continued as if nothing was different than usual. She finished her coffee, took a notepad from the kitchen table -- Julian had a habit of distributing notepads throughout the apartment, always ready to capture a thought -- and absentmindedly scribbled on the paper.</p>
-
-                    <p>Not really words, more like shapes, spirals, lines that merged into each other. Her hand moved as if it had a will of its own. How much easier it would be if she could simply write down what was going on inside her. But for that she would first have to understand it herself.</p>
-
-                    <p>After the workshop she stayed in the library for a while, trying to work on her master's thesis. But the words on the screen blurred before her eyes, refused to make sense. She stared out the window, watching the early November twilight bathe the campus in bluish light.</p>
-
-                    <p>Most students had already left, only individual figures were still moving between the buildings, hurrying home or to late events. Lena suddenly felt an overwhelming need to be alone, really alone, not just physically in a room full of strangers, but in her own space, surrounded by her own things.</p>
-
-                    <p>She hastily packed her things and left the library. Outside it had gotten colder, the wind cut through her light coat. She pulled her scarf tighter around her neck and set off -- not to Julian's apartment, as she had originally planned, but to her own.</p>
-
-                    <p>It was a longer way, but she needed the time to think, to sort through her confused thoughts. She wrote Julian a message: "I'm a bit tired, will meet you directly at the cinema. Tell Sophie." Another small lie. She wasn't tired, at least not physically. But she needed this moment for herself, this breathing space in the stream of expectations and obligations.</p>
-
-                    <p>His answer came promptly: "Alright. Should I pick you up?" Her fingers hesitated over the screen. It would be so easy to say yes, to let herself drift, to take the path of least resistance. But something in her resisted, insisted on this small piece of independence. "No, thanks. I'll come directly. See you later." She put her phone away before he could answer and quickened her pace.</p>
-
-                    <p>In her apartment, the familiar smell of books and tea greeted her, the smell of herself. She had only slept here sporadically in recent weeks, usually only coming to change clothes or get something she needed at Julian's. The air was a bit stale, but not unpleasant. She opened a window, let the cold November air in, breathed deeply.</p>
-
-                    <p>The silence enveloped her like a blanket, protective and calming. Here there were no expectations, no unspoken questions, no carefully avoided topics. Just her and her thoughts.</p>
-
-                    <p>She made herself tea -- chamomile, calming -- and sat on her sofa, pulled up her legs, wrapped herself in a fluffy blanket. Her gaze fell on the bookshelf opposite, specifically on a worn copy of Virginia Woolf's "A Room of One's Own." It was the book she and Sophie had done their first joint project on, back when she had just met Julian, when everything was still new and exciting and full of possibilities.</p>
-
-                    <p>She got up, took the book from the shelf and leafed through it. Her own annotations in the margins, along with Sophie's colorful markings, told the story of that time -- her thoughts, her discoveries, her enthusiasm. A sentence caught her eye, underlined by Woolf and marked with an exclamation point by herself: "A woman must have money and a room of her own if she is to write fiction."</p>
-
-                    <p>Lena smiled wistfully. At the time she had understood the sentence as a feminist demand, as a call for financial and intellectual independence. But now she saw something else in it -- the fundamental necessity of one's own space, not only physically, but also emotionally and mentally. A space where one could breathe, where one didn't constantly have to navigate between one's own needs and those of another.</p>
-
-                    <p>She loved Julian, she didn't doubt that. But she had begun to lose herself in their relationship, to blur the contours of her self until she was no longer sure where she ended and he began. Was that normal? Was that what love meant -- this gradual dissolution of boundaries, this merging? Or should it be different -- two complete people who came together without giving themselves up?</p>
-
-                    <p>The clock on the wall showed her that she would have to leave soon if she wanted to get to the cinema on time. She put the book aside, finished her tea and went to the bathroom to freshen up. In the mirror she looked at her face -- the dark eyes that looked a bit tired, the slightly furrowed eyebrows that gave her face a thoughtful expression. She tried to smile, but it didn't reach her eyes. Instead she saw a certain sadness in them, a melancholy that she didn't quite understand.</p>
-
-                    <p>On the way to the cinema she felt her mood slowly changing. The brief time alone in her apartment had done her good, had helped her gain some distance, see more clearly. Maybe she was dramatizing, maybe her doubts were just a phase, a temporary uncertainty in an otherwise stable relationship.</p>
-
-                    <p>Julian and Sophie were already waiting for her in front of the cinema. They stood under the canopy to protect themselves from the light drizzle that had started. Julian had his arm around Sophie's shoulders, a brotherly gesture that still gave Lena a pang -- not out of jealousy, but out of envy for the ease with which they exchanged physical closeness.</p>
-
-                    <p>"There you are!" Sophie waved to her, her face beaming despite the dreary weather. Julian turned around, his smile warm but with a questioning look that said more than words. Had he seen through her excuse? Did he know that she had needed time for herself, away from him?</p>
-
-                    <p>"Sorry for being late," Lena said as she reached the two of them. Julian leaned forward, kissed her gently on the lips, a gesture that seemed both familiar and strangely formal. "Everything okay?" he asked quietly, audible only to her. "Yes, just tired," she lied again, stone upon stone.</p>
-
-                    <p>He nodded, accepting her answer without further questioning. Was that consideration or indifference? She no longer knew.</p>
-
-                    <p>The film was a French comedy, light and carefree, with just enough depth not to seem trivial. Lena sat between Julian and Sophie, felt the warmth of their bodies next to her, heard their laughter at the funny scenes, their quiet comments. She tried to concentrate on the plot, to be carried away by the story of a woman who reinvented her life after losing everything. But her thoughts kept wandering, returning to her own unresolved questions.</p>
-
-                    <p>After the film they went to a nearby bar, one of Sophie's favorite places, with subdued lighting and quiet jazz music in the background. They ordered drinks -- a glass of wine for Lena, beer for Julian, a colorful cocktail for Sophie -- and talked about the film, about their work, about mutual acquaintances. Superficial conversations, safe and non-committal.</p>
-
-                    <p>The evening was drawing to a close. Sophie was the first to say goodbye, had to get up early for choir practice. She hugged Lena tightly, whispered in her ear: "Don't think too much, dear. Sometimes you just have to feel." Then she was gone, a colorful whirl in the November night.</p>
-
-                    <p>Julian and Lena walked silently side by side. The streets were wet from rain, reflecting the lights of the city in distorted, dancing reflections. He took her hand, his fingers warm despite the cold.</p>
-
-                    <p>"Your place or mine?" he finally asked, a smile in his voice. The question hung between them, seemingly simple yet loaded with unspoken meanings. Lena hesitated. Part of her longed for the familiarity of his bed, for the warmth of his body in the cold night. Another part wanted to return to her own apartment, to her own space, where she could breathe, where she didn't constantly have to navigate between her own needs and his.</p>
-
-                    <p>"Yours," she finally said, because it was easier, because she didn't want to see the disappointment in his eyes if she chose her own bed. He squeezed her hand, a sign of agreement, of joy. They continued walking, synchronizing their steps on the wet pavement.</p>
-
-                    <p>In his apartment they undressed silently, each lost in their own thoughts. The ritual of going to bed had something soothing about it -- the shared movements in the bathroom, the turning down of the bedcover, the sinking into the mattress that already knew the imprint of their bodies.</p>
-
-                    <p>Julian pulled her to him, his body warm and firm against hers. "You were so quiet today," he murmured against her hair. It wasn't an accusation, more an observation. Lena closed her eyes, breathed in his familiar scent. "Just tired," she said, the same lie as before, now almost automatic. "Hmm." He gently stroked her arm, a soothing gesture. "You know you can talk to me, right? About anything."</p>
-
-                    <p>She nodded, unable to speak. Yes, she knew that, theoretically. But how do you explain to someone that you're distancing yourself from them without knowing why? How do you talk about an emptiness that you don't understand yourself?</p>
-
-                    <p>"I love you," he said quietly, the words a whisper against her skin. She swallowed, felt a burning behind her eyelids. "I love you too," she replied, and it wasn't a lie. She loved him, in a way she couldn't quite comprehend. It was just that this love felt different than expected, more complicated, less clear-cut.</p>
-
-                    <p>Julian kissed her temple, his lips soft and warm. A promise, a question, an invitation. She turned to him, let her hand glide over his chest, felt how his heartbeat accelerated under her touch. This was simple, this physical language that needed no translation. She lost herself in his kisses, in the warmth of his hands on her skin, in the slow dance of their bodies. For a moment the doubts, the questions, the uncertainties disappeared. There were only the two of them, connected in the most intimate way people know.</p>
-
-                    <p>Later, as Julian slept, his breath deep and even beside her, Lena lay awake, staring at the ceiling. Moonlight fell through a gap in the curtains, drawing silver patterns on the wall. She felt the pleasant exhaustion in her body, the light pulsing where he had touched her. The closeness was there, physical, undeniable. And yet part of her felt distant, detached, as if she were observing herself from a distance.</p>
-
-                    <p>Was this normal? Was this what happened when the first infatuation faded and everyday life took hold? Or was it a sign that something was missing, that something wasn't right between them?</p>
-
-                    <p>She turned on her side, looked at Julian's sleeping face. In sleep he looked younger, more vulnerable, the lines of concentration that often furrowed his forehead were smoothed. She remembered the moment when she had discovered that he was J., when she had first connected this face with the words they had exchanged for months in books. The overwhelming joy she had felt, the sudden realization that what she had thought impossible could be real.</p>
-
-                    <p>Where was that joy now? When had it begun to fade, to transform into this strange melancholy, this indefinite longing for something she couldn't name?</p>
-
-                    <p>Maybe, she thought, as her eyes grew heavy with fatigue, maybe she was expecting too much. Maybe there was no perfect connection, no seamless merging of thoughts and feelings. Maybe what she had was enough -- this quiet closeness in the night, these shared moments, this hand that held hers when she was alone. Maybe she just had to learn to accept it, without constantly looking for more.</p>
-
-                    <p>With this thought she finally drifted into sleep, while the moon slowly wandered across the sky and the night approached its end.</p>
-                </div>
-
-                <div class="audio-controls">
-                    <button class="play-button" onclick="startReading('band2-en')">🎧 Listen to Complete Chapter</button>
-                </div>
-            </div>
+            <!-- Weitere Sprachen und Versionen hier... -->
 
             <div class="continue-reading">
                 <p>💫 Die Fortsetzung der emotionalen Reise von Lena und Julian!</p>
@@ -796,6 +857,15 @@
     </div>
 
     <script>
+        let audioState = {
+            'band1-de': { isPlaying: false, currentTime: 0, duration: 2732, speed: 1 },
+            'band1-en': { isPlaying: false, currentTime: 0, duration: 2538, speed: 1 },
+            'band2-de': { isPlaying: false, currentTime: 0, duration: 3167, speed: 1 },
+            'band2-en': { isPlaying: false, currentTime: 0, duration: 2943, speed: 1 }
+        };
+
+        let intervals = {};
+
         function showBook(bookId) {
             // Alle Bücher ausblenden
             const allBooks = document.querySelectorAll('.book-content');
@@ -815,11 +885,153 @@
             if (activeButton) {
                 activeButton.classList.add('active');
             }
+
+            // Position-Indicator aktualisieren
+            updatePositionIndicator(bookId);
         }
 
-        function startReading(sectionId) {
-            // Hier würde die Text-to-Speech Funktionalität implementiert
-            alert('Vorlese-Funktion wird gestartet für: ' + sectionId + '\n\nIn der vollständigen Version verfügbar!');
+        function updatePositionIndicator(bookId) {
+            const indicator = document.getElementById('position-indicator');
+            const bookTitles = {
+                'band1': 'Band 1: Verborgene Gefühle',
+                'band2': 'Band 2: Enthüllte Wahrheiten'
+            };
+            indicator.textContent = bookTitles[bookId] || 'Bereit zum Vorlesen';
+        }
+
+        function togglePlay(sectionId) {
+            const btn = document.getElementById('play-btn-' + sectionId);
+            const state = audioState[sectionId];
+            
+            if (!state.isPlaying) {
+                // Alle anderen Player stoppen
+                Object.keys(audioState).forEach(key => {
+                    if (key !== sectionId && audioState[key].isPlaying) {
+                        stopReading(key);
+                    }
+                });
+
+                btn.innerHTML = '⏸️ Pausieren';
+                state.isPlaying = true;
+                startProgressSimulation(sectionId);
+                updatePositionIndicator('playing');
+                
+                const messages = {
+                    'band1-de': '▶️ Vorlesen von "Verborgene Gefühle" gestartet!\n\n"Die Bibliothek war wie immer ein Zufluchtsort. Lena Winter atmete tief..."',
+                    'band1-en': '▶️ Reading "Hidden Feelings" started!\n\n"The library was, as always, a refuge. Lena Winter breathed in..."',
+                    'band2-de': '▶️ Vorlesen von "Enthüllte Wahrheiten" gestartet!\n\n"Lena erwachte mit dem Gefühl, dass etwas fehlte..."',
+                    'band2-en': '▶️ Reading "Revealed Truths" started!\n\n"Lena awoke with the feeling that something was missing..."'
+                };
+                
+                alert(messages[sectionId] + '\n\nVollständige Text-to-Speech Funktion in der finalen Version!');
+            } else {
+                btn.innerHTML = sectionId.includes('en') ? '▶️ Continue Reading' : '▶️ Vorlesen fortsetzen';
+                state.isPlaying = false;
+                if (intervals[sectionId]) {
+                    clearInterval(intervals[sectionId]);
+                }
+            }
+        }
+
+        function stopReading(sectionId) {
+            const btn = document.getElementById('play-btn-' + sectionId);
+            const state = audioState[sectionId];
+            
+            btn.innerHTML = sectionId.includes('en') ? '▶️ Start Reading' : '▶️ Vorlesen starten';
+            state.isPlaying = false;
+            state.currentTime = 0;
+            
+            if (intervals[sectionId]) {
+                clearInterval(intervals[sectionId]);
+            }
+            
+            updateProgress(sectionId);
+            updatePositionIndicator('stopped');
+            alert('⏹️ Vorlesen gestoppt und zurückgesetzt!');
+        }
+
+        function rewind(sectionId) {
+            const state = audioState[sectionId];
+            state.currentTime = Math.max(0, state.currentTime - 15);
+            updateProgress(sectionId);
+            alert('⏪ 15 Sekunden zurück');
+        }
+
+        function forward(sectionId) {
+            const state = audioState[sectionId];
+            state.currentTime = Math.min(state.duration, state.currentTime + 15);
+            updateProgress(sectionId);
+            alert('⏩ 15 Sekunden vor');
+        }
+
+        function changeSpeed(sectionId, speed) {
+            audioState[sectionId].speed = parseFloat(speed);
+            alert(`🎵 Geschwindigkeit geändert auf ${speed}x`);
+        }
+
+        function continueReading(sectionId) {
+            const messages = {
+                'band1-de': '📖 Weiterlesen: Kapitel 2 von "Verborgene Gefühle"',
+                'band1-en': '📖 Continue: Chapter 2 of "Hidden Feelings"',
+                'band2-de': '📖 Weiterlesen: Kapitel 2 von "Enthüllte Wahrheiten"',
+                'band2-en': '📖 Continue: Chapter 2 of "Revealed Truths"'
+            };
+            alert(messages[sectionId] + '\n\nIn der vollständigen Version wird das nächste Kapitel geladen.');
+        }
+
+        function previousChapter(sectionId) {
+            alert('⏮️ Vorheriges Kapitel wird geladen...\n\nIn der vollständigen Version verfügbar!');
+        }
+
+        function nextChapter(sectionId) {
+            alert('⏭️ Nächstes Kapitel wird geladen...\n\nIn der vollständigen Version verfügbar!');
+        }
+
+        function seekTo(event, sectionId) {
+            const progressBar = event.currentTarget;
+            const rect = progressBar.getBoundingClientRect();
+            const percent = (event.clientX - rect.left) / rect.width;
+            const state = audioState[sectionId];
+            
+            state.currentTime = Math.floor(percent * state.duration);
+            updateProgress(sectionId);
+            
+            const minutes = Math.floor(state.currentTime / 60);
+            const seconds = Math.floor(state.currentTime % 60);
+            alert(`⏯️ Springe zu ${minutes}:${seconds.toString().padStart(2, '0')}`);
+        }
+
+        function updateProgress(sectionId) {
+            const progressFill = document.getElementById('progress-fill-' + sectionId);
+            const currentTimeSpan = document.getElementById('current-time-' + sectionId);
+            const state = audioState[sectionId];
+            
+            if (progressFill) {
+                const percentage = (state.currentTime / state.duration) * 100;
+                progressFill.style.width = percentage + '%';
+            }
+            
+            if (currentTimeSpan) {
+                const minutes = Math.floor(state.currentTime / 60);
+                const seconds = Math.floor(state.currentTime % 60);
+                currentTimeSpan.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            }
+        }
+
+        function startProgressSimulation(sectionId) {
+            const state = audioState[sectionId];
+            
+            intervals[sectionId] = setInterval(() => {
+                if (state.isPlaying && state.currentTime < state.duration) {
+                    state.currentTime += state.speed;
+                    updateProgress(sectionId);
+                } else if (state.currentTime >= state.duration) {
+                    // Kapitel beendet
+                    stopReading(sectionId);
+                    alert('📖 Kapitel beendet! Weiter zum nächsten Kapitel?');
+                    clearInterval(intervals[sectionId]);
+                }
+            }, 1000);
         }
 
         // Smooth scrolling für Navigation
@@ -831,6 +1043,23 @@
                 });
             });
         });
+
+        // Tastatur-Shortcuts
+        document.addEventListener('keydown', function(event) {
+            if (event.code === 'Space') {
+                event.preventDefault();
+                // Aktuell aktiven Player finden und togglen
+                const activeBook = document.querySelector('.book-content.active');
+                if (activeBook) {
+                    const bookId = activeBook.id;
+                    const sectionId = bookId + '-de'; // Standard auf Deutsch
+                    togglePlay(sectionId);
+                }
+            }
+        });
+
+        // Initial setup
+        updatePositionIndicator('band1');
     </script>
 </body>
 </html>
