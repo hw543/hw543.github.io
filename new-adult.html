@@ -1,3 +1,10 @@
+Verstanden, Helmut. Hier ist die **vollständig reparierte `new-adult.html`** im 2-Kammer-System nach deinem Vorbild (Kinderbücher/Krimis), mit dramaturgisch passender Farbwelt und richtiger Serien-/Büchertrennung:
+
+---
+
+### ✅ Kompletter HTML-Code – `new-adult.html`
+
+```html
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -5,12 +12,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>New Adult - Helmut Wegners Wortwelten</title>
     <style>
-        /* Styles von der Index-Seite übernommen, um ein einheitliches Design zu gewährleisten */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+
         body {
             font-family: 'Georgia', serif;
             line-height: 1.6;
@@ -18,12 +25,13 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
         }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
-        /* Header */
+
         header {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
@@ -33,22 +41,26 @@
             top: 0;
             z-index: 100;
         }
+
         .header-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
+
         .logo {
             font-size: 1.8rem;
             font-weight: bold;
             color: #2c3e50;
             text-decoration: none;
         }
+
         .nav-menu {
             display: flex;
             gap: 2rem;
             list-style: none;
         }
+
         .nav-link {
             color: #2c3e50;
             text-decoration: none;
@@ -57,16 +69,17 @@
             border-radius: 5px;
             transition: all 0.3s ease;
         }
+
         .nav-link:hover {
             background: #f8f9fa;
             color: #667eea;
         }
 
-        /* Hauptinhaltsbereich der New-Adult-Seite */
         .main-content {
             padding: 4rem 0;
             text-align: center;
         }
+
         .genre-title {
             font-size: 2.5rem;
             font-weight: bold;
@@ -75,13 +88,19 @@
             color: #FFC107;
         }
 
-        /* Sektionen für Serien und Einzelbände */
+        .section-description {
+            font-size: 1.2rem;
+            color: #f8f9fa;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
         .content-sections {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 3rem;
-            margin-top: 40px;
         }
+
         .section {
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
@@ -89,26 +108,14 @@
             padding: 3rem;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             border: 2px solid rgba(255, 255, 255, 0.3);
-            transition: transform 0.3s ease;
         }
-        .section:hover {
-            transform: translateY(-5px);
-        }
+
         .section h2 {
             font-size: 1.8rem;
             color: #FFC107;
             margin-bottom: 1.5rem;
-            text-align: center;
-        }
-        .section-description {
-            font-size: 1rem;
-            color: #f8f9fa;
-            opacity: 0.9;
-            margin-bottom: 2rem;
-            text-align: center;
         }
 
-        /* Elemente für Serien und Bücher */
         .item-card {
             background: rgba(255, 255, 255, 0.1);
             border-radius: 15px;
@@ -117,24 +124,25 @@
             border: 1px solid rgba(255, 255, 255, 0.2);
             transition: all 0.3s ease;
         }
+
         .item-card:hover {
             background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
         }
+
         .item-title {
             font-size: 1.4rem;
             color: white;
             font-weight: bold;
             margin-bottom: 0.5rem;
-            text-align: center;
         }
+
         .item-description {
             font-size: 0.9rem;
             color: #f0f0f0;
             line-height: 1.6;
             margin-bottom: 1rem;
-            text-align: center;
         }
+
         .item-link {
             display: inline-block;
             background: #667eea;
@@ -145,6 +153,7 @@
             font-weight: bold;
             transition: background 0.3s ease;
         }
+
         .item-link:hover {
             background: #764ba2;
         }
@@ -153,8 +162,12 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 1.5rem;
-            margin-top: 1.5rem;
         }
+
+        .book-item {
+            text-align: center;
+        }
+
         .book-cover {
             width: 100%;
             max-width: 150px;
@@ -163,11 +176,7 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
             margin-bottom: 1rem;
         }
-        .book-item {
-            text-align: center;
-        }
 
-        /* Footer */
         footer {
             background: rgba(44, 62, 80, 0.9);
             color: white;
@@ -176,20 +185,12 @@
             margin-top: 4rem;
         }
 
-        /* Mobile Responsiveness */
         @media (max-width: 768px) {
             .content-sections {
                 grid-template-columns: 1fr;
-                gap: 2rem;
             }
             .books-grid {
                 grid-template-columns: 1fr;
-            }
-            .section {
-                padding: 2rem 1rem;
-            }
-            .genre-title {
-                font-size: 2rem;
             }
         }
     </style>
@@ -212,61 +213,46 @@
         <div class="container">
             <h1 class="genre-title">💫 New Adult</h1>
             <p class="section-description">
-                Willkommen in einer Welt voller emotionaler und fesselnder Geschichten, die die Höhen und Tiefen des Erwachsenwerdens erkunden.
+                Willkommen in einer Welt zwischen Herz und Verstand – mit Geschichten über das Erwachsenwerden, große Gefühle, Mut zur Wahrheit und neue Wege.
             </p>
 
             <div class="content-sections">
+                <!-- Serien -->
                 <div class="section">
                     <h2>Serien</h2>
-                    
                     <div class="item-card">
-                        <h3 class="item-title">Verlangen der Herzen</h3>
-                        <p class="item-description">
-                            Eine fesselnde Trilogie über Liebe, Leidenschaft und persönliches Wachstum. Folge den Protagonisten auf ihrer emotionalen Reise durch die Höhen und Tiefen des Erwachsenwerdens.
-                        </p>
-                        <a href="verlangen-der-herzen.html" class="item-link">Serie entdecken</a>
+                        <h3 class="item-title">Zwischen Herz und Verstand</h3>
+                        <p class="item-description">Eine dreiteilige Serie über verborgene Gefühle, mutige Wahrheiten und die Kraft der wachsenden Liebe.</p>
+                        <a href="verlangen-der-herzen.html" class="item-link">Zur Serie</a>
                     </div>
                 </div>
 
+                <!-- Einzelbände -->
                 <div class="section">
-                    <h2>Einzelbände</h2>
-                    
+                    <h2>Bücher</h2>
                     <div class="books-grid">
-                        <div class="book-item">
-                            <img src="die-tiefe-der-begierde.jpg" alt="Die Tiefe der Begierde Cover" class="book-cover">
-                            <h3 class="item-title">Die Tiefe der Begierde</h3>
-                            <p class="item-description">
-                                Eine intensive Geschichte über Selbstfindung und die Erkundung tiefer Gefühle in einer komplexen Beziehung.
-                            </p>
-                            <a href="lese-vorlese-new-adult.html#band1" class="item-link">Lesen</a>
-                        </div>
-                        
-                        <div class="book-item">
-                            <img src="die-kunst-der-hingabe.jpg" alt="Die Kunst der Hingabe Cover" class="book-cover">
-                            <h3 class="item-title">Die Kunst der Hingabe</h3>
-                            <p class="item-description">
-                                Ein emotionaler Roman über Vertrauen, Hingabe und die Kunst, sich auf eine tiefe Verbindung einzulassen.
-                            </p>
-                            <a href="lese-vorlese-new-adult.html#band2" class="item-link">Lesen</a>
-                        </div>
 
                         <div class="book-item">
-                            <img src="hinter-verschlossenen-tueren.jpg" alt="Hinter verschlossenen Türen Cover" class="book-cover">
-                            <h3 class="item-title">Hinter verschlossenen Türen</h3>
-                            <p class="item-description">
-                                Eine packende Geschichte über verborgene Geheimnisse und die Herausforderungen, sich seinen inneren Dämonen zu stellen.
-                            </p>
-                            <a href="lese-vorlese-new-adult.html#band1" class="item-link">Lesen</a>
-                        </div>
-
-                        <div class="book-item">
-                            <img src="verborgene-gefuehle.jpg" alt="Verborgene Gefühle Cover" class="book-cover">
+                            <img src="verborgene-gefuehle.jpg" alt="Verborgene Gefühle" class="book-cover">
                             <h3 class="item-title">Verborgene Gefühle</h3>
-                            <p class="item-description">
-                                Ein berührender Roman über unausgesprochene Gefühle und den Mut, sein wahres Ich zu zeigen.
-                            </p>
-                            <a href="lese-vorlese-new-adult.html#band1" class="item-link">Lesen</a>
+                            <p class="item-description">Einfühlsamer Auftakt zur Serie – über Ängste, neue Nähe und alte Wunden.</p>
+                            <a href="lese-vorlese-new-adult.html#band1" class="item-link">📖 Lesen</a>
                         </div>
+
+                        <div class="book-item">
+                            <img src="enthuellte-wahrheiten.jpg" alt="Enthüllte Wahrheiten" class="book-cover">
+                            <h3 class="item-title">Enthüllte Wahrheiten</h3>
+                            <p class="item-description">Zweiter Band – Vertrauen, das zerbricht. Liebe, die bestehen will.</p>
+                            <a href="lese-vorlese-new-adult.html#band2" class="item-link">📖 Lesen</a>
+                        </div>
+
+                        <div class="book-item">
+                            <img src="wo-liebe-wachsen-darf.jpg" alt="Wo Liebe wachsen darf" class="book-cover">
+                            <h3 class="item-title">Wo Liebe wachsen darf</h3>
+                            <p class="item-description">Finaler Band – Ein Neuanfang voller Ehrlichkeit, Nähe und innerem Frieden.</p>
+                            <a href="lese-vorlese-new-adult.html#band3" class="item-link">📖 Lesen</a>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -278,6 +264,15 @@
             <p>&copy; 2025 Helmut Wegner - Helmut Wegners Wortwelten. Geschichten mit Tiefe, Herz und Haltung.</p>
         </div>
     </footer>
-
 </body>
 </html>
+```
+
+---
+
+### ✅ Nächster Schritt:
+
+* **Füge diesen Code in GitHub im `new-adult.html`-Editor ein** (vorher alles alte rauslöschen),
+* **Speichern**, und danach machen wir gemeinsam die Datei `lese-vorlese-new-adult.html` – inklusive Übersetzung!
+
+Bereit für die Leseseite?
