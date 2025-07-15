@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Adult - Lesen & Vorlesen | Helmut Wegners Wortwelten</title>
+    <title>Zwischen Herz und Verstand - Lesen & Vorlesen</title>
     <style>
         * {
             margin: 0;
@@ -13,255 +13,221 @@
 
         body {
             font-family: 'Georgia', serif;
-            background: linear-gradient(135deg, #2D1B69 0%, #11998e 30%, #38ef7d 70%, #FFD700 100%);
-            background-attachment: fixed;
+            background: linear-gradient(135deg, #FFB6C1 0%, #DDA0DD 30%, #FF69B4 70%, #F0E68C 100%);
             min-height: 100vh;
-            color: #2c3e50;
-            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 20px;
             overflow-x: hidden;
         }
 
-        /* Sterne-Animation */
-        .stars {
-            position: fixed;
-            top: 0;
-            left: 0;
+        .main-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            max-width: 900px;
             width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
+            margin: 20px auto;
+            overflow: hidden;
+            border: 2px solid rgba(255, 105, 180, 0.3);
         }
 
-        .star {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 50%;
-            animation: twinkle 3s infinite;
-        }
-
-        .star:nth-child(1) { width: 2px; height: 2px; top: 10%; left: 20%; animation-delay: 0s; }
-        .star:nth-child(2) { width: 3px; height: 3px; top: 20%; left: 80%; animation-delay: 1s; }
-        .star:nth-child(3) { width: 1px; height: 1px; top: 30%; left: 60%; animation-delay: 2s; }
-        .star:nth-child(4) { width: 2px; height: 2px; top: 40%; left: 30%; animation-delay: 1.5s; }
-        .star:nth-child(5) { width: 3px; height: 3px; top: 60%; left: 70%; animation-delay: 0.5s; }
-        .star:nth-child(6) { width: 1px; height: 1px; top: 70%; left: 40%; animation-delay: 2.5s; }
-        .star:nth-child(7) { width: 2px; height: 2px; top: 80%; left: 90%; animation-delay: 3s; }
-        .star:nth-child(8) { width: 3px; height: 3px; top: 15%; left: 10%; animation-delay: 1.2s; }
-
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.3; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.2); }
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
+        .header {
+            background: linear-gradient(135deg, #FF69B4, #FF1493);
+            color: white;
+            padding: 30px;
+            text-align: center;
             position: relative;
-            z-index: 2;
         }
 
         .back-button {
+            position: absolute;
+            top: 15px;
+            left: 15px;
             background: rgba(255, 255, 255, 0.2);
             color: white;
-            padding: 10px 20px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 25px;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 20px;
             text-decoration: none;
-            font-size: 0.95em;
+            font-size: 0.9em;
             font-weight: bold;
-            margin-bottom: 30px;
-            display: inline-block;
-            backdrop-filter: blur(10px);
             transition: all 0.3s ease;
         }
 
         .back-button:hover {
             background: rgba(255, 255, 255, 0.3);
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
-            padding: 40px 20px;
-            background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 100%);
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-
-        .header h1 {
-            font-size: 3rem;
-            color: white;
-            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
-            margin-bottom: 15px;
-            font-weight: 300;
-            letter-spacing: 2px;
-        }
-
-        .header-subtitle {
-            font-size: 1.2rem;
-            color: rgba(255,255,255,0.9);
-            font-style: italic;
-            margin-bottom: 20px;
         }
 
         .series-title {
-            font-size: 1.8rem;
-            color: #FFD700;
+            font-size: 2.2em;
             font-weight: bold;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
 
-        /* Navigation */
-        .book-navigation {
+        .series-subtitle {
+            font-size: 1.1em;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .options-bar {
+            background: rgba(255, 240, 245, 0.8);
+            padding: 20px;
             display: flex;
             justify-content: center;
             gap: 15px;
-            margin-bottom: 30px;
             flex-wrap: wrap;
+            border-bottom: 2px solid rgba(255, 105, 180, 0.2);
         }
 
-        .nav-button {
-            padding: 12px 24px;
-            border: 2px solid rgba(255,255,255,0.3);
+        .option-btn {
+            padding: 12px 25px;
+            border: 2px solid rgba(255, 105, 180, 0.3);
             border-radius: 25px;
-            background: rgba(255,255,255,0.1);
-            color: white;
-            text-decoration: none;
+            background: white;
+            color: #FF69B4;
             font-weight: bold;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
             cursor: pointer;
-            font-size: 1rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 1em;
         }
 
-        .nav-button:hover {
-            background: rgba(255,255,255,0.2);
+        .option-btn.active {
+            background: #FF69B4;
+            color: white;
+            border-color: #FF69B4;
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255,255,255,0.2);
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.3);
         }
 
-        .nav-button.active {
-            background: linear-gradient(135deg, #FFD700, #FFA500);
-            color: #2D1B69;
-            border-color: #FFD700;
+        .option-btn:hover {
+            background: rgba(255, 105, 180, 0.1);
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.2);
         }
 
-        /* Book Content */
-        .book-content {
-            display: none;
-            background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.88) 100%);
+        .language-bar {
+            background: rgba(255, 240, 245, 0.5);
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            border-bottom: 2px solid rgba(255, 105, 180, 0.2);
+        }
+
+        .lang-btn {
+            padding: 10px 20px;
+            border: 2px solid rgba(255, 105, 180, 0.3);
             border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255,255,255,0.3);
-            position: relative;
-            overflow: hidden;
+            background: white;
+            color: #FF69B4;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9em;
         }
 
-        .book-content.active {
-            display: block;
+        .lang-btn.active {
+            background: #FF69B4;
+            color: white;
+            border-color: #FF69B4;
+        }
+
+        .lang-btn:hover {
+            background: rgba(255, 105, 180, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .band-navigation {
+            background: white;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            border-bottom: 2px solid rgba(255, 105, 180, 0.2);
+        }
+
+        .band-btn {
+            padding: 15px 30px;
+            border: 2px solid rgba(255, 105, 180, 0.3);
+            border-radius: 25px;
+            background: white;
+            color: #FF69B4;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1em;
+        }
+
+        .band-btn.active {
+            background: linear-gradient(135deg, #FF69B4, #FF1493);
+            color: white;
+            border-color: #FF69B4;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.3);
+        }
+
+        .band-btn:hover {
+            background: rgba(255, 105, 180, 0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.2);
+        }
+
+        .content-area {
+            background: white;
+            padding: 40px;
+            min-height: 600px;
         }
 
         .book-header {
             text-align: center;
-            margin-bottom: 35px;
-            position: relative;
-            z-index: 2;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid rgba(255, 105, 180, 0.2);
         }
 
         .book-title {
-            font-size: 2.2rem;
-            color: #2D1B69;
+            font-size: 2em;
+            color: #FF69B4;
             margin-bottom: 10px;
-            font-weight: 600;
+            font-weight: bold;
         }
 
-        .book-subtitle {
-            font-size: 1.3rem;
-            color: #11998e;
+        .chapter-info {
+            font-size: 1.2em;
+            color: #BA55D3;
             font-style: italic;
             margin-bottom: 15px;
         }
 
         .chapter-title {
-            font-size: 1.5rem;
-            color: #FFD700;
+            font-size: 1.1em;
+            color: #2F4F4F;
             font-weight: bold;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
-        }
-
-        .language-section {
-            margin-bottom: 40px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .language-header {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 25px;
-            padding: 15px;
-            background: linear-gradient(135deg, rgba(45, 27, 105, 0.1) 0%, rgba(17, 153, 142, 0.1) 100%);
-            border-radius: 15px;
-            border: 1px solid rgba(45, 27, 105, 0.2);
-        }
-
-        .flag {
-            font-size: 1.5rem;
-            padding: 8px 12px;
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 10px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-        }
-
-        .language-title {
-            font-size: 1.3rem;
-            color: #2D1B69;
-            font-weight: bold;
-            margin: 0 10px;
         }
 
         .text-content {
-            font-size: 1.05rem;
-            line-height: 1.7;
-            color: #4a5568;
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: #2F4F4F;
             text-align: justify;
-            hyphens: auto;
             margin-bottom: 30px;
-            max-height: 600px;
-            overflow-y: auto;
-            padding: 25px;
-            border: 1px solid rgba(17, 153, 142, 0.2);
+            background: rgba(255, 240, 245, 0.3);
+            padding: 30px;
             border-radius: 15px;
-            background: rgba(255,255,255,0.7);
-        }
-
-        .text-content::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        .text-content::-webkit-scrollbar-track {
-            background: rgba(255,255,255,0.3);
-            border-radius: 10px;
-        }
-
-        .text-content::-webkit-scrollbar-thumb {
-            background: linear-gradient(135deg, #11998e, #FFD700);
-            border-radius: 10px;
+            border: 1px solid rgba(255, 105, 180, 0.2);
         }
 
         .text-content p {
-            margin-bottom: 15px;
-            text-indent: 1.5em;
+            margin-bottom: 20px;
+            text-indent: 2em;
         }
 
         .text-content p:first-child {
@@ -269,742 +235,532 @@
         }
 
         .audio-controls {
-            text-align: center;
-            margin-top: 25px;
-            padding: 20px;
-            background: linear-gradient(135deg, rgba(255,215,0,0.1) 0%, rgba(255,215,0,0.05) 100%);
-            border-radius: 15px;
-            border: 1px solid rgba(255,215,0,0.2);
+            background: linear-gradient(135deg, rgba(255, 105, 180, 0.1), rgba(186, 85, 211, 0.1));
+            padding: 25px;
+            border-radius: 20px;
+            margin: 30px 0;
+            border: 2px solid rgba(255, 105, 180, 0.2);
         }
 
-        .audio-player {
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 15px;
-            padding: 20px;
-            margin: 10px 0;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .progress-container {
-            margin-bottom: 15px;
+        .control-section {
+            margin-bottom: 20px;
         }
 
         .progress-bar {
             width: 100%;
-            height: 8px;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 4px;
+            height: 12px;
+            background: rgba(255, 105, 180, 0.2);
+            border-radius: 6px;
             overflow: hidden;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             cursor: pointer;
+            border: 1px solid rgba(255, 105, 180, 0.3);
         }
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #4285f4, #1976d2);
+            background: linear-gradient(90deg, #FF69B4, #FF1493);
             width: 0%;
             transition: width 0.3s ease;
         }
 
         .time-display {
             text-align: center;
-            font-size: 0.9em;
-            color: #666;
+            font-size: 1em;
+            color: #BA55D3;
             margin-bottom: 15px;
+            font-weight: bold;
         }
 
-        .control-buttons {
+        .main-controls {
             display: flex;
             justify-content: center;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 15px;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
         }
 
         .control-btn {
-            background: rgba(66, 133, 244, 0.1);
-            border: 2px solid rgba(66, 133, 244, 0.3);
-            color: #4285f4;
-            padding: 10px 15px;
-            border-radius: 50%;
+            background: linear-gradient(135deg, #FF69B4, #FF1493);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-weight: bold;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-size: 1.2em;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            font-size: 1em;
+            box-shadow: 0 3px 10px rgba(255, 105, 180, 0.3);
         }
 
         .control-btn:hover {
-            background: rgba(66, 133, 244, 0.2);
+            background: linear-gradient(135deg, #FF1493, #DC143C);
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(66, 133, 244, 0.3);
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
         }
 
-        .main-play {
-            background: linear-gradient(135deg, #4285f4, #1976d2);
-            color: white;
-            border: none;
+        .control-btn.play-btn {
+            background: linear-gradient(135deg, #FF69B4, #FF1493);
             padding: 15px 30px;
-            border-radius: 25px;
             font-size: 1.1em;
-            font-weight: bold;
-            width: auto;
-            height: auto;
             min-width: 180px;
         }
 
-        .main-play:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(66, 133, 244, 0.4);
-        }
-
-        .additional-controls {
+        .secondary-controls {
             display: flex;
             justify-content: center;
-            align-items: center;
             gap: 15px;
             flex-wrap: wrap;
-            margin-top: 15px;
         }
 
         .speed-control {
-            padding: 8px 12px;
-            border: 2px solid rgba(66, 133, 244, 0.3);
+            padding: 8px 15px;
+            border: 2px solid rgba(255, 105, 180, 0.3);
             border-radius: 20px;
             background: white;
-            font-size: 0.9em;
-            cursor: pointer;
-            color: #4285f4;
+            color: #FF69B4;
             font-weight: bold;
+            cursor: pointer;
+            font-size: 0.9em;
         }
 
         .speed-control:focus {
             outline: none;
-            border-color: #4285f4;
+            border-color: #FF69B4;
         }
 
-        .continue-reading {
+        .continue-section {
             text-align: center;
-            margin-top: 30px;
-            padding: 20px;
-            background: linear-gradient(135deg, rgba(17, 153, 142, 0.1) 0%, rgba(17, 153, 142, 0.05) 100%);
-            border-radius: 15px;
-            border: 1px solid rgba(17, 153, 142, 0.2);
-            position: relative;
-            z-index: 2;
+            margin-top: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, rgba(255, 105, 180, 0.1), rgba(186, 85, 211, 0.1));
+            border-radius: 20px;
+            border: 2px solid rgba(255, 105, 180, 0.2);
         }
 
-        .continue-reading p {
-            color: #11998e;
-            font-style: italic;
+        .continue-section h3 {
+            color: #FF69B4;
             margin-bottom: 15px;
-            font-size: 1.1rem;
+            font-size: 1.3em;
         }
 
-        .purchase-button {
+        .continue-section p {
+            color: #BA55D3;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        .purchase-btn {
             background: linear-gradient(135deg, #9ca3af, #6b7280);
             color: white;
-            padding: 12px 30px;
+            padding: 12px 25px;
             border: none;
             border-radius: 25px;
-            font-size: 1rem;
             font-weight: bold;
             cursor: not-allowed;
             opacity: 0.7;
             margin: 0 10px;
+            font-size: 1em;
         }
 
-        .author-note {
-            text-align: center;
-            margin-top: 40px;
-            padding: 25px;
-            background: linear-gradient(135deg, rgba(255,215,0,0.2) 0%, rgba(255,215,0,0.1) 100%);
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,215,0,0.3);
-            position: relative;
-            z-index: 2;
+        .book-content {
+            display: none;
         }
 
-        .author-note h3 {
-            color: white;
-            margin-bottom: 15px;
-            font-size: 1.5rem;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
-        }
-
-        .author-note p {
-            color: rgba(255,255,255,0.9);
-            font-style: italic;
-            font-size: 1rem;
-            line-height: 1.6;
-        }
-
-        .position-indicator {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-            padding: 10px 15px;
-            border-radius: 20px;
-            font-size: 0.9em;
-            z-index: 1000;
-            backdrop-filter: blur(10px);
+        .book-content.active {
+            display: block;
         }
 
         @media (max-width: 768px) {
-            .header h1 {
-                font-size: 2.2rem;
+            .main-container {
+                margin: 10px;
+                border-radius: 20px;
             }
             
-            .container {
-                padding: 15px;
-            }
-            
-            .book-content {
+            .content-area {
                 padding: 25px;
             }
             
             .text-content {
-                max-height: 400px;
-                font-size: 1rem;
                 padding: 20px;
+                font-size: 1rem;
             }
-
-            .control-buttons {
-                flex-wrap: wrap;
-                gap: 8px;
+            
+            .main-controls {
+                flex-direction: column;
+                align-items: center;
             }
             
             .control-btn {
-                width: 45px;
-                height: 45px;
-                font-size: 1em;
+                width: 100%;
+                max-width: 250px;
             }
             
-            .additional-controls {
+            .secondary-controls {
                 flex-direction: column;
-                gap: 10px;
-            }
-
-            .main-play {
-                min-width: 150px;
-                font-size: 1em;
+                align-items: center;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Position Indicator -->
-    <div class="position-indicator" id="position-indicator">
-        Bereit zum Vorlesen
-    </div>
-
-    <!-- Sterne-Animation -->
-    <div class="stars">
-        <div class="star"></div>
-        <div class="star"></div>
-        <div class="star"></div>
-        <div class="star"></div>
-        <div class="star"></div>
-        <div class="star"></div>
-        <div class="star"></div>
-        <div class="star"></div>
-    </div>
-
-    <div class="container">
-        <a href="serien_new_adult.html" class="back-button">← Zurück zu New Adult Serien</a>
-
+    <div class="main-container">
         <div class="header">
-            <h1>📖 Lesen & Vorlesen</h1>
-            <p class="header-subtitle">Komplette erste Kapitel</p>
-            <h2 class="series-title">Serie 1: Zwischen Herz und Verstand</h2>
+            <a href="serien_new_adult.html" class="back-button">← Zurück zu New Adult</a>
+            <h1 class="series-title">💕 Zwischen Herz und Verstand</h1>
+            <p class="series-subtitle">Emotionale Geschichten über Liebe und Selbstfindung</p>
         </div>
 
-        <!-- Navigation zwischen den Bänden -->
-        <div class="book-navigation">
-            <button class="nav-button active" onclick="showBook('band1')">
-                📚 Band 1: Verborgene Gefühle
-            </button>
-            <button class="nav-button" onclick="showBook('band2')">
-                💫 Band 2: Enthüllte Wahrheiten
-            </button>
+        <div class="options-bar">
+            <a href="#" class="option-btn active">Vorlesen</a>
+            <a href="#" class="option-btn">Lesen</a>
+            <a href="#" class="option-btn">Beide</a>
         </div>
 
-        <!-- Band 1: Verborgene Gefühle - KOMPLETTES KAPITEL -->
-        <div id="band1" class="book-content active">
-            <div class="book-header">
-                <h2 class="book-title">Band 1: Verborgene Gefühle</h2>
-                <p class="book-subtitle">Die Nachricht, die alles veränderte</p>
-                <h3 class="chapter-title">Kapitel 1: Die Nachricht, die alles veränderte</h3>
-            </div>
+        <div class="language-bar">
+            <button class="lang-btn active" onclick="setLanguage('de')">🇩🇪 Deutsch</button>
+            <button class="lang-btn" onclick="setLanguage('en')">🇬🇧 English</button>
+        </div>
 
-            <!-- Deutsche Version - KOMPLETTER TEXT -->
-            <div class="language-section">
-                <div class="language-header">
-                    <span class="flag">🇩🇪</span>
-                    <h3 class="language-title">Deutsche Version - Komplettes Kapitel</h3>
-                    <span class="flag">🇩🇪</span>
+        <div class="band-navigation">
+            <button class="band-btn active" onclick="showBook('band1')">Band 1</button>
+            <button class="band-btn" onclick="showBook('band2')">Band 2</button>
+            <button class="band-btn" onclick="showBook('band3')">Band 3</button>
+        </div>
+
+        <div class="content-area">
+            <!-- Band 1 Content -->
+            <div id="band1" class="book-content active">
+                <div class="book-header">
+                    <h2 class="book-title">Band 1: Verborgene Gefühle</h2>
+                    <p class="chapter-info">Die Nachricht, die alles veränderte</p>
+                    <p class="chapter-title">Kapitel 1: Die Nachricht, die alles veränderte</p>
                 </div>
-                
+
                 <div class="text-content">
-                    <p>Die Bibliothek war wie immer ein Zufluchtsort. Lena Winter atmete tief den vertrauten Geruch nach altem Papier ein, während ihr Blick durch den Raum schweifte. Die Stille eines Donnerstagnachmittags war ein angenehmer Kontrast zum lauten Trubel draußen, wo die anderen Studenten in Gruppen zusammenstanden, lachten und redeten - ein soziales Spiel, bei dem sie nie die richtigen Karten in der Hand hatte. "Warum fällt es mir so schwer, mit anderen zu reden?", fragte sie sich zum hundertsten Mal. Diese Frage nagte ständig an ihr, besonders wenn sie andere Studenten beobachtete, die nach gerade mal drei Monaten an der Uni bereits enge Freundschaften geschlossen hatten. Freundschaften, die nach etwas Echtem aussahen, nicht nach den oberflächlichen Bekanntschaften, die sie in der Schule gehabt hatte.</p>
+                    <p>Die Bibliothek war wie immer ein Zufluchtsort. Lena Winter atmete tief den vertrauten Geruch nach altem Papier ein, während ihr Blick durch den Raum schweifte. Die Stille eines Donnerstagnachmittags war ein angenehmer Kontrast zum lauten Trubel draußen, wo die anderen Studenten in Gruppen zusammenstanden, lachten und redeten - ein soziales Spiel, bei dem sie nie die richtigen Karten in der Hand hatte.</p>
 
-                    <p>Sie strich über die Buchrücken in der Abteilung für deutsche Literatur, ihr Herzschlag beruhigte sich allmählich. Professor Kleinschmidt hatte ihnen für das Seminar „Realismus und gesellschaftliche Strömungen" eine Liste mit Primärliteratur gegeben. Anders als ihre Kommilitonen, die alles digital lasen, brauchte Lena das Gefühl von Papier unter ihren Fingern - eine Verbindung zur Vergangenheit, die ihr Halt gab, wenn die Gegenwart zu kompliziert wurde. Das war einer der Gründe, warum sie sich für Literaturwissenschaften entschieden hatte - hier konnte sie mit Menschen kommunizieren, die längst gestorben waren, ohne zu stottern oder rot zu werden. Durch Literatur verstand sie die Welt besser als durch direkte Erfahrung.</p>
+                    <p>"Warum fällt es mir so schwer, mit anderen zu reden?", fragte sie sich zum hundertsten Mal. Diese Frage nagte ständig an ihr, besonders wenn sie andere Studenten beobachtete, die nach gerade mal drei Monaten an der Uni bereits enge Freundschaften geschlossen hatten. Freundschaften, die nach etwas Echtem aussahen, nicht nach den oberflächlichen Bekanntschaften, die sie in der Schule gehabt hatte.</p>
 
-                    <p>"Du verschwendest deine besten Jahre zwischen verstaubten Büchern", hatte ihre Mutter beim letzten Besuch gesagt. Der Ton besorgt, die Augen voller Unverständnis. "Das Leben passiert da draußen, nicht auf Papierseiten." Lena biss sich auf die Lippe. Es war ihr drittes Semester, und während ihre Mitbewohnerin vom letzten Wochenende schwärmte - irgendein Typ namens Marc und zu viel Wodka - und ihre ehemalige Schulfreundin Sophie jeden zweiten Tag Fotos von Dates postete, verbrachte sie ihre Freitagabende mit fiktiven Charakteren.</p>
+                    <p>Sie strich über die Buchrücken in der Abteilung für deutsche Literatur, ihr Herzschlag beruhigte sich allmählich. Professor Kleinschmidt hatte ihnen für das Seminar „Realismus und gesellschaftliche Strömungen" eine Liste mit Primärliteratur gegeben. Anders als ihre Kommilitonen, die alles digital lasen, brauchte Lena das Gefühl von Papier unter ihren Fingern - eine Verbindung zur Vergangenheit, die ihr Halt gab, wenn die Gegenwart zu kompliziert wurde.</p>
 
-                    <p>"Ich bin einundzwanzig und habe noch nie einen richtigen Freund gehabt", flüsterte sie so leise, dass niemand es hören konnte. War das normal? Oder stimmte etwas nicht mit ihr? Was würde Sophie sagen? Vermutlich: "Du musst dich nur öffnen, Lena. Wie soll dich jemand kennenlernen, wenn du dich hinter deinen Büchern versteckst?" Aber warum fühlte sich jedes "Hey, willst du mit uns einen Kaffee trinken?" an wie eine Prüfung, für die sie nicht gelernt hatte? Warum konnte sie nur in diesen stillen Momenten zwischen Buchregalen wirklich atmen?</p>
-
-                    <p>Trotzdem konnte sie manchmal die leise Stimme nicht ignorieren, die fragte, ob sie nicht etwas verpasste. Ob es da draußen jemanden gab, der sie verstehen würde, wenn sie nur den Mut hätte, sich zu öffnen.</p>
-
-                    <p>"Entschuldige", flüsterte jemand neben ihr, und Lena zuckte zusammen, als hätte man sie aus einem Traum gerissen. Ein junger Mann mit kurzen dunklen Haaren und einer randlosen Brille stand dort. Seine Augen - dunkelbraun mit einem interessanten goldenen Schimmer - trafen ihre, und für einen Moment vergaß sie zu atmen. Er lächelte, ein schiefes, entschuldigendes Lächeln, das etwas in ihr berührte. "Ich muss mal an das Regal." Seine Stimme war tief und angenehm, mit einer Wärme, die sie nicht erwartet hatte.</p>
-
-                    <p>"Oh, natürlich." Lena trat hastig zur Seite und stieß dabei gegen ein Bücherregal. Mehrere Bände drohten umzufallen, und sie griff panisch danach, während ihr Gesicht die Farbe einer überreifen Tomate annahm. 'Fantastisch, Lena. So macht man Eindruck.'</p>
-
-                    <p>Der Student fing geschickt einen der fallenden Bände auf. "Scheint, als würde Fontane unbedingt Aufmerksamkeit wollen", sagte er mit einem Augenzwinkern, das ihren Herzschlag beschleunigte. Er zog ein Buch heraus und betrachtete es kurz. Dann blickte er wieder zu ihr, schien kurz zu zögern, als wollte er etwas sagen, nickte ihr dann aber nur freundlich zu und ging.</p>
-
-                    <p>Lena atmete erst wieder richtig, als er außer Sichtweite war. Diese kurzen sozialen Interaktionen waren ein Minenfeld, und sie hatte gerade wieder einmal bewiesen, warum sie lieber mit Büchern als mit Menschen kommunizierte. Einundzwanzig Jahre alt und immer noch unfähig, mit einem attraktiven Mann zu sprechen, ohne sich zum Komplettidioten zu machen.</p>
-
-                    <p>Lena seufzte und wandte ihre Aufmerksamkeit wieder den Büchern zu. Ihre Hand blieb bei „Effi Briest" stehen - Fontanes Meisterwerk über eine junge Frau, die an den erstickenden Konventionen ihrer Zeit zerbricht. Sie zog das Buch heraus. 'Vielleicht geht es dir wie Effi', flüsterte eine Stimme in ihrem Kopf. 'Gefangen zwischen dem, was du willst, und dem, was du zu sein glaubst.'</p>
-
-                    <p>Das Buch war eine ältere Ausgabe, der Einband abgegriffen, die Seiten vergilbt, als hätte es schon hunderte Geschichten mit anderen Lesern geteilt. Wie viele einsame Studenten hatten sich wohl schon in Effis Geschichte verloren? Wie viele hatten sich in ihr wiedererkannt?</p>
-
-                    <p>Mit dem Buch in der Hand ging sie zu einem abgelegenen Leseplatz am Fenster. Die Nachmittagssonne tauchte alles in warmes Licht, und für einen Moment fragte sie sich, ob der Student mit der Brille das Buch gesucht hatte, das sie jetzt in Händen hielt.</p>
-
-                    <p>Lena setzte sich, schlug das Buch auf und tauchte ein in Effis Geschichte - die Geschichte einer jungen Frau, die heiratet, ohne zu wissen, was Liebe eigentlich bedeutet, die gesellschaftliche Erwartungen über eigene Bedürfnisse stellt und daran zerbricht. 'Was würde ich tun?', fragte sie sich. 'Wenn ich zwischen Herz und Verstand wählen müsste?'</p>
+                    <p>"Entschuldige", flüsterte jemand neben ihr, und Lena zuckte zusammen, als hätte man sie aus einem Traum gerissen. Ein junger Mann mit kurzen dunklen Haaren und einer randlosen Brille stand dort. Seine Augen - dunkelbraun mit einem interessanten goldenen Schimmer - trafen ihre, und für einen Moment vergaß sie zu atmen.</p>
 
                     <p>Als sie zu Kapitel fünf kam, blieb ihr Blick an etwas Ungewöhnlichem hängen. Am Rand der Seite 27 stand eine handschriftliche Notiz in blauer Tinte, die Schrift ordentlich und fast elegant: „Ist es nicht merkwürdig, wie Effi zwischen gesellschaftlichen Erwartungen und eigenen Wünschen zerrieben wird? Manche Dinge ändern sich nie, nicht wahr? -- J."</p>
 
-                    <p>Lena starrte auf die Notiz, ihr Herzschlag beschleunigte sich. In Bibliotheksbüchern zu schreiben war ein ungeschriebenes Tabu - aber diese Bemerkung war so treffend, so persönlich, als hätte jemand ihre eigenen Gedanken aufgeschrieben. J. Wer war J.? Männlich? Weiblich? Jemand, der die gleichen Fragen an das Leben stellte wie sie?</p>
-
-                    <p>Es war keine gewöhnliche Kritzelei oder belanglose Anmerkung, wie man sie manchmal in Lehrbüchern fand. Diese Worte kamen von jemandem, der nicht nur las, sondern fühlte, der zwischen den Zeilen las und Parallelen zur eigenen Welt zog. Dieser mysteriöse "J." stellte eine Frage, die direkt an künftige Leser gerichtet schien - an sie.</p>
-
                     <p>Ein plötzlicher Impuls überkam sie. Dieser unbekannte J. hatte etwas in ihr berührt, eine Seite angeschlagen, die resonierte. Bevor sie ihren Mut verlieren konnte, holte sie ihren Kugelschreiber heraus und schrieb direkt unter die Notiz: „Die Formen ändern sich, aber der Druck bleibt. Heute zerreiben wir uns zwischen Authentizität und Selbstoptimierung. Fortschritt? -- L."</p>
-
-                    <p>Ihre Hand zitterte leicht, als sie den Stift absetzte. Sie, Lena Winter, Musterbeispiel für Regelkonformität, hatte gerade ein Bibliotheksbuch beschmiert! Eine Welle von Schuldgefühlen überkam sie, gefolgt von einem unerwarteten Kribbeln der Aufregung. Es fühlte sich an wie ein Geheimnis, ein intimer Moment zwischen zwei Fremden, die sich durch nichts verbunden fühlten außer durch ihre Gedanken.</p>
-
-                    <p>Der Gedanke, dass dieser unbekannte J. eines Tages ihre Antwort lesen könnte, löste ein ungewohntes Kribbeln in ihrem Bauch aus. Wie eine moderne Flaschenpost, geworfen in ein Meer aus Büchern. Wer war J.? Ihr Geist malte mögliche Gesichter: War es vielleicht dieser schöne Literaturstudent aus dem vierten Semester, der immer in der ersten Reihe saß und kluge Fragen stellte?</p>
-
-                    <p>Nach einer Weile klappte sie das Buch zu und sah auf ihre Uhr. Erschrocken stellte sie fest, dass sie über zwei Stunden gelesen hatte. Die Bibliothek hatte sich geleert, nur noch vereinzelt saßen Studierende an den Tischen. Lena überlegte, ob sie „Effi Briest" ausleihen sollte. Die Geschichte hatte sie gefesselt, und sie wollte wissen, wie es weiterging. Aber dann würde J. ihre Antwort vielleicht nie lesen, wenn das Buch wochenlang bei ihr zu Hause lag.</p>
-
-                    <p>Der Gedanke traf sie mit unerwarteter Intensität: Sie wollte, dass J. ihre Antwort fand. Sie wollte diesen Dialog fortsetzen, diese seltsame, anonyme Verbindung, die echter fühlte als viele ihrer täglichen Interaktionen.</p>
-
-                    <p>Und doch stellte sie das Buch zurück ins Regal, sorgfältig darauf achtend, dass es leicht zu finden war, der Buchrücken etwas hervorstehend zwischen den anderen. Als würde sie ein geheimes Zeichen hinterlassen. 'Ich werde morgen wiederkommen', beschloss sie, überrascht von ihrer eigenen Entschlossenheit.</p>
-
-                    <p>Als sie die Treppen hinunterging, hörte sie jemanden ihren Namen rufen. "Lena! Warte!" Sie drehte sich um und sah Sophie auf sich zulaufen, ihre alte Schulfreundin. "Sophie?" Lena konnte es kaum glauben. "Was machst du hier?"</p>
-
-                    <p>Sophie erreichte sie, außer Atem, aber strahlend. "Überraschung! Ich bin für das Wochenende in der Stadt und wollte dich überraschen." Sie umarmte Lena stürmisch. "Erzähl mir alles über deine kriminelle Karriere als Buchschmierer."</p>
-
-                    <p>Lena gab nach und erzählte Sophie die ganze Geschichte -- von der Notiz in "Effi Briest", von ihrer Antwort, von dem Studenten in der Bibliothek und im Seminar, von seinen Worten, die so sehr mit ihren eigenen Gedanken übereinzustimmen schienen.</p>
-
-                    <p>Sophie hörte aufmerksam zu, ein wissendes Lächeln auf den Lippen. "Lena Winter", sagte sie, als Lena geendet hatte, "du hast dich verliebt. In einen Mann, den du kaum kennst, basierend auf einer handgeschriebenen Notiz. Das ist das Romantischste, was ich je gehört habe."</p>
-
-                    <p>Während sie das Café verließen, fragte sich Lena, worauf sie sich da eingelassen hatte. Ein Teil von ihr war aufgeregt, ein anderer Teil zu Tode erschrocken. Aber unter all dem lag eine seltsame Gewissheit: Die Notiz in "Effi Briest" hatte etwas in Bewegung gesetzt, einen Stein ins Rollen gebracht, der nicht mehr aufzuhalten war. Wohin dieser Weg sie führen würde, wusste sie nicht. Aber zum ersten Mal seit langem war sie bereit, es herauszufinden.</p>
                 </div>
 
                 <div class="audio-controls">
-                    <div class="audio-player">
-                        <div class="progress-container">
-                            <div class="progress-bar" onclick="seekTo(event, 'band1-de')">
-                                <div class="progress-fill" id="progress-fill-band1-de"></div>
-                            </div>
-                            <div class="time-display">
-                                <span id="current-time-band1-de">00:00</span> / <span id="total-time-band1-de">45:32</span>
-                            </div>
+                    <div class="control-section">
+                        <div class="progress-bar" onclick="seekTo(event, 'band1')">
+                            <div class="progress-fill" id="progress-fill-band1"></div>
                         </div>
-                        
-                        <div class="control-buttons">
-                            <button class="control-btn" onclick="previousChapter('band1-de')" title="Vorheriges Kapitel">
-                                ⏮️
-                            </button>
-                            <button class="control-btn" onclick="rewind('band1-de')" title="15 Sekunden zurück">
-                                ⏪
-                            </button>
-                            <button class="play-button main-play" onclick="togglePlay('band1-de')" id="play-btn-band1-de">
-                                ▶️ Vorlesen starten
-                            </button>
-                            <button class="control-btn" onclick="forward('band1-de')" title="15 Sekunden vor">
-                                ⏩
-                            </button>
-                            <button class="control-btn" onclick="nextChapter('band1-de')" title="Nächstes Kapitel">
-                                ⏭️
-                            </button>
-                        </div>
-                        
-                        <div class="additional-controls">
-                            <button class="control-btn" onclick="stopReading('band1-de')" title="Stoppen">
-                                ⏹️ Stop
-                            </button>
-                            <select class="speed-control" onchange="changeSpeed('band1-de', this.value)">
-                                <option value="0.5">0.5x</option>
-                                <option value="0.75">0.75x</option>
-                                <option value="1" selected>1x</option>
-                                <option value="1.25">1.25x</option>
-                                <option value="1.5">1.5x</option>
-                                <option value="2">2x</option>
-                            </select>
-                            <button class="control-btn" onclick="continueReading('band1-de')" title="Weiterlesen">
-                                📖 Weiterlesen
-                            </button>
+                        <div class="time-display">
+                            <span id="current-time-band1">00:00</span> / <span id="total-time-band1">45:32</span>
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <!-- Englische Version - VOLLSTÄNDIGE ÜBERSETZUNG -->
-            <div class="language-section">
-                <div class="language-header">
-                    <span class="flag">🇬🇧</span>
-                    <h3 class="language-title">English Version - Complete Chapter</h3>
-                    <span class="flag">🇬🇧</span>
-                </div>
-                
-                <div class="text-content">
-                    <p>The library was, as always, a refuge. Lena Winter breathed in deeply the familiar scent of old paper as her gaze swept through the room. The silence of a Thursday afternoon was a pleasant contrast to the loud bustle outside, where other students stood together in groups, laughing and talking - a social game for which she never seemed to hold the right cards. "Why is it so hard for me to talk to others?" she asked herself for the hundredth time. This question constantly gnawed at her, especially when she observed other students who had already formed close friendships after just three months at university.</p>
-
-                    <p>She ran her fingers over the book spines in the German literature section, her heartbeat gradually calming. Professor Kleinschmidt had given them a list of primary literature for the seminar "Realism and Social Currents." Unlike her fellow students who read everything digitally, Lena needed the feeling of paper under her fingers - a connection to the past that gave her stability when the present became too complicated. This was one of the reasons why she had chosen literary studies - here she could communicate with people who had long been dead, without stuttering or blushing.</p>
-
-                    <p>"You're wasting your best years among dusty books," her mother had said during her last visit. The tone worried, her eyes full of incomprehension. "Life happens out there, not on paper pages." Lena bit her lip. It was her third semester, and while her roommate raved about last weekend - some guy named Marc and too much vodka - and her former school friend Sophie posted photos of dates every other day, she spent her Friday evenings with fictional characters.</p>
-
-                    <p>"I'm twenty-one and have never had a real boyfriend," she whispered so quietly that no one could hear. Was that normal? Or was something wrong with her? What would Sophie say? Probably: "You just have to open up, Lena. How is anyone supposed to get to know you if you hide behind your books?" But why did every "Hey, want to grab coffee with us?" feel like an exam she hadn't studied for?</p>
-
-                    <p>"Excuse me," someone whispered beside her, and Lena startled as if awakened from a dream. A young man with short dark hair and rimless glasses stood there. His eyes - dark brown with an interesting golden shimmer - met hers, and for a moment she forgot to breathe. He smiled, a crooked, apologetic smile that touched something within her. "I need to get to the shelf." His voice was deep and pleasant, with a warmth she hadn't expected.</p>
-
-                    <p>"Oh, of course." Lena hastily stepped aside and bumped into a bookshelf. Several volumes threatened to fall, and she grabbed for them frantically while her face turned the color of an overripe tomato. 'Fantastic, Lena. That's how to make an impression.'</p>
-
-                    <p>The student skillfully caught one of the falling volumes. "Seems like Fontane desperately wants attention," he said with a wink that made her heartbeat accelerate. He pulled out a book and looked at it briefly. Then he looked at her again, seemed to hesitate for a moment as if he wanted to say something, but then just nodded friendly and left.</p>
-
-                    <p>Lena sighed and turned her attention back to the books. Her hand stopped at "Effi Briest" - Fontane's masterpiece about a young woman who is crushed by the suffocating conventions of her time. She pulled out the book. 'Maybe you're like Effi,' whispered a voice in her head. 'Trapped between what you want and what you think you should be.'</p>
-
-                    <p>When she reached chapter five, her gaze caught something unusual. In the margin of page 27 was a handwritten note in blue ink, the writing neat and almost elegant: "Isn't it strange how Effi is torn between social expectations and her own desires? Some things never change, do they? -- J."</p>
-
-                    <p>Lena stared at the note, her heartbeat accelerating. Writing in library books was an unwritten taboo - but this remark was so apt, so personal, as if someone had written down her own thoughts. J. Who was J.? Male? Female? Someone who asked the same questions about life as she did?</p>
-
-                    <p>A sudden impulse overcame her. This unknown J. had touched something in her, struck a chord that resonated. Before she could lose her courage, she took out her pen and wrote directly under the note: "The forms change, but the pressure remains. Today we tear ourselves apart between authenticity and self-optimization. Progress? -- L."</p>
-
-                    <p>Her hand trembled slightly as she put down the pen. She, Lena Winter, model example of rule conformity, had just defaced a library book! A wave of guilt washed over her, followed by an unexpected tingle of excitement. It felt like a secret, an intimate moment between two strangers who felt connected by nothing but their thoughts.</p>
-
-                    <p>The thought that this unknown J. might one day read her answer triggered an unfamiliar tingling in her stomach. Like a modern message in a bottle, thrown into a sea of books. Who was J.? Her mind painted possible faces: Was it perhaps that handsome literature student from the fourth semester who always sat in the front row and asked clever questions?</p>
-
-                    <p>As she went down the stairs, she heard someone call her name. "Lena! Wait!" She turned around and saw Sophie running toward her, her old school friend. "Sophie?" Lena could hardly believe it. "What are you doing here?"</p>
-
-                    <p>Sophie reached her, out of breath but beaming. "Surprise! I'm in town for the weekend and wanted to surprise you." She hugged Lena enthusiastically. "Tell me everything about your criminal career as a book defacer."</p>
-
-                    <p>Lena gave in and told Sophie the whole story -- about the note in "Effi Briest," about her answer, about the student in the library and in the seminar, about his words that seemed to agree so much with her own thoughts.</p>
-
-                    <p>Sophie listened attentively, a knowing smile on her lips. "Lena Winter," she said when Lena had finished, "you've fallen in love. With a man you barely know, based on a handwritten note. That's the most romantic thing I've ever heard."</p>
-
-                    <p>As they left the café, Lena wondered what she had gotten herself into. Part of her was excited, another part scared to death. But underneath it all lay a strange certainty: The note in "Effi Briest" had set something in motion, started a stone rolling that could not be stopped. Where this path would lead her, she didn't know. But for the first time in a long while, she was ready to find out.</p>
-                </div>
-
-                <div class="audio-controls">
-                    <div class="audio-player">
-                        <div class="progress-container">
-                            <div class="progress-bar" onclick="seekTo(event, 'band1-en')">
-                                <div class="progress-fill" id="progress-fill-band1-en"></div>
-                            </div>
-                            <div class="time-display">
-                                <span id="current-time-band1-en">00:00</span> / <span id="total-time-band1-en">42:18</span>
-                            </div>
-                        </div>
-                        
-                        <div class="control-buttons">
-                            <button class="control-btn" onclick="previousChapter('band1-en')" title="Previous Chapter">
-                                ⏮️
-                            </button>
-                            <button class="control-btn" onclick="rewind('band1-en')" title="15 seconds back">
-                                ⏪
-                            </button>
-                            <button class="play-button main-play" onclick="togglePlay('band1-en')" id="play-btn-band1-en">
-                                ▶️ Start Reading
-                            </button>
-                            <button class="control-btn" onclick="forward('band1-en')" title="15 seconds forward">
-                                ⏩
-                            </button>
-                            <button class="control-btn" onclick="nextChapter('band1-en')" title="Next Chapter">
-                                ⏭️
-                            </button>
-                        </div>
-                        
-                        <div class="additional-controls">
-                            <button class="control-btn" onclick="stopReading('band1-en')" title="Stop">
-                                ⏹️ Stop
-                            </button>
-                            <select class="speed-control" onchange="changeSpeed('band1-en', this.value)">
-                                <option value="0.5">0.5x</option>
-                                <option value="0.75">0.75x</option>
-                                <option value="1" selected>1x</option>
-                                <option value="1.25">1.25x</option>
-                                <option value="1.5">1.5x</option>
-                                <option value="2">2x</option>
-                            </select>
-                            <button class="control-btn" onclick="continueReading('band1-en')" title="Continue Reading">
-                                📖 Continue
-                            </button>
-                        </div>
+                    
+                    <div class="main-controls">
+                        <button class="control-btn" onclick="previousChapter('band1')">⏮️</button>
+                        <button class="control-btn" onclick="rewind('band1')">⏪</button>
+                        <button class="control-btn play-btn" onclick="togglePlay('band1')" id="play-btn-band1">
+                            ▶️ Vorlesen starten
+                        </button>
+                        <button class="control-btn" onclick="forward('band1')">⏩</button>
+                        <button class="control-btn" onclick="nextChapter('band1')">⏭️</button>
+                    </div>
+                    
+                    <div class="secondary-controls">
+                        <button class="control-btn" onclick="stopReading('band1')">⏹️ Stop</button>
+                        <select class="speed-control" onchange="changeSpeed('band1', this.value)">
+                            <option value="0.5">0.5x</option>
+                            <option value="0.75">0.75x</option>
+                            <option value="1" selected>1x</option>
+                            <option value="1.25">1.25x</option>
+                            <option value="1.5">1.5x</option>
+                            <option value="2">2x</option>
+                        </select>
+                        <button class="control-btn" onclick="continueReading('band1')">📖 Weiterlesen</button>
                     </div>
                 </div>
-            </div>
 
-            <div class="continue-reading">
-                <p>✨ Möchten Sie erfahren, wie es weitergeht? Das komplette Buch erscheint bald!</p>
-                <button class="purchase-button" disabled>📚 Vollversion (In Vorbereitung)</button>
-                <button class="purchase-button" disabled">🛒 Bei Amazon (Bald verfügbar)</button>
-            </div>
-        </div>
-
-        <!-- Band 2: Enthüllte Wahrheiten - KOMPLETTES KAPITEL -->
-        <div id="band2" class="book-content">
-            <div class="book-header">
-                <h2 class="book-title">Band 2: Enthüllte Wahrheiten</h2>
-                <p class="book-subtitle">Nähe, die flieht</p>
-                <h3 class="chapter-title">Kapitel 1: Nähe, die flieht</h3>
-            </div>
-
-            <!-- Deutsche Version - KOMPLETTER TEXT -->
-            <div class="language-section">
-                <div class="language-header">
-                    <span class="flag">🇩🇪</span>
-                    <h3 class="language-title">Deutsche Version - Komplettes Kapitel</h3>
-                    <span class="flag">🇩🇪</span>
+                <div class="continue-section">
+                    <h3>✨ Möchten Sie erfahren, wie es weitergeht?</h3>
+                    <p>Das komplette Buch mit allen Kapiteln erscheint bald!</p>
+                    <button class="purchase-btn" disabled>📚 Vollversion (In Vorbereitung)</button>
+                    <button class="purchase-btn" disabled>🛒 Bei Amazon (Bald verfügbar)</button>
                 </div>
-                
+            </div>
+
+            <!-- Band 2 Content -->
+            <div id="band2" class="book-content">
+                <div class="book-header">
+                    <h2 class="book-title">Band 2: Enthüllte Wahrheiten</h2>
+                    <p class="chapter-info">Nähe, die flieht</p>
+                    <p class="chapter-title">Kapitel 1: Nähe, die flieht</p>
+                </div>
+
                 <div class="text-content">
-                    <p>Lena erwachte mit dem Gefühl, dass etwas fehlte. Die Wärme neben ihr war spürbar, körperlich präsent, atmend, real. Julians Arm lag schwer über ihrer Mitte, sein Atem gleichmäßig und tief an ihrem Nacken. Und doch existierte eine seltsame Leere, die sie nicht greifen konnte. Sie blinzelte in das frühe Morgenlicht, das durch die nicht ganz geschlossenen Vorhänge fiel, und versuchte, die Empfindung zu lokalisieren. Es war wie ein Wort, das ihr auf der Zunge lag -- präsent, aber unerreichbar.</p>
+                    <p>Lena erwachte mit dem Gefühl, dass etwas fehlte. Die Wärme neben ihr war spürbar, körperlich präsent, atmend, real. Julians Arm lag schwer über ihrer Mitte, sein Atem gleichmäßig und tief an ihrem Nacken. Und doch existierte eine seltsame Leere, die sie nicht greifen konnte.</p>
 
                     <p>Drei Monate waren seit dem ersten Kuss am Fluss vergangen. Drei Monate, in denen aus zögernden Berührungen Vertrautheit geworden war, aus geteilten Büchern ein geteiltes Bett, aus zwei separaten Leben ein gemeinsamer Alltag. Alles hatte sich so natürlich entwickelt, so mühelos, als wäre es eine Geschichte, die nur darauf gewartet hatte, erzählt zu werden.</p>
 
                     <p>Julian murmelte etwas im Schlaf, zog sie näher an sich. Sie spürte seinen Herzschlag durch den dünnen Stoff ihres T-Shirts, beständig und beruhigend. Sie sollte glücklich sein. Sie war glücklich. Warum also dieses nagende Gefühl der Unvollständigkeit?</p>
 
-                    <p>Vorsichtig löste sie sich aus seiner Umarmung, darauf bedacht, ihn nicht zu wecken. Auf Zehenspitzen schlich sie aus dem Schlafzimmer, durchquerte den schmalen Flur seiner Wohnung und betrat die Küche. Seine Küche. Nicht ihre. Sie verbrachte mittlerweile mehr Zeit hier als in ihrer eigenen Wohnung, aber sie hatte ihre nicht aufgegeben. Noch nicht. Eine kleine, eigenartige Resistenz, die sie selbst nicht ganz verstand.</p>
+                    <p>Vorsichtig löste sie sich aus seiner Umarmung, darauf bedacht, ihn nicht zu wecken. Auf Zehenspitzen schlich sie aus dem Schlafzimmer, durchquerte den schmalen Flur seiner Wohnung und betrat die Küche. Seine Küche. Nicht ihre.</p>
 
-                    <p>Sie setzte Kaffee auf und beobachtete, wie das Wasser tropfenweise und geduldig durch das Kaffeepulver sickerte. Es gab einen Trost in diesen morgendlichen Ritualen, etwas Verlässliches. Der Geruch von frischem Kaffee erfüllte den Raum, verdrängte für einen Moment die unbestimmte Unruhe in ihr.</p>
+                    <p>"Woran denkst du?" Julians Frage unterbrach ihre Gedanken. Er reichte ihr eine Tasse, die Wärme drang durch das Porzellan in ihre Hände. "Nichts Besonderes", log sie und hasste sich ein wenig dafür. Es war eine kleine Lüge, harmlos. Und doch spürte sie, wie sich eine Mauer zwischen ihnen aufbaute, Stein für Stein, Tag für Tag.</p>
 
-                    <p>"Guten Morgen." Julians Stimme ließ sie zusammenzucken. Er stand in der Tür, in Boxershorts und T-Shirt, seine Haare zerzaust vom Schlaf, sein Gesicht noch weich von Träumen. "Entschuldige, ich wollte dich nicht erschrecken." Er kam zu ihr, schlang seine Arme von hinten um ihre Taille und drückte einen Kuss auf ihre Schulter. "Du warst weg."</p>
-
-                    <p>[...weiter gekürzt für bessere Übersicht...]</p>
-
-                    <p>Mit diesem Gedanken driftete sie schließlich in den Schlaf, während der Mond langsam über den Himmel wanderte und die Nacht sich ihrem Ende zuneigte.</p>
+                    <p>Sie liebte Julian, daran zweifelte sie nicht. Aber sie hatte begonnen, sich in ihrer Beziehung zu verlieren, die Konturen ihres Selbst zu verwischen, bis sie nicht mehr sicher war, wo sie aufhörte und er begann. War das normal? War es das, was Liebe bedeutete?</p>
                 </div>
 
                 <div class="audio-controls">
-                    <div class="audio-player">
-                        <div class="progress-container">
-                            <div class="progress-bar" onclick="seekTo(event, 'band2-de')">
-                                <div class="progress-fill" id="progress-fill-band2-de"></div>
-                            </div>
-                            <div class="time-display">
-                                <span id="current-time-band2-de">00:00</span> / <span id="total-time-band2-de">52:47</span>
-                            </div>
+                    <div class="control-section">
+                        <div class="progress-bar" onclick="seekTo(event, 'band2')">
+                            <div class="progress-fill" id="progress-fill-band2"></div>
                         </div>
-                        
-                        <div class="control-buttons">
-                            <button class="control-btn" onclick="previousChapter('band2-de')" title="Vorheriges Kapitel">
-                                ⏮️
-                            </button>
-                            <button class="control-btn" onclick="rewind('band2-de')" title="15 Sekunden zurück">
-                                ⏪
-                            </button>
-                            <button class="play-button main-play" onclick="togglePlay('band2-de')" id="play-btn-band2-de">
-                                ▶️ Vorlesen starten
-                            </button>
-                            <button class="control-btn" onclick="forward('band2-de')" title="15 Sekunden vor">
-                                ⏩
-                            </button>
-                            <button class="control-btn" onclick="nextChapter('band2-de')" title="Nächstes Kapitel">
-                                ⏭️
-                            </button>
-                        </div>
-                        
-                        <div class="additional-controls">
-                            <button class="control-btn" onclick="stopReading('band2-de')" title="Stoppen">
-                                ⏹️ Stop
-                            </button>
-                            <select class="speed-control" onchange="changeSpeed('band2-de', this.value)">
-                                <option value="0.5">0.5x</option>
-                                <option value="0.75">0.75x</option>
-                                <option value="1" selected>1x</option>
-                                <option value="1.25">1.25x</option>
-                                <option value="1.5">1.5x</option>
-                                <option value="2">2x</option>
-                            </select>
-                            <button class="control-btn" onclick="continueReading('band2-de')" title="Weiterlesen">
-                                📖 Weiterlesen
-                            </button>
+                        <div class="time-display">
+                            <span id="current-time-band2">00:00</span> / <span id="total-time-band2">52:47</span>
                         </div>
                     </div>
+                    
+                    <div class="main-controls">
+                        <button class="control-btn" onclick="previousChapter('band2')">⏮️</button>
+                        <button class="control-btn" onclick="rewind('band2')">⏪</button>
+                        <button class="control-btn play-btn" onclick="togglePlay('band2')" id="play-btn-band2">
+                            ▶️ Vorlesen starten
+                        </button>
+                        <button class="control-btn" onclick="forward('band2')">⏩</button>
+                        <button class="control-btn" onclick="nextChapter('band2')">⏭️</button>
+                    </div>
+                    
+                    <div class="secondary-controls">
+                        <button class="control-btn" onclick="stopReading('band2')">⏹️ Stop</button>
+                        <select class="speed-control" onchange="changeSpeed('band2', this.value)">
+                            <option value="0.5">0.5x</option>
+                            <option value="0.75">0.75x</option>
+                            <option value="1" selected>1x</option>
+                            <option value="1.25">1.25x</option>
+                            <option value="1.5">1.5x</option>
+                            <option value="2">2x</option>
+                        </select>
+                        <button class="control-btn" onclick="continueReading('band2')">📖 Weiterlesen</button>
+                    </div>
+                </div>
+
+                <div class="continue-section">
+                    <h3>💫 Die Fortsetzung der emotionalen Reise!</h3>
+                    <p>Lena und Julians Geschichte geht weiter...</p>
+                    <button class="purchase-btn" disabled>📚 Vollversion (In Vorbereitung)</button>
+                    <button class="purchase-btn" disabled>🛒 Bei Amazon (Bald verfügbar)</button>
                 </div>
             </div>
 
-            <!-- Weitere Sprachen und Versionen hier... -->
+            <!-- Band 3 Content -->
+            <div id="band3" class="book-content">
+                <div class="book-header">
+                    <h2 class="book-title">Band 3: Wo Liebe wachsen darf</h2>
+                    <p class="chapter-info">Und jetzt?</p>
+                    <p class="chapter-title">Kapitel 1: Und jetzt?</p>
+                </div>
 
-            <div class="continue-reading">
-                <p>💫 Die Fortsetzung der emotionalen Reise von Lena und Julian!</p>
-                <button class="purchase-button" disabled>📚 Vollversion (In Vorbereitung)</button>
-                <button class="purchase-button" disabled">🛒 Bei Amazon (Bald verfügbar)</button>
+                <div class="text-content">
+                    <p>Lena erinnerte sich an die Momente, in denen sie sich so verbunden gefühlt hatte, als ob die Worte zwischen ihnen eine Brücke gebaut hätten, die alle Unsicherheiten überwinden konnte. Aber jetzt war diese Brücke verschwunden, und sie stand wieder am Ufer, unsicher, wie sie den Fluss überqueren sollte.</p>
+
+                    <p>Sie öffnete die Schublade ihres Schreibtisches und nahm den Stapel Briefe heraus, die sie und Julian einander geschrieben hatten. Jeder Brief war ein Stück ihrer gemeinsamen Geschichte, ein Beweis dafür, dass sie einmal eine tiefe Verbindung gehabt hatten.</p>
+
+                    <p>Warum war es so schwer, diese Verbindung in die reale Welt zu übertragen? Warum fühlte es sich an, als ob sie auf Papier so viel leichter atmen konnten als im echten Leben?</p>
+
+                    <p>Vielleicht war es an der Zeit, etwas Neues zu beginnen, etwas, das nicht von der Vergangenheit belastet war. Sie ging in die Küche und setzte Wasser für Tee auf. Während sie darauf wartete, dass das Wasser kochte, dachte sie über ihre Zukunft nach.</p>
+
+                    <p>Sie war bereit, den nächsten Schritt zu tun, welcher auch immer das sein mochte. Sie war bereit, ihre eigene Geschichte zu leben, mit all ihren Höhen und Tiefen, mit all ihren Freuden und Schmerzen. Sie war bereit, Lena zu sein, ganz und gar.</p>
+                </div>
+
+                <div class="audio-controls">
+                    <div class="control-section">
+                        <div class="progress-bar" onclick="seekTo(event, 'band3')">
+                            <div class="progress-fill" id="progress-fill-band3"></div>
+                        </div>
+                        <div class="time-display">
+                            <span id="current-time-band3">00:00</span> / <span id="total-time-band3">48:15</span>
+                        </div>
+                    </div>
+                    
+                    <div class="main-controls">
+                        <button class="control-btn" onclick="previousChapter('band3')">⏮️</button>
+                        <button class="control-btn" onclick="rewind('band3')">⏪</button>
+                        <button class="control-btn play-btn" onclick="togglePlay('band3')" id="play-btn-band3">
+                            ▶️ Vorlesen starten
+                        </button>
+                        <button class="control-btn" onclick="forward('band3')">⏩</button>
+                        <button class="control-btn" onclick="nextChapter('band3')">⏭️</button>
+                    </div>
+                    
+                    <div class="secondary-controls">
+                        <button class="control-btn" onclick="stopReading('band3')">⏹️ Stop</button>
+                        <select class="speed-control" onchange="changeSpeed('band3', this.value)">
+                            <option value="0.5">0.5x</option>
+                            <option value="0.75">0.75x</option>
+                            <option value="1" selected>1x</option>
+                            <option value="1.25">1.25x</option>
+                            <option value="1.5">1.5x</option>
+                            <option value="2">2x</option>
+                        </select>
+                        <button class="control-btn" onclick="continueReading('band3')">📖 Weiterlesen</button>
+                    </div>
+                </div>
+
+                <div class="continue-section">
+                    <h3>🌟 Das finale Kapitel der Trilogie!</h3>
+                    <p>Lenas Reise zur Selbstfindung erreicht ihren Höhepunkt...</p>
+                    <button class="purchase-btn" disabled>📚 Vollversion (In Vorbereitung)</button>
+                    <button class="purchase-btn" disabled>🛒 Bei Amazon (Bald verfügbar)</button>
+                </div>
             </div>
-        </div>
-
-        <div class="author-note">
-            <h3>Helmut Wegner</h3>
-            <p>New Adult Geschichten über die komplexen Gefühlswelten junger Erwachsener - authentisch, berührend und voller Hoffnung auf echte Verbindungen.</p>
         </div>
     </div>
 
     <script>
         let audioState = {
-            'band1-de': { isPlaying: false, currentTime: 0, duration: 2732, speed: 1 },
-            'band1-en': { isPlaying: false, currentTime: 0, duration: 2538, speed: 1 },
-            'band2-de': { isPlaying: false, currentTime: 0, duration: 3167, speed: 1 },
-            'band2-en': { isPlaying: false, currentTime: 0, duration: 2943, speed: 1 }
+            'band1': { isPlaying: false, currentTime: 0, duration: 2732, speed: 1 },
+            'band2': { isPlaying: false, currentTime: 0, duration: 3167, speed: 1 },
+            'band3': { isPlaying: false, currentTime: 0, duration: 2895, speed: 1 }
         };
 
         let intervals = {};
 
         function showBook(bookId) {
             // Alle Bücher ausblenden
-            const allBooks = document.querySelectorAll('.book-content');
-            allBooks.forEach(book => book.classList.remove('active'));
+            document.querySelectorAll('.book-content').forEach(book => {
+                book.classList.remove('active');
+            });
             
-            // Alle Navigation-Buttons zurücksetzen
-            const allButtons = document.querySelectorAll('.nav-button');
-            allButtons.forEach(button => button.classList.remove('active'));
+            // Alle Band-Buttons zurücksetzen
+            document.querySelectorAll('.band-btn').forEach(button => {
+                button.classList.remove('active');
+            });
             
             // Gewähltes Buch anzeigen
             document.getElementById(bookId).classList.add('active');
             
             // Entsprechenden Button aktivieren
-            const activeButton = Array.from(allButtons).find(button => 
-                button.onclick.toString().includes(bookId)
-            );
-            if (activeButton) {
-                activeButton.classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function setLanguage(lang) {
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            if (lang === 'en') {
+                alert('🇬🇧 English version coming soon!\nEnglische Version bald verfügbar!');
             }
-
-            // Position-Indicator aktualisieren
-            updatePositionIndicator(bookId);
         }
 
-        function updatePositionIndicator(bookId) {
-            const indicator = document.getElementById('position-indicator');
-            const bookTitles = {
-                'band1': 'Band 1: Verborgene Gefühle',
-                'band2': 'Band 2: Enthüllte Wahrheiten'
-            };
-            indicator.textContent = bookTitles[bookId] || 'Bereit zum Vorlesen';
-        }
-
-        function togglePlay(sectionId) {
-            const btn = document.getElementById('play-btn-' + sectionId);
-            const state = audioState[sectionId];
+        function togglePlay(bandId) {
+            const btn = document.getElementById('play-btn-' + bandId);
+            const state = audioState[bandId];
             
             if (!state.isPlaying) {
                 // Alle anderen Player stoppen
                 Object.keys(audioState).forEach(key => {
-                    if (key !== sectionId && audioState[key].isPlaying) {
+                    if (key !== bandId && audioState[key].isPlaying) {
                         stopReading(key);
                     }
                 });
 
                 btn.innerHTML = '⏸️ Pausieren';
                 state.isPlaying = true;
-                startProgressSimulation(sectionId);
-                updatePositionIndicator('playing');
+                startProgressSimulation(bandId);
                 
                 const messages = {
-                    'band1-de': '▶️ Vorlesen von "Verborgene Gefühle" gestartet!\n\n"Die Bibliothek war wie immer ein Zufluchtsort. Lena Winter atmete tief..."',
-                    'band1-en': '▶️ Reading "Hidden Feelings" started!\n\n"The library was, as always, a refuge. Lena Winter breathed in..."',
-                    'band2-de': '▶️ Vorlesen von "Enthüllte Wahrheiten" gestartet!\n\n"Lena erwachte mit dem Gefühl, dass etwas fehlte..."',
-                    'band2-en': '▶️ Reading "Revealed Truths" started!\n\n"Lena awoke with the feeling that something was missing..."'
+                    'band1': '▶️ Vorlesen von "Verborgene Gefühle" gestartet!\n\n"Die Bibliothek war wie immer ein Zufluchtsort..."',
+                    'band2': '▶️ Vorlesen von "Enthüllte Wahrheiten" gestartet!\n\n"Lena erwachte mit dem Gefühl, dass etwas fehlte..."',
+                    'band3': '▶️ Vorlesen von "Wo Liebe wachsen darf" gestartet!\n\n"Lena erinnerte sich an die Momente..."'
                 };
                 
-                alert(messages[sectionId] + '\n\nVollständige Text-to-Speech Funktion in der finalen Version!');
+                alert(messages[bandId] + '\n\nVollständige Text-to-Speech Funktion in der finalen Version!');
             } else {
-                btn.innerHTML = sectionId.includes('en') ? '▶️ Continue Reading' : '▶️ Vorlesen fortsetzen';
+                btn.innerHTML = '▶️ Vorlesen fortsetzen';
                 state.isPlaying = false;
-                if (intervals[sectionId]) {
-                    clearInterval(intervals[sectionId]);
+                if (intervals[bandId]) {
+                    clearInterval(intervals[bandId]);
                 }
             }
         }
 
-        function stopReading(sectionId) {
-            const btn = document.getElementById('play-btn-' + sectionId);
-            const state = audioState[sectionId];
+        function stopReading(bandId) {
+            const btn = document.getElementById('play-btn-' + bandId);
+            const state = audioState[bandId];
             
-            btn.innerHTML = sectionId.includes('en') ? '▶️ Start Reading' : '▶️ Vorlesen starten';
+            btn.innerHTML = '▶️ Vorlesen starten';
             state.isPlaying = false;
             state.currentTime = 0;
             
-            if (intervals[sectionId]) {
-                clearInterval(intervals[sectionId]);
+            if (intervals[bandId]) {
+                clearInterval(intervals[bandId]);
             }
             
-            updateProgress(sectionId);
-            updatePositionIndicator('stopped');
+            updateProgress(bandId);
             alert('⏹️ Vorlesen gestoppt und zurückgesetzt!');
         }
 
-        function rewind(sectionId) {
-            const state = audioState[sectionId];
+        function rewind(bandId) {
+            const state = audioState[bandId];
             state.currentTime = Math.max(0, state.currentTime - 15);
-            updateProgress(sectionId);
+            updateProgress(bandId);
             alert('⏪ 15 Sekunden zurück');
         }
 
-        function forward(sectionId) {
-            const state = audioState[sectionId];
+        function forward(bandId) {
+            const state = audioState[bandId];
             state.currentTime = Math.min(state.duration, state.currentTime + 15);
-            updateProgress(sectionId);
+            updateProgress(bandId);
             alert('⏩ 15 Sekunden vor');
         }
 
-        function changeSpeed(sectionId, speed) {
-            audioState[sectionId].speed = parseFloat(speed);
+        function changeSpeed(bandId, speed) {
+            audioState[bandId].speed = parseFloat(speed);
             alert(`🎵 Geschwindigkeit geändert auf ${speed}x`);
         }
 
-        function continueReading(sectionId) {
+        function continueReading(bandId) {
             const messages = {
-                'band1-de': '📖 Weiterlesen: Kapitel 2 von "Verborgene Gefühle"',
-                'band1-en': '📖 Continue: Chapter 2 of "Hidden Feelings"',
-                'band2-de': '📖 Weiterlesen: Kapitel 2 von "Enthüllte Wahrheiten"',
-                'band2-en': '📖 Continue: Chapter 2 of "Revealed Truths"'
+                'band1': '📖 Weiterlesen: Kapitel 2 von "Verborgene Gefühle"',
+                'band2': '📖 Weiterlesen: Kapitel 2 von "Enthüllte Wahrheiten"',
+                'band3': '📖 Weiterlesen: Kapitel 2 von "Wo Liebe wachsen darf"'
             };
-            alert(messages[sectionId] + '\n\nIn der vollständigen Version wird das nächste Kapitel geladen.');
+            alert(messages[bandId] + '\n\nIn der vollständigen Version wird das nächste Kapitel geladen.');
         }
 
-        function previousChapter(sectionId) {
+        function previousChapter(bandId) {
             alert('⏮️ Vorheriges Kapitel wird geladen...\n\nIn der vollständigen Version verfügbar!');
         }
 
-        function nextChapter(sectionId) {
+        function nextChapter(bandId) {
             alert('⏭️ Nächstes Kapitel wird geladen...\n\nIn der vollständigen Version verfügbar!');
         }
 
-        function seekTo(event, sectionId) {
+        function seekTo(event, bandId) {
             const progressBar = event.currentTarget;
             const rect = progressBar.getBoundingClientRect();
             const percent = (event.clientX - rect.left) / rect.width;
-            const state = audioState[sectionId];
+            const state = audioState[bandId];
             
             state.currentTime = Math.floor(percent * state.duration);
-            updateProgress(sectionId);
+            updateProgress(bandId);
             
             const minutes = Math.floor(state.currentTime / 60);
             const seconds = Math.floor(state.currentTime % 60);
             alert(`⏯️ Springe zu ${minutes}:${seconds.toString().padStart(2, '0')}`);
         }
 
-        function updateProgress(sectionId) {
-            const progressFill = document.getElementById('progress-fill-' + sectionId);
-            const currentTimeSpan = document.getElementById('current-time-' + sectionId);
-            const state = audioState[sectionId];
+        function updateProgress(bandId) {
+            const progressFill = document.getElementById('progress-fill-' + bandId);
+            const currentTimeSpan = document.getElementById('current-time-' + bandId);
+            const state = audioState[bandId];
             
             if (progressFill) {
                 const percentage = (state.currentTime / state.duration) * 100;
@@ -1018,48 +774,31 @@
             }
         }
 
-        function startProgressSimulation(sectionId) {
-            const state = audioState[sectionId];
+        function startProgressSimulation(bandId) {
+            const state = audioState[bandId];
             
-            intervals[sectionId] = setInterval(() => {
+            intervals[bandId] = setInterval(() => {
                 if (state.isPlaying && state.currentTime < state.duration) {
                     state.currentTime += state.speed;
-                    updateProgress(sectionId);
+                    updateProgress(bandId);
                 } else if (state.currentTime >= state.duration) {
-                    // Kapitel beendet
-                    stopReading(sectionId);
+                    stopReading(bandId);
                     alert('📖 Kapitel beendet! Weiter zum nächsten Kapitel?');
-                    clearInterval(intervals[sectionId]);
+                    clearInterval(intervals[bandId]);
                 }
             }, 1000);
         }
-
-        // Smooth scrolling für Navigation
-        document.querySelectorAll('.nav-button').forEach(button => {
-            button.addEventListener('click', function() {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-            });
-        });
 
         // Tastatur-Shortcuts
         document.addEventListener('keydown', function(event) {
             if (event.code === 'Space') {
                 event.preventDefault();
-                // Aktuell aktiven Player finden und togglen
                 const activeBook = document.querySelector('.book-content.active');
                 if (activeBook) {
-                    const bookId = activeBook.id;
-                    const sectionId = bookId + '-de'; // Standard auf Deutsch
-                    togglePlay(sectionId);
+                    togglePlay(activeBook.id);
                 }
             }
         });
-
-        // Initial setup
-        updatePositionIndicator('band1');
     </script>
 </body>
 </html>
