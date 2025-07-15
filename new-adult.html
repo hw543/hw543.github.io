@@ -1,1 +1,268 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Adult - Helmut Wegners Wortwelten</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Georgia', serif;
+      line-height: 1.6;
+      color: white;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    header {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #2c3e50;
+      text-decoration: none;
+    }
+    .nav-menu {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-link {
+      color: #2c3e50;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+    }
+    .nav-link:hover {
+      background: #f8f9fa;
+      color: #667eea;
+    }
+    .main-content {
+      padding: 4rem 0;
+      text-align: center;
+    }
+    .genre-title {
+      font-size: 2.5rem;
+      font-weight: bold;
+      margin-bottom: 2rem;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      color: #FFC107;
+    }
+    .content-sections {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      margin-top: 40px;
+    }
+    .section {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 3rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      transition: transform 0.3s ease;
+    }
+    .section:hover {
+      transform: translateY(-5px);
+    }
+    .section h2 {
+      font-size: 1.8rem;
+      color: #FFC107;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+    .section-description {
+      font-size: 1rem;
+      color: #f8f9fa;
+      opacity: 0.9;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+    .item-card {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.3s ease;
+    }
+    .item-card:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
+    .item-title {
+      font-size: 1.4rem;
+      color: white;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+      text-align: center;
+    }
+    .item-description {
+      font-size: 0.9rem;
+      color: #f0f0f0;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    .item-link {
+      display: inline-block;
+      background: #667eea;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 20px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+    .item-link:hover {
+      background: #764ba2;
+    }
+    .books-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+    .book-cover {
+      width: 100%;
+      max-width: 150px;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      margin-bottom: 1rem;
+    }
+    .book-item {
+      text-align: center;
+    }
+    footer {
+      background: rgba(44, 62, 80, 0.9);
+      color: white;
+      text-align: center;
+      padding: 2rem 0;
+      margin-top: 4rem;
+    }
+    @media (max-width: 768px) {
+      .content-sections {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      .books-grid {
+        grid-template-columns: 1fr;
+      }
+      .section {
+        padding: 2rem 1rem;
+      }
+      .genre-title {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="header-content">
+        <a href="index.html" class="logo">Helmut Wegners Wortwelten</a>
+        <nav>
+          <ul class="nav-menu">
+            <li><a href="impressum.html" class="nav-link">Kontakt</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <div class="container">
+      <h1 class="genre-title">💫 New Adult</h1>
+      <p class="section-description">
+        Willkommen in einer Welt voller emotionaler und fesselnder Geschichten, die die Höhen und Tiefen des Erwachsenwerdens erkunden.
+      </p>
+
+      <div class="content-sections">
+        <div class="section">
+          <h2>Serien</h2>
+          <div class="item-card">
+            <h3 class="item-title">Zwischen Herz und Verstand</h3>
+            <p class="item-description">
+              Eine gefühlvolle Reise durch das Auf und Ab der ersten großen Liebe – in drei bewegenden Bänden.
+            </p>
+            <a href="verlangen-der-herzen.html" class="item-link">📖 Lesen & Vorlesen</a>
+          </div>
+        </div>
+
+        <div class="section">
+          <h2>Einzelbände</h2>
+          <div class="books-grid">
+            <div class="book-item">
+              <img src="die-tiefe-der-begierde.jpg" alt="Die Tiefe der Begierde Cover" class="book-cover">
+              <h3 class="item-title">Die Tiefe der Begierde</h3>
+              <p class="item-description">
+                Eine intensive Geschichte über Selbstfindung und die Erkundung tiefer Gefühle in einer komplexen Beziehung.
+              </p>
+              <a href="lese-vorlese-new-adult.html#begierde" class="item-link">📖 Lesen & Vorlesen</a>
+            </div>
+
+            <div class="book-item">
+              <img src="die-kunst-der-hingabe.jpg" alt="Die Kunst der Hingabe Cover" class="book-cover">
+              <h3 class="item-title">Die Kunst der Hingabe</h3>
+              <p class="item-description">
+                Ein emotionaler Roman über Vertrauen, Hingabe und die Kunst, sich auf eine tiefe Verbindung einzulassen.
+              </p>
+              <a href="lese-vorlese-new-adult.html#hingabe" class="item-link">📖 Lesen & Vorlesen</a>
+            </div>
+
+            <div class="book-item">
+              <img src="hinter-verschlossenen-tueren.jpg" alt="Hinter verschlossenen Türen Cover" class="book-cover">
+              <h3 class="item-title">Hinter verschlossenen Türen</h3>
+              <p class="item-description">
+                Eine packende Geschichte über verborgene Geheimnisse und die Herausforderungen, sich seinen inneren Dämonen zu stellen.
+              </p>
+              <a href="lese-vorlese-new-adult.html#tueren" class="item-link">📖 Lesen & Vorlesen</a>
+            </div>
+
+            <div class="book-item">
+              <img src="verborgene-gefuehle.jpg" alt="Verborgene Gefühle Cover" class="book-cover">
+              <h3 class="item-title">Verborgene Gefühle</h3>
+              <p class="item-description">
+                Ein berührender Roman über unausgesprochene Gefühle und den Mut, sein wahres Ich zu zeigen.
+              </p>
+              <a href="lese-vorlese-new-adult.html#gefuehle" class="item-link">📖 Lesen & Vorlesen</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Helmut Wegner - Helmut Wegners Wortwelten. Geschichten mit Tiefe, Herz und Haltung.</p>
+    </div>
+  </footer>
+</body>
+</html>
 
