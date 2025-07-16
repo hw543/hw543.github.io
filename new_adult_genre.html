@@ -1,1 +1,288 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Adult - Helmut Wegners Wortwelten</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #FFE5E5 0%, #FFD4B8 50%, #FFCFCF 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #2c1810;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #FFF0F5 0%, #FFE4E1 100%);
+            color: #2F4F4F;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border: 3px solid #FF69B4;
+            position: relative;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: linear-gradient(135deg, #FF69B4, #FF1493);
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 0.9em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(255,105,180,0.3);
+        }
+
+        .back-button:hover {
+            background: linear-gradient(135deg, #FF1493, #C71585);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255,20,147,0.4);
+        }
+
+        .header h1 {
+            font-size: 2.8em;
+            margin-bottom: 10px;
+            color: #FF1493;
+            text-shadow: 2px 2px 4px rgba(255,20,147,0.3);
+        }
+
+        .header p {
+            font-size: 1.3em;
+            color: #C71585;
+            font-style: italic;
+        }
+
+        .chambers-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .chamber {
+            background: linear-gradient(135deg, #FFF8DC 0%, #FFF0F5 100%);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            border: 2px solid #FF69B4;
+            transition: all 0.3s ease;
+        }
+
+        .chamber:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            border-color: #FF1493;
+        }
+
+        .chamber-serien {
+            border-color: #FF1493;
+        }
+
+        .chamber-einzeln {
+            border-color: #FFC107;
+        }
+
+        .chamber-title {
+            font-size: 1.8em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-align: center;
+            padding: 15px;
+            border-radius: 15px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .chamber-serien .chamber-title {
+            background: linear-gradient(135deg, #FF1493, #C71585);
+        }
+
+        .chamber-einzeln .chamber-title {
+            background: linear-gradient(135deg, #FFC107, #FF9800);
+        }
+
+        .chamber-description {
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #2F4F4F;
+        }
+
+        .chamber-content {
+            text-align: center;
+        }
+
+        .serie-preview {
+            background: linear-gradient(135deg, #FFF0F5, #FFE4E1);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border: 2px solid #FF1493;
+        }
+
+        .serie-preview h3 {
+            color: #FF1493;
+            font-size: 1.4em;
+            margin-bottom: 10px;
+        }
+
+        .serie-preview p {
+            color: #2F4F4F;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+
+        .serie-cover {
+            width: 80px;
+            height: 120px;
+            border-radius: 10px;
+            border: 2px solid #FF69B4;
+            object-fit: cover;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            margin: 0 auto 15px;
+        }
+
+        .einzelbuecher-preview {
+            background: linear-gradient(135deg, #FFF8DC, #FFFACD);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border: 2px solid #FFC107;
+        }
+
+        .chamber-button {
+            background: linear-gradient(135deg, #FF1493, #C71585);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .chamber-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .chamber-button-disabled {
+            background: #ccc;
+            color: #666;
+            cursor: not-allowed;
+        }
+
+        .chamber-button-disabled:hover {
+            transform: none;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .info-text {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .chambers-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2.2em;
+            }
+            
+            .chamber {
+                padding: 20px;
+            }
+            
+            .chamber-title {
+                font-size: 1.5em;
+            }
+            
+            .back-button {
+                position: relative;
+                top: 0;
+                left: 0;
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="index.html" class="back-button">← Zurück zur Startseite</a>
+            <h1>💫 New Adult</h1>
+            <p>Emotionale Geschichten über das Erwachsenwerden<br>Liebe, Leidenschaft und Selbstfindung</p>
+        </div>
+
+        <div class="chambers-container">
+            <!-- Kammer 1: New Adult Serien -->
+            <div class="chamber chamber-serien">
+                <div class="chamber-title">💕 New Adult Serien</div>
+                <div class="chamber-description">
+                    Mehrteilige Geschichten mit durchgehenden Charakteren und zusammenhängenden emotionalen Entwicklungen.
+                </div>
+                
+                <div class="chamber-content">
+                    <div class="serie-preview">
+                        <img src="zwischen-herz-verstand.jpg" alt="Zwischen Herz und Verstand Cover" class="serie-cover">
+                        <h3>💭 Zwischen Herz und Verstand</h3>
+                        <p><strong>Eine gefühlvolle Reise durch die erste große Liebe!</strong></p>
+                        <p>Eine emotionale Trilogie über Lena und Julian - von der ersten Begegnung in der Bibliothek bis zur reifen Liebe. 3 Bände voller Gefühle, Zweifel und Selbstfindung.</p>
+                    </div>
+                    
+                    <a href="zwischen-herz-und-verstand.html" class="chamber-button">Serie entdecken</a>
+                    <div class="info-text">3 Bände - Deutsch & Englisch - Lesen & Vorlesen System</div>
+                </div>
+            </div>
+
+            <!-- Kammer 2: Einzelne New Adult Bücher -->
+            <div class="chamber chamber-einzeln">
+                <div class="chamber-title">📖 Einzelne New Adult Bücher</div>
+                <div class="chamber-description">
+                    Standalone New Adult Romane mit abgeschlossenen Handlungen und eigenständigen Charakteren voller Emotionen.
+                </div>
+                
+                <div class="chamber-content">
+                    <div class="einzelbuecher-preview">
+                        <h3>🌟 Bald verfügbar</h3>
+                        <p>Spannende Einzelromane befinden sich in der Entwicklung...</p>
+                        <p>Freuen Sie sich auf eigenständige Geschichten voller Emotionen, erste Liebe und Selbstfindung!</p>
+                    </div>
+                    
+                    <a href="#" class="chamber-button chamber-button-disabled">Bald verfügbar</a>
+                    <div class="info-text">Erscheint demnächst mit eigenständigen New Adult Büchern!</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
