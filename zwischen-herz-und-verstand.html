@@ -1,1 +1,267 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zwischen Herz und Verstand - Helmut Wegners Wortwelten</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #FFE5E5 0%, #FFD4B8 50%, #FFCFCF 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #FFF0F5 0%, #FFE4E1 100%);
+            color: #2F4F4F;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border: 3px solid #FF69B4;
+            position: relative;
+        }
 
+        .back-button {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: linear-gradient(135deg, #FF69B4, #FF1493);
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 0.9em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(255,105,180,0.3);
+        }
+
+        .back-button:hover {
+            background: linear-gradient(135deg, #FF1493, #C71585);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255,20,147,0.4);
+        }
+        
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            color: #FF1493;
+            text-shadow: 2px 2px 4px rgba(255,20,147,0.3);
+        }
+        
+        .header p {
+            font-size: 1.3em;
+            color: #C71585;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .book-card {
+            background: linear-gradient(135deg, #FFF8DC 0%, #FFF0F5 100%);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            border: 2px solid #FF69B4;
+            transition: all 0.3s ease;
+        }
+        
+        .book-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            border-color: #FF1493;
+        }
+        
+        .book-cover {
+            width: 180px;
+            height: 260px;
+            margin: 0 auto 20px;
+            border-radius: 15px;
+            border: 3px solid #FF69B4;
+            object-fit: cover;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+            transition: transform 0.3s ease;
+        }
+        
+        .book-cover:hover {
+            transform: scale(1.05);
+        }
+        
+        .book-title {
+            font-size: 1.8em;
+            color: #FF1493;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .book-description {
+            font-size: 1.1em;
+            color: #2F4F4F;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .book-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+            min-width: 120px;
+        }
+        
+        .btn-read {
+            background: linear-gradient(135deg, #FF1493, #C71585);
+            color: white;
+        }
+        
+        .btn-read:hover {
+            background: linear-gradient(135deg, #C71585, #B22180);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255,20,147,0.4);
+        }
+        
+        .btn-amazon {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #8B4513;
+        }
+
+        .btn-amazon:hover {
+            background: linear-gradient(135deg, #FFA500, #FF8C00);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255,215,0,0.4);
+        }
+
+        .btn-disabled {
+            background: #ccc;
+            color: #666;
+            cursor: not-allowed;
+        }
+
+        .btn-disabled:hover {
+            transform: none;
+            box-shadow: none;
+        }
+        
+        @media (max-width: 768px) {
+            .books-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2.5em;
+            }
+            
+            .book-cover {
+                width: 150px;
+                height: 220px;
+            }
+            
+            .book-title {
+                font-size: 1.5em;
+            }
+            
+            .book-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 200px;
+            }
+
+            .back-button {
+                position: relative;
+                top: 0;
+                left: 0;
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="new_adult_genre.html" class="back-button">← Zurück zur Übersicht</a>
+            <h1>💕 Zwischen Herz und Verstand</h1>
+            <p>Emotionale Geschichten über das Erwachsenwerden</p>
+            <p>Liebe, Leidenschaft und Selbstfindung</p>
+        </div>
+        
+        <div class="books-grid">
+            <!-- Band 1: Verborgene Gefühle -->
+            <div class="book-card">
+                <img src="verborgene-gefuehle.jpg" alt="Verborgene Gefühle Cover" class="book-cover">
+                <h2 class="book-title">Band 1: Verborgene Gefühle</h2>
+                <p class="book-description">
+                    Lena entdeckt in der Bibliothek eine geheimnisvolle Notiz, die ihr Leben verändert. 
+                    Ein emotionales Erwachen zwischen Büchern und unausgesprochenen Worten.
+                </p>
+                <div class="book-actions">
+                    <a href="lese-vorlese-zwischen-herz-verstand.html#band1" class="btn btn-read">📖 Lesen & Vorlesen</a>
+                    <a href="#" class="btn btn-amazon btn-disabled">🛒 In Vorbereitung</a>
+                </div>
+            </div>
+            
+            <!-- Band 2: Enthüllte Wahrheiten -->
+            <div class="book-card">
+                <img src="enthuellte-wahrheiten.jpg" alt="Enthüllte Wahrheiten Cover" class="book-cover">
+                <h2 class="book-title">Band 2: Enthüllte Wahrheiten</h2>
+                <p class="book-description">
+                    Lena und Julian stehen vor der Herausforderung, ihre Beziehung zu definieren. 
+                    Zwischen Nähe und Distanz suchen sie nach ihrer gemeinsamen Wahrheit.
+                </p>
+                <div class="book-actions">
+                    <a href="lese-vorlese-zwischen-herz-verstand.html#band2" class="btn btn-read">📖 Lesen & Vorlesen</a>
+                    <a href="#" class="btn btn-amazon btn-disabled">🛒 In Vorbereitung</a>
+                </div>
+            </div>
+            
+            <!-- Band 3: Wo Liebe wachsen darf -->
+            <div class="book-card">
+                <img src="wo-liebe-wachsen-darf.jpg" alt="Wo Liebe wachsen darf Cover" class="book-cover">
+                <h2 class="book-title">Band 3: Wo Liebe wachsen darf</h2>
+                <p class="book-description">
+                    Die emotionale Vollendung von Lena und Julians Geschichte. 
+                    Ein neuer Anfang, der Mut zur Veränderung und die Kraft echter Liebe.
+                </p>
+                <div class="book-actions">
+                    <a href="lese-vorlese-zwischen-herz-verstand.html#band3" class="btn btn-read">📖 Lesen & Vorlesen</a>
+                    <a href="#" class="btn btn-amazon btn-disabled">🛒 In Vorbereitung</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
