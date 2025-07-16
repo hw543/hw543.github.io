@@ -1,1 +1,425 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>High Fantasy - Helmut Wegners Wortwelten</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #1a0033 0%, #330066 25%, #4d0099 50%, #6600cc 75%, #7733ff 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            padding: 20px;
+            color: #f0f0f0;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .magic-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            background: radial-gradient(circle, #ffd700, transparent);
+            border-radius: 50%;
+            animation: float 4s infinite ease-in-out;
+        }
+
+        .particle:nth-child(1) { width: 4px; height: 4px; top: 20%; left: 10%; animation-delay: 0s; }
+        .particle:nth-child(2) { width: 6px; height: 6px; top: 40%; left: 80%; animation-delay: 1s; }
+        .particle:nth-child(3) { width: 3px; height: 3px; top: 60%; left: 30%; animation-delay: 2s; }
+        .particle:nth-child(4) { width: 5px; height: 5px; top: 80%; left: 70%; animation-delay: 1.5s; }
+        .particle:nth-child(5) { width: 4px; height: 4px; top: 10%; left: 60%; animation-delay: 0.5s; }
+        .particle:nth-child(6) { width: 7px; height: 7px; top: 30%; left: 20%; animation-delay: 2.5s; }
+        .particle:nth-child(7) { width: 3px; height: 3px; top: 70%; left: 90%; animation-delay: 3s; }
+        .particle:nth-child(8) { width: 5px; height: 5px; top: 50%; left: 50%; animation-delay: 1.2s; }
+
+        @keyframes float {
+            0%, 100% { 
+                transform: translateY(0px) scale(1); 
+                opacity: 0.3; 
+            }
+            50% { 
+                transform: translateY(-20px) scale(1.2); 
+                opacity: 1; 
+            }
+        }
+
+        .magic-header {
+            height: 20px;
+            background: linear-gradient(90deg, 
+                #ffd700 0%, 
+                #ffb300 14%, 
+                #ff6b35 28%, 
+                #d63384 42%, 
+                #6610f2 56%, 
+                #4d0099 70%, 
+                #330066 84%, 
+                #1a0033 100%);
+            box-shadow: 0 3px 10px rgba(255,215,0,0.3);
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .header {
+            background: linear-gradient(135deg, rgba(26,0,51,0.9) 0%, rgba(77,0,153,0.8) 100%);
+            color: #ffd700;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border: 3px solid #ffd700;
+            position: relative;
+            backdrop-filter: blur(10px);
+        }
+
+        .back-button {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: linear-gradient(135deg, #ffd700, #ffb300);
+            color: #1a0033;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 0.9em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(255,215,0,0.3);
+        }
+
+        .back-button:hover {
+            background: linear-gradient(135deg, #ffb300, #ff6b35);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255,215,0,0.4);
+        }
+
+        .header h1 {
+            font-size: 2.8em;
+            margin-bottom: 10px;
+            color: #ffd700;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+        }
+
+        .header p {
+            font-size: 1.3em;
+            color: #ffb300;
+            font-style: italic;
+        }
+
+        .chambers-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .chamber {
+            background: linear-gradient(135deg, rgba(26,0,51,0.9) 0%, rgba(77,0,153,0.7) 100%);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            border: 2px solid rgba(255,215,0,0.3);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .chamber:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(255,215,0,0.2);
+            border-color: #ffd700;
+        }
+
+        .chamber-serien {
+            border-color: #ffd700;
+        }
+
+        .chamber-einzeln {
+            border-color: #ffb300;
+        }
+
+        .chamber-title {
+            font-size: 1.8em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-align: center;
+            padding: 15px;
+            border-radius: 15px;
+            color: #1a0033;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .chamber-serien .chamber-title {
+            background: linear-gradient(135deg, #ffd700, #ffb300);
+        }
+
+        .chamber-einzeln .chamber-title {
+            background: linear-gradient(135deg, #ffb300, #ff6b35);
+        }
+
+        .chamber-description {
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #f0f0f0;
+        }
+
+        .chamber-content {
+            text-align: center;
+        }
+
+        .serie-preview {
+            background: linear-gradient(135deg, rgba(255,215,0,0.1) 0%, rgba(255,179,0,0.1) 100%);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border: 2px solid rgba(255,215,0,0.3);
+            backdrop-filter: blur(5px);
+        }
+
+        .serie-preview h3 {
+            color: #ffd700;
+            font-size: 1.4em;
+            margin-bottom: 10px;
+        }
+
+        .serie-preview p {
+            color: #f0f0f0;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+
+        .serie-cover {
+            width: 80px;
+            height: 120px;
+            border-radius: 10px;
+            border: 2px solid #ffd700;
+            object-fit: cover;
+            box-shadow: 0 5px 15px rgba(255,215,0,0.3);
+            margin: 0 auto 15px;
+        }
+
+        .einzelbuecher-preview {
+            background: linear-gradient(135deg, rgba(255,179,0,0.1) 0%, rgba(255,107,53,0.1) 100%);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border: 2px solid rgba(255,179,0,0.3);
+            backdrop-filter: blur(5px);
+        }
+
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .book-mini {
+            background: linear-gradient(135deg, rgba(255,215,0,0.1) 0%, rgba(255,179,0,0.1) 100%);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            text-align: center;
+            border: 2px solid rgba(255,215,0,0.3);
+            backdrop-filter: blur(5px);
+        }
+
+        .book-mini img {
+            width: 60px;
+            height: 90px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            border: 1px solid #ffd700;
+        }
+
+        .book-mini h4 {
+            color: #ffd700;
+            font-size: 0.9em;
+            margin-bottom: 5px;
+        }
+
+        .book-mini p {
+            color: #f0f0f0;
+            font-size: 0.8em;
+        }
+
+        .chamber-button {
+            background: linear-gradient(135deg, #ffd700, #ffb300);
+            color: #1a0033;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255,215,0,0.3);
+        }
+
+        .chamber-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255,215,0,0.4);
+        }
+
+        .chamber-button-disabled {
+            background: #666;
+            color: #999;
+            cursor: not-allowed;
+        }
+
+        .chamber-button-disabled:hover {
+            transform: none;
+            box-shadow: 0 5px 15px rgba(255,215,0,0.3);
+        }
+
+        .info-text {
+            font-size: 0.9em;
+            color: #ccc;
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .chambers-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2.2em;
+            }
+            
+            .chamber {
+                padding: 20px;
+            }
+            
+            .chamber-title {
+                font-size: 1.5em;
+            }
+            
+            .books-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .back-button {
+                position: relative;
+                top: 0;
+                left: 0;
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Magische Partikel -->
+    <div class="magic-particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <div class="magic-header"></div>
+    
+    <div class="container">
+        <div class="header">
+            <a href="index.html" class="back-button">← Zurück zur Startseite</a>
+            <h1>⚔️ High Fantasy</h1>
+            <p>Epische Abenteuer in magischen Welten<br>Wo Helden geboren werden und Legenden entstehen!</p>
+        </div>
+
+        <div class="chambers-container">
+            <!-- Kammer 1: High Fantasy Serien -->
+            <div class="chamber chamber-serien">
+                <div class="chamber-title">🏰 High Fantasy Serien</div>
+                <div class="chamber-description">
+                    Mehrteilige epische Geschichten mit durchgehenden Charakteren und zusammenhängenden Handlungssträngen in magischen Welten.
+                </div>
+                
+                <div class="chamber-content">
+                    <div class="serie-preview">
+                        <img src="die prophezeiung.jpg" alt="Das Vermächtnis von Eldoria Serie Cover" class="serie-cover">
+                        <h3>⚔️ Das Vermächtnis von Eldoria</h3>
+                        <p><strong>Eine epische Fantasy-Serie mit 4 Bänden!</strong></p>
+                        <p>Eine magische Saga voller Abenteuer, Prophezeiungen und Heldenmut erwartet euch! Von der ersten Prophezeiung bis zum finalen Kampf zwischen Licht und Dunkelheit.</p>
+                    </div>
+                    
+                    <a href="lese-vorlese-high-fantasy.html" class="chamber-button">🏰 Serie entdecken</a>
+                    <div class="info-text">4 Bände - Deutsch & Englisch - Lesen & Vorlesen System</div>
+                </div>
+            </div>
+
+            <!-- Kammer 2: Einzelne High Fantasy Bücher -->
+            <div class="chamber chamber-einzeln">
+                <div class="chamber-title">📚 Einzelne High Fantasy Bücher</div>
+                <div class="chamber-description">
+                    Standalone Fantasy-Geschichten mit abgeschlossenen Handlungen und eigenständigen magischen Welten.
+                </div>
+                
+                <div class="chamber-content">
+                    <div class="einzelbuecher-preview">
+                        <div class="books-grid">
+                            <div class="book-mini">
+                                <img src="placeholder-fantasy1.jpg" alt="Einzelbuch 1">
+                                <h4>🐉 Drachenlegenden</h4>
+                                <p>Mystische Abenteuer</p>
+                            </div>
+                            <div class="book-mini">
+                                <img src="placeholder-fantasy2.jpg" alt="Einzelbuch 2">
+                                <h4>🧙 Zaubermeister</h4>
+                                <p>Magische Kräfte</p>
+                            </div>
+                            <div class="book-mini">
+                                <img src="placeholder-fantasy3.jpg" alt="Einzelbuch 3">
+                                <h4>🏰 Königreiche</h4>
+                                <p>Epische Schlachten</p>
+                            </div>
+                            <div class="book-mini">
+                                <img src="placeholder-fantasy4.jpg" alt="Einzelbuch 4">
+                                <h4>🌟 Sternenwächter</h4>
+                                <p>Kosmische Magie</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <a href="lese-vorlese-high-fantasy.html" class="chamber-button">📚 Bücher entdecken</a>
+                    <div class="info-text">Einzelne Fantasy-Abenteuer - Lesen & Vorlesen System</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
