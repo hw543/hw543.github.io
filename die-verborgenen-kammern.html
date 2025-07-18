@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Die verborgenen Kammern - Helmut Wegners Wortwelten</title>
+    <title>Hinter verschlossenen Türen - Vorlesen</title>
     <style>
         * {
             margin: 0;
@@ -13,32 +13,37 @@
 
         body {
             font-family: 'Georgia', serif;
+            line-height: 1.8;
+            color: #2c1810;
             background: linear-gradient(135deg, #FFE5E5 0%, #FFB6C1 25%, #FF69B4 50%, #FFC0CB 75%, #FFCCCB 100%);
             min-height: 100vh;
             padding: 20px;
-            color: #8B1538;
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 900px;
             margin: 0 auto;
+            background: #FFF8F0;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            overflow: hidden;
         }
 
         .header {
             background: linear-gradient(135deg, #C2185B, #8B1538);
             color: white;
             padding: 30px;
-            border-radius: 20px;
             text-align: center;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(194, 24, 91, 0.3);
             position: relative;
         }
 
-        .back-button {
+        .back-button-header {
             position: absolute;
             top: 15px;
             left: 15px;
+        }
+
+        .back-button {
             background: rgba(255, 255, 255, 0.2);
             color: white;
             padding: 8px 16px;
@@ -67,168 +72,160 @@
             font-style: italic;
         }
 
-        .books-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 30px;
-        }
-
-        .book-card {
+        .controls {
+            position: sticky;
+            top: 20px;
+            text-align: center;
+            margin: 30px 0 10px 0;
+            padding: 20px;
             background: linear-gradient(135deg, #FFF0F5 0%, #FFE4E6 100%);
             border-radius: 15px;
-            padding: 25px;
-            text-align: center;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
             border: 2px solid #C2185B;
-            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 5px 15px rgba(194, 24, 91, 0.3);
         }
 
-        .book-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 35px rgba(194, 24, 91, 0.2);
-            border-color: #8B1538;
-        }
-
-        .book-cover {
-            width: 200px;
-            height: 300px;
-            margin: 0 auto 20px auto;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-            position: relative;
-        }
-
-        .book-cover img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .cover-placeholder {
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #C2185B, #8B1538);
+        .language-navigation {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.2em;
-            font-weight: bold;
-            text-align: center;
-        }
-
-        .book-title {
-            font-size: 1.4em;
-            font-weight: bold;
-            color: #C2185B;
-            margin-bottom: 10px;
-        }
-
-        .book-subtitle {
-            font-size: 1em;
-            color: #8B1538;
-            margin-bottom: 15px;
-            font-style: italic;
-        }
-
-        .book-description {
-            font-size: 0.95em;
-            color: #666;
-            line-height: 1.6;
-            margin-bottom: 20px;
-            text-align: justify;
-        }
-
-        .language-flags {
-            margin-bottom: 15px;
-        }
-
-        .language-flags span {
-            font-size: 1.2em;
-            margin: 0 5px;
-        }
-
-        .book-buttons {
-            display: flex;
-            flex-direction: column;
             gap: 10px;
+            justify-content: center;
+            margin-bottom: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            margin: 5px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .btn-lang {
+            background: linear-gradient(135deg, #C2185B, #8B1538);
+            color: white;
+            border: 2px solid transparent;
+        }
+
+        .btn-lang.active {
+            border-color: #FFD700;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+        }
+
+        .btn-lang:hover {
+            background: linear-gradient(135deg, #8B1538, #AD1457);
+            transform: translateY(-2px);
+        }
+
+        .btn-nav {
+            background: linear-gradient(135deg, #4285f4, #1976d2);
+            color: white;
+            text-decoration: none;
+            border: 2px solid transparent;
+        }
+
+        .btn-nav:hover {
+            background: linear-gradient(135deg, #1976d2, #0d47a1);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(66, 133, 244, 0.4);
         }
 
         .btn-read {
-            background: linear-gradient(135deg, #4285f4, #1976d2);
+            background: linear-gradient(135deg, #32CD32, #228B22);
             color: white;
-            padding: 12px 24px;
-            border: none;
-            border-radius: 25px;
-            font-size: 1em;
-            font-weight: bold;
-            cursor: pointer;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(66, 133, 244, 0.3);
         }
 
         .btn-read:hover {
+            background: linear-gradient(135deg, #228B22, #006400);
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(66, 133, 244, 0.4);
         }
 
-        .btn-amazon {
-            background: linear-gradient(135deg, #ff6b35, #f7931e);
+        .btn-stop {
+            background: linear-gradient(135deg, #FF6347, #FF4500);
             color: white;
-            padding: 12px 24px;
-            border: none;
-            border-radius: 25px;
-            font-size: 1em;
-            font-weight: bold;
-            cursor: pointer;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
         }
 
-        .btn-amazon:hover {
+        .btn-stop:hover {
+            background: linear-gradient(135deg, #FF4500, #FF2400);
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
         }
 
-        .btn-disabled {
-            background: #ccc;
-            color: #666;
-            padding: 12px 24px;
-            border: none;
-            border-radius: 25px;
-            font-size: 1em;
+        .story-text {
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: #2F4F4F;
+            text-align: justify;
+            background: linear-gradient(135deg, #FFFAF0 0%, #FFF8DC 100%);
+            padding: 25px;
+            border-radius: 15px;
+            border: 2px solid #DDA0DD;
+            box-shadow: 0 5px 15px rgba(221,160,221,0.2);
+            margin: 20px;
+        }
+
+        .story-text p {
+            margin-bottom: 20px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .status-message {
+            text-align: center;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 10px;
             font-weight: bold;
-            cursor: not-allowed;
         }
 
-        @media (max-width: 768px) {
-            .books-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
+        .status-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .status-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
             }
-            
+
             .header h1 {
                 font-size: 2em;
             }
-            
-            .book-card {
+
+            .controls {
+                padding: 15px;
+            }
+
+            .btn {
+                display: block;
+                margin: 10px auto;
+                width: 200px;
+            }
+
+            .language-navigation {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+
+            .story-text {
                 padding: 20px;
-            }
-            
-            .book-cover {
-                width: 150px;
-                height: 225px;
-            }
-            
-            .back-button {
-                position: relative;
-                top: 0;
-                left: 0;
-                margin-bottom: 15px;
+                margin: 10px;
             }
         }
     </style>
@@ -236,78 +233,413 @@
 <body>
     <div class="container">
         <div class="header">
-            <a href="romantik.html" class="back-button">← Zurück zur Romantik</a>
-            <h1>🌹 Die verborgenen Kammern</h1>
-            <p>Geheimnisvolle Romanzen</p>
+            <div class="back-button-header">
+                <a href="die-verborgenen-kammern.html" class="back-button">← Zurück zur Serie</a>
+            </div>
+            <h1 id="main-title">🌹 Hinter verschlossenen Türen</h1>
+            <p id="author">von Helmut Wegner</p>
         </div>
 
-        <div class="books-grid">
-            <!-- Band 1: Hinter verschlossenen Türen -->
-            <div class="book-card">
-                <div class="book-cover">
-                    <img src="hinter-verschlossenen-tueren.jpg" alt="Hinter verschlossenen Türen" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div class="cover-placeholder" style="display:none;">
-                        🌹<br>Band 1<br>Hinter<br>verschlossenen<br>Türen
-                    </div>
-                </div>
-                <div class="book-title">Band 1: Hinter verschlossenen Türen</div>
-                <div class="book-subtitle">Elena entdeckt eine verborgene Welt</div>
-                <div class="book-description">
-                    In den Schatten alter Gemäuer verbergen sich nicht nur architektonische Schätze, sondern auch die tiefsten Geheimnisse des Herzens. Elena, eine junge Architektin, entdeckt eine verborgene Welt voller Leidenschaft und Geheimnisse.
-                </div>
-                <div class="language-flags">
-                    <span>🇩🇪</span> <span>🇬🇧</span> <span>🇪🇸</span>
-                </div>
-                <div class="book-buttons">
-                    <a href="hinter-verschlossenen-tueren-lesen.html" class="btn-read">📖 Lesen</a>
-                    <a href="https://amazon.de/dp/B0F1YC3J79" class="btn-amazon" target="_blank">🛒 Bei Amazon kaufen</a>
-                </div>
+        <div class="controls">
+            <div class="language-navigation">
+                <a href="index.html" class="btn btn-nav">🏠 Startseite</a>
+                <button class="btn btn-lang active" onclick="switchLanguage('de')">🇩🇪 Deutsch</button>
+                <button class="btn btn-lang" onclick="switchLanguage('en')">🇬🇧 English</button>
+                <button class="btn btn-lang" onclick="switchLanguage('es')">🇪🇸 Español</button>
+                <a href="romantik-fiktion.html" class="btn btn-nav">💕 Romantik</a>
             </div>
 
-            <!-- Band 2: Die Kunst der Hingabe -->
-            <div class="book-card">
-                <div class="book-cover">
-                    <img src="die-kunst-der-hingabe.jpg" alt="Die Kunst der Hingabe" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div class="cover-placeholder" style="display:none;">
-                        🌹<br>Band 2<br>Die Kunst<br>der Hingabe
-                    </div>
-                </div>
-                <div class="book-title">Band 2: Die Kunst der Hingabe</div>
-                <div class="book-subtitle">Verbotene Leidenschaft erwacht</div>
-                <div class="book-description">
-                    Elena taucht tiefer in die Geheimnisse der alten Villa ein und entdeckt dabei nicht nur architektonische Wunder, sondern auch die Kunst der wahren Hingabe. Doch jede Leidenschaft hat ihren Preis.
-                </div>
-                <div class="language-flags">
-                    <span>🇩🇪</span> <span>🇬🇧</span>
-                </div>
-                <div class="book-buttons">
-                    <a href="die-kunst-der-hingabe-lesen.html" class="btn-read">📖 Lesen</a>
-                    <button class="btn-disabled">In Vorbereitung</button>
-                </div>
-            </div>
+            <div id="status-message" class="status-message" style="display: none;"></div>
 
-            <!-- Band 3: Die Tiefe der Begierde -->
-            <div class="book-card">
-                <div class="book-cover">
-                    <img src="die-tiefe-der-begierde.jpg" alt="Die Tiefe der Begierde" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div class="cover-placeholder" style="display:none;">
-                        🌹<br>Band 3<br>Die Tiefe<br>der Begierde
-                    </div>
-                </div>
-                <div class="book-title">Band 3: Die Tiefe der Begierde</div>
-                <div class="book-subtitle">Das finale Geheimnis</div>
-                <div class="book-description">
-                    Im dramatischen Finale der Serie enthüllt Elena das letzte Geheimnis der verborgenen Kammern. Eine emotionale Reise zu den tiefsten Abgründen der Leidenschaft und den höchsten Höhen der Liebe.
-                </div>
-                <div class="language-flags">
-                    <span>🇩🇪</span> <span>🇬🇧</span>
-                </div>
-                <div class="book-buttons">
-                    <a href="die-tiefe-der-begierde-lesen.html" class="btn-read">📖 Lesen</a>
-                    <button class="btn-disabled">In Vorbereitung</button>
-                </div>
+            <button class="btn btn-read" onclick="startReading()">🔊 <span id="btn-read-text">Vorlesen starten</span></button>
+            <button class="btn btn-stop" onclick="stopReading()">⏹️ <span id="btn-stop-text">Stoppen</span></button>
+        </div>
+
+        <!-- Deutsche Version -->
+        <div id="de-content" class="language-content">
+            <div class="story-text" id="storyText">
+                <p>Elena Martinez stand vor dem imposanten schmiedeeisernen Tor der Villa Rosenberg und spürte, wie ihr Herz schneller schlug. Die gothische Architektur des 19. Jahrhunderts ragte vor ihr auf wie ein Märchenschloss aus einer anderen Zeit. Hohe Spitzbogenfenster reflektierten das goldene Licht der untergehenden Sonne, und verschnörkelte Balkone warfen kunstvolle Schatten auf die Fassade aus rötlichem Sandstein.</p>
+
+                <p>Als junge Architektin hatte Elena schon viele historische Gebäude restauriert, aber diese Villa übertraf alles, was sie bisher gesehen hatte. Sie war hierher gekommen, um die Renovierungsarbeiten zu überwachen, die der neue Besitzer, ein geheimnisvoller Geschäftsmann namens Victor Rosenberg, in Auftrag gegeben hatte. Doch je länger sie das Gebäude betrachtete, desto mehr hatte sie das Gefühl, dass diese Villa Geheimnisse barg, die weit über ihre architektonische Schönheit hinausgingen.</p>
+
+                <p>Ein kühler Windhauch strich durch ihre langen, dunkelbraunen Haare und ließ sie frösteln. Elena zog ihren Blazer enger um sich und drückte auf die Klingel neben dem Tor. Das tiefe, melodische Läuten hallte durch die Stille und schien von den alten Mauern widerzuhallen, als würden sie selbst antworten.</p>
+
+                <p>Nach wenigen Augenblicken öffnete sich das Tor mit einem leisen Quietschen, und Elena betrat den gepflasterten Innenhof. Springbrunnen plätscherten sanft in der Mitte des Hofes, umgeben von sorgfältig gepflegten Rosenbüschen, deren Duft die Luft erfüllte. Die Kombination aus Architektur und Natur war atemberaubend.</p>
+
+                <p>"Willkommen, Señorita Martinez." Eine tiefe, samtige Stimme ließ Elena herumfahren. Vor ihr stand ein Mann von beeindruckender Erscheinung. Victor Rosenberg war groß und schlank, mit silbergrauem Haar, das perfekt zurückgekämmt war, und durchdringenden blauen Augen, die sie zu durchschauen schienen. Er trug einen maßgeschneiderten dunkelgrauen Anzug, der seine elegante Gestalt betonte.</p>
+
+                <p>"Herr Rosenberg," sagte Elena und streckte ihm die Hand entgegen. "Es ist mir eine Ehre, an der Restaurierung dieser wunderschönen Villa arbeiten zu dürfen." Seine Hand war warm und fest, und Elena spürte einen unerwarteten Schauer, als ihre Finger sich berührten. Seine Augen verweilten einen Moment länger auf ihrem Gesicht, als wäre er auf der Suche nach etwas Bestimmtem.</p>
+
+                <p>"Die Ehre ist ganz auf meiner Seite," erwiderte Victor mit einem Lächeln, das sowohl charmant als auch geheimnisvoll war. "Ihre Reputation als Expertin für historische Architektur eilt Ihnen voraus. Ich bin überzeugt, dass Sie genau die richtige Person sind, um den Geheimnissen dieser Villa auf den Grund zu gehen."</p>
+
+                <p>Elena bemerkte die seltsame Formulierung, sagte aber nichts dazu. Stattdessen folgte sie Victor zur Haupteingangstür, einer massiven Eichentür mit kunstvollen Beschlägen aus poliertem Messing. "Die Villa wurde 1847 von meinem Urgroßvater erbaut," erklärte Victor, während er die schwere Tür öffnete. "Seither ist sie im Familienbesitz, wurde aber über die Jahre vernachlässigt. Es ist Zeit, ihr wieder zu alter Pracht zu verhelfen."</p>
+
+                <p>Das Innere der Villa verschlug Elena den Atem. Eine geschwungene Marmortreppe führte zu den oberen Stockwerken, während hohe Stuckdecken und kristallene Kronleuchter den Eingangshall in warmes Licht tauchten. Doch trotz der offensichtlichen Pracht lag etwas Melancholisches in der Luft, als würde die Villa selbst um vergangene Zeiten trauern.</p>
+
+                <p>"Ich möchte Ihnen zunächst die wichtigsten Räume zeigen," sagte Victor und führte sie durch einen langen Korridor. "Aber es gibt bestimmte Bereiche des Hauses, die ich vorerst als privat betrachte. Ich hoffe, Sie verstehen das." Elena nickte, obwohl sie eine merkwürdige Neugier in sich aufsteigen spürte. Was verbarg Victor in diesen verbotenen Räumen?</p>
+
+                <p>Sie besichtigten den großzügigen Salon mit seinen antiken Möbeln und wertvollen Gemälden, die Bibliothek mit deckenhohen Bücherregalen voller ledergebundener Bände, und den prächtigen Speisesaal mit einem Tisch, der für zwanzig Personen gedeckt werden konnte. Jeder Raum erzählte seine eigene Geschichte, und Elena konnte förmlich die Vergangenheit in den Wänden spüren.</p>
+
+                <p>Als sie den Rundgang beendeten, standen sie wieder im Eingangshall. Victor betrachtete Elena mit einem nachdenklichen Ausdruck. "Es wird nicht einfach werden," sagte er leise. "Diese Villa hat viele Geheimnisse, und nicht alle davon sind angenehm. Sind Sie sicher, dass Sie bereit sind für das, was Sie hier entdecken könnten?"</p>
+
+                <p>Elena blickte ihm direkt in die Augen. "Herr Rosenberg, ich bin Architektin, keine Schatzjägerin. Meine Aufgabe ist es, dieses wunderschöne Gebäude zu restaurieren und zu bewahren. Was auch immer für Geheimnisse hier verborgen sind – sie sind Teil der Geschichte dieses Ortes, und als solche verdienen sie Respekt."</p>
+
+                <p>Ein Lächeln umspielte Victors Lippen. "Sehr gut gesagt, Señorita Martinez. Ich denke, wir werden gut zusammenarbeiten." Er reichte ihr einen antiken Schlüssel. "Das ist Ihr Zugang zur Villa. Kommen Sie morgen früh, dann können wir mit der detaillierten Planung beginnen."</p>
+
+                <p>Elena nahm den Schlüssel entgegen und spürte sein Gewicht in ihrer Hand. Das Metall war warm, als hätte es eine eigene Lebenskraft. "Bis morgen dann," sagte sie und wandte sich zum Gehen. Doch als sie das Tor erreichte und sich noch einmal umdrehte, war Victor bereits verschwunden, und die Villa lag still und geheimnisvoll im Dämmerlicht.</p>
+
+                <p>Auf dem Heimweg konnte Elena nicht aufhören, an Victor zu denken. Es war nicht nur seine beeindruckende Erscheinung oder sein Charme – es war etwas Tieferes, Verborgenes, das sie faszinierte. Sie hatte das Gefühl, dass ihr Leben sich durch diese Begegnung für immer verändert hatte, auch wenn sie noch nicht wusste, auf welche Weise.</p>
+
+                <p>In dieser Nacht träumte Elena von verschlossenen Türen und geheimnisvollen Korridoren, von leidenschaftlichen Blicken und verbotenen Berührungen. Sie wachte mit dem Gefühl auf, als stünde sie am Beginn eines Abenteuers, das ihr Herz und ihre Seele für immer verändern würde.</p>
+            </div>
+        </div>
+
+        <!-- Englische Version -->
+        <div id="en-content" class="language-content hidden">
+            <div class="story-text" id="storyTextEn">
+                <p>Elena Martinez stood before the imposing wrought-iron gate of Villa Rosenberg and felt her heart beating faster. The Gothic 19th-century architecture towered before her like a fairy-tale castle from another time. High pointed arch windows reflected the golden light of the setting sun, and ornate balconies cast artistic shadows on the reddish sandstone facade.</p>
+
+                <p>As a young architect, Elena had already restored many historic buildings, but this villa surpassed everything she had seen before. She had come here to oversee the renovation work commissioned by the new owner, a mysterious businessman named Victor Rosenberg. But the longer she looked at the building, the more she felt that this villa harbored secrets that went far beyond its architectural beauty.</p>
+
+                <p>A cool breeze swept through her long, dark brown hair and made her shiver. Elena pulled her blazer tighter around herself and pressed the bell next to the gate. The deep, melodic chiming echoed through the silence and seemed to reverberate from the old walls, as if they themselves were answering.</p>
+
+                <p>After a few moments, the gate opened with a soft squeak, and Elena entered the cobblestone courtyard. Fountains splashed gently in the center of the courtyard, surrounded by carefully tended rose bushes whose fragrance filled the air. The combination of architecture and nature was breathtaking.</p>
+
+                <p>"Welcome, Señorita Martinez." A deep, velvety voice made Elena turn around. Before her stood a man of impressive appearance. Victor Rosenberg was tall and slim, with silver-gray hair perfectly combed back, and piercing blue eyes that seemed to see right through her. He wore a tailored dark gray suit that emphasized his elegant figure.</p>
+
+                <p>"Mr. Rosenberg," Elena said, extending her hand to him. "It's an honor to work on the restoration of this beautiful villa." His hand was warm and firm, and Elena felt an unexpected shiver when their fingers touched. His eyes lingered a moment longer on her face, as if he were searching for something specific.</p>
+
+                <p>"The honor is entirely mine," Victor replied with a smile that was both charming and mysterious. "Your reputation as an expert in historic architecture precedes you. I'm convinced that you're exactly the right person to get to the bottom of this villa's secrets."</p>
+
+                <p>Elena noticed the strange phrasing but said nothing about it. Instead, she followed Victor to the main entrance door, a massive oak door with artistic brass fittings. "The villa was built in 1847 by my great-grandfather," Victor explained as he opened the heavy door. "It has been in the family ever since, but has been neglected over the years. It's time to restore it to its former glory."</p>
+
+                <p>The interior of the villa took Elena's breath away. A curved marble staircase led to the upper floors, while high stucco ceilings and crystal chandeliers bathed the entrance hall in warm light. But despite the obvious splendor, there was something melancholic in the air, as if the villa itself was mourning for past times.</p>
+
+                <p>"I'd like to show you the most important rooms first," Victor said, leading her through a long corridor. "But there are certain areas of the house that I consider private for now. I hope you understand that." Elena nodded, although she felt a strange curiosity rising within her. What was Victor hiding in these forbidden rooms?</p>
+
+                <p>They toured the spacious salon with its antique furniture and valuable paintings, the library with its ceiling-high bookshelves full of leather-bound volumes, and the magnificent dining room with a table that could seat twenty people. Each room told its own story, and Elena could literally feel the past in the walls.</p>
+
+                <p>When they finished the tour, they were back in the entrance hall. Victor looked at Elena with a thoughtful expression. "It won't be easy," he said quietly. "This villa has many secrets, and not all of them are pleasant. Are you sure you're ready for what you might discover here?"</p>
+
+                <p>Elena looked directly into his eyes. "Mr. Rosenberg, I'm an architect, not a treasure hunter. My job is to restore and preserve this beautiful building. Whatever secrets are hidden here – they are part of this place's history, and as such they deserve respect."</p>
+
+                <p>A smile played around Victor's lips. "Very well said, Señorita Martinez. I think we'll work well together." He handed her an antique key. "This is your access to the villa. Come early tomorrow morning, then we can begin the detailed planning."</p>
+
+                <p>Elena took the key and felt its weight in her hand. The metal was warm, as if it had a life force of its own. "Until tomorrow then," she said and turned to leave. But when she reached the gate and turned around once more, Victor had already disappeared, and the villa lay quiet and mysterious in the twilight.</p>
+
+                <p>On the way home, Elena couldn't stop thinking about Victor. It wasn't just his impressive appearance or his charm – it was something deeper, hidden, that fascinated her. She had the feeling that her life had been forever changed by this encounter, even though she didn't yet know in what way.</p>
+
+                <p>That night Elena dreamed of locked doors and mysterious corridors, of passionate glances and forbidden touches. She woke up feeling as if she stood at the beginning of an adventure that would forever change her heart and soul.</p>
+            </div>
+        </div>
+
+        <!-- Spanische Version -->
+        <div id="es-content" class="language-content hidden">
+            <div class="story-text" id="storyTextEs">
+                <p>Elena Martínez se encontraba frente a la imponente puerta de hierro forjado de Villa Rosenberg y sintió cómo su corazón latía más rápido. La arquitectura gótica del siglo XIX se alzaba ante ella como un castillo de cuento de hadas de otra época. Las altas ventanas en arco apuntado reflejaban la luz dorada del sol poniente, y los balcones ornamentados proyectaban sombras artísticas sobre la fachada de arenisca rojiza.</p>
+
+                <p>Como joven arquitecta, Elena ya había restaurado muchos edificios históricos, pero esta villa superaba todo lo que había visto antes. Había venido aquí para supervisar los trabajos de renovación encargados por el nuevo propietario, un misterioso empresario llamado Víctor Rosenberg. Pero cuanto más miraba el edificio, más sentía que esta villa albergaba secretos que iban mucho más allá de su belleza arquitectónica.</p>
+
+                <p>Una brisa fresca se deslizó por su largo cabello castaño oscuro y la hizo temblar. Elena se ajustó más la chaqueta y presionó el timbre junto a la puerta. El repique profundo y melódico resonó a través del silencio y pareció rebotar en las viejas paredes, como si ellas mismas estuvieran respondiendo.</p>
+
+                <p>Después de unos momentos, la puerta se abrió con un suave chirrido, y Elena entró en el patio empedrado. Las fuentes salpicaban suavemente en el centro del patio, rodeadas de rosales cuidadosamente cuidados cuya fragancia llenaba el aire. La combinación de arquitectura y naturaleza era impresionante.</p>
+
+                <p>"Bienvenida, Señorita Martínez." Una voz profunda y aterciopelada hizo que Elena se diera la vuelta. Ante ella estaba un hombre de apariencia impresionante. Víctor Rosenberg era alto y esbelto, con cabello gris plateado perfectamente peinado hacia atrás, y ojos azules penetrantes que parecían ver a través de ella. Llevaba un traje gris oscuro hecho a medida que enfatizaba su figura elegante.</p>
+
+                <p>"Señor Rosenberg," dijo Elena, extendiéndole la mano. "Es un honor trabajar en la restauración de esta hermosa villa." Su mano era cálida y firme, y Elena sintió un escalofrío inesperado cuando sus dedos se tocaron. Sus ojos se detuvieron un momento más en su rostro, como si estuviera buscando algo específico.</p>
+
+                <p>"El honor es completamente mío," respondió Víctor con una sonrisa que era tanto encantadora como misteriosa. "Su reputación como experta en arquitectura histórica la precede. Estoy convencido de que usted es exactamente la persona correcta para llegar al fondo de los secretos de esta villa."</p>
+
+                <p>Elena notó la extraña formulación pero no dijo nada al respecto. En cambio, siguió a Víctor hasta la puerta de entrada principal, una puerta masiva de roble con herrajes artísticos de latón pulido. "La villa fue construida en 1847 por mi bisabuelo," explicó Víctor mientras abría la pesada puerta. "Ha estado en la familia desde entonces, pero ha sido descuidada a lo largo de los años. Es hora de devolverle su antigua gloria."</p>
+
+                <p>El interior de la villa le quitó el aliento a Elena. Una escalera de mármol curvada conducía a los pisos superiores, mientras que los techos altos de estuco y las lámparas de araña de cristal bañaban el vestíbulo de entrada en luz cálida. Pero a pesar del esplendor obvio, había algo melancólico en el aire, como si la propia villa estuviera de luto por tiempos pasados.</p>
+
+                <p>Esta noche Elena soñó con puertas cerradas y corredores misteriosos, con miradas apasionadas y caricias prohibidas. Despertó sintiendo como si estuviera al comienzo de una aventura que cambiaría para siempre su corazón y su alma.</p>
             </div>
         </div>
     </div>
+
+    <script>
+        let currentSpeech = null;
+        let isReading = false;
+        let currentLanguage = 'de';
+        let availableVoices = [];
+
+        // Spracheinstellungen
+        const languageTexts = {
+            de: {
+                title: "🌹 Hinter verschlossenen Türen",
+                author: "von Helmut Wegner",
+                btnRead: "Vorlesen starten",
+                btnStop: "Stoppen",
+                lang: "de-DE",
+                startMessage: "Vorlesen gestartet! 🔊",
+                stopMessage: "Vorlesen gestoppt. ⏹️",
+                errorMessage: "Fehler: Vorlesen wird von diesem Browser nicht unterstützt.",
+                noVoiceMessage: "Hinweis: Keine deutsche Stimme verfügbar. Verwende Standardstimme."
+            },
+            en: {
+                title: "🌹 Behind Closed Doors",
+                author: "by Helmut Wegner",
+                btnRead: "Start Reading",
+                btnStop: "Stop",
+                lang: "en-US",
+                startMessage: "Reading started! 🔊",
+                stopMessage: "Reading stopped. ⏹️",
+                errorMessage: "Error: Text-to-speech not supported by this browser.",
+                noVoiceMessage: "Note: No English voice available. Using default voice."
+            },
+            es: {
+                title: "🌹 Detrás de Puertas Cerradas",
+                author: "por Helmut Wegner",
+                btnRead: "Comenzar Lectura",
+                btnStop: "Parar",
+                lang: "es-ES",
+                startMessage: "¡Lectura iniciada! 🔊",
+                stopMessage: "Lectura detenida. ⏹️",
+                errorMessage: "Error: Text-to-speech no compatible con este navegador.",
+                noVoiceMessage: "Nota: No hay voz en español disponible. Usando voz predeterminada."
+            }
+        };
+
+        function loadVoices() {
+            return new Promise((resolve) => {
+                availableVoices = speechSynthesis.getVoices();
+                
+                if (availableVoices.length > 0) {
+                    resolve(availableVoices);
+                } else {
+                    // Fallback für Browser die Stimmen verzögert laden
+                    speechSynthesis.addEventListener('voiceschanged', function() {
+                        availableVoices = speechSynthesis.getVoices();
+                        resolve(availableVoices);
+                    }, { once: true });
+                    
+                    // Timeout falls voiceschanged nicht feuert
+                    setTimeout(() => {
+                        availableVoices = speechSynthesis.getVoices();
+                        resolve(availableVoices);
+                    }, 1000);
+                }
+            });
+        }
+
+        function findBestVoice(targetLang) {
+            if (availableVoices.length === 0) {
+                return null;
+            }
+
+            // Suche nach perfekter Übereinstimmung
+            let voice = availableVoices.find(v => v.lang === targetLang);
+            if (voice) return voice;
+
+            // Suche nach Sprach-Familie (z.B. de für de-DE)
+            const langFamily = targetLang.split('-')[0];
+            voice = availableVoices.find(v => v.lang.startsWith(langFamily));
+            if (voice) return voice;
+
+            // Fallback: erste verfügbare Stimme
+            return availableVoices[0];
+        }
+
+        function switchLanguage(lang) {
+            // Stoppe aktuelles Vorlesen
+            stopReading();
+            
+            // Verstecke alle Sprachen
+            document.querySelectorAll('.language-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            
+            // Zeige ausgewählte Sprache
+            document.getElementById(lang + '-content').classList.remove('hidden');
+            
+            // Update Sprachbuttons
+            document.querySelectorAll('.btn-lang').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Update Texte
+            currentLanguage = lang;
+            const texts = languageTexts[lang];
+            document.getElementById('main-title').textContent = texts.title;
+            document.getElementById('author').textContent = texts.author;
+            document.getElementById('btn-read-text').textContent = texts.btnRead;
+            document.getElementById('btn-stop-text').textContent = texts.btnStop;
+        }
+
+        function showStatus(message, isError = false) {
+            const statusDiv = document.getElementById('status-message');
+            statusDiv.textContent = message;
+            statusDiv.className = `status-message ${isError ? 'status-error' : 'status-success'}`;
+            statusDiv.style.display = 'block';
+            
+            // Nachricht nach 5 Sekunden ausblenden
+            setTimeout(() => {
+                statusDiv.style.display = 'none';
+            }, 5000);
+        }
+
+        async function startReading() {
+            // Prüfe ob Browser Text-to-Speech unterstützt
+            if (!('speechSynthesis' in window)) {
+                showStatus(languageTexts[currentLanguage].errorMessage, true);
+                return;
+            }
+
+            // Stoppe vorheriges Vorlesen
+            stopReading();
+
+            try {
+                // Lade verfügbare Stimmen
+                await loadVoices();
+
+                // Hole den Text der aktuellen Sprache
+                const storyElement = document.querySelector(`#${currentLanguage}-content .story-text`);
+                if (!storyElement) {
+                    showStatus("Fehler: Text nicht gefunden.", true);
+                    return;
+                }
+
+                // Teile Text in kleinere Abschnitte (bessere Kompatibilität)
+                const paragraphs = storyElement.querySelectorAll('p');
+                if (paragraphs.length === 0) {
+                    showStatus("Fehler: Keine Textabschnitte gefunden.", true);
+                    return;
+                }
+
+                // Erstelle Text aus ersten 3 Absätzen (für bessere Performance)
+                let textToRead = '';
+                for (let i = 0; i < Math.min(3, paragraphs.length); i++) {
+                    textToRead += paragraphs[i].textContent + ' ';
+                }
+
+                if (textToRead.trim().length === 0) {
+                    showStatus("Fehler: Kein Text zum Vorlesen gefunden.", true);
+                    return;
+                }
+
+                // Erstelle neue Sprachausgabe
+                currentSpeech = new SpeechSynthesisUtterance(textToRead.trim());
+                
+                // Wähle beste verfügbare Stimme
+                const targetLang = languageTexts[currentLanguage].lang;
+                const bestVoice = findBestVoice(targetLang);
+                
+                if (bestVoice) {
+                    currentSpeech.voice = bestVoice;
+                    currentSpeech.lang = bestVoice.lang;
+                } else {
+                    currentSpeech.lang = targetLang;
+                    showStatus(languageTexts[currentLanguage].noVoiceMessage, false);
+                }
+
+                // Optimierte Einstellungen für bessere Kompatibilität
+                currentSpeech.rate = 0.8;  // Langsamer für bessere Verständlichkeit
+                currentSpeech.volume = 1.0;
+                currentSpeech.pitch = 1.0;
+
+                // Event-Handler
+                currentSpeech.onstart = function() {
+                    isReading = true;
+                    showStatus(languageTexts[currentLanguage].startMessage);
+                };
+
+                currentSpeech.onend = function() {
+                    isReading = false;
+                    currentSpeech = null;
+                    showStatus("Vorlesen beendet. ✅");
+                };
+
+                currentSpeech.onerror = function(event) {
+                    isReading = false;
+                    currentSpeech = null;
+                    console.error('Speech error:', event);
+                    showStatus("Fehler beim Vorlesen. Browser-Problem erkannt.", true);
+                };
+
+                // Starte Vorlesen mit Fallback
+                try {
+                    speechSynthesis.speak(currentSpeech);
+                    
+                    // Zusätzliche Prüfung nach 2 Sekunden
+                    setTimeout(() => {
+                        if (currentSpeech && !speechSynthesis.speaking && !speechSynthesis.pending) {
+                            showStatus("Vorlesen konnte nicht gestartet werden. Browser-Einschränkung.", true);
+                            isReading = false;
+                            currentSpeech = null;
+                        }
+                    }, 2000);
+                    
+                } catch (error) {
+                    console.error('Speech synthesis error:', error);
+                    showStatus("Fehler: " + error.message, true);
+                    isReading = false;
+                    currentSpeech = null;
+                }
+
+            } catch (error) {
+                console.error('General error:', error);
+                showStatus("Unerwarteter Fehler beim Vorlesen.", true);
+                isReading = false;
+                currentSpeech = null;
+            }
+        }
+
+        function stopReading() {
+            if (speechSynthesis.speaking || speechSynthesis.pending) {
+                speechSynthesis.cancel();
+            }
+            
+            if (currentSpeech) {
+                currentSpeech = null;
+            }
+            
+            if (isReading) {
+                isReading = false;
+                showStatus(languageTexts[currentLanguage].stopMessage);
+            }
+        }
+
+        // Browser-Kompatibilität prüfen beim Laden
+        document.addEventListener('DOMContentLoaded', async function() {
+            if (!('speechSynthesis' in window)) {
+                console.warn('Text-to-Speech wird von diesem Browser nicht unterstützt');
+                showStatus("Vorlesen wird von diesem Browser nicht unterstützt.", true);
+                
+                // Buttons deaktivieren
+                const readBtn = document.querySelector('.btn-read');
+                readBtn.style.opacity = '0.5';
+                readBtn.style.cursor = 'not-allowed';
+                readBtn.onclick = function() {
+                    showStatus("Vorlesen wird von diesem Browser nicht unterstützt.", true);
+                };
+            } else {
+                // Lade Stimmen vorab
+                try {
+                    await loadVoices();
+                    console.log('Verfügbare Stimmen:', availableVoices.length);
+                } catch (error) {
+                    console.error('Fehler beim Laden der Stimmen:', error);
+                }
+            }
+        });
+
+        // Cleanup beim Verlassen der Seite
+        window.addEventListener('beforeunload', function() {
+            stopReading();
+        });
+
+        // Mobile Safari Fix
+        document.addEventListener('touchstart', function() {
+            if (!speechSynthesis.speaking && !speechSynthesis.pending) {
+                // Dummy-Speech für Mobile Safari Aktivierung
+                const dummySpeech = new SpeechSynthesisUtterance('');
+                dummySpeech.volume = 0;
+                speechSynthesis.speak(dummySpeech);
+            }
+        }, { once: true });
+    </script>
 </body>
 </html>
